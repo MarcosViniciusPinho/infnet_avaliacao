@@ -9,7 +9,7 @@
 	<packaging>war</packaging>
 
 	<name>avaliacao</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Projeto de TCC que representa o sistema de avaliação da infnet</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
