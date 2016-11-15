@@ -1,0 +1,9 @@
+CREATE TABLE usuario(
+  id BIGINT NOT NULL,
+  nome VARCHAR(120) NOT NULL,
+  login VARCHAR(50) NOT NULL,
+  senha VARCHAR(10) NOT NULL,
+  perfil VARCHAR(3) NOT NULL
+);
+
+ALTER TABLE usuario ADD CONSTRAINT pk_id_usuario PRIMARY KEY (id);
