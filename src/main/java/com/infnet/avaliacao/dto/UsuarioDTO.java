@@ -3,6 +3,7 @@ package com.infnet.avaliacao.dto;
 
 import com.infnet.avaliacao.entity.Usuario;
 import com.infnet.avaliacao.entity.domain.PerfilEnum;
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.apache.commons.collections.CollectionUtils;
 
 import java.io.Serializable;
@@ -47,6 +48,7 @@ public class UsuarioDTO implements Serializable {
      * @return UsuarioDTO
      */
     public static UsuarioDTO toDto(Usuario usuario){
+        ParameterExceptionUtil.validateObjectNull(usuario);
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         usuarioDTO.setId(usuario.getId());
         usuarioDTO.setNome(usuario.getNome());
@@ -63,6 +65,7 @@ public class UsuarioDTO implements Serializable {
      * @return Usuario
      */
     public static <T> Usuario beforeFromSaveConvertToUsuario(T entity){
+        ParameterExceptionUtil.validateObjectNull(entity);
         return (Usuario)entity;
     }
 
