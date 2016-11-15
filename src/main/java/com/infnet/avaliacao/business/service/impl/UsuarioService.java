@@ -1,7 +1,8 @@
 package com.infnet.avaliacao.business.service.impl;
 
 import com.infnet.avaliacao.business.service.IUsuarioService;
-import com.infnet.avaliacao.entity.Usuario;
+import com.infnet.avaliacao.dto.UsuarioDTO;
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import com.infnet.avaliacao.persistence.IUsuarioDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,16 +19,18 @@ public class UsuarioService implements IUsuarioService {
      * {@inheritDoc}
      */
     @Override
-    public void save(Usuario entity) {
-        this.usuarioDao.save(entity);
+    public void save(UsuarioDTO usuarioDTO) {
+        ParameterExceptionUtil.validateObjectNull(usuarioDTO);
+        this.usuarioDao.save(usuarioDTO.toEntity());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Usuario findById(Long id) {
-        return this.usuarioDao.getOne(id);
+    public UsuarioDTO findById(Long id) {
+        ParameterExceptionUtil.validateObjectNull(id);
+        return UsuarioDTO.toDto(this.usuarioDao.getOne(id));
     }
 
     /**
@@ -35,6 +38,7 @@ public class UsuarioService implements IUsuarioService {
      */
     @Override
     public void delete(Long id) {
+        ParameterExceptionUtil.validateObjectNull(id);
         this.usuarioDao.delete(id);
     }
 
@@ -42,8 +46,8 @@ public class UsuarioService implements IUsuarioService {
      * {@inheritDoc}
      */
     @Override
-    public List<Usuario> findAll() {
-        return this.usuarioDao.findAll();
+    public List<UsuarioDTO> findAll() {
+        return UsuarioDTO.convertListEntityToListDto(this.usuarioDao.findAll());
     }
 
 }

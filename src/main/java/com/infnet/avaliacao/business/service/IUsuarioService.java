@@ -1,7 +1,7 @@
 package com.infnet.avaliacao.business.service;
 
-import com.infnet.avaliacao.entity.Usuario;
+import com.infnet.avaliacao.dto.UsuarioDTO;
 
-public interface IUsuarioService extends ICrudService<Usuario> {
+public interface IUsuarioService extends ICrudService<UsuarioDTO> {
 
 }

@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @param <V> dto
  * @param <T> entidade
  */
-public abstract class CrudController<V, T> {
+public abstract class CrudController<V> {
 
     private static final String ACTION_LIST = "/list";
     private static final String ACTION_CREATE = "/create";
@@ -33,7 +33,7 @@ public abstract class CrudController<V, T> {
      * Método que deverá ser sempre implementado por suas subclasses.
      * @return ICrudFacade<T>
      */
-    protected abstract ICrudFacade<T> getFacade();
+    protected abstract ICrudFacade<V> getFacade();
 
     /**
      * Método que salva/altera uma entidade.
@@ -44,7 +44,7 @@ public abstract class CrudController<V, T> {
     @RequestMapping(value = ACTION_SAVE, method = RequestMethod.POST)
     public String save(V entity, RedirectAttributes redirectAttributes){
         try{
-            this.getFacade().save(this.convertDtoToEntity(entity));
+            this.getFacade().save(entity);
             redirectAttributes.addFlashAttribute(SUCESS, MENSAGEM_SUCESSO);
             return this.getRedirectViewList();
         } catch (RuntimeException ex) {
@@ -130,13 +130,6 @@ public abstract class CrudController<V, T> {
      * @return ModelAndView
      */
     protected abstract ModelAndView onPrepareUpdateOrDetail(String view, Long id);
-
-    /**
-     * Convert uma classe dto para uma classe pojo e que deve ser implementado nas subclasses.
-     * @param dto dto
-     * @return T
-     */
-    protected abstract T convertDtoToEntity(V dto);
 
     /**
      * Pega o contexto do controler que sera usado para view.

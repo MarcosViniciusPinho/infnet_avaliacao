@@ -5,20 +5,20 @@ import java.util.List;
 /**
  * Classe que representa o facade generico
  */
-public interface ICrudFacade<T> {
+public interface ICrudFacade<V> {
 
     /**
      * Método que salva/altera a entidade no banco.
-     * @param entity entity
+     * @param dto dto
      */
-    void save(T entity);
+    void save(V dto);
 
     /**
      * Método que busca uma entidade no banco a partir de seu id
      * @param id id
-     * @return T
+     * @return V
      */
-    T findById(Long id);
+    V findById(Long id);
 
     /**
      * Método que exclui uma entidade do banco.
@@ -28,8 +28,8 @@ public interface ICrudFacade<T> {
 
     /**
      * Método que lista todos os registros no banco
-     * @return List<T>
+     * @return List<V>
      */
-    List<T> findAll();
+    List<V> findAll();
 
 }

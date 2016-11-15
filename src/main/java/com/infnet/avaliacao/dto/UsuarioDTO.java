@@ -59,17 +59,6 @@ public class UsuarioDTO implements Serializable {
     }
 
     /**
-     * Método que faz o cast de uma classe genérica para a classe Usuario
-     * @param entity entity
-     * @param <T> classe generica
-     * @return Usuario
-     */
-    public static <T> Usuario beforeFromSaveConvertToUsuario(T entity){
-        ParameterExceptionUtil.validateObjectNull(entity);
-        return (Usuario)entity;
-    }
-
-    /**
      * Método que converte uma lista de entidade para uma lista de dto.
      * @param entities entities
      * @return List<UsuarioDTO>

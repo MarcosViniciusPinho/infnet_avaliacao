@@ -2,7 +2,6 @@ package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.business.facade.IUsuarioFacade;
 import com.infnet.avaliacao.dto.UsuarioDTO;
-import com.infnet.avaliacao.entity.Usuario;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping(value = UsuarioController.PATH_USUARIO)
-public class UsuarioController extends CrudController<UsuarioDTO, Usuario>{
+public class UsuarioController extends CrudController<UsuarioDTO>{
 
     private static final String LISTAR_USUARIOS = "listarUsuarios";
     protected static final String PATH_USUARIO = "/cadastro/usuario";
@@ -78,15 +77,6 @@ public class UsuarioController extends CrudController<UsuarioDTO, Usuario>{
     @Override
     protected String getPathView() {
         return PATH_USUARIO;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Usuario convertDtoToEntity(UsuarioDTO usuarioDTO) {
-        ParameterExceptionUtil.validateObjectNull(usuarioDTO);
-        return usuarioDTO.toEntity();
     }
 
 }

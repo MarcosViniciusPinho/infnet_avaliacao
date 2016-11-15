@@ -2,7 +2,7 @@ package com.infnet.avaliacao.business.facade.impl;
 
 import com.infnet.avaliacao.business.facade.IUsuarioFacade;
 import com.infnet.avaliacao.business.service.IUsuarioService;
-import com.infnet.avaliacao.entity.Usuario;
+import com.infnet.avaliacao.dto.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,15 +18,15 @@ public class UsuarioFacade implements IUsuarioFacade {
      * {@inheritDoc}
      */
     @Override
-    public void save(Usuario entity) {
-        this.usuarioService.save(entity);
+    public void save(UsuarioDTO usuarioDTO) {
+        this.usuarioService.save(usuarioDTO);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Usuario findById(Long id) {
+    public UsuarioDTO findById(Long id) {
         return this.usuarioService.findById(id);
     }
 
@@ -42,7 +42,7 @@ public class UsuarioFacade implements IUsuarioFacade {
      * {@inheritDoc}
      */
     @Override
-    public List<Usuario> findAll() {
+    public List<UsuarioDTO> findAll() {
         return this.usuarioService.findAll();
     }
 
