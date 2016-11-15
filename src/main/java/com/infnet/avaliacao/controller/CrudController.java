@@ -11,7 +11,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 /**
  * Classe responsável por executar o CRUD da aplicação, assim como todos os métodos comuns que todos utilizem em todoo o sistema.
  * @param <V> dto
- * @param <T> entidade
  */
 public abstract class CrudController<V> {
 
@@ -154,7 +153,7 @@ public abstract class CrudController<V> {
     }
 
     /**
-     * Método que redireciona para listagem dos registros(Porto, Armador e Rebocador)
+     * Método que redireciona para listagem dos registros
      * @return String
      */
     protected String getViewList(){
@@ -162,7 +161,7 @@ public abstract class CrudController<V> {
     }
 
     /**
-     * Método que redireciona para listagem dos registros(Porto, Armador e Rebocador)
+     * Método que redireciona para listagem dos registros com redirect
      * @return String
      */
     private String getRedirectViewList(){
