@@ -5,8 +5,8 @@ package com.infnet.avaliacao.entity.domain;
  */
 public enum PerfilEnum {
 
-    ADM("ADMINISTRADOR"),
-    SEC("SECRETARIA");
+    ADM("Administrador"),
+    SEC("Secretaria");
 
     private String id;
 

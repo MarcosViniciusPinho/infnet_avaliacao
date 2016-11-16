@@ -6,6 +6,7 @@ import com.infnet.avaliacao.entity.domain.PerfilEnum;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,32 +38,30 @@ public class UsuarioController extends CrudController<UsuarioDTO>{
      * {@inheritDoc}
      */
     @Override
-    protected ModelAndView onPrepareCreate(){
-        ModelAndView mv = new ModelAndView(getViewForm());
-        this.onLoadView(mv);
-        mv.addObject(new UsuarioDTO());
-        return mv;
+    protected String onPrepareCreate(Model model){
+        this.onLoadView(model);
+        model.addAttribute(new UsuarioDTO());
+        return getViewForm();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected ModelAndView onPrepareUpdateOrDetail(String view, Long id){
+    protected String onPrepareUpdateOrDetail(String view, Long id, Model model){
         ParameterExceptionUtil.validateObjectNull(view);
         ParameterExceptionUtil.validateObjectNull(id);
-        ModelAndView mv = new ModelAndView(view);
-        this.onLoadView(mv);
-        mv.addObject(this.usuarioFacade.findById(id));
-        return mv;
+        this.onLoadView(model);
+        model.addAttribute(this.usuarioFacade.findById(id));
+        return view;
     }
 
     /**
-     * Método criado para retirar duplicação de código nos métodos 'onPrepareCreate' e 'onPrepareUpdateOrDetail'
-     * @param mv mv
+     * {@inheritDoc}
      */
-    private void onLoadView(ModelAndView mv){
-        mv.addObject(LISTAR_PERFIS, PerfilEnum.values());
+    @Override
+    protected void onLoadView(Model model){
+        model.addAttribute(LISTAR_PERFIS, PerfilEnum.values());
     }
 
     /**

@@ -45,7 +45,7 @@
                         <tr th:each="usuario : ${listarUsuarios}">
                             <td th:text="${usuario.nome}"></td>
                             <td th:text="${usuario.login}"></td>
-                            <td th:text="${usuario.perfil}"></td>
+                            <td th:text="${usuario.perfil.id}"></td>
                             <td>
                                 <a title="Detalhar" class="btn btn-link btn-xs" th:href="@{/cadastro/usuario/detail/{id}(id=${usuario.id})}">
                                     <span class="glyphicon glyphicon-th-list"></span>

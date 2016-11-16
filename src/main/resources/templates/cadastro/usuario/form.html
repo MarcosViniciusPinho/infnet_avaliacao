@@ -6,6 +6,7 @@
 
 <head>
     <title>USUÁRIO</title>
+    <script th:src="@{/js/cadastro/usuario/form.js}"/>
 </head>
 
 <body>
@@ -22,6 +23,10 @@
                             <li class="active" th:if="${id ne null}">Alterar Usuário</li>
                         </ol>
 
+                        <div class="alert alert-danger" role="alert" th:if="${!#strings.isEmpty(error)}">
+                            <span th:text="${error}"></span>
+                        </div>
+
                         <h2 th:if="${id eq null}">CADASTRAR USUÁRIO</h2>
                         <h2 th:if="${id ne null}">ALTERAR USUÁRIO</h2>
                         <hr />
@@ -34,6 +39,7 @@
                             <div class="form-group">
                                 <h3>Informações básicas</h3>
                                 <input type="hidden" th:field="*{id}" id="id"/>
+                                <input type="hidden" th:if="${id ne null}" th:field="*{senha}"/>
                                 <div class="well col-sm-12">
                                     <div class="col-sm-5">
                                         <label for="nome"><span class="corVermelho">*</span> Nome:</label>
@@ -47,15 +53,14 @@
                                                placeholder="Informe um login"/>
                                     </div>
 
-                                    <div class="col-sm-3" th:if="${id eq null}">
+                                    <div class="col-sm-3 blocoEditar">
                                         <label for="senha"><span class="corVermelho">*</span> Senha:</label>
-                                        <input type="password" class="form-control" id="senha" th:field="*{senha}" placeholder="Informe uma senha"/>
+                                        <input type="text" class="form-control" id="senha" th:field="*{senha}" placeholder="Informe uma senha"
+                                            maxlength="10"/>
                                     </div>
 
-                                    <input type="hidden" th:if="${id ne null}" th:field="*{senha}"/>
-
-                                    <div class="col-lg-12"> &nbsp; </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-lg-12 blocoEditar"> &nbsp; </div>
+                                    <div class="col-sm-3">
                                         <label for="perfil"><span class="corVermelho">*</span> Perfil:</label>
                                         <select id="perfil" class="form-control" th:field="*{perfil}" name="perfil">
                                             <option value="">Selecione um perfil</option>

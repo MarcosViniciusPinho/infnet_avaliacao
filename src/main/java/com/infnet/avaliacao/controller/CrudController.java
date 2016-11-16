@@ -2,6 +2,7 @@ package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.business.facade.ICrudFacade;
 import com.infnet.avaliacao.exception.ExecutionException;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,7 @@ public abstract class CrudController<V> {
     private static final String ACTION_DETAIL = "/detail/{id}";
     private static final String ACTION_DELETE = "/delete/{id}";
     private static final String SUCESS="sucess";
+    private static final String ERROR="error";
 
     private static final String VIEW_LIST = "/list";
     private static final String VIEW_FORM = "/form";
@@ -41,13 +43,15 @@ public abstract class CrudController<V> {
      * @return String
      */
     @RequestMapping(value = ACTION_SAVE, method = RequestMethod.POST)
-    public String save(V entity, RedirectAttributes redirectAttributes){
+    public String save(V entity, RedirectAttributes redirectAttributes, Model model){
         try{
             this.getFacade().save(entity);
             redirectAttributes.addFlashAttribute(SUCESS, MENSAGEM_SUCESSO);
             return this.getRedirectViewList();
         } catch (RuntimeException ex) {
-            throw new ExecutionException(ex);
+            model.addAttribute(ERROR, ex.getLocalizedMessage());
+            this.onLoadView(model);
+            return this.getViewForm();
         }
     }
 
@@ -89,46 +93,51 @@ public abstract class CrudController<V> {
 
     /**
      * Método que redireciona o usuário para a tela de cadastrar.
+     * @param model model
      * @return ModelAndView
      */
     @RequestMapping(value = ACTION_CREATE)
-    public ModelAndView prepareCreate(){
-        return this.onPrepareCreate();
+    public String prepareCreate(Model model){
+        return this.onPrepareCreate(model);
     }
 
     /**
      * Método responsável de montar as informacoes que irao aparecer na tela de cadastrar e que deve ser implementado nas subclasses.
-     * @return ModelAndView
+     * @param model model
+     * @return String
      */
-    protected abstract ModelAndView onPrepareCreate();
+    protected abstract String onPrepareCreate(Model model);
 
     /**
      * Método que redireciona o usuário para a tela de alterar.
      * @param id id
-     * @return ModelAndView
+     * @param model model
+     * @return String
      */
     @RequestMapping(value = ACTION_EDIT)
-    public ModelAndView prepareUpdate(@PathVariable Long id){
-        return this.onPrepareUpdateOrDetail(this.getViewForm(), id);
+    public String prepareUpdate(@PathVariable Long id, Model model){
+        return this.onPrepareUpdateOrDetail(this.getViewForm(), id, model);
     }
 
     /**
      * Método que redireciona o usuário para a tela de detalhar.
      * @param id id
-     * @return ModelAndView
+     * @param model model
+     * @return String
      */
     @RequestMapping(value = ACTION_DETAIL)
-    public ModelAndView prepareDetail(@PathVariable Long id){
-        return this.onPrepareUpdateOrDetail(this.getViewDetail(), id);
+    public String prepareDetail(@PathVariable Long id, Model model){
+        return this.onPrepareUpdateOrDetail(this.getViewDetail(), id, model);
     }
 
     /**
      * Método responsável de montar as informacoes que irao aparecer na tela de alterar/detalhar e que deve ser implementado nas subclasses.
      * @param view view
      * @param id id
-     * @return ModelAndView
+     * @param model model
+     * @return String
      */
-    protected abstract ModelAndView onPrepareUpdateOrDetail(String view, Long id);
+    protected abstract String onPrepareUpdateOrDetail(String view, Long id, Model model);
 
     /**
      * Pega o contexto do controler que sera usado para view.
@@ -167,5 +176,11 @@ public abstract class CrudController<V> {
     private String getRedirectViewList(){
         return REDIRECT_LIST + getPathView() + ACTION_LIST;
     }
+
+    /**
+     * Método para carregar informações em comum para as telas de Salvar e Alterar.
+     * @param model model
+     */
+    protected void onLoadView(Model model){ }
 
 }
