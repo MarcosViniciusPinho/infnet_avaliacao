@@ -5,7 +5,8 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>USUARIO</title>
+    <title>USUÁRIO</title>
+    <script th:src="@{/js/cadastro/usuario/modalExcluir.js}"/>
 </head>
 
 <body>
@@ -17,14 +18,14 @@
                 <div class="col-lg-12">
                     <ol class="breadcrumb">
                         <li><a th:href="@{/}">Home</a></li>
-                        <li class="active">Usuario</li>
+                        <li class="active">Usuário</li>
                     </ol>
 
                     <div class="alert alert-success" role="alert" th:if="${!#strings.isEmpty(sucess)}">
                         <span th:text="${sucess}"></span>
                     </div>
 
-                    <h2>USUARIO</h2>
+                    <h2>USUÁRIO</h2>
                     <hr />
 
                     <a th:href="@{/cadastro/usuario/create}" class="btn btn-primary">Novo</a>
@@ -69,10 +70,10 @@
                         </tfoot>
                     </table>
                 </div>
-                <!--<form class="form-horizontal" th:attr="data-url-base=@{/cadastro/usuario/delete/}" method="POST" id="formExcluir">-->
-                    <!--<input type="hidden" value="Tem certeza que deseja excluir este usuario" id="mensagemExcluir"/>-->
-                    <!--<div layout:include="Modal"></div>-->
-                <!--</form>-->
+                <form class="form-horizontal" th:attr="data-url-base=@{/cadastro/usuario/delete/}" method="POST" id="formExcluir">
+                    <input type="hidden" value="Tem certeza que deseja excluir este usuario" id="mensagemExcluir"/>
+                    <div layout:include="modal"></div>
+                </form>
             </div>
         </div>
     </div>

@@ -5,7 +5,7 @@
        xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>USUARIO</title>
+    <title>USUÁRIO</title>
 </head>
 
 <body>
@@ -17,13 +17,13 @@
                     <div class="col-lg-12">
                         <ol class="breadcrumb">
                             <li><a th:href="@{/}">Home</a></li>
-                            <li><a th:href="@{/cadastro/usuario/list}">Usuario</a></li>
-                            <li class="active" th:if="${id eq null}">Cadastrar Usuario</li>
-                            <li class="active" th:if="${id ne null}">Alterar Usuario</li>
+                            <li><a th:href="@{/cadastro/usuario/list}">Usuário</a></li>
+                            <li class="active" th:if="${id eq null}">Cadastrar Usuário</li>
+                            <li class="active" th:if="${id ne null}">Alterar Usuário</li>
                         </ol>
 
-                        <h2 th:if="${id eq null}">CADASTRAR USUARIO</h2>
-                        <h2 th:if="${id ne null}">ALTERAR USUARIO</h2>
+                        <h2 th:if="${id eq null}">CADASTRAR USUÁRIO</h2>
+                        <h2 th:if="${id ne null}">ALTERAR USUÁRIO</h2>
                         <hr />
 
                         <div class="textoCamposObrigatorios">
@@ -32,7 +32,7 @@
 
                         <form method="POST" th:action="@{/cadastro/usuario/save}" th:object="${usuarioDTO}" id="form">
                             <div class="form-group">
-                                <h3>Usuario</h3>
+                                <h3>Informações básicas</h3>
                                 <input type="hidden" th:field="*{id}" id="id"/>
                                 <div class="well col-sm-12">
                                     <div class="col-sm-5">
