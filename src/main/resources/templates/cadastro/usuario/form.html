@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout"
+       xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>USUARIO</title>
+</head>
+
+<body>
+    <section layout:fragment="conteudo">
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12"> &nbsp; </div>
+                    <div class="col-lg-12">
+                        <ol class="breadcrumb">
+                            <li><a th:href="@{/}">Home</a></li>
+                            <li><a th:href="@{/cadastro/usuario/list}">Usuario</a></li>
+                            <li class="active" th:if="${id eq null}">Cadastrar Usuario</li>
+                            <li class="active" th:if="${id ne null}">Alterar Usuario</li>
+                        </ol>
+
+                        <h2 th:if="${id eq null}">CADASTRAR USUARIO</h2>
+                        <h2 th:if="${id ne null}">ALTERAR USUARIO</h2>
+                        <hr />
+
+                        <div class="textoCamposObrigatorios">
+                            <small class="col-sm-offset-10">(<span class="corVermelho">*</span>) Campos obrigatórios</small>
+                        </div>
+
+                        <form method="POST" th:action="@{/cadastro/usuario/save}" th:object="${usuarioDTO}" id="form">
+                            <div class="form-group">
+                                <h3>Usuario</h3>
+                                <input type="hidden" th:field="*{id}" id="id"/>
+                                <div class="well col-sm-12">
+                                    <div class="col-sm-5">
+                                        <label for="nome"><span class="corVermelho">*</span> Nome:</label>
+                                        <input type="text" class="form-control" id="nome" th:field="*{nome}" name="nome" maxlength="120"
+                                               placeholder="Informe um nome"/>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <label for="login"><span class="corVermelho">*</span> Login:</label>
+                                        <input type="text" class="form-control" id="login" th:field="*{login}" name="login" maxlength="50"
+                                               placeholder="Informe um login"/>
+                                    </div>
+
+                                    <div class="col-sm-3" th:if="${id eq null}">
+                                        <label for="senha"><span class="corVermelho">*</span> Senha:</label>
+                                        <input type="password" class="form-control" id="senha" th:field="*{senha}" placeholder="Informe uma senha"/>
+                                    </div>
+
+                                    <input type="hidden" th:if="${id ne null}" th:field="*{senha}"/>
+
+                                    <div class="col-lg-12"> &nbsp; </div>
+                                    <div class="col-sm-4">
+                                        <label for="perfil"><span class="corVermelho">*</span> Perfil:</label>
+                                        <select id="perfil" class="form-control" th:field="*{perfil}" name="perfil">
+                                            <option value="">Selecione um perfil</option>
+                                            <option th:each="perfil : ${listarPerfis}" th:value="${perfil}" th:text="${perfil.id}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <input id="salvar" type="submit" class="btn btn-primary" value="Salvar"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

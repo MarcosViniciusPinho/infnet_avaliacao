@@ -1,3 +1,16 @@
 .ajustarPosicaoElementosNaTela {
     margin-left: 20px;
 }
+
+th, td{
+    text-align: center;
+    font-family: sans-serif;
+}
+
+div.textoCamposObrigatorios{
+    margin-top: -40px;
+}
+
+.corVermelho{
+    color: #ee0000;
+}

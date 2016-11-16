@@ -23,9 +23,9 @@ public abstract class CrudController<V> {
     private static final String ACTION_DELETE = "/delete/{id}";
     private static final String SUCESS="sucess";
 
-    private static final String VIEW_LIST = "/List";
-    private static final String VIEW_FORM = "/Form";
-    private static final String VIEW_DETAIL = "/Detail";
+    private static final String VIEW_LIST = "/list";
+    private static final String VIEW_FORM = "/form";
+    private static final String VIEW_DETAIL = "/detail";
     private static final String REDIRECT_LIST = "redirect:";
 
     /**

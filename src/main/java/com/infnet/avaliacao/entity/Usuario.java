@@ -29,6 +29,7 @@ public class Usuario implements Serializable {
     @Column(name = "senha", length = 10, nullable = false)
     private String senha;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "perfil", length = 3, nullable = false)
     private PerfilEnum perfil;
 

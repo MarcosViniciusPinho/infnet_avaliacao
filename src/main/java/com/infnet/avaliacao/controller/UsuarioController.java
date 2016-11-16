@@ -2,6 +2,7 @@ package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.business.facade.IUsuarioFacade;
 import com.infnet.avaliacao.dto.UsuarioDTO;
+import com.infnet.avaliacao.entity.domain.PerfilEnum;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class UsuarioController extends CrudController<UsuarioDTO>{
 
     private static final String LISTAR_USUARIOS = "listarUsuarios";
+    private static final String LISTAR_PERFIS = "listarPerfis";
     protected static final String PATH_USUARIO = "/cadastro/usuario";
 
     @Autowired
@@ -60,7 +62,7 @@ public class UsuarioController extends CrudController<UsuarioDTO>{
      * @param mv mv
      */
     private void onLoadView(ModelAndView mv){
-        mv.addObject(LISTAR_USUARIOS, this.usuarioFacade.findAll());
+        mv.addObject(LISTAR_PERFIS, PerfilEnum.values());
     }
 
     /**
