@@ -10,7 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
- * Classe responsável por executar o CRUD da aplicação, assim como todos os métodos comuns que todos utilizem em todoo o sistema.
+ * Classe responsável por executar o CRUD da aplicação,
+ * assim como todos os métodos comuns que todos utilizem em todoo o sistema.
  * @param <V> dto
  */
 public abstract class CrudController<V> {

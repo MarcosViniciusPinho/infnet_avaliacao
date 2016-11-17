@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 
 /**
- * Classe responsável pelo gerenciamento entre a view e a camada business.
+ * Classe responsável pela captura das informações na view.
  */
 @Controller
 @RequestMapping(value = UsuarioController.PATH_USUARIO)

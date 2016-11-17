@@ -15,6 +15,9 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * {@inheritDoc}
+ */
 @Service
 public class UsuarioService implements IUsuarioService {
 

@@ -1,7 +1,7 @@
 package com.infnet.avaliacao.entity.domain;
 
 /**
- * Classe que representa os valores possiveis para PerfilEnum.
+ * Classe que representa os valores possiveis para Perfil.
  */
 public enum PerfilEnum {
 

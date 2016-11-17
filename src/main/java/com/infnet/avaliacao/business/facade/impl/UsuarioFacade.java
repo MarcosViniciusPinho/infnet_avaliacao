@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * {@inheritDoc}
+ */
 @Service
 public class UsuarioFacade implements IUsuarioFacade {
 
