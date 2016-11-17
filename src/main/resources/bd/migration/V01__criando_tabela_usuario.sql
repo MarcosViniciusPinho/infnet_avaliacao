@@ -7,3 +7,5 @@ CREATE TABLE usuario(
 );
 
 ALTER TABLE usuario ADD CONSTRAINT pk_id_usuario PRIMARY KEY (id);
+
+ALTER TABLE usuario ADD CONSTRAINT un_login UNIQUE (login);

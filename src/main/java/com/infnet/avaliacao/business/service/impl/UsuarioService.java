@@ -2,8 +2,10 @@ package com.infnet.avaliacao.business.service.impl;
 
 import com.infnet.avaliacao.business.service.IUsuarioService;
 import com.infnet.avaliacao.dto.UsuarioDTO;
+import com.infnet.avaliacao.entity.Usuario;
 import com.infnet.avaliacao.entity.domain.PerfilEnum;
 import com.infnet.avaliacao.exception.CampoObrigatorioException;
+import com.infnet.avaliacao.exception.UniqueException;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import com.infnet.avaliacao.persistence.IUsuarioDao;
 import org.apache.commons.lang.StringUtils;
@@ -25,12 +27,28 @@ public class UsuarioService implements IUsuarioService {
     @Override
     public void validate(UsuarioDTO usuarioDTO) {
         ParameterExceptionUtil.validateObjectNull(usuarioDTO);
+        this.validarCamposObrigatorios(usuarioDTO);
+        this.validarLoginUnico(usuarioDTO);
+    }
+
+    private void validarCamposObrigatorios(UsuarioDTO usuarioDTO){
         Optional<PerfilEnum> perfil = Optional.ofNullable(usuarioDTO.getPerfil());
         if(StringUtils.isEmpty(usuarioDTO.getNome())
                 || StringUtils.isEmpty(usuarioDTO.getLogin())
                 || StringUtils.isEmpty(usuarioDTO.getSenha())
                 || !perfil.isPresent()){
             throw new CampoObrigatorioException("Todos os campos destacados com * são obrigatórios");
+        }
+    }
+
+    /**
+     * Método que verifica se o login informado para o usuário corrente já existe.
+     * @param usuarioDTO usuarioDTO
+     */
+    private void validarLoginUnico(UsuarioDTO usuarioDTO){
+        Usuario usuario = usuarioDao.findByLogin(usuarioDTO.getLogin());
+        if(usuario != null && usuarioDTO.toEntity().equals(usuario)){
+            throw new UniqueException("Já existe um usuário com o login informado.");
         }
     }
 

@@ -23,7 +23,7 @@ public class Usuario implements Serializable {
     @Column(name = "nome", length = 120, nullable = false)
     private String nome;
 
-    @Column(name = "login", length = 50, nullable = false)
+    @Column(name = "login", length = 50, nullable = false, unique = true)
     private String login;
 
     @Column(name = "senha", length = 10, nullable = false)
@@ -71,5 +71,18 @@ public class Usuario implements Serializable {
 
     public void setPerfil(PerfilEnum perfil) {
         this.perfil = perfil;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return id != null ? !id.equals(usuario.id) : usuario.id != null;
+    }
+
+    @Override
+    public int hashCode() {
+        return 0;
     }
 }
