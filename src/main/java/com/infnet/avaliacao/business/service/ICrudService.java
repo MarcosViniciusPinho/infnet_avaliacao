@@ -32,4 +32,10 @@ public interface ICrudService<V> {
      */
     List<V> findAll();
 
+    /**
+     * Método que serve para fazer as validacoes
+     * @param dto dto
+     */
+    void validate(V dto);
+
 }

@@ -3,15 +3,15 @@ package com.infnet.avaliacao.business.facade.impl;
 import com.infnet.avaliacao.business.facade.IUsuarioFacade;
 import com.infnet.avaliacao.business.service.IUsuarioService;
 import com.infnet.avaliacao.dto.UsuarioDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class UsuarioFacade implements IUsuarioFacade {
 
-    @Autowired
+    @Resource
     private IUsuarioService usuarioService;
 
     /**

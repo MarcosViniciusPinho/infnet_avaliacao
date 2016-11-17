@@ -4,11 +4,12 @@ import com.infnet.avaliacao.business.facade.IUsuarioFacade;
 import com.infnet.avaliacao.dto.UsuarioDTO;
 import com.infnet.avaliacao.entity.domain.PerfilEnum;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.annotation.Resource;
 
 /**
  * Classe responsável pelo gerenciamento entre a view e a camada business.
@@ -21,7 +22,7 @@ public class UsuarioController extends CrudController<UsuarioDTO>{
     private static final String LISTAR_PERFIS = "listarPerfis";
     protected static final String PATH_USUARIO = "/cadastro/usuario";
 
-    @Autowired
+    @Resource
     private IUsuarioFacade usuarioFacade;
 
     /**

@@ -5,12 +5,10 @@ import com.infnet.avaliacao.entity.Usuario;
 import com.infnet.avaliacao.entity.domain.PerfilEnum;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Classe que representa a tela de usuario.
@@ -73,18 +71,6 @@ public class UsuarioDTO implements Serializable {
             }
         }
         return lista;
-    }
-
-    /**
-     * Método que verifica se os campos obrigatórios foram preenchidos na tela.
-     * @return boolean
-     */
-    public boolean isCamposObrigatoriosVazios(){
-        Optional<PerfilEnum> perfil = Optional.ofNullable(this.getPerfil());
-        return StringUtils.isEmpty(this.getNome())
-                || StringUtils.isEmpty(this.getLogin())
-                || StringUtils.isEmpty(this.getSenha())
-                || !perfil.isPresent();
     }
 
     public Long getId() {
