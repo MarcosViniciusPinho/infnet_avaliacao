@@ -19,16 +19,16 @@
                         <ol class="breadcrumb">
                             <li><a th:href="@{/}">Home</a></li>
                             <li><a th:href="@{/cadastro/usuario/list}">Usuário</a></li>
-                            <li class="active" th:if="${id eq null}">Cadastrar Usuário</li>
-                            <li class="active" th:if="${id ne null}">Alterar Usuário</li>
+                            <li class="active cadastrar">Cadastrar Usuário</li>
+                            <li class="active alterar">Alterar Usuário</li>
                         </ol>
 
                         <div class="alert alert-danger" role="alert" th:if="${!#strings.isEmpty(error)}">
                             <span th:text="${error}"></span>
                         </div>
 
-                        <h2 th:if="${id eq null}">CADASTRAR USUÁRIO</h2>
-                        <h2 th:if="${id ne null}">ALTERAR USUÁRIO</h2>
+                        <h2 class="cadastrar">CADASTRAR USUÁRIO</h2>
+                        <h2 class="alterar">ALTERAR USUÁRIO</h2>
                         <hr />
 
                         <div class="textoCamposObrigatorios">
