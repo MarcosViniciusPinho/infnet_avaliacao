@@ -7,8 +7,8 @@ body
     max-width: 280px;
     padding: 15px;
     margin:100px;
-    margin-top:160px;
-    margin-left: 200px;
+    margin-top:130px;
+    margin-left: 85px;
 }
 .panel-default {
     opacity: 0.9;
@@ -29,6 +29,6 @@ body
     left: 0;
     background-size: cover;
     background-position: 50% 50%;
-    background-image: url('http://i.imgur.com/aFs5QmP.jpg');
+    background-image: url('../images/fundo_infnet.png');
     background-repeat:repeat;
 }
