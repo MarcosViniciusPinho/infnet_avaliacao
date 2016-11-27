@@ -22,6 +22,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+
+		<!--Usar local-->
+		<database.url>jdbc:h2:file:./banco/avaliacao</database.url>
+		<database.user>sa</database.user>
+		<database.driver>org.h2.Driver</database.driver>
 	</properties>
 
 	<dependencies>
@@ -42,6 +47,7 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<!--Usar local-->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -71,11 +77,6 @@
 			<version>2.3</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-core</artifactId>
-		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -84,8 +85,25 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>4.0.3</version>
+				<configuration>
+					<url>${database.url}</url>
+					<user>${database.user}</user>
+					<driver>${database.driver}</driver>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
-
 
 </project>
