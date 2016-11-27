@@ -10,4 +10,3 @@ public class AvaliacaoApplication {
 		SpringApplication.run(AvaliacaoApplication.class, args);
 	}
 }
-//teste
