@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <title>Infnet</title>
+    <title th:text="#{infnet}"></title>
 
     <link rel="stylesheet" th:href="@{/css/avaliacao.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/infnet.min.css}"/>
@@ -33,7 +33,7 @@
             <div class="navbar-header">
                 <a class="navbar-brand  hidden-xs" href="#">
                     <img id="logo" alt="Infnet" th:src="@{/images/logo_infnet.png}" width="80px" height="50px"
-                    title="Instituto Infnet"/>
+                    th:title="#{institutoinfnet}"/>
                 </a>
 
                 <ul class="nav  navbar-nav">
@@ -59,14 +59,14 @@
                             </div>
                         </li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Versão 0.0.1</a></li>
-                        <li><a href="#">Administrador</a></li>
-                        <li><a href="#">Alterar senha</a></li>
+                        <li><a href="#" th:text="#{versao}"></a></li>
+                        <li><a href="#" th:text="#{administrador}"></a></li>
+                        <li><a href="#" th:text="#{alterarsenha}"></a></li>
                     </ul>
                 </li>
 
                 <li>
-                    <a th:href="@{/}" title="Logout"><em class="fa  fa-sign-out"></em></a>
+                    <a th:href="@{/}" th:title="#{logout}"><em class="fa  fa-sign-out"></em></a>
                 </li>
             </ul>
 
@@ -81,13 +81,13 @@
 
                     <li class="aw-menu__item  is-active">
                         <a href="#">
-                            <i class="fa  fa-fw  fa-file-text"></i><span>Cadastros</span>
+                            <i class="fa  fa-fw  fa-file-text"></i><span th:text="#{cadastros}"></span>
                             <i class="aw-menu__navigation-icon  fa"></i>
                         </a>
 
                         <ul class="aw-menu__list  aw-menu__list--sublist">
                             <li class="aw-menu__item  aw-menu__item--link">
-                                <a th:href="@{/cadastro/usuario/list}">Cadastro de usuários</a>
+                                <a th:href="@{/cadastro/usuario/list}" th:text="#{cadastrodeusuario}"></a>
                             </li>
                         </ul>
                     </li>
@@ -103,7 +103,7 @@
 
     <footer class="aw-layout-footer js-content is-toggled">
         <div class="container-fluid">
-            <span class="aw-footer-disclaimer">&copy; 2016 Infnet. Todos os direitos reservados.</span>
+            <span class="aw-footer-disclaimer">&copy; <span th:text="#{rodapetemplate}"></span></span>
         </div>
     </footer>
 
