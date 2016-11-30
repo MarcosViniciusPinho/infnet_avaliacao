@@ -40,7 +40,7 @@ public class UsuarioService implements IUsuarioService {
                 || StringUtils.isEmpty(usuarioDTO.getLogin())
                 || StringUtils.isEmpty(usuarioDTO.getSenha())
                 || !perfil.isPresent()){
-            throw new CampoObrigatorioException("Todos os campos destacados com * são obrigatórios");
+            throw new CampoObrigatorioException("usuario.mensagem.erro.obrigatorio");
         }
     }
 
@@ -51,7 +51,7 @@ public class UsuarioService implements IUsuarioService {
     private void validarLoginUnico(UsuarioDTO usuarioDTO){
         Usuario usuario = usuarioDao.findByLogin(usuarioDTO.getLogin());
         if(usuario != null && usuarioDTO.toEntity().equals(usuario)){
-            throw new UniqueException("Já existe um usuário com o login informado.");
+            throw new UniqueException("usuario.mensagem.erro.login.unico");
         }
     }
 

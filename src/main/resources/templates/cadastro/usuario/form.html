@@ -24,7 +24,7 @@
                         </ol>
 
                         <div class="alert alert-danger" role="alert" th:if="${!#strings.isEmpty(error)}">
-                            <span th:text="${error}"></span>
+                            <span th:text="#{${error}}"></span>
                         </div>
 
                         <h2 class="cadastrar" th:text="#{usuario.cadastrar}"></h2>

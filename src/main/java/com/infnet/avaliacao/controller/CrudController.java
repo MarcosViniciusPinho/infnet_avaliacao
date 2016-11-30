@@ -20,7 +20,7 @@ public abstract class CrudController<V> {
     private static final String ACTION_CREATE = "/create";
     private static final String ACTION_EDIT = "/edit/{id}";
     private static final String ACTION_SAVE = "/save";
-    private static final String MENSAGEM_SUCESSO = "Operação realizada com sucesso.";
+    private static final String MENSAGEM_SUCESSO = "mensagem.sucesso";
     private static final String ACTION_DETAIL = "/detail/{id}";
     private static final String ACTION_DELETE = "/delete/{id}";
     private static final String SUCESS="sucess";
