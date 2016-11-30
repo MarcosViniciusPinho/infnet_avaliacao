@@ -68,7 +68,7 @@
                                             <span class="corVermelho">*</span> <span th:text="#{usuario.perfil}"></span>:</label>
                                         <select id="perfil" class="form-control" th:field="*{perfil}" name="perfil">
                                             <option value="" th:text="#{usuario.select.perfil}"></option>
-                                            <option th:each="perfil : ${listarPerfis}" th:value="${perfil}" th:text="${perfil.id}"></option>
+                                            <option th:each="perfil : ${listarPerfis}" th:value="${perfil}" th:text="#{${perfil.id}}"></option>
                                         </select>
                                     </div>
                                 </div>
