@@ -14,7 +14,17 @@
 
 <body>
 
-<div id="fullscreen_bg" class="fullscreen_bg"></div>
+<div id="fullscreen_bg" class="fullscreen_bg">
+    <a class="navbar-brand  hidden-xs" th:href="@{/?lang=pt}">
+        <img id="icone_brasil" alt="Infnet" th:src="@{/images/icone_brasil.png}" width="80px" height="50px"/>
+    </a>
+    <a class="navbar-brand  hidden-xs" th:href="@{/?lang=en}">
+        <img id="icone_americano" alt="Infnet" th:src="@{/images/icone_americano.png}" width="70px" height="50px"/>
+    </a>
+    <a class="navbar-brand  hidden-xs" th:href="@{/?lang=es}">
+        <img id="icone_espanha" alt="Infnet" th:src="@{/images/icone_espanha.png}" width="70px" height="50px"/>
+    </a>
+</div>
 <form class="form-signin">
     <div class="container">
         <div class="row">

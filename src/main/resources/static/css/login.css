@@ -29,6 +29,6 @@ body
     left: 0;
     background-size: cover;
     background-position: 50% 50%;
-    background-image: url('../images/fundo_infnet.png');
+    /*background-image: url('../images/fundo_infnet.png');*/
     background-repeat:repeat;
 }
