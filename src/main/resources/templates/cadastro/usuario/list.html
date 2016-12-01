@@ -65,7 +65,11 @@
                         </tbody>
                         <tfoot>
                         <tr>
-                            <td colspan="4" th:text="${'Existe(m) ' + #lists.size(listarUsuarios) + ' registro(s).'}"></td>
+                            <td colspan="4">
+                                <span th:text="#{usuario.texto.rodape.primeira.parte}"></span>
+                                <span th:text="${#lists.size(listarUsuarios)}"> </span>
+                                <span th:text="#{usuario.texto.rodape.segunda.parte}"></span>
+                            </td>
                         </tr>
                         </tfoot>
                     </table>
