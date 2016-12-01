@@ -2,6 +2,7 @@ package com.infnet.avaliacao;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,7 @@ import java.util.Locale;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
+@SpringBootApplication
 public class AvaliacaoApplication extends WebMvcConfigurerAdapter {
 
 	public static void main(String[] args) {
