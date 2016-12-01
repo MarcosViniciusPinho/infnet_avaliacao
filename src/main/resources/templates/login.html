@@ -16,13 +16,16 @@
 
 <div id="fullscreen_bg" class="fullscreen_bg">
     <a class="navbar-brand  hidden-xs" th:href="@{/?lang=pt}">
-        <img id="icone_brasil" alt="Infnet" th:src="@{/images/icone_brasil.png}" width="80px" height="50px"/>
+        <img id="icone_brasil" th:src="@{/images/icone_brasil.png}" width="80px" height="50px"
+             th:title="#{icone.brasil}"/>
     </a>
     <a class="navbar-brand  hidden-xs" th:href="@{/?lang=en}">
-        <img id="icone_americano" alt="Infnet" th:src="@{/images/icone_americano.png}" width="70px" height="50px"/>
+        <img id="icone_americano" th:src="@{/images/icone_americano.png}" width="70px" height="50px"
+             th:title="#{icone.americano}"/>
     </a>
     <a class="navbar-brand  hidden-xs" th:href="@{/?lang=es}">
-        <img id="icone_espanha" alt="Infnet" th:src="@{/images/icone_espanha.png}" width="70px" height="50px"/>
+        <img id="icone_espanha" th:src="@{/images/icone_espanha.png}" width="70px" height="50px"
+             th:title="#{icone.espanha}"/>
     </a>
 </div>
 <form class="form-signin">
