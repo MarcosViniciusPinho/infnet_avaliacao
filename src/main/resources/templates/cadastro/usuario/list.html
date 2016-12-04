@@ -38,7 +38,7 @@
                             <th th:text="#{usuario.nome}"></th>
                             <th th:text="#{usuario.login}"></th>
                             <th th:text="#{usuario.perfil}"></th>
-                            <th th:text="#{usuario.acao}"></th>
+                            <th th:text="#{acao}"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -47,28 +47,28 @@
                             <td th:text="${usuario.login}"></td>
                             <td th:text="#{${usuario.perfil.id}}"></td>
                             <td>
-                                <a th:title="#{usuario.detalhar}" class="btn btn-link btn-xs" th:href="@{/cadastro/usuario/detail/{id}(id=${usuario.id})}">
+                                <a th:title="#{hint.detalhar}" class="btn btn-link btn-xs" th:href="@{/cadastro/usuario/detail/{id}(id=${usuario.id})}">
                                     <span class="glyphicon glyphicon-th-list"></span>
                                 </a>
-                                <a th:title="#{usuario.editar}" class="btn btn-link btn-xs" th:href="@{/cadastro/usuario/edit/{id}(id=${usuario.id})}">
+                                <a th:title="#{hint.editar}" class="btn btn-link btn-xs" th:href="@{/cadastro/usuario/edit/{id}(id=${usuario.id})}">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </a>
-                                <a th:title="#{usuario.excluir}" class="btn btn-link btn-xs" href="#"
+                                <a th:title="#{hint.excluir}" class="btn btn-link btn-xs" href="#"
                                     th:attr="data-id=${usuario.id}, data-nome=${usuario.nome}" data-toggle="modal" data-target="#modalExcluir">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </a>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" th:if="${#lists.isEmpty(listarUsuarios)}"><span th:text="#{usuario.nenhumregistroencontrado}"></span></td>
+                            <td colspan="4" th:if="${#lists.isEmpty(listarUsuarios)}"><span th:text="#{nenhumregistroencontrado}"></span></td>
                         </tr>
                         </tbody>
                         <tfoot>
                         <tr>
                             <td colspan="4">
-                                <span th:text="#{usuario.texto.rodape.primeira.parte}"></span>
+                                <span th:text="#{texto.rodape.primeira.parte}"></span>
                                 <span th:text="${#lists.size(listarUsuarios)}"> </span>
-                                <span th:text="#{usuario.texto.rodape.segunda.parte}"></span>
+                                <span th:text="#{texto.rodape.segunda.parte}"></span>
                             </td>
                         </tr>
                         </tfoot>

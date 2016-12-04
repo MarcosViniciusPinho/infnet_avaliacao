@@ -7,7 +7,7 @@ import com.infnet.avaliacao.entity.domain.PerfilEnum;
 import com.infnet.avaliacao.exception.CampoObrigatorioException;
 import com.infnet.avaliacao.exception.UniqueException;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
-import com.infnet.avaliacao.persistence.impl.IUsuarioDao;
+import com.infnet.avaliacao.persistence.IUsuarioDao;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 

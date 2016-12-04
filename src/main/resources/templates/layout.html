@@ -91,6 +91,19 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li class="aw-menu__item  is-active">
+                        <a href="#">
+                            <i class="fa  fa-fw  fa-file-text"></i><span th:text="#{avaliacao}"></span>
+                            <i class="aw-menu__navigation-icon  fa"></i>
+                        </a>
+
+                        <ul class="aw-menu__list  aw-menu__list--sublist">
+                            <li class="aw-menu__item  aw-menu__item--link">
+                                <a th:href="@{/avaliacao/list}" th:text="#{montar}"></a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
 
