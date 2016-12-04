@@ -21,4 +21,11 @@ public interface ITemplateAvaliacaoFacade {
      */
     void delete(Long id);
 
+    /**
+     * Método que busca um template avaliacao a partir de seu id
+     * @param id id
+     * @return TemplateAvaliacaoDTO
+     */
+    TemplateAvaliacaoDTO findById(Long id);
+
 }

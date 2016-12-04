@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout"
+       xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="#{avaliacao}"></title>
+    <!--<script th:src="@{/js/util/modalExcluir.js}"/>-->
+</head>
+
+<body>
+    <section layout:fragment="conteudo">
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12"> &nbsp; </div>
+                    <div class="col-lg-12">
+                        <ol class="breadcrumb">
+                            <li><a th:href="@{/home}" th:text="#{home}"></a></li>
+                            <li><a th:href="@{/avaliacao/list}" th:text="#{avaliacao}"></a></li>
+                            <li class="active" th:text="#{avaliacao.tela.detalhar}"></li>
+                        </ol>
+
+                        <h2 th:text="#{avaliacao.tela.detalhar}"></h2>
+                        <hr />
+                            <div class="form-group">
+                                <!--<h3 th:text="#{usuario.informacoes.basicas}"></h3>-->
+                                <div class="well col-sm-12">
+                                    <div class="col-sm-12">
+                                        <label>
+                                            <span th:text="#{avaliacao.titulo}"></span>:
+                                        </label>&nbsp; <span th:text="${templateAvaliacaoDTO.titulo}"/>
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <!--<label th:text="#{login}">:</label> &nbsp; <span th:text="${usuarioDTO.login}"/>-->
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <!--<label th:text="#{usuario.perfil}">:</label> &nbsp; <span th:text="${usuarioDTO.perfil}"/>-->
+                                    </div>
+                                </div>
+                            </div>
+
+                        <!--<a th:href="@{/cadastro/usuario/edit/{id}(id=${usuarioDTO.id})}" class="btn btn-primary" th:text="#{usuario.editar}"></a>-->
+                        <!--<a th:attr="data-id=${usuarioDTO.id}, data-nome=${usuarioDTO.nome}" data-toggle="modal" data-target="#modalExcluir"-->
+                           <!--class="btn btn-primary" th:text="#{usuario.excluir}"></a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<form class="form-horizontal" th:attr="data-url-base=@{/cadastro/usuario/delete/}" method="POST" id="formExcluir">-->
+            <!--<input type="hidden" th:value="#{usuario.confirmacaoexclusao}" id="mensagemExcluir"/>-->
+            <!--<div layout:include="modal"></div>-->
+        <!--</form>-->
+    </section>
+</body>
+</html>

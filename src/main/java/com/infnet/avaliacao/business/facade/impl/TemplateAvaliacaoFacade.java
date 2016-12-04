@@ -3,6 +3,7 @@ package com.infnet.avaliacao.business.facade.impl;
 import com.infnet.avaliacao.business.facade.ITemplateAvaliacaoFacade;
 import com.infnet.avaliacao.business.service.ITemplateAvaliacaoService;
 import com.infnet.avaliacao.dto.TemplateAvaliacaoDTO;
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -31,5 +32,14 @@ public class TemplateAvaliacaoFacade implements ITemplateAvaliacaoFacade {
     @Override
     public void delete(Long id) {
         this.templateAvaliacaoService.delete(id);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TemplateAvaliacaoDTO findById(Long id) {
+        ParameterExceptionUtil.validateObjectNull(id);
+        return this.templateAvaliacaoService.findById(id);
     }
 }

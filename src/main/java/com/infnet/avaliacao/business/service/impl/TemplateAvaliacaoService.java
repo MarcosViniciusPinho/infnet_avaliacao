@@ -35,4 +35,13 @@ public class TemplateAvaliacaoService implements ITemplateAvaliacaoService {
         this.templateAvaliacaoDao.delete(id);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TemplateAvaliacaoDTO findById(Long id) {
+        ParameterExceptionUtil.validateObjectNull(id);
+        return TemplateAvaliacaoDTO.toDto(this.templateAvaliacaoDao.getOne(id));
+    }
+
 }

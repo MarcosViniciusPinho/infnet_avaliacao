@@ -2,7 +2,9 @@ package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.business.facade.ITemplateAvaliacaoFacade;
 import com.infnet.avaliacao.exception.ExecutionException;
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +28,9 @@ public class TemplateAvaliacaoController{
     private static final String SUCESS="sucess";
     private static final String MENSAGEM_SUCESSO = "mensagem.sucesso";
     private static final String REDIRECT_LIST = "redirect:";
+    private static final String ACTION_DETAIL = "/detail/{id}";
+    private static final String VIEW_DETAIL = "/detail";
+
 
     @Resource
     private ITemplateAvaliacaoFacade templateAvaliacaoFacade;
@@ -63,6 +68,24 @@ public class TemplateAvaliacaoController{
     }
 
     /**
+     * Método que redireciona o usuário para a tela de detalhar.
+     * @param id id
+     * @param model model
+     * @return String
+     */
+    @RequestMapping(value = ACTION_DETAIL)
+    public String prepareDetail(@PathVariable Long id, Model model){
+        return this.onPrepareUpdateOrDetail(this.getViewDetail(), id, model);
+    }
+
+    private String onPrepareUpdateOrDetail(String view, Long id, Model model){
+        ParameterExceptionUtil.validateObjectNull(view);
+        ParameterExceptionUtil.validateObjectNull(id);
+        model.addAttribute(this.templateAvaliacaoFacade.findById(id));
+        return view;
+    }
+
+    /**
      * Pega o contexto do controler que sera usado para view.
      * @return String
      */
@@ -76,6 +99,14 @@ public class TemplateAvaliacaoController{
      */
     private String getViewList(){
         return getPathView() + VIEW_LIST;
+    }
+
+    /**
+     * Método que redireciona para a tela de detalhar.
+     * @return String
+     */
+    private String getViewDetail(){
+        return getPathView() + VIEW_DETAIL;
     }
 
     private ITemplateAvaliacaoFacade getFacade() {

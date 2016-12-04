@@ -43,9 +43,9 @@
                         <tr th:each="templateAvaliacao : ${listarTemplateAvaliacao}">
                             <td th:text="${templateAvaliacao.titulo}"></td>
                             <td>
-                                <!--<a th:title="#{hint.detalhar}" class="btn btn-link btn-xs" th:href="@{/cadastro/usuario/detail/{id}(id=${usuario.id})}">-->
-                                    <!--<span class="glyphicon glyphicon-th-list"></span>-->
-                                <!--</a>-->
+                                <a th:title="#{hint.detalhar}" class="btn btn-link btn-xs" th:href="@{/avaliacao/detail/{id}(id=${templateAvaliacao.id})}">
+                                    <span class="glyphicon glyphicon-th-list"></span>
+                                </a>
                                 <!--<a th:title="#{hint.editar}" class="btn btn-link btn-xs" th:href="@{/cadastro/usuario/edit/{id}(id=${usuario.id})}">-->
                                     <!--<span class="glyphicon glyphicon-pencil"></span>-->
                                 <!--</a>-->
