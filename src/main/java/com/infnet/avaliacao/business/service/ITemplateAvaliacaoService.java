@@ -15,4 +15,12 @@ public interface ITemplateAvaliacaoService {
      */
     List<TemplateAvaliacaoDTO> findAll();
 
+    /**
+     * Método que exclui um template avaliação.
+     * @param id id
+     */
+    void delete(Long id);
+
+
+
 }

@@ -25,4 +25,11 @@ public class TemplateAvaliacaoFacade implements ITemplateAvaliacaoFacade {
         return this.templateAvaliacaoService.findAll();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void delete(Long id) {
+        this.templateAvaliacaoService.delete(id);
+    }
 }
