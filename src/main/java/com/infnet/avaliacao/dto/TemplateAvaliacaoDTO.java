@@ -16,6 +16,7 @@ public class TemplateAvaliacaoDTO implements Serializable {
 
     private String titulo;
 
+    private List<TemplateTopicoDTO> templateTopicoDTOList = new ArrayList<>(0);
 
     /**
      * Método que converte um dto para uma entidade.
@@ -38,6 +39,9 @@ public class TemplateAvaliacaoDTO implements Serializable {
         TemplateAvaliacaoDTO templateAvaliacaoDTO = new TemplateAvaliacaoDTO();
         templateAvaliacaoDTO.setId(templateAvaliacao.getId());
         templateAvaliacaoDTO.setTitulo(templateAvaliacao.getTitulo());
+        templateAvaliacaoDTO.setTemplateTopicoDTOList(
+                TemplateTopicoDTO.convertListEntityToListDto(
+                        templateAvaliacao.getTemplateTopicoList()));
         return templateAvaliacaoDTO;
     }
 
@@ -56,7 +60,6 @@ public class TemplateAvaliacaoDTO implements Serializable {
         return lista;
     }
 
-
     public Long getId() {
         return id;
     }
@@ -73,4 +76,11 @@ public class TemplateAvaliacaoDTO implements Serializable {
         this.titulo = titulo;
     }
 
+    public List<TemplateTopicoDTO> getTemplateTopicoDTOList() {
+        return templateTopicoDTOList;
+    }
+
+    public void setTemplateTopicoDTOList(List<TemplateTopicoDTO> templateTopicoDTOList) {
+        this.templateTopicoDTOList = templateTopicoDTOList;
+    }
 }

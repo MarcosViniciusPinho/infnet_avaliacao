@@ -34,7 +34,10 @@
                                     </div>
 
                                     <div class="col-sm-12">
-                                        <!--<label th:text="#{login}">:</label> &nbsp; <span th:text="${usuarioDTO.login}"/>-->
+                                        <span th:each="templateTopico : ${templateAvaliacaoDTO.templateTopicoDTOList}">
+                                            <span th:text="${templateTopico.enunciado}"></span>
+                                            <br />
+                                        </span>
                                     </div>
 
                                     <div class="col-sm-12">
