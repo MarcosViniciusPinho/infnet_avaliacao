@@ -2,12 +2,12 @@ package com.infnet.avaliacao.dto.domain;
 
 public enum MultiplaEscolhaEnum {
 
-    CONCORDO_TOTALMENTE("Concordo totalmente"),
-    CONCORDO("Concordo"),
-    NAO_CONCORDO_NEM_DISCORDO("Não concordo nem discordo"),
-    DISCORDO("Discordo"),
-    DISCORDO_TOTALMENTE("Discordo totalmente"),
-    NAO_SEI_AVALIAR("Não sei avaliar");
+    CONCORDO_TOTALMENTE("avaliacao.concordo.totalmente"),
+    CONCORDO("avaliacao.concordo"),
+    NAO_CONCORDO_NEM_DISCORDO("avaliacao.nao.concordo"),
+    DISCORDO("avaliacao.discordo"),
+    DISCORDO_TOTALMENTE("avaliacao.discordo.totalmente"),
+    NAO_SEI_AVALIAR("avaliacao.nao.sei.avaliar");
 
     private String id;
 
