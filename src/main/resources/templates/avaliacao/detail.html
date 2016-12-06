@@ -62,8 +62,9 @@
                                     <div class="col-sm-12">
                                         <span th:each="templateTopico : ${templateAvaliacaoDTO.templateTopicoDTOList}">
                                             <strong><span th:text="${templateTopico.enunciado}"></span>:</strong>
-                                            <span th:each="templatePergunta : ${templateTopico.templatePerguntaDTOList}">
+                                            <span th:each="templatePergunta,status : ${templateTopico.templatePerguntaDTOList}">
                                                 <div class="col-sm-12">
+                                                    <span th:text="${status.count + '.' }"></span>
                                                     <span th:text="${templatePergunta.questao}"></span>
                                                 </div>
                                                 <div class="col-sm-12" th:if="${!#strings.contains(templatePergunta.questao, '?')}">
