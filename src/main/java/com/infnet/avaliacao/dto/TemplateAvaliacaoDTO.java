@@ -19,17 +19,6 @@ public class TemplateAvaliacaoDTO implements Serializable {
     private List<TemplateTopicoDTO> templateTopicoDTOList = new ArrayList<>(0);
 
     /**
-     * Método que converte um dto para uma entidade.
-     * @return TemplateAvaliacao
-     */
-    public TemplateAvaliacao toEntity(){
-        TemplateAvaliacao templateAvaliacao = new TemplateAvaliacao();
-        templateAvaliacao.setId(this.getId());
-        templateAvaliacao.setTitulo(this.getTitulo());
-        return templateAvaliacao;
-    }
-
-    /**
      * Método que converte uma entidade para um dto.
      * @param templateAvaliacao templateAvaliacao
      * @return TemplateAvaliacaoDTO

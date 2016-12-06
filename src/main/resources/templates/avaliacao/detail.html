@@ -33,10 +33,42 @@
                                         </label>&nbsp; <span th:text="${templateAvaliacaoDTO.titulo}"/>
                                     </div>
 
+                                    <div class="col-sm-12">&nbsp;</div>
+                                    <div class="col-sm-6">
+                                        <label>Aluno:</label>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label>CPF:</label>
+                                    </div>
+
+                                    <div class="col-sm-12">&nbsp;</div>
+                                    <div class="col-sm-12">
+                                        <label>Módulo:</label>
+                                    </div>
+
+                                    <div class="col-sm-12">&nbsp;</div>
+                                    <div class="col-sm-12">
+                                        Por favor, preencha essa avaliação com toda atenção. Ela é muito importante para a melhoria contínua de seu curso. É através das avaliações
+                                        que poderemos construir um curso cada vez melhor, o que é importante para você agora e para o valor de seu diploma no futuro.
+                                    </div>
+
+                                    <div class="col-sm-12">&nbsp;</div>
                                     <div class="col-sm-12">
                                         <span th:each="templateTopico : ${templateAvaliacaoDTO.templateTopicoDTOList}">
-                                            <span th:text="${templateTopico.enunciado}"></span>
-                                            <br />
+                                            <strong><span th:text="${templateTopico.enunciado}"></span>:</strong>
+                                            <span th:each="templatePergunta : ${templateTopico.templatePerguntaDTOList}">
+                                                <div class="col-sm-12">
+                                                    <span th:text="${templatePergunta.questao}"></span>
+                                                </div>
+                                                <div class="col-sm-12" th:if="${!#strings.contains(templatePergunta.questao, '?')}">
+                                                    <input type="radio" th:each="multiplaEscolha : ${templatePergunta.multiplaEscolhaEnumList}"
+                                                           th:text="${multiplaEscolha.id}" th:value="${multiplaEscolha}" disabled="disabled"/>
+                                                    <div class="row">&nbsp;</div>
+                                                </div>
+                                            </span>
+                                            <div class="row">&nbsp;</div>
+                                            <div class="row">&nbsp;</div>
                                         </span>
                                     </div>
 

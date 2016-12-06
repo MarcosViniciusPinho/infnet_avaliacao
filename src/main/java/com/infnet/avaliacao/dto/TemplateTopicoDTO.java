@@ -1,6 +1,5 @@
 package com.infnet.avaliacao.dto;
 
-import com.infnet.avaliacao.entity.TemplatePergunta;
 import com.infnet.avaliacao.entity.TemplateTopico;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.apache.commons.collections.CollectionUtils;
@@ -17,21 +16,22 @@ public class TemplateTopicoDTO implements Serializable {
 
     private String enunciado;
 
-    private List<TemplatePergunta> templatePerguntaList;
-
+    private List<TemplatePerguntaDTO> templatePerguntaDTOList;
 
     /**
      * Método que converte uma entidade para um dto.
-     * @param TemplateTopico TemplateTopico
+     * @param templateTopico templateTopico
      * @return TemplateTopicoDTO
      */
-    public static TemplateTopicoDTO toDto(TemplateTopico TemplateTopico){
-        ParameterExceptionUtil.validateObjectNull(TemplateTopico);
-        TemplateTopicoDTO TemplateTopicoDTO = new TemplateTopicoDTO();
-        TemplateTopicoDTO.setId(TemplateTopico.getId());
-        TemplateTopicoDTO.setEnunciado(TemplateTopico.getEnunciado());
-        TemplateTopicoDTO.setTemplatePerguntaList(TemplateTopico.getTemplatePerguntaList());
-        return TemplateTopicoDTO;
+    public static TemplateTopicoDTO toDto(TemplateTopico templateTopico){
+        ParameterExceptionUtil.validateObjectNull(templateTopico);
+        TemplateTopicoDTO templateTopicoDTO = new TemplateTopicoDTO();
+        templateTopicoDTO.setId(templateTopico.getId());
+        templateTopicoDTO.setEnunciado(templateTopico.getEnunciado());
+        templateTopicoDTO.setTemplatePerguntaDTOList(
+                TemplatePerguntaDTO.convertListEntityToListDto(
+                        templateTopico.getTemplatePerguntaList()));
+        return templateTopicoDTO;
     }
 
     /**
@@ -42,8 +42,8 @@ public class TemplateTopicoDTO implements Serializable {
     public static List<TemplateTopicoDTO> convertListEntityToListDto(List<TemplateTopico> entities){
         List<TemplateTopicoDTO> lista = new ArrayList<>();
         if(CollectionUtils.isNotEmpty(entities)){
-            for(TemplateTopico TemplateTopico : entities){
-                lista.add(toDto(TemplateTopico));
+            for(TemplateTopico templateTopico : entities){
+                lista.add(toDto(templateTopico));
             }
         }
         return lista;
@@ -65,12 +65,11 @@ public class TemplateTopicoDTO implements Serializable {
         this.enunciado = enunciado;
     }
 
-    public List<TemplatePergunta> getTemplatePerguntaList() {
-        return templatePerguntaList;
+    public List<TemplatePerguntaDTO> getTemplatePerguntaDTOList() {
+        return templatePerguntaDTOList;
     }
 
-    public void setTemplatePerguntaList(List<TemplatePergunta> templatePerguntaList) {
-        this.templatePerguntaList = templatePerguntaList;
+    public void setTemplatePerguntaDTOList(List<TemplatePerguntaDTO> templatePerguntaDTOList) {
+        this.templatePerguntaDTOList = templatePerguntaDTOList;
     }
-
 }
