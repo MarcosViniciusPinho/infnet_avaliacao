@@ -69,7 +69,9 @@
                                                 </div>
                                                 <div class="col-sm-12" th:if="${!#strings.contains(templatePergunta.questao, '?')}">
                                                     <input type="radio" th:each="multiplaEscolha : ${templatePergunta.multiplaEscolhaEnumList}"
-                                                           th:text="#{${multiplaEscolha.id}}" th:value="${multiplaEscolha}" disabled="disabled"/>
+                                                            disabled="disabled" id="multiplaEscolhaInput">
+                                                            <span th:text="#{${multiplaEscolha.id}}" th:value="${multiplaEscolha}"></span>
+                                                    </input>
                                                     <div class="row">&nbsp;</div>
                                                 </div>
                                             </span>

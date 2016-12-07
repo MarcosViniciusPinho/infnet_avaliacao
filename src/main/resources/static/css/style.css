@@ -22,3 +22,6 @@ div.textoCamposObrigatorios{
 #logo{
     margin-top: -15px;
 }
+input#multiplaEscolhaInput{
+    margin-left: 15px;
+}
