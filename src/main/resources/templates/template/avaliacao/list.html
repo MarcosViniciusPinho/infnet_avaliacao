@@ -35,7 +35,7 @@
                     <table class="table table-striped table-hover table-bordered">
                         <thead>
                         <tr>
-                            <th th:text="#{avaliacao.titulo}"></th>
+                            <th th:text="#{template.avaliacao.titulo}"></th>
                             <th th:text="#{acao}"></th>
                         </tr>
                         </thead>
@@ -43,10 +43,10 @@
                         <tr th:each="templateAvaliacao : ${listarTemplateAvaliacao}">
                             <td th:text="${templateAvaliacao.titulo}"></td>
                             <td>
-                                <a th:title="#{hint.detalhar}" class="btn btn-link btn-xs" th:href="@{/avaliacao/detail/{id}(id=${templateAvaliacao.id})}">
+                                <a th:title="#{hint.detalhar}" class="btn btn-link btn-xs" th:href="@{/template/avaliacao/detail/{id}(id=${templateAvaliacao.id})}">
                                     <span class="glyphicon glyphicon-th-list"></span>
                                 </a>
-                                <a th:title="#{avaliacao.hint.criar.ou.editar}" class="btn btn-link btn-xs" th:href="@{/avaliacao/edit/{id}(id=${templateAvaliacao.id})}">
+                                <a th:title="#{template.avaliacao.hint.criar.ou.editar}" class="btn btn-link btn-xs" th:href="@{/template/avaliacao/edit/{id}(id=${templateAvaliacao.id})}">
                                     <span class="glyphicon glyphicon-list-alt"></span>
                                 </a>
                                 <a th:title="#{hint.excluir}" class="btn btn-link btn-xs" href="#"
@@ -70,8 +70,8 @@
                         </tfoot>
                     </table>
                 </div>
-                <form class="form-horizontal" th:attr="data-url-base=@{/avaliacao/delete/}" method="POST" id="formExcluir">
-                    <input type="hidden" th:value="#{avaliacao.confirmacaoexclusao}" id="mensagemExcluir"/>
+                <form class="form-horizontal" th:attr="data-url-base=@{/template/avaliacao/delete/}" method="POST" id="formExcluir">
+                    <input type="hidden" th:value="#{template.avaliacao.confirmacaoexclusao}" id="mensagemExcluir"/>
                     <div layout:include="modal"></div>
                 </form>
             </div>

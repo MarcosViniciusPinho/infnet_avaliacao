@@ -20,7 +20,7 @@ import javax.annotation.Resource;
 @RequestMapping(value = TemplateAvaliacaoController.PATH_TEMPLATE_AVALIACAO)
 public class TemplateAvaliacaoController{
 
-    protected static final String PATH_TEMPLATE_AVALIACAO = "/avaliacao";
+    protected static final String PATH_TEMPLATE_AVALIACAO = "/template/avaliacao";
     private static final String ACTION_LIST = "/list";
     private static final String VIEW_LIST = "/list";
     private static final String LISTAR_TEMPLATE_AVALIACAO = "listarTemplateAvaliacao";
