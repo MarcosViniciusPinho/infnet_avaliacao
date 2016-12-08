@@ -6,7 +6,6 @@
 
 <head>
     <title th:text="#{avaliacao}"></title>
-    <!--<script th:src="@{/js/util/modalExcluir.js}"/>-->
 </head>
 
 <body>
@@ -25,7 +24,6 @@
                         <h2 th:text="#{avaliacao.tela.detalhar}"></h2>
                         <hr />
                             <div class="form-group">
-                                <!--<h3 th:text="#{usuario.informacoes.basicas}"></h3>-->
                                 <div class="well col-sm-12">
                                     <div class="col-sm-12">
                                         <label>
@@ -57,7 +55,6 @@
                                     <div class="col-sm-12">
                                         <span th:text="#{avaliacao.texto.padrao}"></span>
                                     </div>
-
                                     <div class="col-sm-12">&nbsp;</div>
                                     <div class="col-sm-12">
                                         <span th:each="templateTopico : ${templateAvaliacaoDTO.templateTopicoDTOList}">
@@ -68,10 +65,13 @@
                                                     <span th:text="${templatePergunta.questao}"></span>
                                                 </div>
                                                 <div class="col-sm-12" th:if="${!#strings.contains(templatePergunta.questao, '?')}">
-                                                    <input type="radio" th:each="multiplaEscolha : ${templatePergunta.multiplaEscolhaEnumList}"
-                                                            disabled="disabled" id="multiplaEscolhaInput">
-                                                            <span th:text="#{${multiplaEscolha.id}}" th:value="${multiplaEscolha}"></span>
-                                                    </input>
+                                                    <span th:each="multiplaEscolha : ${templatePergunta.multiplaEscolhaEnumList}">
+                                                        <div class="col-sm-4">
+                                                            <input type="radio" th:value="${multiplaEscolha}" disabled="disabled"/>
+                                                            <span th:text="#{${multiplaEscolha.id}}"></span>
+                                                        </div>
+                                                    </span>
+                                                    <div class="row">&nbsp;</div>
                                                     <div class="row">&nbsp;</div>
                                                 </div>
                                             </span>
@@ -80,23 +80,12 @@
                                         </span>
                                     </div>
 
-                                    <div class="col-sm-12">
-                                        <!--<label th:text="#{usuario.perfil}">:</label> &nbsp; <span th:text="${usuarioDTO.perfil}"/>-->
-                                    </div>
                                 </div>
                             </div>
-
-                        <!--<a th:href="@{/cadastro/usuario/edit/{id}(id=${usuarioDTO.id})}" class="btn btn-primary" th:text="#{usuario.editar}"></a>-->
-                        <!--<a th:attr="data-id=${usuarioDTO.id}, data-nome=${usuarioDTO.nome}" data-toggle="modal" data-target="#modalExcluir"-->
-                           <!--class="btn btn-primary" th:text="#{usuario.excluir}"></a>-->
                     </div>
                 </div>
             </div>
         </div>
-        <!--<form class="form-horizontal" th:attr="data-url-base=@{/cadastro/usuario/delete/}" method="POST" id="formExcluir">-->
-            <!--<input type="hidden" th:value="#{usuario.confirmacaoexclusao}" id="mensagemExcluir"/>-->
-            <!--<div layout:include="modal"></div>-->
-        <!--</form>-->
     </section>
 </body>
 </html>
