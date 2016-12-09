@@ -3,7 +3,7 @@ package com.infnet.avaliacao.business.service.impl;
 import com.infnet.avaliacao.business.service.ITemplateAvaliacaoService;
 import com.infnet.avaliacao.dto.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
-import com.infnet.avaliacao.persistence.ITemplateAvaliacaoDao;
+import com.infnet.avaliacao.persistence.ITemplateAvaliacaoDAO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,7 +16,7 @@ import java.util.List;
 public class TemplateAvaliacaoService implements ITemplateAvaliacaoService {
 
     @Resource
-    private ITemplateAvaliacaoDao templateAvaliacaoDao;
+    private ITemplateAvaliacaoDAO templateAvaliacaoDao;
 
     /**
      * {@inheritDoc}

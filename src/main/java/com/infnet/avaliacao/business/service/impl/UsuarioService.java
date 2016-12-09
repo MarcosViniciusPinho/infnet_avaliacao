@@ -7,7 +7,7 @@ import com.infnet.avaliacao.entity.domain.PerfilEnum;
 import com.infnet.avaliacao.exception.CampoObrigatorioException;
 import com.infnet.avaliacao.exception.UniqueException;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
-import com.infnet.avaliacao.persistence.IUsuarioDao;
+import com.infnet.avaliacao.persistence.IUsuarioDAO;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +22,7 @@ import java.util.Optional;
 public class UsuarioService implements IUsuarioService {
 
     @Resource
-    private IUsuarioDao usuarioDao;
+    private IUsuarioDAO usuarioDao;
 
     /**
      * {@inheritDoc}

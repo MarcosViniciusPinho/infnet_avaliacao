@@ -8,5 +8,5 @@ import org.springframework.data.repository.NoRepositoryBean;
  * @param <T> entidade
  */
 @NoRepositoryBean
-public interface ICrudDao<T> extends JpaRepository<T, Long> {
+public interface ICrudDAO<T> extends JpaRepository<T, Long> {
 }
