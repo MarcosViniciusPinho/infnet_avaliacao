@@ -30,6 +30,15 @@ public class TemplateAvaliacaoService implements ITemplateAvaliacaoService {
      * {@inheritDoc}
      */
     @Override
+    public void save(TemplateAvaliacaoDTO templateAvaliacaoDTO) {
+        this.validate(templateAvaliacaoDTO);
+        this.templateAvaliacaoDao.save(templateAvaliacaoDTO.toEntity());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void delete(Long id) {
         ParameterExceptionUtil.validateObjectNull(id);
         this.templateAvaliacaoDao.delete(id);
@@ -42,6 +51,13 @@ public class TemplateAvaliacaoService implements ITemplateAvaliacaoService {
     public TemplateAvaliacaoDTO findById(Long id) {
         ParameterExceptionUtil.validateObjectNull(id);
         return TemplateAvaliacaoDTO.toDto(this.templateAvaliacaoDao.getOne(id));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void validate(TemplateAvaliacaoDTO dto) {
     }
 
 }

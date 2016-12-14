@@ -1,6 +1,7 @@
 package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.business.facade.ITemplateAvaliacaoFacade;
+import com.infnet.avaliacao.dto.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.exception.ExecutionException;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,10 @@ public class TemplateAvaliacaoController{
     private static final String REDIRECT_LIST = "redirect:";
     private static final String ACTION_DETAIL = "/detail/{id}";
     private static final String VIEW_DETAIL = "/detail";
+    private static final String ACTION_EDIT = "/edit/{id}";
+    private static final String VIEW_FORM = "/form";
+    private static final String ACTION_SAVE = "/save";
+    private static final String ERROR="error";
 
 
     @Resource
@@ -78,12 +83,48 @@ public class TemplateAvaliacaoController{
         return this.onPrepareUpdateOrDetail(this.getViewDetail(), id, model);
     }
 
+    /**
+     * Método que redireciona o usuário para a tela de alterar.
+     * @param id id
+     * @param model model
+     * @return String
+     */
+    @RequestMapping(value = ACTION_EDIT)
+    public String prepareUpdate(@PathVariable Long id, Model model){
+        return this.onPrepareUpdateOrDetail(this.getViewForm(), id, model);
+    }
+
     private String onPrepareUpdateOrDetail(String view, Long id, Model model){
         ParameterExceptionUtil.validateObjectNull(view);
         ParameterExceptionUtil.validateObjectNull(id);
         model.addAttribute(this.templateAvaliacaoFacade.findById(id));
         return view;
     }
+
+    /**
+     * Método que salva/altera uma entidade.
+     * @param entity entity
+     * @param redirectAttributes redirectAttributes
+     * @return String
+     */
+    @RequestMapping(value = ACTION_SAVE, method = RequestMethod.POST)
+    public String save(TemplateAvaliacaoDTO entity, RedirectAttributes redirectAttributes, Model model){
+        try{
+            this.getFacade().save(entity);
+            redirectAttributes.addFlashAttribute(SUCESS, MENSAGEM_SUCESSO);
+            return this.getRedirectViewList();
+        } catch (RuntimeException ex) {
+            model.addAttribute(ERROR, ex.getLocalizedMessage());
+            this.onLoadView(model);
+            return this.getViewForm();
+        }
+    }
+
+    /**
+     * Método para carregar informações em comum para as telas de Salvar e Alterar.
+     * @param model model
+     */
+    protected void onLoadView(Model model){ }
 
     /**
      * Pega o contexto do controler que sera usado para view.
@@ -107,6 +148,14 @@ public class TemplateAvaliacaoController{
      */
     private String getViewDetail(){
         return getPathView() + VIEW_DETAIL;
+    }
+
+    /**
+     * Método que redireciona para a tela de cadastrar/alterar.
+     * @return String
+     */
+    protected String getViewForm(){
+        return getPathView() + VIEW_FORM;
     }
 
     private ITemplateAvaliacaoFacade getFacade() {

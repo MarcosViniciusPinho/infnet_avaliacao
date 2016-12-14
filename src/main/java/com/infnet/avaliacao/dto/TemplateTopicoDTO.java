@@ -18,6 +18,12 @@ public class TemplateTopicoDTO implements Serializable {
 
     private List<TemplatePerguntaDTO> templatePerguntaDTOList;
 
+    private TemplateTopico toEntity(){
+        TemplateTopico templateTopico = new TemplateTopico();
+        templateTopico.setEnunciado(this.getEnunciado());
+        return templateTopico;
+    }
+
     /**
      * Método que converte uma entidade para um dto.
      * @param templateTopico templateTopico
@@ -44,6 +50,21 @@ public class TemplateTopicoDTO implements Serializable {
         if(CollectionUtils.isNotEmpty(entities)){
             for(TemplateTopico templateTopico : entities){
                 lista.add(toDto(templateTopico));
+            }
+        }
+        return lista;
+    }
+
+    /**
+     * Método que converte uma lista de dtos para uma lista de entidades.
+     * @param dtos dtos
+     * @return List<TemplateTopico>
+     */
+    public static List<TemplateTopico> convertListDtoToListEntity(List<TemplateTopicoDTO> dtos){
+        List<TemplateTopico> lista = new ArrayList<>();
+        if(CollectionUtils.isNotEmpty(dtos)){
+            for(TemplateTopicoDTO templateTopico : dtos){
+                lista.add(templateTopico.toEntity());
             }
         }
         return lista;

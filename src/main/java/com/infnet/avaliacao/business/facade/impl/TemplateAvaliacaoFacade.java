@@ -26,6 +26,11 @@ public class TemplateAvaliacaoFacade implements ITemplateAvaliacaoFacade {
         return this.templateAvaliacaoService.findAll();
     }
 
+    @Override
+    public void save(TemplateAvaliacaoDTO dto) {
+        templateAvaliacaoService.save(dto);
+    }
+
     /**
      * {@inheritDoc}
      */
