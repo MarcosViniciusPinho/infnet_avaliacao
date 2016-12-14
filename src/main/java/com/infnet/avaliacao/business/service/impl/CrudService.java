@@ -4,8 +4,8 @@ import com.infnet.avaliacao.business.service.ICrudService;
 import com.infnet.avaliacao.dto.IDTO;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import com.infnet.avaliacao.persistence.ICrudDAO;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class CrudService<V extends IDTO<T>, T> implements ICrudService<V, T>{
 
-    @Resource
+    @Autowired
     private ICrudDAO<T> crudDAO;
 
     /**
