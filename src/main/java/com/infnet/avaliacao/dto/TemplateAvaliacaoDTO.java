@@ -4,11 +4,10 @@ import com.infnet.avaliacao.entity.TemplateAvaliacao;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.apache.commons.collections.CollectionUtils;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TemplateAvaliacaoDTO implements Serializable {
+public class TemplateAvaliacaoDTO implements IDTO<TemplateAvaliacao> {
 
     private static final long serialVersionUID = 1L;
 
@@ -18,6 +17,7 @@ public class TemplateAvaliacaoDTO implements Serializable {
 
     private List<TemplateTopicoDTO> templateTopicoDTOList = new ArrayList<>(0);
 
+    @Override
     public TemplateAvaliacao toEntity(){
         TemplateAvaliacao templateAvaliacao = new TemplateAvaliacao();
         templateAvaliacao.setTitulo(this.getTitulo());
@@ -56,6 +56,7 @@ public class TemplateAvaliacaoDTO implements Serializable {
         return lista;
     }
 
+    @Override
     public Long getId() {
         return id;
     }

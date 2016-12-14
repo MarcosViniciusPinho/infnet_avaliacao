@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Classe que representa o serviço generico
  */
-public interface ICrudService<V> {
+public interface ICrudService<V, T> {
 
     /**
      * Método que salva/altera a entidade no banco.
@@ -16,9 +16,9 @@ public interface ICrudService<V> {
     /**
      * Método que busca uma entidade no banco a partir de seu id
      * @param id id
-     * @return V
+     * @return T
      */
-    V findById(Long id);
+    T findById(Long id);
 
     /**
      * Método que exclui uma entidade do banco.
@@ -28,9 +28,9 @@ public interface ICrudService<V> {
 
     /**
      * Método que lista todos os registros no banco
-     * @return List<V>
+     * @return List<T>
      */
-    List<V> findAll();
+    List<T> findAll();
 
     /**
      * Método que serve para fazer as validacoes

@@ -30,7 +30,7 @@ public class UsuarioFacade implements IUsuarioFacade {
      */
     @Override
     public UsuarioDTO findById(Long id) {
-        return this.usuarioService.findById(id);
+        return UsuarioDTO.toDto(this.usuarioService.findById(id));
     }
 
     /**
@@ -46,7 +46,7 @@ public class UsuarioFacade implements IUsuarioFacade {
      */
     @Override
     public List<UsuarioDTO> findAll() {
-        return this.usuarioService.findAll();
+        return UsuarioDTO.convertListEntityToListDto(this.usuarioService.findAll());
     }
 
 }

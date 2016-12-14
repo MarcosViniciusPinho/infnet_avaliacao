@@ -6,20 +6,18 @@ import com.infnet.avaliacao.entity.Usuario;
 import com.infnet.avaliacao.entity.domain.PerfilEnum;
 import com.infnet.avaliacao.exception.CampoObrigatorioException;
 import com.infnet.avaliacao.exception.UniqueException;
-import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import com.infnet.avaliacao.persistence.IUsuarioDAO;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.Optional;
 
 /**
  * {@inheritDoc}
  */
 @Service
-public class UsuarioService implements IUsuarioService {
+public class UsuarioService extends CrudService<UsuarioDTO, Usuario> implements IUsuarioService {
 
     @Resource
     private IUsuarioDAO usuarioDao;
@@ -29,7 +27,6 @@ public class UsuarioService implements IUsuarioService {
      */
     @Override
     public void validate(UsuarioDTO usuarioDTO) {
-        ParameterExceptionUtil.validateObjectNull(usuarioDTO);
         this.validarCamposObrigatorios(usuarioDTO);
         this.validarLoginUnico(usuarioDTO);
     }
@@ -53,41 +50,6 @@ public class UsuarioService implements IUsuarioService {
         if(usuario != null && usuarioDTO.toEntity().equals(usuario)){
             throw new UniqueException("usuario.mensagem.erro.login.unico");
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void save(UsuarioDTO usuarioDTO) {
-        this.validate(usuarioDTO);
-        this.usuarioDao.save(usuarioDTO.toEntity());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public UsuarioDTO findById(Long id) {
-        ParameterExceptionUtil.validateObjectNull(id);
-        return UsuarioDTO.toDto(this.usuarioDao.getOne(id));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void delete(Long id) {
-        ParameterExceptionUtil.validateObjectNull(id);
-        this.usuarioDao.delete(id);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<UsuarioDTO> findAll() {
-        return UsuarioDTO.convertListEntityToListDto(this.usuarioDao.findAll());
     }
 
 }

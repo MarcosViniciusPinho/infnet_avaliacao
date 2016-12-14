@@ -6,14 +6,13 @@ import com.infnet.avaliacao.entity.domain.PerfilEnum;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.apache.commons.collections.CollectionUtils;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Classe que representa a tela de usuario.
  */
-public class UsuarioDTO implements Serializable {
+public class UsuarioDTO implements IDTO<Usuario> {
 
     private static final long serialVersionUID = 1L;
 
@@ -28,10 +27,7 @@ public class UsuarioDTO implements Serializable {
     private PerfilEnum perfil;
 
 
-    /**
-     * Método que converte um dto para uma entidade.
-     * @return Usuario
-     */
+    @Override
     public Usuario toEntity(){
         Usuario usuario = new Usuario();
         usuario.setId(this.getId());
@@ -73,6 +69,7 @@ public class UsuarioDTO implements Serializable {
         return lista;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
