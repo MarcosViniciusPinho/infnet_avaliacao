@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.business.facade;
 
-import com.infnet.avaliacao.dto.UsuarioDTO;
+import com.infnet.avaliacao.dto.impl.UsuarioDTO;
 
 /**
  * Classe que representa o facade de usuario.

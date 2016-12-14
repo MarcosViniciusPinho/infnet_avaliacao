@@ -2,7 +2,7 @@ package com.infnet.avaliacao.business.facade.impl;
 
 import com.infnet.avaliacao.business.facade.IUsuarioFacade;
 import com.infnet.avaliacao.business.service.IUsuarioService;
-import com.infnet.avaliacao.dto.UsuarioDTO;
+import com.infnet.avaliacao.dto.impl.UsuarioDTO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.business.service;
 
-import com.infnet.avaliacao.dto.TemplateAvaliacaoDTO;
+import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.entity.TemplateAvaliacao;
 
 /**

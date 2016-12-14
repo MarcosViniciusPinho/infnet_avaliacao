@@ -2,7 +2,7 @@ package com.infnet.avaliacao.business.facade.impl;
 
 import com.infnet.avaliacao.business.facade.ITemplateAvaliacaoFacade;
 import com.infnet.avaliacao.business.service.ITemplateAvaliacaoService;
-import com.infnet.avaliacao.dto.TemplateAvaliacaoDTO;
+import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

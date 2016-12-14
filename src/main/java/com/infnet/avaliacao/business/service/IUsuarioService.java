@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.business.service;
 
-import com.infnet.avaliacao.dto.UsuarioDTO;
+import com.infnet.avaliacao.dto.impl.UsuarioDTO;
 import com.infnet.avaliacao.entity.Usuario;
 
 /**

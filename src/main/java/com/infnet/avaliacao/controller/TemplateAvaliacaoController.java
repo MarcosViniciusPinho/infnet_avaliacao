@@ -1,7 +1,7 @@
 package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.business.facade.ITemplateAvaliacaoFacade;
-import com.infnet.avaliacao.dto.TemplateAvaliacaoDTO;
+import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.exception.ExecutionException;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package com.infnet.avaliacao.dto;
+package com.infnet.avaliacao.dto.impl;
 
 import com.infnet.avaliacao.entity.TemplateTopico;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;

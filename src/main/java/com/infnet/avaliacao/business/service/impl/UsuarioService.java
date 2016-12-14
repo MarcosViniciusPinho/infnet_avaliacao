@@ -1,7 +1,7 @@
 package com.infnet.avaliacao.business.service.impl;
 
 import com.infnet.avaliacao.business.service.IUsuarioService;
-import com.infnet.avaliacao.dto.UsuarioDTO;
+import com.infnet.avaliacao.dto.impl.UsuarioDTO;
 import com.infnet.avaliacao.entity.Usuario;
 import com.infnet.avaliacao.entity.domain.PerfilEnum;
 import com.infnet.avaliacao.exception.CampoObrigatorioException;

@@ -1,6 +1,7 @@
-package com.infnet.avaliacao.dto;
+package com.infnet.avaliacao.dto.impl;
 
 
+import com.infnet.avaliacao.dto.IDTO;
 import com.infnet.avaliacao.entity.Usuario;
 import com.infnet.avaliacao.entity.domain.PerfilEnum;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;

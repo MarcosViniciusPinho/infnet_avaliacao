@@ -1,7 +1,7 @@
 package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.business.facade.IUsuarioFacade;
-import com.infnet.avaliacao.dto.UsuarioDTO;
+import com.infnet.avaliacao.dto.impl.UsuarioDTO;
 import com.infnet.avaliacao.entity.domain.PerfilEnum;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.springframework.stereotype.Controller;

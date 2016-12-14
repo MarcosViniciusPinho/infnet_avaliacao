@@ -1,4 +1,4 @@
-package com.infnet.avaliacao.dto;
+package com.infnet.avaliacao.dto.impl;
 
 import com.infnet.avaliacao.dto.domain.MultiplaEscolhaEnum;
 import com.infnet.avaliacao.entity.TemplatePergunta;

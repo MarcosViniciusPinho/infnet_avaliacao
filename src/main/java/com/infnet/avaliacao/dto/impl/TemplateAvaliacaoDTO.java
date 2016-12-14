@@ -1,5 +1,6 @@
-package com.infnet.avaliacao.dto;
+package com.infnet.avaliacao.dto.impl;
 
+import com.infnet.avaliacao.dto.IDTO;
 import com.infnet.avaliacao.entity.TemplateAvaliacao;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.apache.commons.collections.CollectionUtils;
