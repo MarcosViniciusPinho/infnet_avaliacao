@@ -35,6 +35,7 @@ public class TemplateAvaliacaoController{
     private static final String VIEW_FORM = "/form";
     private static final String ACTION_SAVE = "/save";
     private static final String ERROR="error";
+    private static final String ACTION_SELECIONAR_TOPICO = "/selecionarTopico/{id}";
 
 
     @Resource
@@ -118,6 +119,12 @@ public class TemplateAvaliacaoController{
             this.onLoadView(model);
             return this.getViewForm();
         }
+    }
+
+    @RequestMapping(value = ACTION_SELECIONAR_TOPICO)
+    public String selecionarTopico(@PathVariable Long id, Model model){
+        //TODO fazer a logica para popular os topicos selecionados na tela para a lista de topicos da classe template avaliação.
+        return this.getViewForm();
     }
 
     /**

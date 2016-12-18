@@ -97,7 +97,9 @@
                                                <!--th:attr="data-id=${templateAvaliacao.id}, data-nome=${templateAvaliacao.titulo}" data-toggle="modal" data-target="#modalExcluir">-->
                                                 <!--<span class="glyphicon glyphicon-trash"></span>-->
                                             <!--</a>-->
-                                            <input type="checkbox" th:value="*{templateTopicoDTOList}"/>
+                                            <a th:href="@{/template/avaliacao/selecionarTopico/{id}(id=${templateTopico.id})}">
+                                                <input type="checkbox"/>
+                                            </a>
                                         </td>
                                     </tr>
                                     <tr>
