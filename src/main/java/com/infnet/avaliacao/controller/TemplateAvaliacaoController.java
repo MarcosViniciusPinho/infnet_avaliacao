@@ -96,7 +96,7 @@ public class TemplateAvaliacaoController{
      */
     @RequestMapping(value = ACTION_EDIT)
     public String prepareUpdate(@PathVariable Long id, Model model){
-        model.addAttribute(LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAll());
+        this.onEdit(model);
         return this.onPrepareUpdateOrDetail(this.getViewForm(), id, model);
     }
 
@@ -138,6 +138,10 @@ public class TemplateAvaliacaoController{
      * @param model model
      */
     protected void onLoadView(Model model){
+        this.onEdit(model);
+    }
+
+    protected void onEdit(Model model){
         model.addAttribute(LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAll());
     }
 
