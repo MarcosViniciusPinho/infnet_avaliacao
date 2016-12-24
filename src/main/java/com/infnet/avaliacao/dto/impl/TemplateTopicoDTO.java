@@ -1,14 +1,14 @@
 package com.infnet.avaliacao.dto.impl;
 
+import com.infnet.avaliacao.dto.IDTO;
 import com.infnet.avaliacao.entity.TemplateTopico;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.apache.commons.collections.CollectionUtils;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TemplateTopicoDTO implements Serializable {
+public class TemplateTopicoDTO implements IDTO<TemplateTopico> {
 
     private static final long serialVersionUID = 1L;
 
@@ -18,7 +18,7 @@ public class TemplateTopicoDTO implements Serializable {
 
     private List<TemplatePerguntaDTO> templatePerguntaDTOList;
 
-    private TemplateTopico toEntity(){
+    public TemplateTopico toEntity(){
         TemplateTopico templateTopico = new TemplateTopico();
         templateTopico.setEnunciado(this.getEnunciado());
         return templateTopico;

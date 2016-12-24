@@ -1,6 +1,7 @@
 package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.business.facade.ITemplateAvaliacaoFacade;
+import com.infnet.avaliacao.business.facade.ITemplateTopicoFacade;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.exception.ExecutionException;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
@@ -36,9 +37,13 @@ public class TemplateAvaliacaoController{
     private static final String VIEW_FORM = "/form";
     private static final String ACTION_SAVE = "/save";
     private static final String ERROR="error";
+    private static final String LISTAR_TEMPLATE_TOPICO = "listarTemplateTopico";
 
     @Resource
     private ITemplateAvaliacaoFacade templateAvaliacaoFacade;
+
+    @Resource
+    private ITemplateTopicoFacade templateTopicoFacade;
 
     /**
      * Método que faz a listagem dos registros na tela.
@@ -91,6 +96,7 @@ public class TemplateAvaliacaoController{
      */
     @RequestMapping(value = ACTION_EDIT)
     public String prepareUpdate(@PathVariable Long id, Model model){
+        model.addAttribute(LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAll());
         return this.onPrepareUpdateOrDetail(this.getViewForm(), id, model);
     }
 
@@ -131,7 +137,9 @@ public class TemplateAvaliacaoController{
      * Método para carregar informações em comum para as telas de Salvar e Alterar.
      * @param model model
      */
-    protected void onLoadView(Model model){ }
+    protected void onLoadView(Model model){
+        model.addAttribute(LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAll());
+    }
 
     /**
      * Pega o contexto do controler que sera usado para view.
