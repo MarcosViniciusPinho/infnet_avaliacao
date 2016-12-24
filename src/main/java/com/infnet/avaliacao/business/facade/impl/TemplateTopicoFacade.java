@@ -22,7 +22,8 @@ public class TemplateTopicoFacade implements ITemplateTopicoFacade {
      */
     @Override
     public List<TemplateTopicoDTO> findAll() {
-        return TemplateTopicoDTO.convertListEntityToListDto(this.templateTopicoService.findAll());
+        return TemplateTopicoDTO.convertListEntityToListDto(
+                this.templateTopicoService.findAll());
     }
 
     @Override
@@ -44,5 +45,11 @@ public class TemplateTopicoFacade implements ITemplateTopicoFacade {
     @Override
     public TemplateTopicoDTO findById(Long id) {
         return TemplateTopicoDTO.toDto(this.templateTopicoService.findById(id));
+    }
+
+    @Override
+    public List<TemplateTopicoDTO> getListaTemplatesTopicosPorId(List<Long> idsTemplateTopico) {
+        return TemplateTopicoDTO.convertListEntityToListDto(
+                this.templateTopicoService.getListaTemplatesTopicosPorId(idsTemplateTopico));
     }
 }

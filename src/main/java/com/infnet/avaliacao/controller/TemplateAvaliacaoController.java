@@ -127,10 +127,10 @@ public class TemplateAvaliacaoController{
         }
     }
 
-    private void onForm(TemplateAvaliacaoDTO entity){
+    private void onForm(TemplateAvaliacaoDTO entity) {
         List<Long> idsTopicosSelecionados = entity.getIdsTemplateTopicoSelecionados();
-
-
+        entity.setTemplateTopicoDTOList(
+                this.templateTopicoFacade.getListaTemplatesTopicosPorId(idsTopicosSelecionados));
     }
 
     /**
