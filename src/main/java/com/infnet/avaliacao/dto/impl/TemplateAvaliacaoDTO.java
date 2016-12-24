@@ -18,6 +18,8 @@ public class TemplateAvaliacaoDTO implements IDTO<TemplateAvaliacao> {
 
     private List<TemplateTopicoDTO> templateTopicoDTOList = new ArrayList<>(0);
 
+    private List<Long> idsTemplateTopicoSelecionados = new ArrayList<>(0);
+
     @Override
     public TemplateAvaliacao toEntity(){
         TemplateAvaliacao templateAvaliacao = new TemplateAvaliacao();
@@ -80,5 +82,13 @@ public class TemplateAvaliacaoDTO implements IDTO<TemplateAvaliacao> {
 
     public void setTemplateTopicoDTOList(List<TemplateTopicoDTO> templateTopicoDTOList) {
         this.templateTopicoDTOList = templateTopicoDTOList;
+    }
+
+    public List<Long> getIdsTemplateTopicoSelecionados() {
+        return idsTemplateTopicoSelecionados;
+    }
+
+    public void setIdsTemplateTopicoSelecionados(List<Long> idsTemplateTopicoSelecionados) {
+        this.idsTemplateTopicoSelecionados = idsTemplateTopicoSelecionados;
     }
 }

@@ -1,3 +1,4 @@
-function salvar(position){
-    alert('Clicou na posição: '+position);
+function selecionarTopico(idTopico){
+    alert('Clicou na posição: '+idTopico);
+    $('#idsTemplateTopicoSelecionados').val(idTopico);
 }

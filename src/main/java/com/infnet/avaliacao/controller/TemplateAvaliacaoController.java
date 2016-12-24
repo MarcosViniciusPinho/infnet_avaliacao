@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Classe responsável pela captura das informações na view.
@@ -35,8 +36,6 @@ public class TemplateAvaliacaoController{
     private static final String VIEW_FORM = "/form";
     private static final String ACTION_SAVE = "/save";
     private static final String ERROR="error";
-    private static final String ACTION_SELECIONAR_TOPICO = "/selecionarTopico/{id}";
-
 
     @Resource
     private ITemplateAvaliacaoFacade templateAvaliacaoFacade;
@@ -111,6 +110,7 @@ public class TemplateAvaliacaoController{
     @RequestMapping(value = ACTION_SAVE, method = RequestMethod.POST)
     public String save(TemplateAvaliacaoDTO entity, RedirectAttributes redirectAttributes, Model model){
         try{
+            this.onForm(entity);
             this.getFacade().save(entity);
             redirectAttributes.addFlashAttribute(SUCESS, MENSAGEM_SUCESSO);
             return this.getRedirectViewList();
@@ -121,10 +121,10 @@ public class TemplateAvaliacaoController{
         }
     }
 
-    @RequestMapping(value = ACTION_SELECIONAR_TOPICO)
-    public String selecionarTopico(@PathVariable Long id, Model model){
-        //TODO fazer a logica para popular os topicos selecionados na tela para a lista de topicos da classe template avaliação.
-        return this.getViewForm();
+    private void onForm(TemplateAvaliacaoDTO entity){
+        List<Long> idsTopicosSelecionados = entity.getIdsTemplateTopicoSelecionados();
+
+
     }
 
     /**
