@@ -23,6 +23,7 @@ public class TemplateAvaliacaoDTO implements IDTO<TemplateAvaliacao> {
     @Override
     public TemplateAvaliacao toEntity(){
         TemplateAvaliacao templateAvaliacao = new TemplateAvaliacao();
+        templateAvaliacao.setId(this.getId());
         templateAvaliacao.setTitulo(this.getTitulo());
         templateAvaliacao.setTemplateTopicoList(TemplateTopicoDTO.convertListDtoToListEntity(this.getTemplateTopicoDTOList()));
         return templateAvaliacao;
