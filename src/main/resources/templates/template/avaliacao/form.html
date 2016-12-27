@@ -54,8 +54,8 @@
                                     <tr th:each="templateTopico,status : ${listarTemplateTopico}">
                                         <td th:text="${templateTopico.enunciado}"></td>
                                         <td>
-                                            <a th:onclick="'selecionarTopico(' + ${templateTopico.id} + ');'">
-                                                <input type="checkbox"/>
+                                            <a th:onclick="'selecionarTopico();'">
+                                                <input type="checkbox" th:value="${templateTopico.id}" name="checks[]"/>
                                             </a>
                                         </td>
                                     </tr>
