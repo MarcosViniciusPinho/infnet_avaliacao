@@ -19,7 +19,7 @@ public class TemplateAvaliacao implements Serializable {
     @Column(name = "titulo", length = 50, nullable = false)
     private String titulo;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "template_avaliacao_topico", joinColumns = {
             @JoinColumn(name = "id_template_avaliacao", nullable = false)
     }, inverseJoinColumns = {
@@ -83,8 +83,7 @@ public class TemplateAvaliacao implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TemplateAvaliacao that = (TemplateAvaliacao) o;
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        return titulo != null ? titulo.equals(that.titulo) : that.titulo == null;
+        return id != null ? id.equals(that.id) : that.id == null;
     }
 
     @Override

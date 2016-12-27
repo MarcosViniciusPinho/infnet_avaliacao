@@ -20,6 +20,7 @@ public class TemplateTopicoDTO implements IDTO<TemplateTopico> {
 
     public TemplateTopico toEntity(){
         TemplateTopico templateTopico = new TemplateTopico();
+        templateTopico.setId(this.getId());
         templateTopico.setEnunciado(this.getEnunciado());
         return templateTopico;
     }
