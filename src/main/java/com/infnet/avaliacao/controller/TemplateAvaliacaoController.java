@@ -4,7 +4,6 @@ import com.infnet.avaliacao.business.facade.ITemplateAvaliacaoFacade;
 import com.infnet.avaliacao.business.facade.ITemplateTopicoFacade;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.exception.ExecutionException;
-import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -85,7 +84,8 @@ public class TemplateAvaliacaoController{
      */
     @RequestMapping(value = ACTION_DETAIL)
     public String prepareDetail(@PathVariable Long id, Model model){
-        return this.onPrepareUpdateOrDetail(this.getViewDetail(), id, model);
+        model.addAttribute(this.templateAvaliacaoFacade.findById(id));
+        return this.getViewDetail();
     }
 
     /**
@@ -96,15 +96,8 @@ public class TemplateAvaliacaoController{
      */
     @RequestMapping(value = ACTION_EDIT)
     public String prepareUpdate(@PathVariable Long id, Model model){
-        this.onEdit(model);
-        return this.onPrepareUpdateOrDetail(this.getViewForm(), id, model);
-    }
-
-    private String onPrepareUpdateOrDetail(String view, Long id, Model model){
-        ParameterExceptionUtil.validateObjectNull(view);
-        ParameterExceptionUtil.validateObjectNull(id);
-        model.addAttribute(this.templateAvaliacaoFacade.findById(id));
-        return view;
+        this.onEdit(id, model);
+        return this.getViewForm();
     }
 
     /**
@@ -138,11 +131,13 @@ public class TemplateAvaliacaoController{
      * @param model model
      */
     protected void onLoadView(Model model){
-        this.onEdit(model);
+        model.addAttribute(LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAll());
     }
 
-    protected void onEdit(Model model){
+    protected void onEdit(Long id, Model model){
         model.addAttribute(LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAll());
+        TemplateAvaliacaoDTO templateAvaliacaoDTO = this.templateAvaliacaoFacade.findById(id);
+        model.addAttribute(templateAvaliacaoDTO.carregarTopicosCadastradosParaFicarSelecionados());
     }
 
     /**
