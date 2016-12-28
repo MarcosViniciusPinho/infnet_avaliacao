@@ -27,6 +27,10 @@
                             <span th:text="#{${error}}"></span>
                         </div>
 
+                        <div class="alert alert-success" role="alert" th:if="${!#strings.isEmpty(sucess)}">
+                            <span th:text="#{${sucess}}"></span>
+                        </div>
+
                         <h2>Montar Avaliação  - Curso: <span th:text="${templateAvaliacaoDTO.titulo}"></span> </h2>
 
                         <!--<h2 class="cadastrar" th:text="#{usuario.cadastrar}"></h2>-->

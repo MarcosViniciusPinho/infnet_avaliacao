@@ -110,27 +110,27 @@ public class TemplateAvaliacaoController{
     /**
      * Método que salva/altera uma entidade.
      * @param entity entity
-     * @param redirectAttributes redirectAttributes
      * @return String
      */
     @RequestMapping(value = ACTION_SAVE, method = RequestMethod.POST)
-    public String save(TemplateAvaliacaoDTO entity, RedirectAttributes redirectAttributes, Model model){
+    public ModelAndView save(TemplateAvaliacaoDTO entity, Model model){
+        ModelAndView mv = new ModelAndView(this.getViewForm());
         try{
-            this.onForm(entity);
+            this.onForm(entity, mv);
             this.getFacade().save(entity);
-            redirectAttributes.addFlashAttribute(SUCESS, MENSAGEM_SUCESSO);
-            return this.getRedirectViewList();
+            mv.addObject(SUCESS, MENSAGEM_SUCESSO);
         } catch (RuntimeException ex) {
-            model.addAttribute(ERROR, ex.getLocalizedMessage());
+            mv.addObject(ERROR, ex.getLocalizedMessage());
             this.onLoadView(model);
-            return this.getViewForm();
         }
+        return mv;
     }
 
-    private void onForm(TemplateAvaliacaoDTO entity) {
+    private void onForm(TemplateAvaliacaoDTO entity, ModelAndView mv) {
         List<Long> idsTopicosSelecionados = entity.getIdsTemplateTopicoSelecionados();
         entity.setTemplateTopicoDTOList(
                 this.templateTopicoFacade.getListaTemplatesTopicosPorId(idsTopicosSelecionados));
+        mv.addObject(LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAll());
     }
 
     /**
