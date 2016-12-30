@@ -35,6 +35,7 @@ public class TemplateAvaliacaoController{
     private static final String ACTION_EDIT = "/edit/{id}";
     private static final String VIEW_FORM = "/form";
     private static final String ACTION_SAVE = "/save";
+    private static final String ACTION_ERROR = "/error/{id}";
     private static final String ERROR="error";
     private static final String LISTAR_TEMPLATE_TOPICO = "listarTemplateTopico";
 
@@ -89,7 +90,7 @@ public class TemplateAvaliacaoController{
     }
 
     /**
-     * Método que redireciona o usuário para a tela de alterar.
+     * Método que redireciona o usuário para a tela de form.
      * @param id id
      * @param model model
      * @return String
@@ -97,6 +98,18 @@ public class TemplateAvaliacaoController{
     @RequestMapping(value = ACTION_EDIT)
     public String prepareUpdate(@PathVariable Long id, Model model){
         this.onEdit(id, model);
+        return this.getViewForm();
+    }
+
+    /**
+     * Método que redireciona o usuário para a tela de form quando houver exceção.
+     * @param id id
+     * @param model model
+     * @return String
+     */
+    @RequestMapping(value = ACTION_ERROR)
+    public String prepareError(@PathVariable Long id, Model model){
+        this.onError(id, model);
         return this.getViewForm();
     }
 
@@ -115,9 +128,9 @@ public class TemplateAvaliacaoController{
             redirectAttributes.addFlashAttribute(SUCESS, MENSAGEM_SUCESSO);
             return this.getRedirectViewEdit();
         } catch (RuntimeException ex) {
-            model.addAttribute(ERROR, ex.getLocalizedMessage());
+            redirectAttributes.addFlashAttribute(ERROR, ex.getLocalizedMessage());
             this.onLoadView(model);
-            return this.getViewForm();
+            return getRedirectViewError();
         }
     }
 
@@ -128,8 +141,13 @@ public class TemplateAvaliacaoController{
         model.addAttribute(LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAll());
     }
 
+    protected void onError(Long id, Model model){
+        model.addAttribute(this.templateAvaliacaoFacade.findById(id));
+        this.onLoadView(model);
+    }
+
     /**
-     * Método para carregar informações em comum para as telas de Salvar e Alterar.
+     * Método para carregar informações em comum para a tela de form.
      * @param model model
      */
     protected void onLoadView(Model model){
@@ -186,8 +204,20 @@ public class TemplateAvaliacaoController{
         return REDIRECT_LIST + getPathView() + ACTION_LIST;
     }
 
+    /**
+     * Método que redireciona para a tela de form com os check box's marcados.
+     * @return String
+     */
     private String getRedirectViewEdit(){
         return REDIRECT_LIST + getPathView() + ACTION_EDIT;
+    }
+
+    /**
+     * Método que redireciona para a tela de form com os check box's desmarcados.
+     * @return String
+     */
+    private String getRedirectViewError(){
+        return REDIRECT_LIST + getPathView() + ACTION_ERROR;
     }
 
 }
