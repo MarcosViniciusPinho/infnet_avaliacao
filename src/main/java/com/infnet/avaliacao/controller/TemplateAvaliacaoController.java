@@ -103,27 +103,29 @@ public class TemplateAvaliacaoController{
     /**
      * Método que salva/altera uma entidade.
      * @param entity entity
+     * @param redirectAttributes redirectAttributes
      * @return String
      */
     @RequestMapping(value = ACTION_SAVE, method = RequestMethod.POST)
-    public ModelAndView save(TemplateAvaliacaoDTO entity, Model model){
-        ModelAndView mv = new ModelAndView(this.getViewForm());
+    public String save(TemplateAvaliacaoDTO entity, RedirectAttributes redirectAttributes, Model model){
         try{
-            this.onForm(entity, mv);
+            this.onForm(entity, model);
+            redirectAttributes.addAttribute("id", entity.getId());
             this.getFacade().save(entity);
-            mv.addObject(SUCESS, MENSAGEM_SUCESSO);
+            redirectAttributes.addFlashAttribute(SUCESS, MENSAGEM_SUCESSO);
+            return this.getRedirectViewEdit();
         } catch (RuntimeException ex) {
-            mv.addObject(ERROR, ex.getLocalizedMessage());
+            model.addAttribute(ERROR, ex.getLocalizedMessage());
             this.onLoadView(model);
+            return this.getViewForm();
         }
-        return mv;
     }
 
-    private void onForm(TemplateAvaliacaoDTO entity, ModelAndView mv) {
+    private void onForm(TemplateAvaliacaoDTO entity, Model model) {
         List<Long> idsTopicosSelecionados = entity.getIdsTemplateTopicoSelecionados();
         entity.setTemplateTopicoDTOList(
                 this.templateTopicoFacade.getListaTemplatesTopicosPorId(idsTopicosSelecionados));
-        mv.addObject(LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAll());
+        model.addAttribute(LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAll());
     }
 
     /**
@@ -135,7 +137,7 @@ public class TemplateAvaliacaoController{
     }
 
     protected void onEdit(Long id, Model model){
-        model.addAttribute(LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAll());
+        this.onLoadView(model);
         TemplateAvaliacaoDTO templateAvaliacaoDTO = this.templateAvaliacaoFacade.findById(id);
         model.addAttribute(templateAvaliacaoDTO.carregarTopicosCadastradosParaFicarSelecionados());
     }
@@ -182,6 +184,10 @@ public class TemplateAvaliacaoController{
      */
     private String getRedirectViewList(){
         return REDIRECT_LIST + getPathView() + ACTION_LIST;
+    }
+
+    private String getRedirectViewEdit(){
+        return REDIRECT_LIST + getPathView() + ACTION_EDIT;
     }
 
 }
