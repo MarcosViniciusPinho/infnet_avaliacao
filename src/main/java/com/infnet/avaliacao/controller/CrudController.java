@@ -2,6 +2,7 @@ package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.business.facade.ICrudFacade;
 import com.infnet.avaliacao.controller.util.ActionConstant;
+import com.infnet.avaliacao.controller.util.MessageConstant;
 import com.infnet.avaliacao.exception.ExecutionException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,10 +16,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @param <V> dto
  */
 public abstract class CrudController<V> {
-
-    protected static final String MENSAGEM_SUCESSO = "mensagem.sucesso";
-    protected static final String SUCESS="sucess";
-    protected static final String ERROR="error";
 
     private static final String VIEW_LIST = "/list";
     private static final String VIEW_FORM = "/form";
@@ -41,7 +38,7 @@ public abstract class CrudController<V> {
     public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes){
         try {
             this.getFacade().delete(id);
-            redirectAttributes.addFlashAttribute(SUCESS, MENSAGEM_SUCESSO);
+            redirectAttributes.addFlashAttribute(MessageConstant.SUCESS, MessageConstant.MENSAGEM_SUCESSO);
             return this.getRedirectViewList();
         } catch (RuntimeException ex) {
             throw new ExecutionException(ex);

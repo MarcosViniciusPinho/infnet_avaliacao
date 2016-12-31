@@ -1,6 +1,7 @@
 package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.controller.util.ActionConstant;
+import com.infnet.avaliacao.controller.util.MessageConstant;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,10 +24,10 @@ public abstract class CadastroController<V> extends CrudController<V>{
     public String save(V entity, RedirectAttributes redirectAttributes, Model model){
         try{
             this.getFacade().save(entity);
-            redirectAttributes.addFlashAttribute(SUCESS, MENSAGEM_SUCESSO);
+            redirectAttributes.addFlashAttribute(MessageConstant.SUCESS, MessageConstant.MENSAGEM_SUCESSO);
             return this.getRedirectViewList();
         } catch (RuntimeException ex) {
-            model.addAttribute(ERROR, ex.getLocalizedMessage());
+            model.addAttribute(MessageConstant.ERROR, ex.getLocalizedMessage());
             this.onLoadView(model);
             return this.getViewForm();
         }

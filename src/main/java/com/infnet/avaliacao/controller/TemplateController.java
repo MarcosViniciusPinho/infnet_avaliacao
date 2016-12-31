@@ -1,6 +1,7 @@
 package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.controller.util.ActionConstant;
+import com.infnet.avaliacao.controller.util.MessageConstant;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,10 +26,10 @@ public abstract class TemplateController<V> extends CrudController<V>{
         try{
             this.onForm(entity, model, redirectAttributes);
             this.getFacade().save(entity);
-            redirectAttributes.addFlashAttribute(SUCESS, MENSAGEM_SUCESSO);
+            redirectAttributes.addFlashAttribute(MessageConstant.SUCESS, MessageConstant.MENSAGEM_SUCESSO);
             return this.getRedirectViewEdit();
         } catch (RuntimeException ex) {
-            redirectAttributes.addFlashAttribute(ERROR, ex.getLocalizedMessage());
+            redirectAttributes.addFlashAttribute(MessageConstant.ERROR, ex.getLocalizedMessage());
             this.onLoadView(model);
             return getRedirectViewError();
         }
