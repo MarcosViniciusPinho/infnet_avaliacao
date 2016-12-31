@@ -1,5 +1,6 @@
 package com.infnet.avaliacao.controller;
 
+import com.infnet.avaliacao.controller.util.ActionConstant;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,15 +13,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 public abstract class CadastroController<V> extends CrudController<V>{
 
-    private static final String ACTION_CREATE = "/create";
-
     /**
      * Método que salva/altera uma entidade.
      * @param entity entity
      * @param redirectAttributes redirectAttributes
      * @return String
      */
-    @RequestMapping(value = ACTION_SAVE, method = RequestMethod.POST)
+    @RequestMapping(value = ActionConstant.ACTION_SAVE, method = RequestMethod.POST)
     public String save(V entity, RedirectAttributes redirectAttributes, Model model){
         try{
             this.getFacade().save(entity);
@@ -38,7 +37,7 @@ public abstract class CadastroController<V> extends CrudController<V>{
      * @param model model
      * @return ModelAndView
      */
-    @RequestMapping(value = ACTION_CREATE)
+    @RequestMapping(value = ActionConstant.ACTION_CREATE)
     public String prepareCreate(Model model){
         return this.onPrepareCreate(model);
     }
@@ -49,7 +48,7 @@ public abstract class CadastroController<V> extends CrudController<V>{
      * @param model model
      * @return String
      */
-    @RequestMapping(value = ACTION_EDIT)
+    @RequestMapping(value = ActionConstant.ACTION_EDIT)
     public String prepareUpdate(@PathVariable Long id, Model model){
         return this.onPrepareUpdateOrDetail(this.getViewForm(), id, model);
     }
@@ -60,7 +59,7 @@ public abstract class CadastroController<V> extends CrudController<V>{
      * @param model model
      * @return String
      */
-    @RequestMapping(value = ACTION_DETAIL)
+    @RequestMapping(value = ActionConstant.ACTION_DETAIL)
     public String prepareDetail(@PathVariable Long id, Model model){
         return this.onPrepareUpdateOrDetail(this.getViewDetail(), id, model);
     }

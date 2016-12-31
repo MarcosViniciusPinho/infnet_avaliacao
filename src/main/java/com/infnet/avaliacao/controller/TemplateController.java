@@ -1,5 +1,6 @@
 package com.infnet.avaliacao.controller;
 
+import com.infnet.avaliacao.controller.util.ActionConstant;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 public abstract class TemplateController<V> extends CrudController<V>{
 
-    private static final String ACTION_ERROR = "/error/{id}";
-
     /**
      * Houve necessidade de reimplementação do método pois o comportamento de montar avaliação é diferente do padrão adotado.
      * @param entity entity
@@ -21,7 +20,7 @@ public abstract class TemplateController<V> extends CrudController<V>{
      * @param model model
      * @return String
      */
-    @RequestMapping(value = ACTION_SAVE, method = RequestMethod.POST)
+    @RequestMapping(value = ActionConstant.ACTION_SAVE, method = RequestMethod.POST)
     public String save(V entity, RedirectAttributes redirectAttributes, Model model){
         try{
             this.onForm(entity, model, redirectAttributes);
@@ -48,7 +47,7 @@ public abstract class TemplateController<V> extends CrudController<V>{
      * @return String
      */
     private String getRedirectViewEdit(){
-        return REDIRECT_LIST + getPathView() + ACTION_EDIT;
+        return REDIRECT_LIST + getPathView() + ActionConstant.ACTION_EDIT;
     }
 
     /**
@@ -56,7 +55,7 @@ public abstract class TemplateController<V> extends CrudController<V>{
      * @return String
      */
     private String getRedirectViewError(){
-        return REDIRECT_LIST + getPathView() + ACTION_ERROR;
+        return REDIRECT_LIST + getPathView() + ActionConstant.ACTION_ERROR;
     }
 
     /**
@@ -65,7 +64,7 @@ public abstract class TemplateController<V> extends CrudController<V>{
      * @param model model
      * @return String
      */
-    @RequestMapping(value = ACTION_EDIT)
+    @RequestMapping(value = ActionConstant.ACTION_EDIT)
     public String prepareUpdate(@PathVariable Long id, Model model){
         this.onEdit(id, model);
         return this.getViewForm();
@@ -77,7 +76,7 @@ public abstract class TemplateController<V> extends CrudController<V>{
      * @param model model
      * @return String
      */
-    @RequestMapping(value = ACTION_ERROR)
+    @RequestMapping(value = ActionConstant.ACTION_ERROR)
     public String prepareError(@PathVariable Long id, Model model){
         this.onErrorOrDetail(id, model);
         return this.getViewForm();
@@ -89,7 +88,7 @@ public abstract class TemplateController<V> extends CrudController<V>{
      * @param model model
      * @return String
      */
-    @RequestMapping(value = ACTION_DETAIL)
+    @RequestMapping(value = ActionConstant.ACTION_DETAIL)
     public String prepareDetail(@PathVariable Long id, Model model){
         this.onErrorOrDetail(id, model);
         return getViewDetail();

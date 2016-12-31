@@ -1,6 +1,7 @@
 package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.business.facade.ICrudFacade;
+import com.infnet.avaliacao.controller.util.ActionConstant;
 import com.infnet.avaliacao.exception.ExecutionException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,12 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 public abstract class CrudController<V> {
 
-    private static final String ACTION_LIST = "/list";
-    protected static final String ACTION_EDIT = "/edit/{id}";
-    protected static final String ACTION_SAVE = "/save";
     protected static final String MENSAGEM_SUCESSO = "mensagem.sucesso";
-    protected static final String ACTION_DETAIL = "/detail/{id}";
-    private static final String ACTION_DELETE = "/delete/{id}";
     protected static final String SUCESS="sucess";
     protected static final String ERROR="error";
 
@@ -41,7 +37,7 @@ public abstract class CrudController<V> {
      * @param redirectAttributes redirectAttributes
      * @return String
      */
-    @RequestMapping(value = ACTION_DELETE, method = RequestMethod.POST)
+    @RequestMapping(value = ActionConstant.ACTION_DELETE, method = RequestMethod.POST)
     public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes){
         try {
             this.getFacade().delete(id);
@@ -56,7 +52,7 @@ public abstract class CrudController<V> {
      * Método que faz a listagem dos registros na tela.
      * @return ModelAndView
      */
-    @RequestMapping(value = ACTION_LIST)
+    @RequestMapping(value = ActionConstant.ACTION_LIST)
     public ModelAndView list(){
         try {
             return this.onList();
@@ -106,7 +102,7 @@ public abstract class CrudController<V> {
      * @return String
      */
     protected String getRedirectViewList(){
-        return REDIRECT_LIST + getPathView() + ACTION_LIST;
+        return REDIRECT_LIST + getPathView() + ActionConstant.ACTION_LIST;
     }
 
     /**
