@@ -19,7 +19,7 @@
                         <ol class="breadcrumb">
                             <li><a th:href="@{/home}" th:text="#{home}"></a></li>
                             <li><a th:href="@{/template/avaliacao/list}" th:text="#{avaliacao}"></a></li>
-                            <!--<li class="active cadastrar" th:text="#{usuario.cadastrar}"></li>-->
+                            <li class="active"><span>Montar - Tópico</span></li>
                             <!--<li class="active alterar" th:text="#{usuario.alterar}"></li>-->
                         </ol>
 
@@ -37,10 +37,12 @@
                         <!--<h2 class="alterar" th:text="#{usuario.alterar}"></h2>-->
                         <hr />
 
-                        <!--<div class="textoCamposObrigatorios">-->
-                            <!--<small class="col-sm-offset-10">(<span class="corVermelho">*</span>)-->
-                                <!--<span th:text="#{usuario.campo.obrigatorio}"></span> </small>-->
-                        <!--</div>-->
+                        <div class="textoCamposObrigatorios">
+                            <small class="col-sm-offset-10">(<span class="corVermelho">*</span>)
+                                <span>Seleção de tópico obrigatória</span> </small>
+                        </div>
+
+                        <div class="col-lg-12"> &nbsp; </div>
 
                         <form method="POST" th:action="@{/template/avaliacao/save}" th:object="${templateAvaliacaoDTO}" id="form">
                             <div class="form-group">
@@ -51,7 +53,8 @@
                                     <thead>
                                     <tr>
                                         <th>Tópico</th>
-                                        <th th:text="#{acao}"></th>
+                                        <th>Selecione(<span class="corVermelho">*</span>)</th>
+                                        <th>Ação</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -62,14 +65,15 @@
                                                     th:checked="${#lists.contains(templateAvaliacaoDTO.idsTemplateTopicoSelecionados, templateTopico.id)}"
                                                     onclick="selecionarTopico();"/>
                                         </td>
+                                        <td>Teste</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2" th:if="${#lists.isEmpty(listarTemplateTopico)}"><span th:text="#{nenhumregistroencontrado}"></span></td>
+                                        <td colspan="3" th:if="${#lists.isEmpty(listarTemplateTopico)}"><span th:text="#{nenhumregistroencontrado}"></span></td>
                                     </tr>
                                     </tbody>
                                     <tfoot>
                                     <tr>
-                                        <td colspan="2">
+                                        <td colspan="3">
                                             <span th:text="#{texto.rodape.primeira.parte}"></span>
                                             <span th:text="${#lists.size(listarTemplateTopico)}"> </span>
                                             <span th:text="#{texto.rodape.segunda.parte}"></span>
