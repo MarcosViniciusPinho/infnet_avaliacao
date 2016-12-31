@@ -1,6 +1,7 @@
 package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.business.facade.IUsuarioFacade;
+import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.dto.impl.UsuarioDTO;
 import com.infnet.avaliacao.entity.domain.PerfilEnum;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
@@ -15,12 +16,11 @@ import javax.annotation.Resource;
  * Classe responsável pela captura das informações na view.
  */
 @Controller
-@RequestMapping(value = UsuarioController.PATH_USUARIO)
+@RequestMapping(value = PathConstant.PATH_USUARIO)
 public class UsuarioController extends CadastroController<UsuarioDTO>{
 
     private static final String LISTAR_USUARIOS = "listarUsuarios";
     private static final String LISTAR_PERFIS = "listarPerfis";
-    protected static final String PATH_USUARIO = "/cadastro/usuario";
 
     @Resource
     private IUsuarioFacade usuarioFacade;
@@ -78,7 +78,7 @@ public class UsuarioController extends CadastroController<UsuarioDTO>{
      */
     @Override
     protected String getPathView() {
-        return PATH_USUARIO;
+        return PathConstant.PATH_USUARIO;
     }
 
 }

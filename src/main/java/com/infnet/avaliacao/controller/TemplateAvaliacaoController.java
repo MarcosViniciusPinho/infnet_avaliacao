@@ -2,6 +2,7 @@ package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.business.facade.ITemplateAvaliacaoFacade;
 import com.infnet.avaliacao.business.facade.ITemplateTopicoFacade;
+import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +17,9 @@ import java.util.List;
  * Classe responsável pela captura das informações na view.
  */
 @Controller
-@RequestMapping(value = TemplateAvaliacaoController.PATH_TEMPLATE_AVALIACAO)
+@RequestMapping(value = PathConstant.PATH_TEMPLATE_AVALIACAO)
 public class TemplateAvaliacaoController extends TemplateController<TemplateAvaliacaoDTO>{
 
-    protected static final String PATH_TEMPLATE_AVALIACAO = "/template/avaliacao";
     private static final String LISTAR_TEMPLATE_AVALIACAO = "listarTemplateAvaliacao";
     private static final String LISTAR_TEMPLATE_TOPICO = "listarTemplateTopico";
 
@@ -83,7 +83,7 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      */
     @Override
     protected String getPathView() {
-        return PATH_TEMPLATE_AVALIACAO;
+        return PathConstant.PATH_TEMPLATE_AVALIACAO;
     }
 
     /**
