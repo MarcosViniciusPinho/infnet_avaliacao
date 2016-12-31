@@ -16,7 +16,7 @@ import javax.annotation.Resource;
  */
 @Controller
 @RequestMapping(value = UsuarioController.PATH_USUARIO)
-public class UsuarioController extends CrudController<UsuarioDTO>{
+public class UsuarioController extends CadastroController<UsuarioDTO>{
 
     private static final String LISTAR_USUARIOS = "listarUsuarios";
     private static final String LISTAR_PERFIS = "listarPerfis";
