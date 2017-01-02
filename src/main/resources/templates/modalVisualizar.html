@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <body>
 
     <div class="modal fade" id="modalVisualizar" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-dialog-lenght-fulll">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="myModalLabel">Visualizar</h3>
+                    <h3 class="modal-title" id="myModalLabel" th:text="#{template.avalicao.visualizar.topico}"></h3>
                 </div>
                 <div class="modal-body modal-body-lenght-full">
                     <span id="valor"></span>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" th:text="#{btn.fechar}"></button>
                 </div>
             </div>
         </div>
