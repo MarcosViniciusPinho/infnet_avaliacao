@@ -31,7 +31,7 @@ public abstract class TemplateController<V> extends CrudController<V>{
         } catch (RuntimeException ex) {
             redirectAttributes.addFlashAttribute(MessageConstant.ERROR, ex.getLocalizedMessage());
             this.onLoadView(model);
-            return getRedirectViewError();
+            return this.getRedirectViewError();
         }
     }
 
@@ -68,7 +68,7 @@ public abstract class TemplateController<V> extends CrudController<V>{
     @RequestMapping(value = ActionConstant.ACTION_EDIT)
     public String prepareUpdate(@PathVariable Long id, Model model){
         this.onEdit(id, model);
-        return this.getViewForm();
+        return getViewForm();
     }
 
     /**
@@ -80,7 +80,7 @@ public abstract class TemplateController<V> extends CrudController<V>{
     @RequestMapping(value = ActionConstant.ACTION_ERROR)
     public String prepareError(@PathVariable Long id, Model model){
         this.onErrorOrDetail(id, model);
-        return this.getViewForm();
+        return getViewForm();
     }
 
     /**

@@ -25,11 +25,11 @@ public abstract class CadastroController<V> extends CrudController<V>{
         try{
             this.getFacade().save(entity);
             redirectAttributes.addFlashAttribute(MessageConstant.SUCESS, MessageConstant.MENSAGEM_SUCESSO);
-            return this.getRedirectViewList();
+            return getRedirectViewList();
         } catch (RuntimeException ex) {
             model.addAttribute(MessageConstant.ERROR, ex.getLocalizedMessage());
             this.onLoadView(model);
-            return this.getViewForm();
+            return getViewForm();
         }
     }
 
@@ -51,7 +51,7 @@ public abstract class CadastroController<V> extends CrudController<V>{
      */
     @RequestMapping(value = ActionConstant.ACTION_EDIT)
     public String prepareUpdate(@PathVariable Long id, Model model){
-        return this.onPrepareUpdateOrDetail(this.getViewForm(), id, model);
+        return this.onPrepareUpdateOrDetail(getViewForm(), id, model);
     }
 
     /**
@@ -62,7 +62,7 @@ public abstract class CadastroController<V> extends CrudController<V>{
      */
     @RequestMapping(value = ActionConstant.ACTION_DETAIL)
     public String prepareDetail(@PathVariable Long id, Model model){
-        return this.onPrepareUpdateOrDetail(this.getViewDetail(), id, model);
+        return this.onPrepareUpdateOrDetail(getViewDetail(), id, model);
     }
 
     /**
