@@ -46,8 +46,8 @@
                                 <a th:title="#{hint.detalhar}" class="btn btn-link btn-xs" th:href="@{/template/avaliacao/detail/{id}(id=${templateAvaliacao.id})}">
                                     <span class="glyphicon glyphicon-th-list"></span>
                                 </a>
-                                <a th:title="#{template.avaliacao.hint.criar.ou.editar}" class="btn btn-link btn-xs" th:href="@{/template/avaliacao/edit/{id}(id=${templateAvaliacao.id})}">
-                                    <span class="glyphicon glyphicon-list-alt"></span>
+                                <a th:title="#{template.avaliacao.hint.associar.topico}" class="btn btn-link btn-xs" th:href="@{/template/avaliacao/edit/{id}(id=${templateAvaliacao.id})}">
+                                    <span class="glyphicon glyphicon-plus"></span>
                                 </a>
                                 <a th:title="#{hint.excluir}" class="btn btn-link btn-xs" href="#"
                                     th:attr="data-id=${templateAvaliacao.id}, data-nome=${templateAvaliacao.titulo}" data-toggle="modal" data-target="#modalExcluir">
