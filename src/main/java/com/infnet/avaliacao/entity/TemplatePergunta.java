@@ -21,7 +21,6 @@ public class TemplatePergunta implements Serializable {
     @JoinColumn(name = "id_template_topico", nullable = false)
     private TemplateTopico templateTopico;
 
-
     public Long getId() {
         return id;
     }
