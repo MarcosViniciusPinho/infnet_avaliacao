@@ -64,14 +64,14 @@
                                             <td>
                                                  <input type="checkbox" th:value="${templateTopico.id}" name="checks[]"
                                                         th:checked="${#lists.contains(templateAvaliacaoDTO.idsTemplateTopicoSelecionados, templateTopico.id)}"
-                                                        onclick="selecionarTopico();"/>
+                                                        th:onclick="'selecionarTopico(' + ${templateTopico.id} + ');'"/>
                                             </td>
                                             <td>
                                                 <a th:title="#{template.avalicao.visualizar.topico}" class="btn btn-link btn-xs"
                                                    th:attr="data-nome=${templateTopico.enunciado}" data-toggle="modal" data-target="#modalVisualizar">
                                                     <span class="glyphicon glyphicon-resize-full"></span>
                                                 </a>
-                                                <a id="btnPergunta" href="#" th:title="#{template.avaliacao.hint.associar.pergunta}"
+                                                <a th:class="'btnPergunta'+${templateTopico.id}" href="#" th:title="#{template.avaliacao.hint.associar.pergunta}"
                                                     th:if="${#lists.contains(templateAvaliacaoDTO.idsTemplateTopicoSelecionados, templateTopico.id)}">
                                                     <span class="glyphicon glyphicon-plus"></span>
                                                 </a>
