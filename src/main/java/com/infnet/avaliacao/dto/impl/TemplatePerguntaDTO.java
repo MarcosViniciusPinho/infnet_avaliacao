@@ -4,7 +4,9 @@ import com.infnet.avaliacao.dto.IDTO;
 import com.infnet.avaliacao.dto.domain.MultiplaEscolhaEnum;
 import com.infnet.avaliacao.entity.TemplatePergunta;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
+import org.apache.commons.collections.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -46,6 +48,21 @@ public class TemplatePerguntaDTO implements IDTO<TemplatePergunta> {
                 TemplateAvaliacaoTopicoPerguntaDTO.convertListEntityToListDto(
                         templatePergunta.getTemplateAvaliacaoTopicoPerguntaList()));
         return templatePerguntaDTO;
+    }
+
+    /**
+     * Método que converte uma lista de entidade para uma lista de dto.
+     * @param entities entities
+     * @return List<TemplatePerguntaDTO>
+     */
+    public static List<TemplatePerguntaDTO> convertListEntityToListDto(List<TemplatePergunta> entities){
+        List<TemplatePerguntaDTO> lista = new ArrayList<>();
+        if(CollectionUtils.isNotEmpty(entities)){
+            for(TemplatePergunta templatePergunta : entities){
+                lista.add(toDto(templatePergunta));
+            }
+        }
+        return lista;
     }
 
     public Long getId() {
