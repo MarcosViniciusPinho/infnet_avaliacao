@@ -16,8 +16,6 @@ public class TemplateTopicoDTO implements IDTO<TemplateTopico> {
 
     private String enunciado;
 
-    private List<TemplatePerguntaDTO> templatePerguntaDTOList;
-
     public TemplateTopico toEntity(){
         TemplateTopico templateTopico = new TemplateTopico();
         templateTopico.setId(this.getId());
@@ -35,9 +33,6 @@ public class TemplateTopicoDTO implements IDTO<TemplateTopico> {
         TemplateTopicoDTO templateTopicoDTO = new TemplateTopicoDTO();
         templateTopicoDTO.setId(templateTopico.getId());
         templateTopicoDTO.setEnunciado(templateTopico.getEnunciado());
-        templateTopicoDTO.setTemplatePerguntaDTOList(
-                TemplatePerguntaDTO.convertListEntityToListDto(
-                        templateTopico.getTemplatePerguntaList()));
         return templateTopicoDTO;
     }
 
@@ -87,11 +82,4 @@ public class TemplateTopicoDTO implements IDTO<TemplateTopico> {
         this.enunciado = enunciado;
     }
 
-    public List<TemplatePerguntaDTO> getTemplatePerguntaDTOList() {
-        return templatePerguntaDTOList;
-    }
-
-    public void setTemplatePerguntaDTOList(List<TemplatePerguntaDTO> templatePerguntaDTOList) {
-        this.templatePerguntaDTOList = templatePerguntaDTOList;
-    }
 }
