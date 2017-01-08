@@ -20,7 +20,7 @@ public class TemplateAvaliacaoTopicoPergunta implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_template_avaliacao", nullable = false)
     private TemplateAvaliacao templateAvaliacao;
 

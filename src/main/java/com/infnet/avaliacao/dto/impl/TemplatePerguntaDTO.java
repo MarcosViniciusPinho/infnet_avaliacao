@@ -1,22 +1,31 @@
 package com.infnet.avaliacao.dto.impl;
 
+import com.infnet.avaliacao.dto.IDTO;
 import com.infnet.avaliacao.dto.domain.MultiplaEscolhaEnum;
 import com.infnet.avaliacao.entity.TemplatePergunta;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
-import org.apache.commons.collections.CollectionUtils;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TemplatePerguntaDTO implements Serializable {
+public class TemplatePerguntaDTO implements IDTO<TemplatePergunta> {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
 
     private String questao;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TemplatePergunta toEntity(){
+        TemplatePergunta templatePergunta = new TemplatePergunta();
+        templatePergunta.setId(this.getId());
+        templatePergunta.setQuestao(this.getQuestao());
+        return templatePergunta;
+    }
 
     /**
      * Método que converte uma entidade para um dto.
@@ -29,21 +38,6 @@ public class TemplatePerguntaDTO implements Serializable {
         templatePerguntaDTO.setId(templatePergunta.getId());
         templatePerguntaDTO.setQuestao(templatePergunta.getQuestao());
         return templatePerguntaDTO;
-    }
-
-    /**
-     * Método que converte uma lista de entidade para uma lista de dto.
-     * @param entities entities
-     * @return List<TemplatePerguntaDTO>
-     */
-    public static List<TemplatePerguntaDTO> convertListEntityToListDto(List<TemplatePergunta> entities){
-        List<TemplatePerguntaDTO> lista = new ArrayList<>();
-        if(CollectionUtils.isNotEmpty(entities)){
-            for(TemplatePergunta templatePergunta : entities){
-                lista.add(toDto(templatePergunta));
-            }
-        }
-        return lista;
     }
 
     public Long getId() {

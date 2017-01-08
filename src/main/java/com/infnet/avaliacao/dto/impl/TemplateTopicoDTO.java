@@ -16,10 +16,19 @@ public class TemplateTopicoDTO implements IDTO<TemplateTopico> {
 
     private String enunciado;
 
+    private List<TemplateAvaliacaoTopicoPerguntaDTO> templateAvaliacaoTopicoPerguntaDTOList;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public TemplateTopico toEntity(){
         TemplateTopico templateTopico = new TemplateTopico();
         templateTopico.setId(this.getId());
         templateTopico.setEnunciado(this.getEnunciado());
+        templateTopico.setTemplateAvaliacaoTopicoPerguntaList(
+                TemplateAvaliacaoTopicoPerguntaDTO.convertListDtoToListEntity(
+                        this.getTemplateAvaliacaoTopicoPerguntaDTOList()));
         return templateTopico;
     }
 
@@ -33,6 +42,9 @@ public class TemplateTopicoDTO implements IDTO<TemplateTopico> {
         TemplateTopicoDTO templateTopicoDTO = new TemplateTopicoDTO();
         templateTopicoDTO.setId(templateTopico.getId());
         templateTopicoDTO.setEnunciado(templateTopico.getEnunciado());
+        templateTopicoDTO.setTemplateAvaliacaoTopicoPerguntaDTOList(
+                TemplateAvaliacaoTopicoPerguntaDTO.convertListEntityToListDto(
+                        templateTopico.getTemplateAvaliacaoTopicoPerguntaList()));
         return templateTopicoDTO;
     }
 
@@ -66,6 +78,10 @@ public class TemplateTopicoDTO implements IDTO<TemplateTopico> {
         return lista;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Long getId() {
         return id;
     }
@@ -82,4 +98,11 @@ public class TemplateTopicoDTO implements IDTO<TemplateTopico> {
         this.enunciado = enunciado;
     }
 
+    public List<TemplateAvaliacaoTopicoPerguntaDTO> getTemplateAvaliacaoTopicoPerguntaDTOList() {
+        return templateAvaliacaoTopicoPerguntaDTOList;
+    }
+
+    public void setTemplateAvaliacaoTopicoPerguntaDTOList(List<TemplateAvaliacaoTopicoPerguntaDTO> templateAvaliacaoTopicoPerguntaDTOList) {
+        this.templateAvaliacaoTopicoPerguntaDTOList = templateAvaliacaoTopicoPerguntaDTOList;
+    }
 }

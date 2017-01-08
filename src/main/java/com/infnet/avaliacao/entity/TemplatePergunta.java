@@ -2,7 +2,6 @@ package com.infnet.avaliacao.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name = "template_pergunta")
@@ -18,9 +17,6 @@ public class TemplatePergunta implements Serializable {
     @Column(name = "questao", length = 150, nullable = false)
     private String questao;
 
-    @OneToMany(mappedBy = "templatePergunta", cascade = CascadeType.ALL)
-    private List<TemplateAvaliacaoTopicoPergunta> templateAvaliacaoTopicoPerguntaList;
-
     public Long getId() {
         return id;
     }
@@ -35,14 +31,6 @@ public class TemplatePergunta implements Serializable {
 
     public void setQuestao(String questao) {
         this.questao = questao;
-    }
-
-    public List<TemplateAvaliacaoTopicoPergunta> getTemplateAvaliacaoTopicoPerguntaList() {
-        return templateAvaliacaoTopicoPerguntaList;
-    }
-
-    public void setTemplateAvaliacaoTopicoPerguntaList(List<TemplateAvaliacaoTopicoPergunta> templateAvaliacaoTopicoPerguntaList) {
-        this.templateAvaliacaoTopicoPerguntaList = templateAvaliacaoTopicoPerguntaList;
     }
 
     @Override
