@@ -1,9 +1,11 @@
 package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.business.facade.ITemplatePerguntaFacade;
+import com.infnet.avaliacao.business.facade.ITemplateTopicoFacade;
 import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoTopicoPerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
+import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +19,13 @@ import java.util.List;
  * Classe responsável pela captura das informações na view.
  */
 @Controller
-@RequestMapping(value = PathConstant.PATH_TEMPLATE_PERGUNTA)
-public class TemplatePerguntaController extends TemplateController<TemplatePerguntaDTO>{
+@RequestMapping(value = PathConstant.PATH_TEMPLATE_TOPICO)
+public class TemplateTopicoController extends TemplateController<TemplateTopicoDTO>{
 
     private static final String LISTAR_TEMPLATE_PERGUNTA = "listarTemplatePergunta";
+
+    @Resource
+    private ITemplateTopicoFacade templateTopicoFacade;
 
     @Resource
     private ITemplatePerguntaFacade templatePerguntaFacade;
@@ -39,11 +44,11 @@ public class TemplatePerguntaController extends TemplateController<TemplatePergu
      * {@inheritDoc}
      */
     @Override
-    protected void onForm(TemplatePerguntaDTO entity, Model model, RedirectAttributes redirectAttributes) {
+    protected void onForm(TemplateTopicoDTO entity, Model model, RedirectAttributes redirectAttributes) {
         List<Long> idsPerguntasSelecionados = entity.getIdsTemplatePerguntaSelecionados();
         List<TemplatePerguntaDTO> templatePerguntaDTOList = this.templatePerguntaFacade.getListaTemplatesPerguntasPorId(idsPerguntasSelecionados);
         entity.setTemplateAvaliacaoTopicoPerguntaDTOList(
-                TemplateAvaliacaoTopicoPerguntaDTO.produceAssociativeClass(templatePerguntaDTOList));
+                TemplateAvaliacaoTopicoPerguntaDTO.produceAssociativeClass(templatePerguntaDTOList, entity));
         model.addAttribute(LISTAR_TEMPLATE_PERGUNTA, templatePerguntaFacade.findAll());
         redirectAttributes.addAttribute("id", entity.getId());
     }
@@ -53,7 +58,7 @@ public class TemplatePerguntaController extends TemplateController<TemplatePergu
      */
     @Override
     protected void onErrorOrDetail(Long id, Model model){
-        model.addAttribute(this.templatePerguntaFacade.findById(id));
+        model.addAttribute(this.templateTopicoFacade.findById(id));
         this.onLoadView(model);
     }
 
@@ -71,8 +76,8 @@ public class TemplatePerguntaController extends TemplateController<TemplatePergu
     @Override
     protected void onEdit(Long id, Model model){
         this.onLoadView(model);
-        TemplatePerguntaDTO templatePerguntaDTO = this.templatePerguntaFacade.findById(id);
-        model.addAttribute(templatePerguntaDTO.carregarPerguntasCadastradosParaFicarSelecionados());
+        TemplateTopicoDTO templateTopicoDTO = this.templateTopicoFacade.findById(id);
+        model.addAttribute(templateTopicoDTO.carregarPerguntasCadastradosParaFicarSelecionados());
     }
 
     /**
@@ -80,15 +85,15 @@ public class TemplatePerguntaController extends TemplateController<TemplatePergu
      */
     @Override
     protected String getPathView() {
-        return PathConstant.PATH_TEMPLATE_PERGUNTA;
+        return PathConstant.PATH_TEMPLATE_TOPICO;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected ITemplatePerguntaFacade getFacade() {
-        return templatePerguntaFacade;
+    protected ITemplateTopicoFacade getFacade() {
+        return templateTopicoFacade;
     }
 
 }

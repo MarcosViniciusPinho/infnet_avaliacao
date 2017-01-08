@@ -18,10 +18,6 @@ public class TemplatePerguntaDTO implements IDTO<TemplatePergunta> {
 
     private String questao;
 
-    private List<TemplateAvaliacaoTopicoPerguntaDTO> templateAvaliacaoTopicoPerguntaDTOList;
-
-    private List<Long> idsTemplatePerguntaSelecionados = new ArrayList<>(0);
-
     /**
      * {@inheritDoc}
      */
@@ -30,9 +26,6 @@ public class TemplatePerguntaDTO implements IDTO<TemplatePergunta> {
         TemplatePergunta templatePergunta = new TemplatePergunta();
         templatePergunta.setId(this.getId());
         templatePergunta.setQuestao(this.getQuestao());
-        templatePergunta.setTemplateAvaliacaoTopicoPerguntaList(
-                TemplateAvaliacaoTopicoPerguntaDTO.convertListDtoToListEntity(
-                        this.getTemplateAvaliacaoTopicoPerguntaDTOList()));
         return templatePergunta;
     }
 
@@ -46,9 +39,6 @@ public class TemplatePerguntaDTO implements IDTO<TemplatePergunta> {
         TemplatePerguntaDTO templatePerguntaDTO = new TemplatePerguntaDTO();
         templatePerguntaDTO.setId(templatePergunta.getId());
         templatePerguntaDTO.setQuestao(templatePergunta.getQuestao());
-        templatePerguntaDTO.setTemplateAvaliacaoTopicoPerguntaDTOList(
-                TemplateAvaliacaoTopicoPerguntaDTO.convertListEntityToListDto(
-                        templatePergunta.getTemplateAvaliacaoTopicoPerguntaList()));
         return templatePerguntaDTO;
     }
 
@@ -67,19 +57,6 @@ public class TemplatePerguntaDTO implements IDTO<TemplatePergunta> {
         return lista;
     }
 
-    /**
-     * Método que carrega os topicos cadastrados para uma determinada avaliação e os carrega na tela de topicos nos checkbox's.
-     * @return TemplatePerguntaDTO
-     */
-    public TemplatePerguntaDTO carregarPerguntasCadastradosParaFicarSelecionados(){
-        List<Long> templatePerguntaList = new ArrayList<>();
-        for(TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO : this.getTemplateAvaliacaoTopicoPerguntaDTOList()){
-            templatePerguntaList.add(templateAvaliacaoTopicoPerguntaDTO.getId());
-        }
-        this.setIdsTemplatePerguntaSelecionados(templatePerguntaList);
-        return this;
-    }
-
     public Long getId() {
         return id;
     }
@@ -94,22 +71,6 @@ public class TemplatePerguntaDTO implements IDTO<TemplatePergunta> {
 
     public void setQuestao(String questao) {
         this.questao = questao;
-    }
-
-    public List<TemplateAvaliacaoTopicoPerguntaDTO> getTemplateAvaliacaoTopicoPerguntaDTOList() {
-        return templateAvaliacaoTopicoPerguntaDTOList;
-    }
-
-    public void setTemplateAvaliacaoTopicoPerguntaDTOList(List<TemplateAvaliacaoTopicoPerguntaDTO> templateAvaliacaoTopicoPerguntaDTOList) {
-        this.templateAvaliacaoTopicoPerguntaDTOList = templateAvaliacaoTopicoPerguntaDTOList;
-    }
-
-    public List<Long> getIdsTemplatePerguntaSelecionados() {
-        return idsTemplatePerguntaSelecionados;
-    }
-
-    public void setIdsTemplatePerguntaSelecionados(List<Long> idsTemplatePerguntaSelecionados) {
-        this.idsTemplatePerguntaSelecionados = idsTemplatePerguntaSelecionados;
     }
 
     /**

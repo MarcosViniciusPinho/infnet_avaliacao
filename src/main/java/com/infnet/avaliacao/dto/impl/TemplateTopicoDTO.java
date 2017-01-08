@@ -16,6 +16,10 @@ public class TemplateTopicoDTO implements IDTO<TemplateTopico> {
 
     private String enunciado;
 
+    private List<TemplateAvaliacaoTopicoPerguntaDTO> templateAvaliacaoTopicoPerguntaDTOList;
+
+    private List<Long> idsTemplatePerguntaSelecionados = new ArrayList<>(0);
+
     /**
      * {@inheritDoc}
      */
@@ -24,6 +28,9 @@ public class TemplateTopicoDTO implements IDTO<TemplateTopico> {
         TemplateTopico templateTopico = new TemplateTopico();
         templateTopico.setId(this.getId());
         templateTopico.setEnunciado(this.getEnunciado());
+        templateTopico.setTemplateAvaliacaoTopicoPerguntaList(
+                TemplateAvaliacaoTopicoPerguntaDTO.convertListDtoToListEntity(
+                        this.getTemplateAvaliacaoTopicoPerguntaDTOList()));
         return templateTopico;
     }
 
@@ -37,6 +44,9 @@ public class TemplateTopicoDTO implements IDTO<TemplateTopico> {
         TemplateTopicoDTO templateTopicoDTO = new TemplateTopicoDTO();
         templateTopicoDTO.setId(templateTopico.getId());
         templateTopicoDTO.setEnunciado(templateTopico.getEnunciado());
+        templateTopicoDTO.setTemplateAvaliacaoTopicoPerguntaDTOList(
+                TemplateAvaliacaoTopicoPerguntaDTO.convertListEntityToListDto(
+                        templateTopico.getTemplateAvaliacaoTopicoPerguntaList()));
         return templateTopicoDTO;
     }
 
@@ -71,6 +81,19 @@ public class TemplateTopicoDTO implements IDTO<TemplateTopico> {
     }
 
     /**
+     * Método que carrega os topicos cadastrados para uma determinada avaliação e os carrega na tela de topicos nos checkbox's.
+     * @return TemplateTopicoDTO
+     */
+    public TemplateTopicoDTO carregarPerguntasCadastradosParaFicarSelecionados(){
+        List<Long> templatePerguntaList = new ArrayList<>();
+        for(TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO : this.getTemplateAvaliacaoTopicoPerguntaDTOList()){
+            templatePerguntaList.add(templateAvaliacaoTopicoPerguntaDTO.getId());
+        }
+        this.setIdsTemplatePerguntaSelecionados(templatePerguntaList);
+        return this;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -90,4 +113,19 @@ public class TemplateTopicoDTO implements IDTO<TemplateTopico> {
         this.enunciado = enunciado;
     }
 
+    public List<TemplateAvaliacaoTopicoPerguntaDTO> getTemplateAvaliacaoTopicoPerguntaDTOList() {
+        return templateAvaliacaoTopicoPerguntaDTOList;
+    }
+
+    public void setTemplateAvaliacaoTopicoPerguntaDTOList(List<TemplateAvaliacaoTopicoPerguntaDTO> templateAvaliacaoTopicoPerguntaDTOList) {
+        this.templateAvaliacaoTopicoPerguntaDTOList = templateAvaliacaoTopicoPerguntaDTOList;
+    }
+
+    public List<Long> getIdsTemplatePerguntaSelecionados() {
+        return idsTemplatePerguntaSelecionados;
+    }
+
+    public void setIdsTemplatePerguntaSelecionados(List<Long> idsTemplatePerguntaSelecionados) {
+        this.idsTemplatePerguntaSelecionados = idsTemplatePerguntaSelecionados;
+    }
 }
