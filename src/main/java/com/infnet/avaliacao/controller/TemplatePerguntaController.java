@@ -1,7 +1,6 @@
 package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.business.facade.ITemplatePerguntaFacade;
-import com.infnet.avaliacao.business.facade.ITemplateTopicoFacade;
 import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import org.springframework.stereotype.Controller;
@@ -11,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Classe responsável pela captura das informações na view.
@@ -19,14 +19,10 @@ import javax.annotation.Resource;
 @RequestMapping(value = PathConstant.PATH_TEMPLATE_PERGUNTA)
 public class TemplatePerguntaController extends TemplateController<TemplatePerguntaDTO>{
 
-    private static final String LISTAR_TEMPLATE_AVALIACAO = "listarTemplateAvaliacao";
-    private static final String LISTAR_TEMPLATE_TOPICO = "listarTemplateTopico";
+    private static final String LISTAR_TEMPLATE_PERGUNTA = "listarTemplatePergunta";
 
     @Resource
     private ITemplatePerguntaFacade templatePerguntaFacade;
-
-    @Resource
-    private ITemplateTopicoFacade templateTopicoFacade;
 
     /**
      * {@inheritDoc}
@@ -34,7 +30,7 @@ public class TemplatePerguntaController extends TemplateController<TemplatePergu
     @Override
     protected ModelAndView onList(){
         ModelAndView mv = new ModelAndView(getViewList());
-        mv.addObject(LISTAR_TEMPLATE_AVALIACAO, this.templatePerguntaFacade.findAll());
+        mv.addObject(LISTAR_TEMPLATE_PERGUNTA, this.templatePerguntaFacade.findAll());
         return mv;
     }
 
@@ -43,10 +39,12 @@ public class TemplatePerguntaController extends TemplateController<TemplatePergu
      */
     @Override
     protected void onForm(TemplatePerguntaDTO entity, Model model, RedirectAttributes redirectAttributes) {
-//        List<Long> idsTopicosSelecionados = entity.getIdsTemplateTopicoSelecionados();
-//        entity.setTemplateTopicoDTOList(
-//                this.templateTopicoFacade.getListaTemplatesTopicosPorId(idsTopicosSelecionados));
-        model.addAttribute(LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAll());
+        List<Long> idsPerguntasSelecionados = entity.getIdsTemplatePerguntaSelecionados();
+        List<TemplatePerguntaDTO> templatePerguntaDTOList = this.templatePerguntaFacade.getListaTemplatesPerguntasPorId(idsPerguntasSelecionados);
+
+//        entity.setTemplateAvaliacaoTopicoPerguntaDTOList(
+//                this.templatePerguntaFacade.getListaTemplatesPerguntasPorId(idsPerguntasSelecionados));
+        model.addAttribute(LISTAR_TEMPLATE_PERGUNTA, templatePerguntaFacade.findAll());
         redirectAttributes.addAttribute("id", entity.getId());
     }
 
@@ -64,7 +62,7 @@ public class TemplatePerguntaController extends TemplateController<TemplatePergu
      */
     @Override
     protected void onLoadView(Model model){
-        model.addAttribute(LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAll());
+        model.addAttribute(LISTAR_TEMPLATE_PERGUNTA, templatePerguntaFacade.findAll());
     }
 
     /**
@@ -74,7 +72,7 @@ public class TemplatePerguntaController extends TemplateController<TemplatePergu
     protected void onEdit(Long id, Model model){
         this.onLoadView(model);
         TemplatePerguntaDTO templatePerguntaDTO = this.templatePerguntaFacade.findById(id);
-//        model.addAttribute(templatePerguntaDTO.carregarTopicosCadastradosParaFicarSelecionados());
+        model.addAttribute(templatePerguntaDTO.carregarPerguntasCadastradosParaFicarSelecionados());
     }
 
     /**

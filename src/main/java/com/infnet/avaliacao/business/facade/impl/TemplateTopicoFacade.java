@@ -47,6 +47,9 @@ public class TemplateTopicoFacade implements ITemplateTopicoFacade {
         return TemplateTopicoDTO.toDto(this.templateTopicoService.findById(id));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<TemplateTopicoDTO> getListaTemplatesTopicosPorId(List<Long> idsTemplateTopico) {
         return TemplateTopicoDTO.convertListEntityToListDto(

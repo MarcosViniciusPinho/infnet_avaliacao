@@ -45,4 +45,14 @@ public class TemplatePerguntaFacade implements ITemplatePerguntaFacade {
     public TemplatePerguntaDTO findById(Long id) {
         return TemplatePerguntaDTO.toDto(this.templatePerguntaService.findById(id));
     }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<TemplatePerguntaDTO> getListaTemplatesPerguntasPorId(List<Long> idsTemplateTopico) {
+        return TemplatePerguntaDTO.convertListEntityToListDto(
+                this.templatePerguntaService.getListaTemplatesPerguntasPorId(idsTemplateTopico));
+    }
 }
