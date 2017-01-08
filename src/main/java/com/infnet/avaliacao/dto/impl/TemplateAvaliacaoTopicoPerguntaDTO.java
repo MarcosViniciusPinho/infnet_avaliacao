@@ -1,7 +1,10 @@
 package com.infnet.avaliacao.dto.impl;
 
 import com.infnet.avaliacao.dto.IDTO;
+import com.infnet.avaliacao.entity.TemplateAvaliacao;
 import com.infnet.avaliacao.entity.TemplateAvaliacaoTopicoPergunta;
+import com.infnet.avaliacao.entity.TemplatePergunta;
+import com.infnet.avaliacao.entity.TemplateTopico;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.apache.commons.collections.CollectionUtils;
 
@@ -14,11 +17,11 @@ public class TemplateAvaliacaoTopicoPerguntaDTO implements IDTO<TemplateAvaliaca
 
     private Long id;
 
-    private TemplateAvaliacaoDTO templateAvaliacaoDTO;
+    private TemplateAvaliacao templateAvaliacao;
 
-    private TemplateTopicoDTO templateTopicoDTO;
+    private TemplateTopico templateTopico;
 
-    private TemplatePerguntaDTO templatePerguntaDTO;
+    private TemplatePergunta templatePergunta;
 
     /**
      * {@inheritDoc}
@@ -27,9 +30,9 @@ public class TemplateAvaliacaoTopicoPerguntaDTO implements IDTO<TemplateAvaliaca
     public TemplateAvaliacaoTopicoPergunta toEntity(){
         TemplateAvaliacaoTopicoPergunta templateAvaliacaoTopicoPergunta = new TemplateAvaliacaoTopicoPergunta();
         templateAvaliacaoTopicoPergunta.setId(this.getId());
-        templateAvaliacaoTopicoPergunta.setTemplateAvaliacao(this.getTemplateAvaliacaoDTO().toEntity());
-        templateAvaliacaoTopicoPergunta.setTemplateTopico(this.getTemplateTopicoDTO().toEntity());
-        templateAvaliacaoTopicoPergunta.setTemplatePergunta(this.getTemplatePerguntaDTO().toEntity());
+        templateAvaliacaoTopicoPergunta.setTemplateAvaliacao(this.getTemplateAvaliacao());
+        templateAvaliacaoTopicoPergunta.setTemplateTopico(this.getTemplateTopico());
+        templateAvaliacaoTopicoPergunta.setTemplatePergunta(this.getTemplatePergunta());
         return templateAvaliacaoTopicoPergunta;
     }
 
@@ -42,15 +45,9 @@ public class TemplateAvaliacaoTopicoPerguntaDTO implements IDTO<TemplateAvaliaca
         ParameterExceptionUtil.validateObjectNull(templateAvaliacaoTopicoPergunta);
         TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO = new TemplateAvaliacaoTopicoPerguntaDTO();
         templateAvaliacaoTopicoPerguntaDTO.setId(templateAvaliacaoTopicoPergunta.getId());
-        templateAvaliacaoTopicoPerguntaDTO.setTemplateAvaliacaoDTO(
-                TemplateAvaliacaoDTO.toDto(
-                        templateAvaliacaoTopicoPergunta.getTemplateAvaliacao()));
-        templateAvaliacaoTopicoPerguntaDTO.setTemplateTopicoDTO(
-                TemplateTopicoDTO.toDto(
-                        templateAvaliacaoTopicoPergunta.getTemplateTopico()));
-        templateAvaliacaoTopicoPerguntaDTO.setTemplatePerguntaDTO(
-                TemplatePerguntaDTO.toDto(
-                        templateAvaliacaoTopicoPergunta.getTemplatePergunta()));
+        templateAvaliacaoTopicoPerguntaDTO.setTemplateAvaliacao(templateAvaliacaoTopicoPergunta.getTemplateAvaliacao());
+        templateAvaliacaoTopicoPerguntaDTO.setTemplateTopico(templateAvaliacaoTopicoPergunta.getTemplateTopico());
+        templateAvaliacaoTopicoPerguntaDTO.setTemplatePergunta(templateAvaliacaoTopicoPergunta.getTemplatePergunta());
         return templateAvaliacaoTopicoPerguntaDTO;
     }
 
@@ -85,6 +82,24 @@ public class TemplateAvaliacaoTopicoPerguntaDTO implements IDTO<TemplateAvaliaca
     }
 
     /**
+     * Método que cria o objeto da classe associativa, houve necessidade deste trecho de código pois
+     * esta classe associativa tem 3 atributos e o hibernate tem dificuldade de gerenciar essa quantidade de atributos então a associacao ocorre
+     * na mao mesmo.
+     * @param templatePerguntaDTOList templatePerguntaDTOList
+     * @return List<TemplateAvaliacaoTopicoPerguntaDTO>
+     */
+    public static List<TemplateAvaliacaoTopicoPerguntaDTO> produceAssociativeClass(List<TemplatePerguntaDTO> templatePerguntaDTOList){
+        TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO;
+        List<TemplateAvaliacaoTopicoPerguntaDTO> templateAvaliacaoTopicoPerguntaDTOList = new ArrayList<>();
+        for(TemplatePerguntaDTO templatePerguntaDTO : templatePerguntaDTOList){
+            templateAvaliacaoTopicoPerguntaDTO = new TemplateAvaliacaoTopicoPerguntaDTO();
+            templateAvaliacaoTopicoPerguntaDTO.setTemplatePergunta(templatePerguntaDTO.toEntity());
+            templateAvaliacaoTopicoPerguntaDTOList.add(templateAvaliacaoTopicoPerguntaDTO);
+        }
+        return templateAvaliacaoTopicoPerguntaDTOList;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -96,27 +111,27 @@ public class TemplateAvaliacaoTopicoPerguntaDTO implements IDTO<TemplateAvaliaca
         this.id = id;
     }
 
-    public TemplateAvaliacaoDTO getTemplateAvaliacaoDTO() {
-        return templateAvaliacaoDTO;
+    public TemplateAvaliacao getTemplateAvaliacao() {
+        return templateAvaliacao;
     }
 
-    public void setTemplateAvaliacaoDTO(TemplateAvaliacaoDTO templateAvaliacaoDTO) {
-        this.templateAvaliacaoDTO = templateAvaliacaoDTO;
+    public void setTemplateAvaliacao(TemplateAvaliacao templateAvaliacao) {
+        this.templateAvaliacao = templateAvaliacao;
     }
 
-    public TemplateTopicoDTO getTemplateTopicoDTO() {
-        return templateTopicoDTO;
+    public TemplateTopico getTemplateTopico() {
+        return templateTopico;
     }
 
-    public void setTemplateTopicoDTO(TemplateTopicoDTO templateTopicoDTO) {
-        this.templateTopicoDTO = templateTopicoDTO;
+    public void setTemplateTopico(TemplateTopico templateTopico) {
+        this.templateTopico = templateTopico;
     }
 
-    public TemplatePerguntaDTO getTemplatePerguntaDTO() {
-        return templatePerguntaDTO;
+    public TemplatePergunta getTemplatePergunta() {
+        return templatePergunta;
     }
 
-    public void setTemplatePerguntaDTO(TemplatePerguntaDTO templatePerguntaDTO) {
-        this.templatePerguntaDTO = templatePerguntaDTO;
+    public void setTemplatePergunta(TemplatePergunta templatePergunta) {
+        this.templatePergunta = templatePergunta;
     }
 }

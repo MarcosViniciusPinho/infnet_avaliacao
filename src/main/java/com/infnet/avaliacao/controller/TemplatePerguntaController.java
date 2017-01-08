@@ -2,6 +2,7 @@ package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.business.facade.ITemplatePerguntaFacade;
 import com.infnet.avaliacao.controller.util.PathConstant;
+import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoTopicoPerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,9 +42,8 @@ public class TemplatePerguntaController extends TemplateController<TemplatePergu
     protected void onForm(TemplatePerguntaDTO entity, Model model, RedirectAttributes redirectAttributes) {
         List<Long> idsPerguntasSelecionados = entity.getIdsTemplatePerguntaSelecionados();
         List<TemplatePerguntaDTO> templatePerguntaDTOList = this.templatePerguntaFacade.getListaTemplatesPerguntasPorId(idsPerguntasSelecionados);
-
-//        entity.setTemplateAvaliacaoTopicoPerguntaDTOList(
-//                this.templatePerguntaFacade.getListaTemplatesPerguntasPorId(idsPerguntasSelecionados));
+        entity.setTemplateAvaliacaoTopicoPerguntaDTOList(
+                TemplateAvaliacaoTopicoPerguntaDTO.produceAssociativeClass(templatePerguntaDTOList));
         model.addAttribute(LISTAR_TEMPLATE_PERGUNTA, templatePerguntaFacade.findAll());
         redirectAttributes.addAttribute("id", entity.getId());
     }
