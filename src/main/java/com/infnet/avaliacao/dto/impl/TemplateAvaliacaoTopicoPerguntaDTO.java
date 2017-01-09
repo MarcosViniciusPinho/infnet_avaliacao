@@ -90,13 +90,15 @@ public class TemplateAvaliacaoTopicoPerguntaDTO implements IDTO<TemplateAvaliaca
      * @return List<TemplateAvaliacaoTopicoPerguntaDTO>
      */
     public static List<TemplateAvaliacaoTopicoPerguntaDTO> produceAssociativeClass(List<TemplatePerguntaDTO> templatePerguntaDTOList,
-                                                                                   TemplateTopicoDTO templateTopicoDTO){
+                                                                                   TemplateTopicoDTO templateTopicoDTO,
+                                                                                   TemplateAvaliacaoDTO templateAvaliacaoDTO){
         TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO;
         List<TemplateAvaliacaoTopicoPerguntaDTO> templateAvaliacaoTopicoPerguntaDTOList = new ArrayList<>();
         for(TemplatePerguntaDTO templatePerguntaDTO : templatePerguntaDTOList){
             templateAvaliacaoTopicoPerguntaDTO = new TemplateAvaliacaoTopicoPerguntaDTO();
             templateAvaliacaoTopicoPerguntaDTO.setTemplatePergunta(templatePerguntaDTO.toEntity());
             templateAvaliacaoTopicoPerguntaDTO.setTemplateTopico(templateTopicoDTO.toEntity());
+            templateAvaliacaoTopicoPerguntaDTO.setTemplateAvaliacao(templateAvaliacaoDTO.toEntity());
             templateAvaliacaoTopicoPerguntaDTOList.add(templateAvaliacaoTopicoPerguntaDTO);
         }
         return templateAvaliacaoTopicoPerguntaDTOList;

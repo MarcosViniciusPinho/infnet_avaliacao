@@ -21,7 +21,7 @@
                         <ol class="breadcrumb">
                             <li><a th:href="@{/home}" th:text="#{home}"></a></li>
                             <li><a th:href="@{/template/avaliacao/list}" th:text="#{avaliacao}"></a></li>
-                            <!--<li><a th:href="@{/template/avaliacao/topico/list}" th:text="#{template.avaliacao.topico}"></a></li>-->
+                            <li><a th:href="@{/template/avaliacao/edit/{id}(id=${templateTopicoDTO.idAvaliacao})}" th:text="#{template.avaliacao.topico}"></a></li>
                             <li class="active" th:text="#{template.avaliacao.montarTopico}"></li>
                         </ol>
 
@@ -50,6 +50,7 @@
                             <div class="form-group">
                                 <input type="hidden" th:field="*{id}" id="id"/>
                                 <input type="hidden" th:field="*{enunciado}"/>
+                                <input type="hidden" th:field="*{idAvaliacao}"/>
                                 <table class="table table-striped table-hover table-bordered">
                                     <thead>
                                         <tr>

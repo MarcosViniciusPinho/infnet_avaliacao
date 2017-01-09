@@ -3,7 +3,6 @@ package com.infnet.avaliacao.controller;
 import com.infnet.avaliacao.controller.util.ActionConstant;
 import com.infnet.avaliacao.controller.util.MessageConstant;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -47,61 +46,12 @@ public abstract class TemplateController<V> extends CrudController<V>{
      * Método que redireciona para a tela de form com os check box's marcados.
      * @return String
      */
-    private String getRedirectViewEdit(){
-        return REDIRECT_LIST + getPathView() + ActionConstant.ACTION_EDIT;
-    }
+    protected abstract String getRedirectViewEdit();
 
     /**
      * Método que redireciona para a tela de form com os check box's desmarcados.
      * @return String
      */
-    private String getRedirectViewError(){
-        return REDIRECT_LIST + getPathView() + ActionConstant.ACTION_ERROR;
-    }
-
-    /**
-     * Método que redireciona o usuário para a tela de alterar.
-     * @param id id
-     * @param model model
-     * @return String
-     */
-    @RequestMapping(value = ActionConstant.ACTION_EDIT)
-    public String prepareUpdate(@PathVariable Long id, Model model){
-        this.onEdit(id, model);
-        return getViewForm();
-    }
-
-    /**
-     * Método que redireciona o usuário para a tela de form quando houver exceção.
-     * @param id id
-     * @param model model
-     * @return String
-     */
-    @RequestMapping(value = ActionConstant.ACTION_ERROR)
-    public String prepareError(@PathVariable Long id, Model model){
-        this.onErrorOrDetail(id, model);
-        return getViewForm();
-    }
-
-    /**
-     * Método que redireciona o usuário para a tela de detalhar.
-     * @param id id
-     * @param model model
-     * @return String
-     */
-    @RequestMapping(value = ActionConstant.ACTION_DETAIL)
-    public String prepareDetail(@PathVariable Long id, Model model){
-        this.onErrorOrDetail(id, model);
-        return getViewDetail();
-    }
-
-    /**
-     * Método usado para quando houver uma exceção na tela de form e também reaproveitado para ser usado no momento de detalhar.
-     * @param id id
-     * @param model model
-     */
-    protected abstract void onErrorOrDetail(Long id, Model model);
-
-    protected abstract void onEdit(Long id, Model model);
+    protected abstract String getRedirectViewError();
 
 }

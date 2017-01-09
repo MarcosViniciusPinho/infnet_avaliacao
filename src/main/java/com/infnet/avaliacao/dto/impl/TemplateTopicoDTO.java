@@ -20,6 +20,8 @@ public class TemplateTopicoDTO implements IDTO<TemplateTopico> {
 
     private List<Long> idsTemplatePerguntaSelecionados = new ArrayList<>(0);
 
+    private Long idAvaliacao;
+
     /**
      * {@inheritDoc}
      */
@@ -127,5 +129,13 @@ public class TemplateTopicoDTO implements IDTO<TemplateTopico> {
 
     public void setIdsTemplatePerguntaSelecionados(List<Long> idsTemplatePerguntaSelecionados) {
         this.idsTemplatePerguntaSelecionados = idsTemplatePerguntaSelecionados;
+    }
+
+    public Long getIdAvaliacao() {
+        return idAvaliacao;
+    }
+
+    public void setIdAvaliacao(Long idAvaliacao) {
+        this.idAvaliacao = idAvaliacao;
     }
 }

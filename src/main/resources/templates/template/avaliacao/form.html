@@ -74,7 +74,7 @@
                                                 </a>
                                                 <a th:class="'btnPergunta'+${templateTopico.id}" href="#" th:title="#{template.avaliacao.hint.associar.pergunta}"
                                                     th:if="${#lists.contains(templateAvaliacaoDTO.idsTemplateTopicoSelecionados, templateTopico.id)}"
-                                                    th:href="@{/template/avaliacao/topico/edit/{id}(id=${templateTopico.id})}">
+                                                    th:href="@{/template/avaliacao/topico/edit/{id}/avaliacao/{idAvaliacao}(id=${templateTopico.id},idAvaliacao=${templateAvaliacaoDTO.id})}">
                                                     <span class="glyphicon glyphicon-plus"></span>
                                                 </a>
                                             </td>

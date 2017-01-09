@@ -1,13 +1,17 @@
 package com.infnet.avaliacao.controller;
 
+import com.infnet.avaliacao.business.facade.ITemplateAvaliacaoFacade;
 import com.infnet.avaliacao.business.facade.ITemplatePerguntaFacade;
 import com.infnet.avaliacao.business.facade.ITemplateTopicoFacade;
+import com.infnet.avaliacao.controller.util.ActionConstant;
 import com.infnet.avaliacao.controller.util.PathConstant;
+import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoTopicoPerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -30,6 +34,9 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
     @Resource
     private ITemplatePerguntaFacade templatePerguntaFacade;
 
+    @Resource
+    private ITemplateAvaliacaoFacade templateAvaliacaoFacade;
+
     /**
      * {@inheritDoc}
      */
@@ -47,19 +54,12 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
     protected void onForm(TemplateTopicoDTO entity, Model model, RedirectAttributes redirectAttributes) {
         List<Long> idsPerguntasSelecionados = entity.getIdsTemplatePerguntaSelecionados();
         List<TemplatePerguntaDTO> templatePerguntaDTOList = this.templatePerguntaFacade.getListaTemplatesPerguntasPorId(idsPerguntasSelecionados);
+        TemplateAvaliacaoDTO templateAvaliacaoDTO = this.templateAvaliacaoFacade.findById(entity.getIdAvaliacao());
         entity.setTemplateAvaliacaoTopicoPerguntaDTOList(
-                TemplateAvaliacaoTopicoPerguntaDTO.produceAssociativeClass(templatePerguntaDTOList, entity));
+                TemplateAvaliacaoTopicoPerguntaDTO.produceAssociativeClass(templatePerguntaDTOList, entity, templateAvaliacaoDTO));
         model.addAttribute(LISTAR_TEMPLATE_PERGUNTA, templatePerguntaFacade.findAll());
         redirectAttributes.addAttribute("id", entity.getId());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void onErrorOrDetail(Long id, Model model){
-        model.addAttribute(this.templateTopicoFacade.findById(id));
-        this.onLoadView(model);
+        redirectAttributes.addAttribute("idAvaliacao", entity.getIdAvaliacao());
     }
 
     /**
@@ -70,14 +70,66 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
         model.addAttribute(LISTAR_TEMPLATE_PERGUNTA, templatePerguntaFacade.findAll());
     }
 
+    private void onEdit(Long id, Long idAvaliacao, Model model){
+        this.onLoadView(model);
+        TemplateTopicoDTO templateTopicoDTO = this.templateTopicoFacade.findById(id);
+        templateTopicoDTO.setIdAvaliacao(idAvaliacao);
+        model.addAttribute(templateTopicoDTO.carregarPerguntasCadastradosParaFicarSelecionados());
+    }
+
+    /**
+     * Método que redireciona o usuário para a tela de alterar.
+     * @param id id
+     * @param idAvaliacao idAvaliacao
+     * @param model model
+     * @return String
+     */
+    @RequestMapping(value = ActionConstant.ACTION_EDIT_CUSTOM)
+    public String prepareUpdate(@PathVariable Long id, @PathVariable Long idAvaliacao, Model model){
+        this.onEdit(id, idAvaliacao, model);
+        return getViewForm();
+    }
+
+    /**
+     * Método que redireciona o usuário para a tela de form quando houver exceção.
+     * @param id id
+     * @param idAvaliacao idAvaliacao
+     * @param model model
+     * @return String
+     */
+    @RequestMapping(value = ActionConstant.ACTION_ERROR_CUSTOM)
+    public String prepareError(@PathVariable Long id, @PathVariable Long idAvaliacao, Model model){
+        this.onErrorOrDetail(id, idAvaliacao, model);
+        return getViewForm();
+    }
+
+    /**
+     * Método usado para quando houver uma exceção na tela de form e também reaproveitado para ser usado no momento de detalhar.
+     * @param id id
+     * @param idAvaliacao idAvaliacao
+     * @param model model
+     */
+    private void onErrorOrDetail(Long id, Long idAvaliacao, Model model){
+        TemplateTopicoDTO templateTopicoDTO = this.templateTopicoFacade.findById(id);
+        templateTopicoDTO.setIdAvaliacao(idAvaliacao);
+        model.addAttribute(templateTopicoDTO);
+        this.onLoadView(model);
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void onEdit(Long id, Model model){
-        this.onLoadView(model);
-        TemplateTopicoDTO templateTopicoDTO = this.templateTopicoFacade.findById(id);
-        model.addAttribute(templateTopicoDTO.carregarPerguntasCadastradosParaFicarSelecionados());
+    protected String getRedirectViewEdit(){
+        return REDIRECT_LIST + getPathView() + ActionConstant.ACTION_EDIT_CUSTOM;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected String getRedirectViewError(){
+        return REDIRECT_LIST + getPathView() + ActionConstant.ACTION_ERROR_CUSTOM;
     }
 
     /**
