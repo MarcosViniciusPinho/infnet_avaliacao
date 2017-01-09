@@ -74,6 +74,7 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
         this.onLoadView(model);
         TemplateTopicoDTO templateTopicoDTO = this.templateTopicoFacade.findById(id);
         templateTopicoDTO.setIdAvaliacao(idAvaliacao);
+        model.addAttribute(this.templateAvaliacaoFacade.findById(idAvaliacao));
         model.addAttribute(templateTopicoDTO.carregarPerguntasCadastradosParaFicarSelecionados());
     }
 
@@ -113,6 +114,7 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
         TemplateTopicoDTO templateTopicoDTO = this.templateTopicoFacade.findById(id);
         templateTopicoDTO.setIdAvaliacao(idAvaliacao);
         model.addAttribute(templateTopicoDTO);
+        model.addAttribute(this.templateAvaliacaoFacade.findById(idAvaliacao));
         this.onLoadView(model);
     }
 
