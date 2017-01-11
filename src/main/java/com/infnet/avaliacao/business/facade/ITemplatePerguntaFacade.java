@@ -1,6 +1,9 @@
 package com.infnet.avaliacao.business.facade;
 
+import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
+import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoTopicoPerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
+import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
 
 import java.util.List;
 
@@ -15,5 +18,9 @@ public interface ITemplatePerguntaFacade extends ICrudFacade<TemplatePerguntaDTO
      * @return List<TemplatePerguntaDTO>
      */
     List<TemplatePerguntaDTO> getListaTemplatesPerguntasPorId(List<Long> idsTemplatePergunta);
+
+    List<TemplateAvaliacaoTopicoPerguntaDTO> getListaPerguntasAssociadasAoTopicoPorAvaliacao(List<TemplatePerguntaDTO> templatePerguntaDTOList,
+                                                                     TemplateTopicoDTO templateTopicoDTO,
+                                                                     TemplateAvaliacaoDTO templateAvaliacaoDTO);
 
 }

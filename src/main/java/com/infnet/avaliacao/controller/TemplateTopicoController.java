@@ -6,7 +6,6 @@ import com.infnet.avaliacao.business.facade.ITemplateTopicoFacade;
 import com.infnet.avaliacao.controller.util.ActionConstant;
 import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
-import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoTopicoPerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
 import org.springframework.stereotype.Controller;
@@ -55,8 +54,11 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
         List<Long> idsPerguntasSelecionados = entity.getIdsTemplatePerguntaSelecionados();
         List<TemplatePerguntaDTO> templatePerguntaDTOList = this.templatePerguntaFacade.getListaTemplatesPerguntasPorId(idsPerguntasSelecionados);
         TemplateAvaliacaoDTO templateAvaliacaoDTO = this.templateAvaliacaoFacade.findById(entity.getIdAvaliacao());
+
         entity.setTemplateAvaliacaoTopicoPerguntaDTOList(
-                TemplateAvaliacaoTopicoPerguntaDTO.produceAssociativeClass(templatePerguntaDTOList, entity, templateAvaliacaoDTO));
+                this.templatePerguntaFacade.getListaPerguntasAssociadasAoTopicoPorAvaliacao(
+                        templatePerguntaDTOList, entity, templateAvaliacaoDTO));
+
         model.addAttribute(LISTAR_TEMPLATE_PERGUNTA, templatePerguntaFacade.findAll());
         redirectAttributes.addAttribute("id", entity.getId());
         redirectAttributes.addAttribute("idAvaliacao", entity.getIdAvaliacao());

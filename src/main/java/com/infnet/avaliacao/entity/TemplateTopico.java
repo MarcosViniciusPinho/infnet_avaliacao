@@ -18,7 +18,7 @@ public class TemplateTopico implements Serializable {
     @Column(name = "enunciado", length = 50, nullable = false)
     private String enunciado;
 
-    @OneToMany(mappedBy = "templateTopico", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "templateTopico")
     private List<TemplateAvaliacaoTopicoPergunta> templateAvaliacaoTopicoPerguntaList;
 
     public Long getId() {

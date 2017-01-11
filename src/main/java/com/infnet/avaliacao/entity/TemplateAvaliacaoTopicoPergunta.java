@@ -20,15 +20,15 @@ public class TemplateAvaliacaoTopicoPergunta implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE})
+    @ManyToOne
     @JoinColumn(name = "id_template_avaliacao", nullable = false)
     private TemplateAvaliacao templateAvaliacao;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE})
+    @ManyToOne
     @JoinColumn(name = "id_template_topico", nullable = false)
     private TemplateTopico templateTopico;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE})
+    @ManyToOne
     @JoinColumn(name = "id_template_pergunta", nullable = false)
     private TemplatePergunta templatePergunta;
 
