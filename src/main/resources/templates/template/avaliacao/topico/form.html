@@ -69,7 +69,7 @@
                                             <td th:text="${templatePergunta.questao}"></td>
                                             <td>
                                                  <input type="checkbox" th:value="${templatePergunta.id}" name="checks[]"
-                                                        th:checked="${#lists.contains(templateTopicoDTO.idsTemplatePerguntaSelecionados, templatePergunta.id)}"
+                                                        th:checked="${templatePergunta.checked}"
                                                         onclick="selecionarPergunta()"/>
                                             </td>
                                             <td>

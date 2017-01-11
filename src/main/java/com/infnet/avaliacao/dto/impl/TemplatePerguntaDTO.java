@@ -18,6 +18,8 @@ public class TemplatePerguntaDTO implements IDTO<TemplatePergunta> {
 
     private String questao;
 
+    private boolean checked;
+
     /**
      * {@inheritDoc}
      */
@@ -71,6 +73,14 @@ public class TemplatePerguntaDTO implements IDTO<TemplatePergunta> {
 
     public void setQuestao(String questao) {
         this.questao = questao;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 
     /**

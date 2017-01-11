@@ -23,4 +23,13 @@ public interface ITemplatePerguntaFacade extends ICrudFacade<TemplatePerguntaDTO
                                                                      TemplateTopicoDTO templateTopicoDTO,
                                                                      TemplateAvaliacaoDTO templateAvaliacaoDTO);
 
+    /**
+     * Método que lista as perguntas com seu checkbox devidamente associado ao seu respectivo topico de uma avaliação.
+     * @param templateTopicoDTO templateTopicoDTO
+     * @param templateAvaliacaoDTO templateAvaliacaoDTO
+     * @return List<TemplatePerguntaDTO>
+     */
+    List<TemplatePerguntaDTO> findAllComCheckedPerguntasMarcadas(TemplateTopicoDTO templateTopicoDTO,
+                                                                 TemplateAvaliacaoDTO templateAvaliacaoDTO);
+
 }

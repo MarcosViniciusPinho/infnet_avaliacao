@@ -59,7 +59,9 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
                 this.templatePerguntaFacade.getListaPerguntasAssociadasAoTopicoPorAvaliacao(
                         templatePerguntaDTOList, entity, templateAvaliacaoDTO));
 
-        model.addAttribute(LISTAR_TEMPLATE_PERGUNTA, templatePerguntaFacade.findAll());
+        model.addAttribute(LISTAR_TEMPLATE_PERGUNTA,
+                this.templatePerguntaFacade.findAllComCheckedPerguntasMarcadas(
+                        entity, templateAvaliacaoDTO));
         redirectAttributes.addAttribute("id", entity.getId());
         redirectAttributes.addAttribute("idAvaliacao", entity.getIdAvaliacao());
     }
@@ -73,11 +75,14 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
     }
 
     private void onEdit(Long id, Long idAvaliacao, Model model){
-        this.onLoadView(model);
         TemplateTopicoDTO templateTopicoDTO = this.templateTopicoFacade.findById(id);
         templateTopicoDTO.setIdAvaliacao(idAvaliacao);
-        model.addAttribute(this.templateAvaliacaoFacade.findById(idAvaliacao));
-        model.addAttribute(templateTopicoDTO.carregarPerguntasCadastradosParaFicarSelecionados());
+        TemplateAvaliacaoDTO templateAvaliacaoDTO = this.templateAvaliacaoFacade.findById(idAvaliacao);
+        model.addAttribute(templateAvaliacaoDTO);
+        model.addAttribute(templateTopicoDTO);
+        model.addAttribute(LISTAR_TEMPLATE_PERGUNTA,
+                this.templatePerguntaFacade.findAllComCheckedPerguntasMarcadas(
+                        templateTopicoDTO, templateAvaliacaoDTO));
     }
 
     /**

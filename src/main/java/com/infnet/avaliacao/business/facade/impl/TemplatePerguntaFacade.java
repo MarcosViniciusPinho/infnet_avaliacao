@@ -63,9 +63,22 @@ public class TemplatePerguntaFacade implements ITemplatePerguntaFacade {
                 this.templatePerguntaService.getListaTemplatesPerguntasPorId(idsTemplateTopico));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<TemplateAvaliacaoTopicoPerguntaDTO> getListaPerguntasAssociadasAoTopicoPorAvaliacao(
             List<TemplatePerguntaDTO> templatePerguntaDTOList, TemplateTopicoDTO templateTopicoDTO, TemplateAvaliacaoDTO templateAvaliacaoDTO) {
         return this.templateAvaliacaoTopicoPerguntaService.produceAssociativeClass(templatePerguntaDTOList, templateTopicoDTO, templateAvaliacaoDTO);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<TemplatePerguntaDTO> findAllComCheckedPerguntasMarcadas(TemplateTopicoDTO templateTopicoDTO,
+                                                                        TemplateAvaliacaoDTO templateAvaliacaoDTO) {
+        return this.templatePerguntaService.findAllComCheckedPerguntasMarcadas(templateTopicoDTO, templateAvaliacaoDTO);
+    }
+
 }

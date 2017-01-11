@@ -83,19 +83,6 @@ public class TemplateTopicoDTO implements IDTO<TemplateTopico> {
     }
 
     /**
-     * Método que carrega os topicos cadastrados para uma determinada avaliação e os carrega na tela de topicos nos checkbox's.
-     * @return TemplateTopicoDTO
-     */
-    public TemplateTopicoDTO carregarPerguntasCadastradosParaFicarSelecionados(){
-        List<Long> templatePerguntaList = new ArrayList<>();
-        for(TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO : this.getTemplateAvaliacaoTopicoPerguntaDTOList()){
-            templatePerguntaList.add(templateAvaliacaoTopicoPerguntaDTO.getId());
-        }
-        this.setIdsTemplatePerguntaSelecionados(templatePerguntaList);
-        return this;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
