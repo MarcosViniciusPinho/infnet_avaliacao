@@ -59,9 +59,6 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
                 this.templatePerguntaFacade.getListaPerguntasAssociadasAoTopicoPorAvaliacao(
                         templatePerguntaDTOList, entity, templateAvaliacaoDTO));
 
-        model.addAttribute(LISTAR_TEMPLATE_PERGUNTA,
-                this.templatePerguntaFacade.findAllComCheckedPerguntasMarcadas(
-                        entity, templateAvaliacaoDTO));
         redirectAttributes.addAttribute("id", entity.getId());
         redirectAttributes.addAttribute("idAvaliacao", entity.getIdAvaliacao());
     }
