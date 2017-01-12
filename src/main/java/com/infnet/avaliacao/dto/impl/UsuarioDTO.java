@@ -28,6 +28,9 @@ public class UsuarioDTO implements IDTO<Usuario> {
     private PerfilEnum perfil;
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Usuario toEntity(){
         Usuario usuario = new Usuario();
@@ -70,6 +73,9 @@ public class UsuarioDTO implements IDTO<Usuario> {
         return lista;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Long getId() {
         return id;

@@ -17,10 +17,6 @@ public class TemplatePergunta implements Serializable {
     @Column(name = "questao", length = 150, nullable = false)
     private String questao;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_template_topico", nullable = false)
-    private TemplateTopico templateTopico;
-
     public Long getId() {
         return id;
     }
@@ -35,14 +31,6 @@ public class TemplatePergunta implements Serializable {
 
     public void setQuestao(String questao) {
         this.questao = questao;
-    }
-
-    public TemplateTopico getTemplateTopico() {
-        return templateTopico;
-    }
-
-    public void setTemplateTopico(TemplateTopico templateTopico) {
-        this.templateTopico = templateTopico;
     }
 
     @Override

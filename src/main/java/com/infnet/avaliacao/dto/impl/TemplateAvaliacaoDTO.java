@@ -20,6 +20,9 @@ public class TemplateAvaliacaoDTO implements IDTO<TemplateAvaliacao> {
 
     private List<Long> idsTemplateTopicoSelecionados = new ArrayList<>(0);
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public TemplateAvaliacao toEntity(){
         TemplateAvaliacao templateAvaliacao = new TemplateAvaliacao();
@@ -73,6 +76,9 @@ public class TemplateAvaliacaoDTO implements IDTO<TemplateAvaliacao> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Long getId() {
         return id;

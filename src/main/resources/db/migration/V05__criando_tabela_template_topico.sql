@@ -1,6 +1,4 @@
 CREATE TABLE template_topico(
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   enunciado VARCHAR(50) NOT NULL
 );
-
-ALTER TABLE template_topico ADD CONSTRAINT pk_id_template_topico PRIMARY KEY (id);

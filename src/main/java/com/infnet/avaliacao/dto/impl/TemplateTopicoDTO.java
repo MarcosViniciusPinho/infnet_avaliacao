@@ -16,12 +16,23 @@ public class TemplateTopicoDTO implements IDTO<TemplateTopico> {
 
     private String enunciado;
 
-    private List<TemplatePerguntaDTO> templatePerguntaDTOList;
+    private List<TemplateAvaliacaoTopicoPerguntaDTO> templateAvaliacaoTopicoPerguntaDTOList;
 
+    private List<Long> idsTemplatePerguntaSelecionados = new ArrayList<>(0);
+
+    private Long idAvaliacao;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public TemplateTopico toEntity(){
         TemplateTopico templateTopico = new TemplateTopico();
         templateTopico.setId(this.getId());
         templateTopico.setEnunciado(this.getEnunciado());
+        templateTopico.setTemplateAvaliacaoTopicoPerguntaList(
+                TemplateAvaliacaoTopicoPerguntaDTO.convertListDtoToListEntity(
+                        this.getTemplateAvaliacaoTopicoPerguntaDTOList()));
         return templateTopico;
     }
 
@@ -35,9 +46,9 @@ public class TemplateTopicoDTO implements IDTO<TemplateTopico> {
         TemplateTopicoDTO templateTopicoDTO = new TemplateTopicoDTO();
         templateTopicoDTO.setId(templateTopico.getId());
         templateTopicoDTO.setEnunciado(templateTopico.getEnunciado());
-        templateTopicoDTO.setTemplatePerguntaDTOList(
-                TemplatePerguntaDTO.convertListEntityToListDto(
-                        templateTopico.getTemplatePerguntaList()));
+        templateTopicoDTO.setTemplateAvaliacaoTopicoPerguntaDTOList(
+                TemplateAvaliacaoTopicoPerguntaDTO.convertListEntityToListDto(
+                        templateTopico.getTemplateAvaliacaoTopicoPerguntaList()));
         return templateTopicoDTO;
     }
 
@@ -71,6 +82,10 @@ public class TemplateTopicoDTO implements IDTO<TemplateTopico> {
         return lista;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Long getId() {
         return id;
     }
@@ -87,11 +102,27 @@ public class TemplateTopicoDTO implements IDTO<TemplateTopico> {
         this.enunciado = enunciado;
     }
 
-    public List<TemplatePerguntaDTO> getTemplatePerguntaDTOList() {
-        return templatePerguntaDTOList;
+    public List<TemplateAvaliacaoTopicoPerguntaDTO> getTemplateAvaliacaoTopicoPerguntaDTOList() {
+        return templateAvaliacaoTopicoPerguntaDTOList;
     }
 
-    public void setTemplatePerguntaDTOList(List<TemplatePerguntaDTO> templatePerguntaDTOList) {
-        this.templatePerguntaDTOList = templatePerguntaDTOList;
+    public void setTemplateAvaliacaoTopicoPerguntaDTOList(List<TemplateAvaliacaoTopicoPerguntaDTO> templateAvaliacaoTopicoPerguntaDTOList) {
+        this.templateAvaliacaoTopicoPerguntaDTOList = templateAvaliacaoTopicoPerguntaDTOList;
+    }
+
+    public List<Long> getIdsTemplatePerguntaSelecionados() {
+        return idsTemplatePerguntaSelecionados;
+    }
+
+    public void setIdsTemplatePerguntaSelecionados(List<Long> idsTemplatePerguntaSelecionados) {
+        this.idsTemplatePerguntaSelecionados = idsTemplatePerguntaSelecionados;
+    }
+
+    public Long getIdAvaliacao() {
+        return idAvaliacao;
+    }
+
+    public void setIdAvaliacao(Long idAvaliacao) {
+        this.idAvaliacao = idAvaliacao;
     }
 }

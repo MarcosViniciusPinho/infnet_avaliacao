@@ -18,8 +18,8 @@ public class TemplateTopico implements Serializable {
     @Column(name = "enunciado", length = 50, nullable = false)
     private String enunciado;
 
-    @OneToMany(mappedBy = "templateTopico", cascade = CascadeType.ALL)
-    private List<TemplatePergunta> templatePerguntaList;
+    @OneToMany(mappedBy = "templateTopico")
+    private List<TemplateAvaliacaoTopicoPergunta> templateAvaliacaoTopicoPerguntaList;
 
     public Long getId() {
         return id;
@@ -37,12 +37,12 @@ public class TemplateTopico implements Serializable {
         this.enunciado = enunciado;
     }
 
-    public List<TemplatePergunta> getTemplatePerguntaList() {
-        return templatePerguntaList;
+    public List<TemplateAvaliacaoTopicoPergunta> getTemplateAvaliacaoTopicoPerguntaList() {
+        return templateAvaliacaoTopicoPerguntaList;
     }
 
-    public void setTemplatePerguntaList(List<TemplatePergunta> templatePerguntaList) {
-        this.templatePerguntaList = templatePerguntaList;
+    public void setTemplateAvaliacaoTopicoPerguntaList(List<TemplateAvaliacaoTopicoPergunta> templateAvaliacaoTopicoPerguntaList) {
+        this.templateAvaliacaoTopicoPerguntaList = templateAvaliacaoTopicoPerguntaList;
     }
 
     @Override

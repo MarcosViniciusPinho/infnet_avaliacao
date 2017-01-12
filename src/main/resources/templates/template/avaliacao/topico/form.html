@@ -6,7 +6,7 @@
 
 <head>
     <title th:text="#{avaliacao}"></title>
-    <script th:src="@{/js/template/avaliacao/form.js}"/>
+    <script th:src="@{/js/template/avaliacao/topico/form.js}"/>
     <script th:src="@{/js/util/modalVisualizar.js}"/>
     <script th:src="@{/js/util/form.js}"/>
 </head>
@@ -21,7 +21,8 @@
                         <ol class="breadcrumb">
                             <li><a th:href="@{/home}" th:text="#{home}"></a></li>
                             <li><a th:href="@{/template/avaliacao/list}" th:text="#{avaliacao}"></a></li>
-                            <li class="active" th:text="#{template.avaliacao.montarTopico}"></li>
+                            <li><a th:href="@{/template/avaliacao/edit/{id}(id=${templateTopicoDTO.idAvaliacao})}" th:text="#{template.avaliacao.topico}"></a></li>
+                            <li class="active" th:text="#{template.avaliacao.montarPergunta}"></li>
                         </ol>
 
                         <div class="alert alert-danger" role="alert" th:if="${!#strings.isEmpty(error)}">
@@ -33,25 +34,29 @@
                         </div>
 
                         <h2>
-                            <span th:text="#{template.avaliacao.montar.avaliacao.curso}"></span>: <span th:text="${templateAvaliacaoDTO.titulo}"></span>
+                            <span th:text="#{template.avaliacao.montar.avaliacao.curso}"></span>:
+                            <span th:text="${templateAvaliacaoDTO.titulo}"></span>
+                            <span th:text="#{template.avaliacao.montar.avaliacao.topico}"></span>:
+                            <span th:text="${templateTopicoDTO.enunciado}"></span>
                         </h2>
 
                         <hr />
 
                         <div class="textoCamposObrigatorios">
                             <small class="col-sm-offset-10">(<span class="corVermelho">*</span>)
-                                <span th:text="#{template.avaliacao.campo.obrigatorio}"></span></small>
+                                <span th:text="#{template.avaliacao.topico.campo.obrigatorio}"></span></small>
                         </div>
 
                         <div class="col-lg-12"> &nbsp; </div>
-                        <form method="POST" th:action="@{/template/avaliacao/save}" th:object="${templateAvaliacaoDTO}" id="form">
+                        <form method="POST" th:action="@{/template/avaliacao/topico/save}" th:object="${templateTopicoDTO}" id="form">
                             <div class="form-group">
                                 <input type="hidden" th:field="*{id}" id="id"/>
-                                <input type="hidden" th:field="*{titulo}"/>
+                                <input type="hidden" th:field="*{enunciado}"/>
+                                <input type="hidden" th:field="*{idAvaliacao}"/>
                                 <table class="table table-striped table-hover table-bordered">
                                     <thead>
                                         <tr>
-                                            <th th:text="#{template.avaliacao.topico}"></th>
+                                            <th th:text="#{template.avaliacao.pergunta}"></th>
                                             <th>
                                                 <span th:text="#{template.avaliacao.selecione}"></span>
                                                 (<span class="corVermelho">*</span>)
@@ -60,41 +65,36 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr th:each="templateTopico,status : ${listarTemplateTopico}">
-                                            <td th:text="${templateTopico.enunciado}"></td>
+                                        <tr th:each="templatePergunta,status : ${listarTemplatePergunta}">
+                                            <td th:text="${templatePergunta.questao}"></td>
                                             <td>
-                                                 <input type="checkbox" th:value="${templateTopico.id}" name="checks[]"
-                                                        th:checked="${#lists.contains(templateAvaliacaoDTO.idsTemplateTopicoSelecionados, templateTopico.id)}"
-                                                        th:onclick="'selecionarTopico(' + ${templateTopico.id} + ');'"/>
+                                                 <input type="checkbox" th:value="${templatePergunta.id}" name="checks[]"
+                                                        th:checked="${templatePergunta.checked}"
+                                                        onclick="selecionarPergunta()"/>
                                             </td>
                                             <td>
                                                 <a th:title="#{template.avalicao.visualizar.topico}" class="btn btn-link btn-xs"
-                                                   th:attr="data-nome=${templateTopico.enunciado}" data-toggle="modal" data-target="#modalVisualizar">
+                                                   th:attr="data-nome=${templatePergunta.questao}" data-toggle="modal" data-target="#modalVisualizar">
                                                     <span class="glyphicon glyphicon-resize-full"></span>
-                                                </a>
-                                                <a th:class="'btnPergunta'+${templateTopico.id}" href="#" th:title="#{template.avaliacao.hint.associar.pergunta}"
-                                                    th:if="${#lists.contains(templateAvaliacaoDTO.idsTemplateTopicoSelecionados, templateTopico.id)}"
-                                                    th:href="@{/template/avaliacao/topico/edit/{id}/avaliacao/{idAvaliacao}(id=${templateTopico.id},idAvaliacao=${templateAvaliacaoDTO.id})}">
-                                                    <span class="glyphicon glyphicon-plus"></span>
                                                 </a>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="3" th:if="${#lists.isEmpty(listarTemplateTopico)}"><span th:text="#{nenhumregistroencontrado}"></span></td>
+                                            <td colspan="3" th:if="${#lists.isEmpty(listarTemplatePergunta)}"><span th:text="#{nenhumregistroencontrado}"></span></td>
                                         </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <td colspan="3">
                                                 <span th:text="#{texto.rodape.primeira.parte}"></span>
-                                                <span th:text="${#lists.size(listarTemplateTopico)}"> </span>
+                                                <span th:text="${#lists.size(listarTemplatePergunta)}"> </span>
                                                 <span th:text="#{texto.rodape.segunda.parte}"></span>
                                             </td>
                                         </tr>
                                     </tfoot>
                                 </table>
                                 <div layout:include="modalVisualizar"></div>
-                                <input type="hidden" th:field="*{idsTemplateTopicoSelecionados}" id="idsTemplateTopicoSelecionados"/>
+                                <input type="hidden" th:field="*{idsTemplatePerguntaSelecionados}" id="idsTemplatePerguntaSelecionados"/>
                             </div>
                             <input id="salvar" type="submit" class="btn btn-primary" th:value="#{btn.salvar}"/>
                         </form>
