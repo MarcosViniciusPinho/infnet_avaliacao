@@ -49,7 +49,6 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
         List<Long> idsTopicosSelecionados = entity.getIdsTemplateTopicoSelecionados();
         entity.setTemplateTopicoDTOList(
                 this.templateTopicoFacade.getListaTemplatesTopicosPorId(idsTopicosSelecionados));
-        model.addAttribute(LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAll());
         redirectAttributes.addAttribute("id", entity.getId());
     }
 
