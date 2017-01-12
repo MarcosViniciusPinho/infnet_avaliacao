@@ -1,6 +1,7 @@
 package com.infnet.avaliacao.business.facade.impl;
 
 import com.infnet.avaliacao.business.facade.ITemplateTopicoFacade;
+import com.infnet.avaliacao.business.service.ITemplateAvaliacaoTopicoPerguntaService;
 import com.infnet.avaliacao.business.service.ITemplateTopicoService;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ public class TemplateTopicoFacade implements ITemplateTopicoFacade {
     @Resource
     private ITemplateTopicoService templateTopicoService;
 
+    @Resource
+    private ITemplateAvaliacaoTopicoPerguntaService templateAvaliacaoTopicoPerguntaService;
+
     /**
      * {@inheritDoc}
      */
@@ -28,7 +32,8 @@ public class TemplateTopicoFacade implements ITemplateTopicoFacade {
 
     @Override
     public void save(TemplateTopicoDTO dto) {
-        templateTopicoService.save(dto);
+        this.templateTopicoService.save(dto);
+        this.templateAvaliacaoTopicoPerguntaService.save(dto.getTemplateAvaliacaoTopicoPerguntaDTOList());
     }
 
     /**
@@ -47,6 +52,9 @@ public class TemplateTopicoFacade implements ITemplateTopicoFacade {
         return TemplateTopicoDTO.toDto(this.templateTopicoService.findById(id));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<TemplateTopicoDTO> getListaTemplatesTopicosPorId(List<Long> idsTemplateTopico) {
         return TemplateTopicoDTO.convertListEntityToListDto(
