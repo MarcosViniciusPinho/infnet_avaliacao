@@ -23,6 +23,8 @@ public class TemplateAvaliacaoTopicoPerguntaDTO implements IDTO<TemplateAvaliaca
 
     private TemplatePergunta templatePergunta;
 
+    private boolean ativo;
+
     /**
      * {@inheritDoc}
      */
@@ -33,6 +35,7 @@ public class TemplateAvaliacaoTopicoPerguntaDTO implements IDTO<TemplateAvaliaca
         templateAvaliacaoTopicoPergunta.setTemplateAvaliacao(this.getTemplateAvaliacao());
         templateAvaliacaoTopicoPergunta.setTemplateTopico(this.getTemplateTopico());
         templateAvaliacaoTopicoPergunta.setTemplatePergunta(this.getTemplatePergunta());
+        templateAvaliacaoTopicoPergunta.setAtivo(this.isAtivo());
         return templateAvaliacaoTopicoPergunta;
     }
 
@@ -115,5 +118,13 @@ public class TemplateAvaliacaoTopicoPerguntaDTO implements IDTO<TemplateAvaliaca
 
     public void setTemplatePergunta(TemplatePergunta templatePergunta) {
         this.templatePergunta = templatePergunta;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 }

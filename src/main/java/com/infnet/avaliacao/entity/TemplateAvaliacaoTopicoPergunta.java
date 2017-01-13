@@ -6,8 +6,8 @@ import java.io.Serializable;
 /**
  * Foi necessário criar esta classe para poder mapear esta entidade associativa pois para a mesma existem 3 atributos, portanto o hibernate
  * não gerencia esses atributos pela anotação @ManyToMany. Devido a este fator foi necessário fazer o relacionamento NxN manualmente.
- * Obs: O atributo id só existe pois esta classe associativa está mapeada, pois se estivesse sido gerenciado pelo hibernate pela anotação
- * dito a cima este atributo não existiria.
+ * Obs: Os atributos id e ativo só existem pois esta classe associativa está mapeada, pois se estivesse sido gerenciado pelo hibernate pela anotação
+ * dito a cima estes atributos não existiriam.
  */
 @Entity
 @Table(name = "template_avaliacao_topico_pergunta")
@@ -31,6 +31,9 @@ public class TemplateAvaliacaoTopicoPergunta implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_template_pergunta", nullable = false)
     private TemplatePergunta templatePergunta;
+
+    @Column(name = "ativo", nullable = false)
+    private boolean ativo;
 
     public Long getId() {
         return id;
@@ -64,4 +67,11 @@ public class TemplateAvaliacaoTopicoPergunta implements Serializable {
         this.templatePergunta = templatePergunta;
     }
 
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
 }

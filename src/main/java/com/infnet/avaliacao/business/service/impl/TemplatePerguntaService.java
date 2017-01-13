@@ -44,7 +44,9 @@ public class TemplatePerguntaService extends CrudService<TemplatePerguntaDTO, Te
             TemplateAvaliacaoTopicoPergunta templateAvaliacaoTopicoPergunta = this.templateAvaliacaoTopicoPerguntaDAO.
                     findByTemplateAvaliacaoAndTemplateTopicoAndTemplatePerguntaEquals(templateAvaliacaoDTO.toEntity(),
                             templateTopicoDTO.toEntity(), templatePerguntaDTO.toEntity());
-            templatePerguntaDTO.setChecked(templateAvaliacaoTopicoPergunta != null ? Boolean.TRUE : Boolean.FALSE);
+            if(templateAvaliacaoTopicoPergunta != null) {
+                templatePerguntaDTO.setChecked(templateAvaliacaoTopicoPergunta.isAtivo());
+            }
         }
         return templatePerguntaDTOList;
     }

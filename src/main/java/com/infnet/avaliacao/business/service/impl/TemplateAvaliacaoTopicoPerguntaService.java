@@ -31,6 +31,15 @@ public class TemplateAvaliacaoTopicoPerguntaService implements ITemplateAvaliaca
                 templateAvaliacaoTopicoPerguntaDTOList));
     }
 
+    private void inativarTodasMarcacoesDePerguntaDeUmaAvaliacaoPorTopico(TemplateAvaliacaoDTO templateAvaliacaoDTO,
+                                                   TemplateTopicoDTO templateTopicoDTO){
+        List<TemplateAvaliacaoTopicoPergunta> lista = this.templateAvaliacaoTopicoPerguntaDAO.findAllByTemplateAvaliacaoAndTemplateTopicoEquals(templateAvaliacaoDTO.toEntity(),
+                templateTopicoDTO.toEntity());
+        for(TemplateAvaliacaoTopicoPergunta templateAvaliacaoTopicoPergunta : lista){
+            templateAvaliacaoTopicoPergunta.setAtivo(Boolean.FALSE);
+            this.templateAvaliacaoTopicoPerguntaDAO.save(templateAvaliacaoTopicoPergunta);
+        }
+    }
 
     /**
      * {@inheritDoc}
@@ -39,6 +48,7 @@ public class TemplateAvaliacaoTopicoPerguntaService implements ITemplateAvaliaca
     public List<TemplateAvaliacaoTopicoPerguntaDTO> produceAssociativeClass(List<TemplatePerguntaDTO> templatePerguntaDTOList,
                                                                                    TemplateTopicoDTO templateTopicoDTO,
                                                                                    TemplateAvaliacaoDTO templateAvaliacaoDTO){
+        this.inativarTodasMarcacoesDePerguntaDeUmaAvaliacaoPorTopico(templateAvaliacaoDTO, templateTopicoDTO);
         List<TemplateAvaliacaoTopicoPerguntaDTO> templateAvaliacaoTopicoPerguntaDTOList = new ArrayList<>();
         for(TemplatePerguntaDTO templatePerguntaDTO : templatePerguntaDTOList){
             TemplateAvaliacaoTopicoPergunta templateAvaliacaoTopicoPergunta = this.templateAvaliacaoTopicoPerguntaDAO.
@@ -65,6 +75,7 @@ public class TemplateAvaliacaoTopicoPerguntaService implements ITemplateAvaliaca
             templateAvaliacaoTopicoPerguntaDTO.setTemplateTopico(templateTopicoDTO.toEntity());
             templateAvaliacaoTopicoPerguntaDTO.setTemplateAvaliacao(templateAvaliacaoDTO.toEntity());
         }
+        templateAvaliacaoTopicoPerguntaDTO.setAtivo(Boolean.TRUE);
         return templateAvaliacaoTopicoPerguntaDTO;
     }
 }
