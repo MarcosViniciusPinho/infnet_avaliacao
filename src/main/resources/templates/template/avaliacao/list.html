@@ -49,10 +49,6 @@
                                 <a th:title="#{template.avaliacao.hint.associar.topico}" class="btn btn-link btn-xs" th:href="@{/template/avaliacao/edit/{id}(id=${templateAvaliacao.id})}">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </a>
-                                <a th:title="#{hint.excluir}" class="btn btn-link btn-xs" href="#"
-                                    th:attr="data-id=${templateAvaliacao.id}, data-nome=${templateAvaliacao.titulo}" data-toggle="modal" data-target="#modalExcluir">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                </a>
                             </td>
                         </tr>
                         <tr>
@@ -70,10 +66,6 @@
                         </tfoot>
                     </table>
                 </div>
-                <form class="form-horizontal" th:attr="data-url-base=@{/template/avaliacao/delete/}" method="POST" id="formExcluir">
-                    <input type="hidden" th:value="#{template.avaliacao.confirmacaoexclusao}" id="mensagemExcluir"/>
-                    <div layout:include="modal"></div>
-                </form>
             </div>
         </div>
     </div>

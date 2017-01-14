@@ -2,6 +2,7 @@ package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.controller.util.ActionConstant;
 import com.infnet.avaliacao.controller.util.MessageConstant;
+import com.infnet.avaliacao.exception.ExecutionException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,23 @@ public abstract class CadastroController<V> extends CrudController<V>{
             model.addAttribute(MessageConstant.ERROR, ex.getLocalizedMessage());
             this.onLoadView(model);
             return getViewForm();
+        }
+    }
+
+    /**
+     * Método que exclui uma entidade.
+     * @param id id
+     * @param redirectAttributes redirectAttributes
+     * @return String
+     */
+    @RequestMapping(value = ActionConstant.ACTION_DELETE, method = RequestMethod.POST)
+    public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes){
+        try {
+            this.getFacade().delete(id);
+            redirectAttributes.addFlashAttribute(MessageConstant.SUCESS, MessageConstant.MENSAGEM_SUCESSO);
+            return this.getRedirectViewList();
+        } catch (RuntimeException ex) {
+            throw new ExecutionException(ex);
         }
     }
 

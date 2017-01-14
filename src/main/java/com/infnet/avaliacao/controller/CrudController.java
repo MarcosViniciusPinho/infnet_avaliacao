@@ -2,14 +2,10 @@ package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.business.facade.ICrudFacade;
 import com.infnet.avaliacao.controller.util.ActionConstant;
-import com.infnet.avaliacao.controller.util.MessageConstant;
 import com.infnet.avaliacao.exception.ExecutionException;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Classe responsável por executar as funcionalidades em comum nos módulos da aplicação.
@@ -27,23 +23,6 @@ public abstract class CrudController<V> {
      * @return ICrudFacade<T>
      */
     protected abstract ICrudFacade<V> getFacade();
-
-    /**
-     * Método que exclui uma entidade.
-     * @param id id
-     * @param redirectAttributes redirectAttributes
-     * @return String
-     */
-    @RequestMapping(value = ActionConstant.ACTION_DELETE, method = RequestMethod.POST)
-    public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes){
-        try {
-            this.getFacade().delete(id);
-            redirectAttributes.addFlashAttribute(MessageConstant.SUCESS, MessageConstant.MENSAGEM_SUCESSO);
-            return this.getRedirectViewList();
-        } catch (RuntimeException ex) {
-            throw new ExecutionException(ex);
-        }
-    }
 
     /**
      * Método que faz a listagem dos registros na tela.

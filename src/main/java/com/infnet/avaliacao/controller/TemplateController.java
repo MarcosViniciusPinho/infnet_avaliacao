@@ -35,7 +35,7 @@ public abstract class TemplateController<V> extends CrudController<V>{
     }
 
     /**
-     * Método para popular a lista de templates topicos selecionados na tela de form.
+     * Método para popular o objeto com as informações necessárias a serem preenchidos.
      * @param entity entity
      * @param model model
      * @param redirectAttributes redirectAttributes
