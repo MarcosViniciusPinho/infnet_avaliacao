@@ -33,7 +33,7 @@
 
                         <div class="textoCamposObrigatorios">
                             <small class="col-sm-offset-10">(<span class="corVermelho">*</span>)
-                                <span th:text="#{usuario.campo.obrigatorio}"></span> </small>
+                                <span th:text="#{campo.obrigatorio}"></span> </small>
                         </div>
 
                         <form method="POST" th:action="@{/cadastro/usuario/save}" th:object="${usuarioDTO}" id="form">
