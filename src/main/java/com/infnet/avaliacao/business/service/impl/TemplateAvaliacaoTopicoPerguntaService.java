@@ -7,6 +7,7 @@ import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
 import com.infnet.avaliacao.entity.TemplateAvaliacaoTopicoPergunta;
 import com.infnet.avaliacao.persistence.ITemplateAvaliacaoTopicoPerguntaDAO;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -33,12 +34,24 @@ public class TemplateAvaliacaoTopicoPerguntaService implements ITemplateAvaliaca
 
     private void inativarTodasMarcacoesDePerguntaDeUmaAvaliacaoPorTopico(TemplateAvaliacaoDTO templateAvaliacaoDTO,
                                                    TemplateTopicoDTO templateTopicoDTO){
-        List<TemplateAvaliacaoTopicoPergunta> lista = this.templateAvaliacaoTopicoPerguntaDAO.findAllByTemplateAvaliacaoAndTemplateTopicoEquals(templateAvaliacaoDTO.toEntity(),
+        List<TemplateAvaliacaoTopicoPergunta> lista = this.templateAvaliacaoTopicoPerguntaDAO.findAllByTemplateAvaliacaoAndTemplateTopicoEquals(
+                templateAvaliacaoDTO.toEntity(),
                 templateTopicoDTO.toEntity());
+        boolean existePerguntaSelecionada = !this.isNaoExistePerguntaSelecionada(templateTopicoDTO);
+        if(existePerguntaSelecionada){
+            this.inativarPerguntas(lista);
+        }
+    }
+
+    private void inativarPerguntas(List<TemplateAvaliacaoTopicoPergunta> lista){
         for(TemplateAvaliacaoTopicoPergunta templateAvaliacaoTopicoPergunta : lista){
             templateAvaliacaoTopicoPergunta.setAtivo(Boolean.FALSE);
             this.templateAvaliacaoTopicoPerguntaDAO.save(templateAvaliacaoTopicoPergunta);
         }
+    }
+
+    private boolean isNaoExistePerguntaSelecionada(TemplateTopicoDTO templateTopicoDTO){
+        return CollectionUtils.isEmpty(templateTopicoDTO.getIdsTemplatePerguntaSelecionados());
     }
 
     /**
