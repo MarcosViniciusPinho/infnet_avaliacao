@@ -22,12 +22,3 @@ div.textoCamposObrigatorios{
 #logo{
     margin-top: -15px;
 }
-input#multiplaEscolhaInput{
-    margin-left: 15px;
-}
-div.modal-dialog.modal-dialog-lenght-fulll{
-    width: 1500px;
-}
-div.modal-body.modal-body-lenght-full{
-    height: 575px;
-}
