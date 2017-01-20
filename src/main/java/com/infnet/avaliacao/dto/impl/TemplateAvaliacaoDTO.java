@@ -1,5 +1,6 @@
 package com.infnet.avaliacao.dto.impl;
 
+import com.infnet.avaliacao.controller.wrapper.PerguntaAssociadaWrapper;
 import com.infnet.avaliacao.dto.IDTO;
 import com.infnet.avaliacao.entity.TemplateAvaliacao;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
@@ -74,6 +75,55 @@ public class TemplateAvaliacaoDTO implements IDTO<TemplateAvaliacao> {
         }
         this.setIdsTemplateTopicoSelecionados(templateTopicoList);
         return this;
+    }
+
+    /**
+     * Método que verifica se o id do TemplateAvaliacao é igual ao id do TemplateAvaliacao que é atributo da classe TemplateAvaliacaoTopicoPergunta,
+     * verifica também se o id do TemplateTopico é igual ao id do TemplateTopico que é atributo da classe TemplateAvaliacaoTopicoPergunta e
+     * Verifica se para aquela determinado pergunta está ativa na classe TemplateAvaliacaoTopicoPergunta.
+     * @param templateTopicoDTO templateTopicoDTO
+     * @param templateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO
+     * @return boolean
+     */
+    private boolean isVerificaTopicoAndAvaliacaoAndAtivo(TemplateTopicoDTO templateTopicoDTO,
+                                                         TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO){
+        return templateAvaliacaoTopicoPerguntaDTO.isAtivo()
+                && templateTopicoDTO.getId().equals(templateAvaliacaoTopicoPerguntaDTO.getTemplateTopico().getId())
+                && this.getId().equals(templateAvaliacaoTopicoPerguntaDTO.getTemplateAvaliacao().getId());
+    }
+
+    private void addPerguntasAssociadas(TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO,
+                                        List<TemplatePerguntaDTO> templatePerguntaDTOList, TemplateTopicoDTO templateTopicoDTO){
+        if(this.isVerificaTopicoAndAvaliacaoAndAtivo(templateTopicoDTO, templateAvaliacaoTopicoPerguntaDTO)){
+            templatePerguntaDTOList.add(
+                    TemplatePerguntaDTO.toDto(
+                            templateAvaliacaoTopicoPerguntaDTO.getTemplatePergunta()));
+        }
+    }
+
+    private void percorrerPerguntasAssociadas(TemplateTopicoDTO templateTopicoDTO, List<TemplatePerguntaDTO> templatePerguntaDTOList){
+        for(TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO : templateTopicoDTO.getTemplateAvaliacaoTopicoPerguntaDTOList()){
+            this.addPerguntasAssociadas(templateAvaliacaoTopicoPerguntaDTO, templatePerguntaDTOList, templateTopicoDTO);
+        }
+    }
+
+    private void initDetail(List<PerguntaAssociadaWrapper> perguntaAssociadaWrapperList, TemplateTopicoDTO templateTopicoDTO){
+        PerguntaAssociadaWrapper perguntaAssociadaWrapper = new PerguntaAssociadaWrapper();
+        perguntaAssociadaWrapper.setTemplateTopicoDTO(templateTopicoDTO);
+        List<TemplatePerguntaDTO> templatePerguntaDTOList = new ArrayList<>();
+        this.percorrerPerguntasAssociadas(templateTopicoDTO, templatePerguntaDTOList);
+        perguntaAssociadaWrapper.setTemplatePerguntaDTOList(templatePerguntaDTOList);
+        perguntaAssociadaWrapperList.add(perguntaAssociadaWrapper);
+    }
+
+    /**
+     * Método que serve para fazer a exibição dos topicos com perguntas associadas na tela de detalhar.
+     * @param perguntaAssociadaWrapperList perguntaAssociadaWrapperList
+     */
+    public void detail(List<PerguntaAssociadaWrapper> perguntaAssociadaWrapperList){
+        for(TemplateTopicoDTO templateTopicoDTO : this.getTemplateTopicoDTOList()){
+            this.initDetail(perguntaAssociadaWrapperList, templateTopicoDTO);
+        }
     }
 
     /**

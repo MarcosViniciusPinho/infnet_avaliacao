@@ -6,9 +6,6 @@ import com.infnet.avaliacao.controller.util.ActionConstant;
 import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.controller.wrapper.PerguntaAssociadaWrapper;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
-import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoTopicoPerguntaDTO;
-import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
-import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
 import com.infnet.avaliacao.exception.ExecutionException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -147,23 +144,7 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
     private void onDetail(Long id, Model model){
         TemplateAvaliacaoDTO templateAvaliacaoDTO = this.templateAvaliacaoFacade.findById(id);
         List<PerguntaAssociadaWrapper> perguntaAssociadaWrapperList = new ArrayList<>();
-        PerguntaAssociadaWrapper perguntaAssociadaWrapper;
-        for(TemplateTopicoDTO templateTopicoDTO : templateAvaliacaoDTO.getTemplateTopicoDTOList()){
-            perguntaAssociadaWrapper = new PerguntaAssociadaWrapper();
-            perguntaAssociadaWrapper.setTemplateTopicoDTO(templateTopicoDTO);
-            List<TemplatePerguntaDTO> templatePerguntaDTOList = new ArrayList<>();
-            for(TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO : templateTopicoDTO.getTemplateAvaliacaoTopicoPerguntaDTOList()){
-                if(templateAvaliacaoTopicoPerguntaDTO.isAtivo()
-                        && templateTopicoDTO.getId().equals(templateAvaliacaoTopicoPerguntaDTO.getTemplateTopico().getId())
-                        && templateAvaliacaoDTO.getId().equals(templateAvaliacaoTopicoPerguntaDTO.getTemplateAvaliacao().getId())){
-                    templatePerguntaDTOList.add(
-                            TemplatePerguntaDTO.toDto(
-                                    templateAvaliacaoTopicoPerguntaDTO.getTemplatePergunta()));
-                }
-            }
-            perguntaAssociadaWrapper.setTemplatePerguntaDTOList(templatePerguntaDTOList);
-            perguntaAssociadaWrapperList.add(perguntaAssociadaWrapper);
-        }
+        templateAvaliacaoDTO.detail(perguntaAssociadaWrapperList);
         model.addAttribute(templateAvaliacaoDTO);
         model.addAttribute(perguntaAssociadaWrapperList);
         this.onLoadView(model);
