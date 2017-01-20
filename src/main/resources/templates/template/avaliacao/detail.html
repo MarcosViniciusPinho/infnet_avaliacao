@@ -57,9 +57,9 @@
                                     </div>
                                     <div class="col-sm-12">&nbsp;</div>
                                     <div class="col-sm-12">
-                                        <span th:each="templateTopico : ${templateAvaliacaoDTO.templateTopicoDTOList}">
-                                            <strong><span th:text="${templateTopico.enunciado}"></span>:</strong>
-                                            <span th:each="templatePergunta,status : ${templateTopico.templatePerguntaDTOList}">
+                                        <span th:each="wrapper : ${perguntaAssociadaWrapperList}">
+                                            <strong><span th:text="${wrapper.templateTopicoDTO.enunciado}"></span>:</strong>
+                                            <span th:each="templatePergunta,status : ${wrapper.templatePerguntaDTOList}">
                                                 <div class="col-sm-12">
                                                     <span th:text="${status.count + '.' }"></span>
                                                     <span th:text="${templatePergunta.questao}"></span>

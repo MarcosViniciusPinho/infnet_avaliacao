@@ -51,6 +51,7 @@ public class TemplateAvaliacaoTopicoPerguntaDTO implements IDTO<TemplateAvaliaca
         templateAvaliacaoTopicoPerguntaDTO.setTemplateAvaliacao(templateAvaliacaoTopicoPergunta.getTemplateAvaliacao());
         templateAvaliacaoTopicoPerguntaDTO.setTemplateTopico(templateAvaliacaoTopicoPergunta.getTemplateTopico());
         templateAvaliacaoTopicoPerguntaDTO.setTemplatePergunta(templateAvaliacaoTopicoPergunta.getTemplatePergunta());
+        templateAvaliacaoTopicoPerguntaDTO.setAtivo(templateAvaliacaoTopicoPergunta.isAtivo());
         return templateAvaliacaoTopicoPerguntaDTO;
     }
 

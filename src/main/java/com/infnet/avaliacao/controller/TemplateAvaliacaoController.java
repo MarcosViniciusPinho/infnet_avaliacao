@@ -4,7 +4,11 @@ import com.infnet.avaliacao.business.facade.ITemplateAvaliacaoFacade;
 import com.infnet.avaliacao.business.facade.ITemplateTopicoFacade;
 import com.infnet.avaliacao.controller.util.ActionConstant;
 import com.infnet.avaliacao.controller.util.PathConstant;
+import com.infnet.avaliacao.controller.wrapper.PerguntaAssociadaWrapper;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
+import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoTopicoPerguntaDTO;
+import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
+import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
 import com.infnet.avaliacao.exception.ExecutionException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -108,7 +113,7 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      */
     @RequestMapping(value = ActionConstant.ACTION_ERROR)
     public String prepareError(@PathVariable Long id, Model model){
-        this.onErrorOrDetail(id, model);
+        this.onError(id, model);
         return getViewForm();
     }
 
@@ -120,17 +125,47 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      */
     @RequestMapping(value = ActionConstant.ACTION_DETAIL)
     public String prepareDetail(@PathVariable Long id, Model model){
-        this.onErrorOrDetail(id, model);
+        this.onDetail(id, model);
         return getViewDetail();
     }
 
     /**
-     * Método usado para quando houver uma exceção na tela de form e também reaproveitado para ser usado no momento de detalhar.
+     * Método usado para quando houver uma exceção na tela de form.
      * @param id id
      * @param model model
      */
-    private void onErrorOrDetail(Long id, Model model){
+    private void onError(Long id, Model model){
         model.addAttribute(this.templateAvaliacaoFacade.findById(id));
+        this.onLoadView(model);
+    }
+
+    /**
+     * Método usado o momento de detalhar a avaliação.
+     * @param id id
+     * @param model model
+     */
+    private void onDetail(Long id, Model model){
+        TemplateAvaliacaoDTO templateAvaliacaoDTO = this.templateAvaliacaoFacade.findById(id);
+        List<PerguntaAssociadaWrapper> perguntaAssociadaWrapperList = new ArrayList<>();
+        PerguntaAssociadaWrapper perguntaAssociadaWrapper;
+        for(TemplateTopicoDTO templateTopicoDTO : templateAvaliacaoDTO.getTemplateTopicoDTOList()){
+            perguntaAssociadaWrapper = new PerguntaAssociadaWrapper();
+            perguntaAssociadaWrapper.setTemplateTopicoDTO(templateTopicoDTO);
+            List<TemplatePerguntaDTO> templatePerguntaDTOList = new ArrayList<>();
+            for(TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO : templateTopicoDTO.getTemplateAvaliacaoTopicoPerguntaDTOList()){
+                if(templateAvaliacaoTopicoPerguntaDTO.isAtivo()
+                        && templateTopicoDTO.getId().equals(templateAvaliacaoTopicoPerguntaDTO.getTemplateTopico().getId())
+                        && templateAvaliacaoDTO.getId().equals(templateAvaliacaoTopicoPerguntaDTO.getTemplateAvaliacao().getId())){
+                    templatePerguntaDTOList.add(
+                            TemplatePerguntaDTO.toDto(
+                                    templateAvaliacaoTopicoPerguntaDTO.getTemplatePergunta()));
+                }
+            }
+            perguntaAssociadaWrapper.setTemplatePerguntaDTOList(templatePerguntaDTOList);
+            perguntaAssociadaWrapperList.add(perguntaAssociadaWrapper);
+        }
+        model.addAttribute(templateAvaliacaoDTO);
+        model.addAttribute(perguntaAssociadaWrapperList);
         this.onLoadView(model);
     }
 
