@@ -5,6 +5,7 @@ import com.infnet.avaliacao.business.facade.ITemplateTopicoFacade;
 import com.infnet.avaliacao.controller.util.ActionConstant;
 import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
+import com.infnet.avaliacao.exception.ExecutionException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,13 +33,18 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
     private ITemplateTopicoFacade templateTopicoFacade;
 
     /**
-     * {@inheritDoc}
+     * Método que faz a listagem dos registros na tela.
+     * @return ModelAndView
      */
-    @Override
-    protected ModelAndView onList(){
-        ModelAndView mv = new ModelAndView(getViewList());
-        mv.addObject(LISTAR_TEMPLATE_AVALIACAO, this.templateAvaliacaoFacade.findAll());
-        return mv;
+    @RequestMapping(value = ActionConstant.ACTION_LIST)
+    public ModelAndView list(){
+        try {
+            ModelAndView mv = new ModelAndView(getViewList());
+            mv.addObject(LISTAR_TEMPLATE_AVALIACAO, this.templateAvaliacaoFacade.findAll());
+            return mv;
+        } catch (RuntimeException ex) {
+            throw new ExecutionException(ex);
+        }
     }
 
     /**

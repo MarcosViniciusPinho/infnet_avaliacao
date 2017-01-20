@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
@@ -35,16 +34,6 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
 
     @Resource
     private ITemplateAvaliacaoFacade templateAvaliacaoFacade;
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected ModelAndView onList(){
-        ModelAndView mv = new ModelAndView(getViewList());
-        mv.addObject(LISTAR_TEMPLATE_PERGUNTA, this.templatePerguntaFacade.findAll());
-        return mv;
-    }
 
     /**
      * {@inheritDoc}

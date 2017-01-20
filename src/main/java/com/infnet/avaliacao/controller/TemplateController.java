@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * Classe responsável por executar o comportamento padrão do módulo de templates da aplicação.
  * @param <V> dto
  */
-public abstract class TemplateController<V> extends CrudController<V>{
+public abstract class TemplateController<V> extends InitController<V> {
 
     /**
      * Houve necessidade de reimplementação do método pois o comportamento de montar avaliação é diferente do padrão adotado.

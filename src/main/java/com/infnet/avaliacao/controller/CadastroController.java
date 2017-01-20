@@ -7,13 +7,34 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Classe responsável por executar o comportamento padrão do módulo cadastro da aplicação.
  * @param <V> dto
  */
-public abstract class CadastroController<V> extends CrudController<V>{
+public abstract class CadastroController<V> extends InitController<V> {
+
+
+    /**
+     * Método que faz a listagem dos registros na tela.
+     * @return ModelAndView
+     */
+    @RequestMapping(value = ActionConstant.ACTION_LIST)
+    public ModelAndView list(){
+        try {
+            return this.onList();
+        } catch (RuntimeException ex) {
+            throw new ExecutionException(ex);
+        }
+    }
+
+    /**
+     * Método responsável de montar as informacoes no grid da tela e que deve ser implementado nas subclasses.
+     * @return ModelAndView
+     */
+    protected abstract ModelAndView onList();
 
     /**
      * Método que salva/altera uma entidade.
@@ -98,5 +119,13 @@ public abstract class CadastroController<V> extends CrudController<V>{
      * @return String
      */
     protected abstract String onPrepareUpdateOrDetail(String view, Long id, Model model);
+
+    /**
+     * Método que redireciona para listagem dos registros com redirect
+     * @return String
+     */
+    protected String getRedirectViewList(){
+        return REDIRECT_LIST + getPathView() + ActionConstant.ACTION_LIST;
+    }
 
 }
