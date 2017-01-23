@@ -22,6 +22,14 @@ public class Avaliacao implements Serializable {
     @OneToMany(mappedBy = "avaliacao", cascade = CascadeType.ALL)
     private List<Resposta> respostaList;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_turma", nullable = false)
+    private Turma turma;
+
+    @OneToOne
+    @JoinColumn(name = "id_aluno", nullable = false)
+    private Aluno aluno;
+
     public Long getId() {
         return id;
     }
@@ -44,6 +52,22 @@ public class Avaliacao implements Serializable {
 
     public void setRespostaList(List<Resposta> respostaList) {
         this.respostaList = respostaList;
+    }
+
+    public Turma getTurma() {
+        return turma;
+    }
+
+    public void setTurma(Turma turma) {
+        this.turma = turma;
+    }
+
+    public Aluno getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
     }
 
     @Override

@@ -21,6 +21,10 @@ public class Resposta implements Serializable {
     @JoinColumn(name = "id_avaliacao", nullable = false)
     private Avaliacao avaliacao;
 
+    @OneToOne
+    @JoinColumn(name = "id_template_pergunta", nullable = false)
+    private TemplatePergunta templatePergunta;
+
     public Long getId() {
         return id;
     }
@@ -43,6 +47,14 @@ public class Resposta implements Serializable {
 
     public void setAvaliacao(Avaliacao avaliacao) {
         this.avaliacao = avaliacao;
+    }
+
+    public TemplatePergunta getTemplatePergunta() {
+        return templatePergunta;
+    }
+
+    public void setTemplatePergunta(TemplatePergunta templatePergunta) {
+        this.templatePergunta = templatePergunta;
     }
 
     @Override
