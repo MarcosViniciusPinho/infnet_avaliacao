@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.infnet</groupId>
-	<artifactId>avaliacao</artifactId>
+	<artifactId>sai</artifactId>
 	<version>0.1.0</version>
 	<packaging>war</packaging>
 
-	<name>avaliacao</name>
+	<name>sai</name>
 	<description>Projeto de TCC que representa o sistema de avaliação da infnet</description>
 
 	<parent>
