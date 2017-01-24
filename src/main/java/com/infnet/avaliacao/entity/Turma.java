@@ -2,6 +2,7 @@ package com.infnet.avaliacao.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "turma")
@@ -17,6 +18,9 @@ public class Turma implements Serializable {
     @Column(name = "numero", length = 20, nullable = false)
     private String numero;
 
+    @OneToMany(mappedBy = "turma", cascade = CascadeType.ALL)
+    private List<Avaliacao> avaliacaoList;
+
     public Long getId() {
         return id;
     }
@@ -31,6 +35,14 @@ public class Turma implements Serializable {
 
     public void setNumero(String numero) {
         this.numero = numero;
+    }
+
+    public List<Avaliacao> getAvaliacaoList() {
+        return avaliacaoList;
+    }
+
+    public void setAvaliacaoList(List<Avaliacao> avaliacaoList) {
+        this.avaliacaoList = avaliacaoList;
     }
 
     @Override
