@@ -21,12 +21,6 @@ public interface ICrudService<V, T> {
     T findById(Long id);
 
     /**
-     * Método que exclui uma entidade do banco.
-     * @param id id
-     */
-    void delete(Long id);
-
-    /**
      * Método que lista todos os registros no banco
      * @return List<T>
      */

@@ -64,13 +64,20 @@ public abstract class CadastroController<V> extends InitController<V> {
     @RequestMapping(value = ActionConstant.ACTION_DELETE, method = RequestMethod.POST)
     public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes){
         try {
-            this.getFacade().delete(id);
+            this.onDelete(id);
             redirectAttributes.addFlashAttribute(MessageConstant.SUCESS, MessageConstant.MENSAGEM_SUCESSO);
             return this.getRedirectViewList();
         } catch (RuntimeException ex) {
             throw new ExecutionException(ex);
         }
     }
+
+    /**
+     * Método precisou ser criado pois o método de delete deixou de ser genérico e os módulos que precisarem da funcionalidade excluir
+     * deverão implementar este método e chamar o delete atraves de seus respectivos facades.
+     * @param id id
+     */
+    protected abstract void onDelete(Long id);
 
     /**
      * Método que redireciona o usuário para a tela de cadastrar.

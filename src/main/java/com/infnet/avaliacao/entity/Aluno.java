@@ -18,10 +18,10 @@ public class Aluno implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "email", length = 120, nullable = false)
+    @Column(name = "email", length = 120, nullable = false, unique = true)
     private String email;
 
-    @Column(name = "cpf", length = 11, nullable = false, unique = true)
+    @Column(name = "cpf", length = 12, nullable = false, unique = true)
     private Long cpf;
 
     @Column(name = "nome", length = 100, nullable = false)
@@ -63,8 +63,8 @@ public class Aluno implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Aluno usuario = (Aluno) o;
-        return id != null ? !id.equals(usuario.id) : usuario.id != null;
+        Aluno aluno = (Aluno) o;
+        return id != null ? !id.equals(aluno.id) : aluno.id != null;
     }
 
     @Override

@@ -41,10 +41,10 @@ select 9 , 'br@gmail.com', 54673892098, 'bruno';
 
 --TURMA
 insert into turma(id, id_modulo, id_professor, numero, data_termino)
-select 1, 1, 1, 1, '2016-04-11 00:00:00' union all
-select 2, 2, 2, 2, '2016-11-20 00:00:00' union all
-select 3, 3, 3, 3, '2017-03-25 00:00:00' union all
-select 4, 4, 1, 4, '2017-09-15 00:00:00';
+select 1, 1, 1, 1001, '2016-04-11 00:00:00' union all
+select 2, 2, 2, 2002, '2016-11-20 00:00:00' union all
+select 3, 3, 3, 3003, '2017-03-25 00:00:00' union all
+select 4, 4, 1, 4004, '2017-09-15 00:00:00';
 
 --TURMA_ALUNO
 insert into turma_aluno(id_turma, id_aluno)

@@ -40,14 +40,6 @@ public class TemplateTopicoFacade implements ITemplateTopicoFacade {
      * {@inheritDoc}
      */
     @Override
-    public void delete(Long id) {
-        this.templateTopicoService.delete(id);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public TemplateTopicoDTO findById(Long id) {
         return TemplateTopicoDTO.toDto(this.templateTopicoService.findById(id));
     }

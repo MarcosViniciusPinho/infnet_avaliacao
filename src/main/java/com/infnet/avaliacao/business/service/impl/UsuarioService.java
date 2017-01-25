@@ -6,6 +6,7 @@ import com.infnet.avaliacao.entity.Usuario;
 import com.infnet.avaliacao.entity.domain.PerfilEnum;
 import com.infnet.avaliacao.exception.CampoObrigatorioException;
 import com.infnet.avaliacao.exception.UniqueException;
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import com.infnet.avaliacao.persistence.IUsuarioDAO;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,15 @@ public class UsuarioService extends CrudService<UsuarioDTO, Usuario> implements 
         if(usuario != null && usuarioDTO.toEntity().equals(usuario)){
             throw new UniqueException("usuario.mensagem.erro.login.unico");
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void delete(Long id) {
+        ParameterExceptionUtil.validateObjectNull(id);
+        this.usuarioDao.delete(id);
     }
 
 }

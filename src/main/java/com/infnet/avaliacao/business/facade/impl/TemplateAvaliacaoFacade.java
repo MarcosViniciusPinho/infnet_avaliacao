@@ -34,14 +34,6 @@ public class TemplateAvaliacaoFacade implements ITemplateAvaliacaoFacade {
      * {@inheritDoc}
      */
     @Override
-    public void delete(Long id) {
-        this.templateAvaliacaoService.delete(id);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public TemplateAvaliacaoDTO findById(Long id) {
         return TemplateAvaliacaoDTO.toDto(this.templateAvaliacaoService.findById(id));
     }

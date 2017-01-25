@@ -39,15 +39,6 @@ public class CrudService<V extends IDTO<T>, T> implements ICrudService<V, T>{
      * {@inheritDoc}
      */
     @Override
-    public void delete(Long id) {
-        ParameterExceptionUtil.validateObjectNull(id);
-        this.crudDAO.delete(id);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public List<T> findAll() {
         return this.crudDAO.findAll();
     }

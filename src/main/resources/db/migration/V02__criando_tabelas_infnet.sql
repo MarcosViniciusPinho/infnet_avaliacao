@@ -27,10 +27,12 @@ ALTER TABLE professor ADD CONSTRAINT pk_id_professor PRIMARY KEY (id);
 CREATE TABLE aluno(
   id BIGINT NOT NULL,
   email VARCHAR(120) NOT NULL,
-  cpf char(11) UNIQUE NOT NULL,
+  cpf BIGINT(12) NOT NULL,
   nome varchar(100) NOT NULL
 );
 ALTER TABLE aluno ADD CONSTRAINT pk_id_aluno PRIMARY KEY (id);
+ALTER TABLE aluno ADD CONSTRAINT un_cpf UNIQUE (cpf);
+ALTER TABLE aluno ADD CONSTRAINT un_email UNIQUE (email);
 
 --TURMA
 CREATE TABLE turma(

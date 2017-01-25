@@ -61,6 +61,14 @@ public class UsuarioController extends CadastroController<UsuarioDTO>{
      * {@inheritDoc}
      */
     @Override
+    protected void onDelete(Long id) {
+        this.getFacade().delete(id);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected void onLoadView(Model model){
         model.addAttribute(LISTAR_PERFIS, PerfilEnum.values());
     }

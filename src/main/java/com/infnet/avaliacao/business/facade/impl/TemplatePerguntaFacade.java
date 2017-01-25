@@ -41,14 +41,6 @@ public class TemplatePerguntaFacade implements ITemplatePerguntaFacade {
      * {@inheritDoc}
      */
     @Override
-    public void delete(Long id) {
-        this.templatePerguntaService.delete(id);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public TemplatePerguntaDTO findById(Long id) {
         return TemplatePerguntaDTO.toDto(this.templatePerguntaService.findById(id));
     }
