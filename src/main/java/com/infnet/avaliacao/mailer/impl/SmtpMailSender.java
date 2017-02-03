@@ -24,7 +24,7 @@ public class SmtpMailSender implements ISmtpMailSender{
      */
     @Override
     public void enviarEmail(String email) throws MessagingException {
-        String linkEmailAluno = "<a href='www.google.com'>Clique aqui</a>";
+        String linkEmailAluno = "<a href='http://localhost:8081/sai/resposta/avaliacao/aluno/10950811793/turma/5'>Clique aqui</a>";
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setSubject(ASSUNTO);
