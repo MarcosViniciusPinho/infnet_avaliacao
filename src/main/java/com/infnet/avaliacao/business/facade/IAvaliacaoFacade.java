@@ -15,4 +15,6 @@ public interface IAvaliacaoFacade {
 
     AvaliacaoDTO popularAlunoAndTurmaParaAvaliacao(Long cpf);
 
+    boolean isExisteCpf(Long cpf);
+
 }

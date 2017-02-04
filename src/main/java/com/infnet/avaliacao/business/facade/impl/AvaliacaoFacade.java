@@ -36,4 +36,8 @@ public class AvaliacaoFacade implements IAvaliacaoFacade {
         return avaliacaoDTO;
     }
 
+    public boolean isExisteCpf(Long cpf){
+        return this.alunoService.findByCpf(cpf) != null ? Boolean.TRUE : Boolean.FALSE;
+    }
+
 }
