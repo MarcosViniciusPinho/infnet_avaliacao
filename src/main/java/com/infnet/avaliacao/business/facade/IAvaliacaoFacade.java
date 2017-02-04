@@ -13,4 +13,6 @@ public interface IAvaliacaoFacade {
      */
     void save(AvaliacaoDTO avaliacaoDTO);
 
+    AvaliacaoDTO popularAlunoAndTurmaParaAvaliacao(Long cpf);
+
 }

@@ -3,6 +3,7 @@ package com.infnet.avaliacao.dto.impl;
 
 import com.infnet.avaliacao.dto.IDTO;
 import com.infnet.avaliacao.entity.Aluno;
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 
 public class AlunoDTO implements IDTO<Aluno> {
 
@@ -27,6 +28,21 @@ public class AlunoDTO implements IDTO<Aluno> {
         aluno.setCpf(this.getCpf());
         aluno.setEmail(this.getEmail());
         return aluno;
+    }
+
+    /**
+     * Método que converte uma entidade para um dto.
+     * @param aluno aluno
+     * @return AlunoDTO
+     */
+    public static AlunoDTO toDto(Aluno aluno){
+        ParameterExceptionUtil.validateObjectNull(aluno);
+        AlunoDTO alunoDTO = new AlunoDTO();
+        alunoDTO.setId(aluno.getId());
+        alunoDTO.setEmail(aluno.getEmail());
+        alunoDTO.setCpf(aluno.getCpf());
+        alunoDTO.setNome(aluno.getNome());
+        return alunoDTO;
     }
 
     /**

@@ -53,8 +53,9 @@ public class RespostaAvaliacaoController {
      */
     @RequestMapping(value = ActionConstant.ACTION_LINK_RESPONDER_AVALIACAO)
     public String prepareCreate(@PathVariable Long cpf, @PathVariable Long id, Model model){
-        this.onLoadView(model);
-        model.addAttribute(new AvaliacaoDTO());
+//        this.onLoadView(model);
+        AvaliacaoDTO avaliacaoDTO = this.getFacade().popularAlunoAndTurmaParaAvaliacao(cpf);
+        model.addAttribute(avaliacaoDTO);
         return getViewForm();
     }
 
