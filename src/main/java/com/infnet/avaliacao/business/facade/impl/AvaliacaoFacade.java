@@ -36,6 +36,7 @@ public class AvaliacaoFacade implements IAvaliacaoFacade {
 
     public AvaliacaoDTO popularAlunoAndTurmaParaAvaliacao(Long cpf, Long idTurma){
         AvaliacaoDTO avaliacaoDTO = new AvaliacaoDTO();
+        Long idTemplateAvaliacao = this.turmaService.findTemplateAvaliacaoTurmaById(idTurma);
         avaliacaoDTO.setAlunoDTO(
                 AlunoDTO.toDto(this.alunoService.findByCpf(cpf)));
         avaliacaoDTO.setTurmaDTO(

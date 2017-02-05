@@ -14,4 +14,6 @@ public interface ITurmaService {
      */
     Turma findById(Long id);
 
+    Long findTemplateAvaliacaoTurmaById(Long idTurma);
+
 }

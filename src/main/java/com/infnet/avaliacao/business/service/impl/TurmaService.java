@@ -23,4 +23,13 @@ public class TurmaService implements ITurmaService {
     public Turma findById(Long id) {
         return this.turmaDAO.getOne(id);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Long findTemplateAvaliacaoTurmaById(Long idTurma){
+        return this.turmaDAO.findByIdTurmaOnTemplateAvaliacaoTurma(idTurma);
+    }
+
 }
