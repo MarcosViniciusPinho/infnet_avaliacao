@@ -30,6 +30,18 @@ public class TurmaDTO implements IDTO<Turma> {
     }
 
     /**
+     * Método que converte uma entidade para um dto.
+     * @param turma turma
+     * @return TurmaDTO
+     */
+    public static TurmaDTO toDto(Turma turma){
+        TurmaDTO turmaDTO = new TurmaDTO();
+        turmaDTO.setId(turma.getId());
+        turmaDTO.setNumero(turma.getNumero());
+        return turmaDTO;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

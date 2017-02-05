@@ -56,7 +56,7 @@ public class RespostaAvaliacaoController {
 //        this.onLoadView(model);
         boolean existeCpfInformado = this.getFacade().isExisteCpf(cpf);
         if(existeCpfInformado){
-            AvaliacaoDTO avaliacaoDTO = this.getFacade().popularAlunoAndTurmaParaAvaliacao(cpf);
+            AvaliacaoDTO avaliacaoDTO = this.getFacade().popularAlunoAndTurmaParaAvaliacao(cpf, id);
             model.addAttribute(avaliacaoDTO);
         }
         return getViewForm();

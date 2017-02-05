@@ -13,7 +13,7 @@ public interface IAvaliacaoFacade {
      */
     void save(AvaliacaoDTO avaliacaoDTO);
 
-    AvaliacaoDTO popularAlunoAndTurmaParaAvaliacao(Long cpf);
+    AvaliacaoDTO popularAlunoAndTurmaParaAvaliacao(Long cpf, Long idTurma);
 
     boolean isExisteCpf(Long cpf);
 
