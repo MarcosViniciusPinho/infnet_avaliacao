@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layoutAvaliacao"
->
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <!--<title th:text="#{usuario}"></title>-->
@@ -11,7 +11,34 @@
 
 <body>
     <section layout:fragment="conteudoAvaliacao">
-        <h1>Teste!!</h1>
+        <div class="col-sm-12">
+            <span th:each="wrapper : ${perguntaAssociadaWrapperList}">
+                <h4 th:text="${wrapper.templateTopicoDTO.enunciado + ':'}"></h4>
+                <span th:each="templatePergunta,status : ${wrapper.templatePerguntaDTOList}">
+                    <div class="col-sm-12">
+                        <h4>
+                            <span th:text="${status.count + '.' }"></span>
+                            <span th:text="${templatePergunta.questao}"></span>
+                        </h4>
+                    </div>
+                    <div class="col-sm-12" th:if="${!#strings.contains(templatePergunta.questao, '?')}">
+                        <span th:each="multiplaEscolha : ${templatePergunta.multiplaEscolhaEnumList}">
+                            <div class="col-sm-4">
+                                <h4>
+                                    <input type="radio" th:value="${multiplaEscolha}"/>
+                                    <span th:text="#{${multiplaEscolha.id}}"></span>
+                                </h4>
+                            </div>
+                        </span>
+                        <div class="row">&nbsp;</div>
+                        <div class="row">&nbsp;</div>
+                    </div>
+                </span>
+                <div class="row">&nbsp;</div>
+                <div class="row">&nbsp;</div>
+            </span>
+
+        </div>
     </section>
 </body>
 </html>

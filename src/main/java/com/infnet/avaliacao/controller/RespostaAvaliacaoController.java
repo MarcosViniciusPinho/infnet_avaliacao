@@ -4,6 +4,7 @@ import com.infnet.avaliacao.business.facade.IAvaliacaoFacade;
 import com.infnet.avaliacao.controller.util.ActionConstant;
 import com.infnet.avaliacao.controller.util.MessageConstant;
 import com.infnet.avaliacao.controller.util.PathConstant;
+import com.infnet.avaliacao.controller.wrapper.PerguntaAssociadaWrapper;
 import com.infnet.avaliacao.dto.impl.AvaliacaoDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe responsável pela captura das informações na view.
@@ -58,6 +61,10 @@ public class RespostaAvaliacaoController {
         if(existeCpfInformado){
             AvaliacaoDTO avaliacaoDTO = this.getFacade().popularAlunoAndTurmaParaAvaliacao(cpf, id);
             model.addAttribute(avaliacaoDTO);
+
+            List<PerguntaAssociadaWrapper> perguntaAssociadaWrapperList = new ArrayList<>();
+            avaliacaoDTO.showNextTopicoComPergunta(perguntaAssociadaWrapperList);
+            model.addAttribute(perguntaAssociadaWrapperList);
         }
         return getViewForm();
     }

@@ -1,5 +1,6 @@
 package com.infnet.avaliacao.dto.impl;
 
+import com.infnet.avaliacao.controller.wrapper.PerguntaAssociadaWrapper;
 import com.infnet.avaliacao.dto.IDTO;
 import com.infnet.avaliacao.entity.Avaliacao;
 import org.apache.commons.collections.CollectionUtils;
@@ -49,6 +50,14 @@ public class AvaliacaoDTO implements IDTO<Avaliacao> {
             }
         }
         return lista;
+    }
+
+    public void showNextTopicoComPergunta(List<PerguntaAssociadaWrapper> perguntaAssociadaWrapperList){
+        if(this.getTemplateAvaliacaoDTO() != null
+                && CollectionUtils.isNotEmpty(this.getTemplateAvaliacaoDTO().getTemplateTopicoDTOList())){
+            TemplateTopicoDTO templateTopicoDTO = this.getTemplateAvaliacaoDTO().getTemplateTopicoDTOList().get(0);
+            this.getTemplateAvaliacaoDTO().init(perguntaAssociadaWrapperList, templateTopicoDTO);
+        }
     }
 
     /**

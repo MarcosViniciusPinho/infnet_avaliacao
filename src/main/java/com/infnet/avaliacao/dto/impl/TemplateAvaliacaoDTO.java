@@ -107,7 +107,7 @@ public class TemplateAvaliacaoDTO implements IDTO<TemplateAvaliacao> {
         }
     }
 
-    private void initDetail(List<PerguntaAssociadaWrapper> perguntaAssociadaWrapperList, TemplateTopicoDTO templateTopicoDTO){
+    protected void init(List<PerguntaAssociadaWrapper> perguntaAssociadaWrapperList, TemplateTopicoDTO templateTopicoDTO){
         PerguntaAssociadaWrapper perguntaAssociadaWrapper = new PerguntaAssociadaWrapper();
         perguntaAssociadaWrapper.setTemplateTopicoDTO(templateTopicoDTO);
         List<TemplatePerguntaDTO> templatePerguntaDTOList = new ArrayList<>();
@@ -122,7 +122,7 @@ public class TemplateAvaliacaoDTO implements IDTO<TemplateAvaliacao> {
      */
     public void detail(List<PerguntaAssociadaWrapper> perguntaAssociadaWrapperList){
         for(TemplateTopicoDTO templateTopicoDTO : this.getTemplateTopicoDTOList()){
-            this.initDetail(perguntaAssociadaWrapperList, templateTopicoDTO);
+            this.init(perguntaAssociadaWrapperList, templateTopicoDTO);
         }
     }
 
