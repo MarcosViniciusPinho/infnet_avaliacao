@@ -29,7 +29,7 @@
                             <span th:each="multiplaEscolha : ${templatePergunta.multiplaEscolhaEnumList}">
                                 <div class="col-sm-4">
                                     <h4>
-                                        <input type="radio" th:value="${multiplaEscolha}"/>
+                                        <input type="radio" th:value="${multiplaEscolha}" th:name="${status.count + 'radio'}"/>
                                         <span th:text="#{${multiplaEscolha.id}}"></span>
                                     </h4>
                                 </div>
