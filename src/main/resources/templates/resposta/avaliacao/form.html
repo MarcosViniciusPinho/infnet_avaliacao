@@ -37,13 +37,16 @@
                             <div class="row">&nbsp;</div>
                             <div class="row">&nbsp;</div>
                         </div>
+                        <div class="col-sm-12" th:if="${#strings.contains(templatePergunta.questao, '?')}">
+                            <textarea cols="150" rows="10"></textarea>
+                        </div>
                     </span>
                     <div class="row">&nbsp;</div>
                     <div class="row">&nbsp;</div>
                 </span>
+                <input id="proximo" type="submit" class="btn btn-primary" th:value="#{btn.proximo}" th:if="${exibirBotaoProximo}"/>
+                <input id="salvar" type="submit" class="btn btn-primary" th:value="#{btn.salvar}" th:if="${exibirBotaoSalvar}"/>
             </div>
-            <input id="proximo" type="submit" class="btn btn-primary" th:value="#{btn.proximo}" th:if="${exibirBotaoProximo}"/>
-            <input id="salvar" type="submit" class="btn btn-primary" th:value="#{btn.salvar}" th:if="${exibirBotaoSalvar}"/>
         </form>
     </section>
 </body>
