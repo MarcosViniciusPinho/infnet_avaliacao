@@ -22,6 +22,8 @@ public class AvaliacaoDTO implements IDTO<Avaliacao> {
 
     private AlunoDTO alunoDTO;
 
+    private int indiceTopico;
+
     /**
      * {@inheritDoc}
      */
@@ -52,10 +54,14 @@ public class AvaliacaoDTO implements IDTO<Avaliacao> {
         return lista;
     }
 
-    public void showNextTopicoComPergunta(List<PerguntaAssociadaWrapper> perguntaAssociadaWrapperList){
-        if(this.getTemplateAvaliacaoDTO() != null
-                && CollectionUtils.isNotEmpty(this.getTemplateAvaliacaoDTO().getTemplateTopicoDTOList())){
-            TemplateTopicoDTO templateTopicoDTO = this.getTemplateAvaliacaoDTO().getTemplateTopicoDTOList().get(0);
+    public boolean isExisteTemplateAvaliacaoAndTemplateTopico(){
+        return this.getTemplateAvaliacaoDTO() != null
+                && CollectionUtils.isNotEmpty(this.getTemplateAvaliacaoDTO().getTemplateTopicoDTOList());
+    }
+
+    public void showNextTopicoComPergunta(List<PerguntaAssociadaWrapper> perguntaAssociadaWrapperList, int posicao){
+        if(this.isExisteTemplateAvaliacaoAndTemplateTopico()){
+            TemplateTopicoDTO templateTopicoDTO = this.getTemplateAvaliacaoDTO().getTemplateTopicoDTOList().get(posicao);
             this.getTemplateAvaliacaoDTO().init(perguntaAssociadaWrapperList, templateTopicoDTO);
         }
     }
@@ -103,4 +109,13 @@ public class AvaliacaoDTO implements IDTO<Avaliacao> {
     public void setAlunoDTO(AlunoDTO alunoDTO) {
         this.alunoDTO = alunoDTO;
     }
+
+    public int getIndiceTopico() {
+        return indiceTopico;
+    }
+
+    public void setIndiceTopico(int indiceTopico) {
+        this.indiceTopico = indiceTopico;
+    }
+
 }
