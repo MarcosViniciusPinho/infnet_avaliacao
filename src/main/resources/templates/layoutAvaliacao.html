@@ -15,6 +15,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <script th:src="@{/js/avaliacao.min.js}"/>
     <script th:src="@{/js/infnet.min.js}"/>
+    <script th:src="@{/js/bloquearBotaoVoltarNavegador.js}"/>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -30,19 +31,32 @@
 
     <div id="page-content-wrapper">
         <div class="container-fluid">
+
+            <div id="msgAviso" style="display:none;">
+                <span style="color: red" th:text="#{erro.btn.voltar.navegador}"></span>
+            </div>
+
             <div class="col-lg-12"> &nbsp; </div>
             <img id="logo" alt="Infnet" th:src="@{/images/imagem_avaliacao.png}"/>
 
             <div class="col-lg-12"> &nbsp; </div>
             <div th:if="${avaliacaoDTO ne null}">
                 <div class="col-sm-6">
-                    <h3> Aluno: <span th:text="${avaliacaoDTO.alunoDTO.nome}"></span></h3>
+                    <h3>
+                        <span th:text="#{avaliacao.label.modulo}"></span>:
+                        <span th:text="${avaliacaoDTO.alunoDTO.nome}"></span>
+                    </h3>
                 </div>
                 <div class="col-sm-6">
-                    <h3> CPF: <span th:text="${avaliacaoDTO.alunoDTO.cpf}"></span></h3>
+                    <h3>
+                        <span th:text="#{avaliacao.label.cpf}"></span>:
+                        <span th:text="${avaliacaoDTO.alunoDTO.cpf}"></span>
+                    </h3>
                 </div>
                 <div class="col-sm-12">
-                    <h3> Módulo: </h3>
+                    <h3>
+                        <span th:text="#{avaliacao.label.modulo}"></span>:
+                    </h3>
                 </div>
 
                 <div class="col-sm-12">
