@@ -26,6 +26,8 @@ public class RespostaAvaliacaoController {
 
     private static final String VIEW_FORM = "/form";
     private static final String VIEW_AGRADECIMENTO = "/agradecimento";
+    private static final String EXIBIR_BOTAO_PROXIMO = "exibirBotaoProximo";
+    private static final String EXIBIR_BOTAO_SALVAR = "exibirBotaoSalvar";
 
     @Resource
     private IAvaliacaoFacade avaliacaoFacade;
@@ -41,7 +43,7 @@ public class RespostaAvaliacaoController {
         try{
             AvaliacaoDTO avaliacaoDTO = this.getFacade().popularAlunoAndTurmaParaAvaliacao(dto.getAlunoDTO().getCpf(),
                     dto.getTurmaDTO().getId());
-            avaliacaoDTO.setIndiceTopico(dto.getIndiceTopico());
+            this.onForm(dto, avaliacaoDTO, model);
             if(this.isVerificarIndiceAtualComTamanhoTotalDaListaDeTopico(avaliacaoDTO)){
                 this.buscarProximoTopicoComPerguntas(avaliacaoDTO, model);
             } else{
@@ -54,6 +56,14 @@ public class RespostaAvaliacaoController {
             this.onLoadView(model);
         }
         return getViewForm();
+    }
+
+    private void onForm(AvaliacaoDTO dto, AvaliacaoDTO avaliacaoDTO, Model model){
+        avaliacaoDTO.setIndiceTopico(dto.getIndiceTopico());
+        avaliacaoDTO.setTotalTemplateTopicos(avaliacaoDTO.getTemplateAvaliacaoDTO().getTemplateTopicoDTOList().size());
+        int calculoParaBotaoProximo = (avaliacaoDTO.getTotalTemplateTopicos()-1) - avaliacaoDTO.getIndiceTopico();
+        model.addAttribute(EXIBIR_BOTAO_PROXIMO, calculoParaBotaoProximo > 0);
+        model.addAttribute(EXIBIR_BOTAO_SALVAR, calculoParaBotaoProximo == 0);
     }
 
     /**
@@ -70,12 +80,14 @@ public class RespostaAvaliacaoController {
             model.addAttribute(avaliacaoDTO);
             this.recuperarTopicoComPerguntas(avaliacaoDTO, model);
         }
+        model.addAttribute(EXIBIR_BOTAO_PROXIMO, Boolean.TRUE);
+        model.addAttribute(EXIBIR_BOTAO_SALVAR, Boolean.FALSE);
         return getViewForm();
     }
 
     private boolean isVerificarIndiceAtualComTamanhoTotalDaListaDeTopico(AvaliacaoDTO avaliacaoDTO){
         return avaliacaoDTO.isExisteTemplateAvaliacaoAndTemplateTopico() &&
-                avaliacaoDTO.getTemplateAvaliacaoDTO().getTemplateTopicoDTOList().size() > avaliacaoDTO.getIndiceTopico();
+                avaliacaoDTO.isExisteProximoTopico();
     }
 
     private void buscarProximoTopicoComPerguntas(AvaliacaoDTO avaliacaoDTO, Model model){

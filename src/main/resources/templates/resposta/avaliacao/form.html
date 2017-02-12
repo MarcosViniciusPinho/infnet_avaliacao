@@ -42,7 +42,8 @@
                     <div class="row">&nbsp;</div>
                 </span>
             </div>
-            <input id="salvar" type="submit" class="btn btn-primary" th:value="#{btn.salvar}"/>
+            <input id="proximo" type="submit" class="btn btn-primary" th:value="#{btn.proximo}" th:if="${exibirBotaoProximo}"/>
+            <input id="salvar" type="submit" class="btn btn-primary" th:value="#{btn.salvar}" th:if="${exibirBotaoSalvar}"/>
         </form>
     </section>
 </body>

@@ -24,6 +24,8 @@ public class AvaliacaoDTO implements IDTO<Avaliacao> {
 
     private int indiceTopico;
 
+    private int totalTemplateTopicos;
+
     /**
      * {@inheritDoc}
      */
@@ -64,6 +66,10 @@ public class AvaliacaoDTO implements IDTO<Avaliacao> {
             TemplateTopicoDTO templateTopicoDTO = this.getTemplateAvaliacaoDTO().getTemplateTopicoDTOList().get(posicao);
             this.getTemplateAvaliacaoDTO().init(perguntaAssociadaWrapperList, templateTopicoDTO);
         }
+    }
+
+    public boolean isExisteProximoTopico(){
+        return this.getTemplateAvaliacaoDTO().getTemplateTopicoDTOList().size() > this.getIndiceTopico();
     }
 
     /**
@@ -118,4 +124,11 @@ public class AvaliacaoDTO implements IDTO<Avaliacao> {
         this.indiceTopico = indiceTopico;
     }
 
+    public int getTotalTemplateTopicos() {
+        return totalTemplateTopicos;
+    }
+
+    public void setTotalTemplateTopicos(int totalTemplateTopicos) {
+        this.totalTemplateTopicos = totalTemplateTopicos;
+    }
 }
