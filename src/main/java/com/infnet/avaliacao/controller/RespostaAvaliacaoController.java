@@ -32,21 +32,28 @@ public class RespostaAvaliacaoController {
 
     /**
      * Método que salva/altera uma entidade.
-     * @param avaliacaoDTO avaliacaoDTO
+     * @param dto dto
      * @param redirectAttributes redirectAttributes
      * @return String
      */
     @RequestMapping(value = ActionConstant.ACTION_SAVE, method = RequestMethod.POST)
-    public String save(AvaliacaoDTO avaliacaoDTO, RedirectAttributes redirectAttributes, Model model){
+    public String save(AvaliacaoDTO dto, RedirectAttributes redirectAttributes, Model model){
         try{
-            this.getFacade().save(avaliacaoDTO);
-            redirectAttributes.addFlashAttribute(MessageConstant.SUCESS, MessageConstant.MENSAGEM_SUCESSO);
-            return getViewAgradecimento();
+            AvaliacaoDTO avaliacaoDTO = this.getFacade().popularAlunoAndTurmaParaAvaliacao(dto.getAlunoDTO().getCpf(),
+                    dto.getTurmaDTO().getId());
+            avaliacaoDTO.setIndiceTopico(dto.getIndiceTopico());
+            if(this.isVerificarIndiceAtualComTamanhoTotalDaListaDeTopico(avaliacaoDTO)){
+                this.buscarProximoTopicoComPerguntas(avaliacaoDTO, model);
+            } else{
+                this.getFacade().save(avaliacaoDTO);
+                redirectAttributes.addFlashAttribute(MessageConstant.SUCESS, MessageConstant.MENSAGEM_SUCESSO);
+                return getViewAgradecimento();
+            }
         } catch (RuntimeException ex) {
             model.addAttribute(MessageConstant.ERROR, ex.getLocalizedMessage());
             this.onLoadView(model);
-            return getViewForm();
         }
+        return getViewForm();
     }
 
     /**
@@ -61,12 +68,26 @@ public class RespostaAvaliacaoController {
         if(existeCpfInformado){
             AvaliacaoDTO avaliacaoDTO = this.getFacade().popularAlunoAndTurmaParaAvaliacao(cpf, id);
             model.addAttribute(avaliacaoDTO);
-
-            List<PerguntaAssociadaWrapper> perguntaAssociadaWrapperList = new ArrayList<>();
-            avaliacaoDTO.showNextTopicoComPergunta(perguntaAssociadaWrapperList);
-            model.addAttribute(perguntaAssociadaWrapperList);
+            this.recuperarTopicoComPerguntas(avaliacaoDTO, model);
         }
         return getViewForm();
+    }
+
+    private boolean isVerificarIndiceAtualComTamanhoTotalDaListaDeTopico(AvaliacaoDTO avaliacaoDTO){
+        return avaliacaoDTO.isExisteTemplateAvaliacaoAndTemplateTopico() &&
+                avaliacaoDTO.getTemplateAvaliacaoDTO().getTemplateTopicoDTOList().size() > avaliacaoDTO.getIndiceTopico();
+    }
+
+    private void buscarProximoTopicoComPerguntas(AvaliacaoDTO avaliacaoDTO, Model model){
+        if(avaliacaoDTO.isExisteTemplateAvaliacaoAndTemplateTopico()){
+            this.recuperarTopicoComPerguntas(avaliacaoDTO, model);
+        }
+    }
+
+    private void recuperarTopicoComPerguntas(AvaliacaoDTO avaliacaoDTO, Model model){
+        List<PerguntaAssociadaWrapper> perguntaAssociadaWrapperList = new ArrayList<>();
+        avaliacaoDTO.showNextTopicoComPergunta(perguntaAssociadaWrapperList, avaliacaoDTO.getIndiceTopico());
+        model.addAttribute(perguntaAssociadaWrapperList);
     }
 
     /**

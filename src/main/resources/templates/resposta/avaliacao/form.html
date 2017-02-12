@@ -5,40 +5,45 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <!--<title th:text="#{usuario}"></title>-->
-    <!--<script th:src="@{/js/cadastro/usuario/form.js}"/>-->
+    <script th:src="@{/js/resposta/avaliacao/form.js}"/>
 </head>
 
 <body>
     <section layout:fragment="conteudoAvaliacao">
-        <div class="col-sm-12">
-            <span th:each="wrapper : ${perguntaAssociadaWrapperList}">
-                <h4 th:text="${wrapper.templateTopicoDTO.enunciado + ':'}"></h4>
-                <span th:each="templatePergunta,status : ${wrapper.templatePerguntaDTOList}">
-                    <div class="col-sm-12">
-                        <h4>
-                            <span th:text="${status.count + '.' }"></span>
-                            <span th:text="${templatePergunta.questao}"></span>
-                        </h4>
-                    </div>
-                    <div class="col-sm-12" th:if="${!#strings.contains(templatePergunta.questao, '?')}">
-                        <span th:each="multiplaEscolha : ${templatePergunta.multiplaEscolhaEnumList}">
-                            <div class="col-sm-4">
-                                <h4>
-                                    <input type="radio" th:value="${multiplaEscolha}"/>
-                                    <span th:text="#{${multiplaEscolha.id}}"></span>
-                                </h4>
-                            </div>
-                        </span>
-                        <div class="row">&nbsp;</div>
-                        <div class="row">&nbsp;</div>
-                    </div>
+        <form method="POST" th:action="@{/resposta/avaliacao/save}" th:object="${avaliacaoDTO}" id="form">
+            <input type="hidden" th:field="*{turmaDTO.id}"/>
+            <input type="hidden" th:field="*{alunoDTO.nome}"/>
+            <input type="hidden" th:field="*{alunoDTO.cpf}"/>
+            <input type="hidden" th:field="*{indiceTopico}" id="indiceTopico"/>
+            <div class="col-sm-12">
+                <span th:each="wrapper : ${perguntaAssociadaWrapperList}">
+                    <h4 th:text="${wrapper.templateTopicoDTO.enunciado + ':'}"></h4>
+                    <span th:each="templatePergunta,status : ${wrapper.templatePerguntaDTOList}">
+                        <div class="col-sm-12">
+                            <h4>
+                                <span th:text="${status.count + '.' }"></span>
+                                <span th:text="${templatePergunta.questao}"></span>
+                            </h4>
+                        </div>
+                        <div class="col-sm-12" th:if="${!#strings.contains(templatePergunta.questao, '?')}">
+                            <span th:each="multiplaEscolha : ${templatePergunta.multiplaEscolhaEnumList}">
+                                <div class="col-sm-4">
+                                    <h4>
+                                        <input type="radio" th:value="${multiplaEscolha}"/>
+                                        <span th:text="#{${multiplaEscolha.id}}"></span>
+                                    </h4>
+                                </div>
+                            </span>
+                            <div class="row">&nbsp;</div>
+                            <div class="row">&nbsp;</div>
+                        </div>
+                    </span>
+                    <div class="row">&nbsp;</div>
+                    <div class="row">&nbsp;</div>
                 </span>
-                <div class="row">&nbsp;</div>
-                <div class="row">&nbsp;</div>
-            </span>
-
-        </div>
+            </div>
+            <input id="salvar" type="submit" class="btn btn-primary" th:value="#{btn.salvar}"/>
+        </form>
     </section>
 </body>
 </html>
