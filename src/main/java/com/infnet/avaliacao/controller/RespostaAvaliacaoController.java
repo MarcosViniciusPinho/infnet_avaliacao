@@ -61,6 +61,7 @@ public class RespostaAvaliacaoController {
     private void onForm(AvaliacaoDTO dto, AvaliacaoDTO avaliacaoDTO, Model model){
         avaliacaoDTO.setIndiceTopico(dto.getIndiceTopico());
         avaliacaoDTO.setTotalTemplateTopicos(avaliacaoDTO.getTemplateAvaliacaoDTO().getTemplateTopicoDTOList().size());
+        avaliacaoDTO.setRespostasSelecionadasComPerguntas(dto.getRespostasSelecionadasComPerguntas());
         int calculoParaBotaoProximo = (avaliacaoDTO.getTotalTemplateTopicos()-1) - avaliacaoDTO.getIndiceTopico();
         model.addAttribute(EXIBIR_BOTAO_PROXIMO, calculoParaBotaoProximo > 0);
         model.addAttribute(EXIBIR_BOTAO_SALVAR, calculoParaBotaoProximo == 0);

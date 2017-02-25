@@ -26,6 +26,8 @@ public class AvaliacaoDTO implements IDTO<Avaliacao> {
 
     private int totalTemplateTopicos;
 
+    private List<String> respostasSelecionadasComPerguntas;
+
     /**
      * {@inheritDoc}
      */
@@ -130,5 +132,13 @@ public class AvaliacaoDTO implements IDTO<Avaliacao> {
 
     public void setTotalTemplateTopicos(int totalTemplateTopicos) {
         this.totalTemplateTopicos = totalTemplateTopicos;
+    }
+
+    public List<String> getRespostasSelecionadasComPerguntas() {
+        return respostasSelecionadasComPerguntas;
+    }
+
+    public void setRespostasSelecionadasComPerguntas(List<String> respostasSelecionadasComPerguntas) {
+        this.respostasSelecionadasComPerguntas = respostasSelecionadasComPerguntas;
     }
 }

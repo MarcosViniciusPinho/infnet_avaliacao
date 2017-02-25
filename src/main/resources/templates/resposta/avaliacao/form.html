@@ -29,7 +29,7 @@
                             <span th:each="multiplaEscolha : ${templatePergunta.multiplaEscolhaEnumList}">
                                 <div class="col-sm-4">
                                     <h4>
-                                        <input type="radio" th:value="${multiplaEscolha}" th:name="${status.count + 'radio'}"/>
+                                        <input type="radio" th:value="#{${multiplaEscolha.id}} +'-'+ ${templatePergunta.id}" th:name="${status.count + 'radio'}"/>
                                         <span th:text="#{${multiplaEscolha.id}}"></span>
                                     </h4>
                                 </div>
@@ -43,7 +43,9 @@
                     </span>
                     <div class="row">&nbsp;</div>
                     <div class="row">&nbsp;</div>
+                    <input type="hidden" th:value="${#lists.size(wrapper.templatePerguntaDTOList)}" id="totalPerguntas"/>
                 </span>
+                <input type="hidden" th:field="*{respostasSelecionadasComPerguntas}" id="respostasSelecionadasComPerguntas"/>
                 <input id="proximo" type="submit" class="btn btn-primary" th:value="#{btn.proximo}" th:if="${exibirBotaoProximo}"/>
                 <input id="salvar" type="submit" class="btn btn-primary" th:value="#{btn.salvar}" th:if="${exibirBotaoSalvar}"/>
             </div>
