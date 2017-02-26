@@ -35,7 +35,7 @@ public class TemplateAvaliacao implements Serializable {
     })
     private List<Turma> turmaList = new ArrayList<>(0);
 
-    @OneToMany(mappedBy = "templateAvaliacao", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "templateAvaliacao")
     private List<Avaliacao> avaliacaoList;
 
     public Long getId() {

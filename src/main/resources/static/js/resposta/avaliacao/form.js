@@ -1,11 +1,16 @@
 $(document).ready(function () {
+    clicarEmProximoOuSalvar("#proximo");
+    clicarEmProximoOuSalvar("#salvar");
+});
+
+function clicarEmProximoOuSalvar(elemento){
     var proximoIndiceTopico = $('#indiceTopico').val();
-    $("#proximo").click(function() {
+    $(elemento).click(function() {
         proximoIndiceTopico++;
         $('#indiceTopico').val(proximoIndiceTopico);
         addConteudoDaLista();
     });
-});
+}
 
 function addConteudoDaLista() {
     var totalPerguntas = $('#totalPerguntas').val();

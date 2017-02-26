@@ -74,6 +74,10 @@ public class AvaliacaoDTO implements IDTO<Avaliacao> {
         return this.getTemplateAvaliacaoDTO().getTemplateTopicoDTOList().size() > this.getIndiceTopico();
     }
 
+    public String[] getRespostasAndPerguntasSeparados(String respostaComPerguntaAssociada){
+        return respostaComPerguntaAssociada.split("-");
+    }
+
     /**
      * {@inheritDoc}
      */

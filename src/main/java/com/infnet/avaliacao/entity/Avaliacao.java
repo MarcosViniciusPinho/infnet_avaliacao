@@ -15,14 +15,14 @@ public class Avaliacao implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_template_avaliacao", nullable = false)
     private TemplateAvaliacao templateAvaliacao;
 
     @OneToMany(mappedBy = "avaliacao", cascade = CascadeType.ALL)
     private List<Resposta> respostaList;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_turma", nullable = false)
     private Turma turma;
 

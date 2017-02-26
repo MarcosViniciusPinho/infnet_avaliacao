@@ -1,6 +1,7 @@
 package com.infnet.avaliacao.dto.impl;
 
 import com.infnet.avaliacao.dto.IDTO;
+import com.infnet.avaliacao.entity.Avaliacao;
 import com.infnet.avaliacao.entity.Resposta;
 import org.apache.commons.collections.CollectionUtils;
 
@@ -15,7 +16,7 @@ public class RespostaDTO implements IDTO<Resposta> {
 
     private String valor;
 
-    private AvaliacaoDTO avaliacaoDTO;
+    private Avaliacao avaliacao;
 
     private TemplatePerguntaDTO templatePerguntaDTO;
 
@@ -27,8 +28,7 @@ public class RespostaDTO implements IDTO<Resposta> {
         Resposta resposta = new Resposta();
         resposta.setId(this.getId());
         resposta.setValor(this.getValor());
-        resposta.setAvaliacao(
-                this.getAvaliacaoDTO().toEntity());
+        resposta.setAvaliacao(this.getAvaliacao());
         resposta.setTemplatePergunta(
                 this.getTemplatePerguntaDTO().toEntity());
         return resposta;
@@ -69,12 +69,12 @@ public class RespostaDTO implements IDTO<Resposta> {
         this.valor = valor;
     }
 
-    public AvaliacaoDTO getAvaliacaoDTO() {
-        return avaliacaoDTO;
+    public Avaliacao getAvaliacao() {
+        return avaliacao;
     }
 
-    public void setAvaliacaoDTO(AvaliacaoDTO avaliacaoDTO) {
-        this.avaliacaoDTO = avaliacaoDTO;
+    public void setAvaliacao(Avaliacao avaliacao) {
+        this.avaliacao = avaliacao;
     }
 
     public TemplatePerguntaDTO getTemplatePerguntaDTO() {

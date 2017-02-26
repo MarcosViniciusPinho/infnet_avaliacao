@@ -18,7 +18,7 @@ public class Turma implements Serializable {
     @Column(name = "numero", length = 20, nullable = false)
     private String numero;
 
-    @OneToMany(mappedBy = "turma", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "turma")
     private List<Avaliacao> avaliacaoList;
 
     public Long getId() {
