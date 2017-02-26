@@ -3,6 +3,7 @@ package com.infnet.avaliacao.dto.impl;
 import com.infnet.avaliacao.controller.wrapper.PerguntaAssociadaWrapper;
 import com.infnet.avaliacao.dto.IDTO;
 import com.infnet.avaliacao.entity.Avaliacao;
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.apache.commons.collections.CollectionUtils;
 
 import java.util.ArrayList;
@@ -44,6 +45,28 @@ public class AvaliacaoDTO implements IDTO<Avaliacao> {
     }
 
     /**
+     * Método que converte uma entidade para um dto.
+     * @param avaliacao avaliacao
+     * @return AvaliacaoDTO
+     */
+    public static AvaliacaoDTO toDto(Avaliacao avaliacao){
+        ParameterExceptionUtil.validateObjectNull(avaliacao);
+        AvaliacaoDTO avaliacaoDTO = new AvaliacaoDTO();
+        avaliacaoDTO.setId(avaliacao.getId());
+        avaliacaoDTO.setTemplateAvaliacaoDTO(
+                TemplateAvaliacaoDTO.toDto(avaliacao.getTemplateAvaliacao()));
+        avaliacaoDTO.setRespostaDTOList(
+                RespostaDTO.convertListEntityToListDto(
+                        avaliacao.getRespostaList()));
+        avaliacaoDTO.setTurmaDTO(
+               TurmaDTO.toDto(avaliacao.getTurma()));
+        avaliacaoDTO.setAlunoDTO(
+                AlunoDTO.toDto(avaliacao.getAluno()));
+        return avaliacaoDTO;
+
+    }
+
+    /**
      * Método que converte uma lista de dtos para uma lista de entidades.
      * @param dtos dtos
      * @return List<Avaliacao>
@@ -53,6 +76,21 @@ public class AvaliacaoDTO implements IDTO<Avaliacao> {
         if(CollectionUtils.isNotEmpty(dtos)){
             for(AvaliacaoDTO avaliacaoDTO : dtos){
                 lista.add(avaliacaoDTO.toEntity());
+            }
+        }
+        return lista;
+    }
+
+    /**
+     * Método que converte uma lista de entidade para uma lista de dto.
+     * @param entities entities
+     * @return List<AvaliacaoDTO>
+     */
+    public static List<AvaliacaoDTO> convertListEntityToListDto(List<Avaliacao> entities){
+        List<AvaliacaoDTO> lista = new ArrayList<>();
+        if(CollectionUtils.isNotEmpty(entities)){
+            for(Avaliacao avaliacao : entities){
+                lista.add(toDto(avaliacao));
             }
         }
         return lista;

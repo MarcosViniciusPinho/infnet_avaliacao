@@ -3,6 +3,7 @@ package com.infnet.avaliacao.dto.impl;
 import com.infnet.avaliacao.dto.IDTO;
 import com.infnet.avaliacao.entity.Avaliacao;
 import com.infnet.avaliacao.entity.Resposta;
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.apache.commons.collections.CollectionUtils;
 
 import java.util.ArrayList;
@@ -35,6 +36,23 @@ public class RespostaDTO implements IDTO<Resposta> {
     }
 
     /**
+     * Método que converte uma entidade para um dto.
+     * @param resposta resposta
+     * @return RespostaDTO
+     */
+    public static RespostaDTO toDto(Resposta resposta){
+        ParameterExceptionUtil.validateObjectNull(resposta);
+        RespostaDTO respostaDTO = new RespostaDTO();
+        respostaDTO.setId(resposta.getId());
+        respostaDTO.setValor(resposta.getValor());
+        respostaDTO.setAvaliacao(resposta.getAvaliacao());
+        respostaDTO.setTemplatePerguntaDTO(
+               TemplatePerguntaDTO.toDto(
+                       resposta.getTemplatePergunta()));
+        return respostaDTO;
+    }
+
+    /**
      * Método que converte uma lista de dtos para uma lista de entidades.
      * @param dtos dtos
      * @return List<Resposta>
@@ -44,6 +62,21 @@ public class RespostaDTO implements IDTO<Resposta> {
         if(CollectionUtils.isNotEmpty(dtos)){
             for(RespostaDTO respostaDTO : dtos){
                 lista.add(respostaDTO.toEntity());
+            }
+        }
+        return lista;
+    }
+
+    /**
+     * Método que converte uma lista de entidade para uma lista de dto.
+     * @param entities entities
+     * @return List<RespostaDTO>
+     */
+    public static List<RespostaDTO> convertListEntityToListDto(List<Resposta> entities){
+        List<RespostaDTO> lista = new ArrayList<>();
+        if(CollectionUtils.isNotEmpty(entities)){
+            for(Resposta resposta : entities){
+                lista.add(toDto(resposta));
             }
         }
         return lista;

@@ -17,7 +17,7 @@ public class Resposta implements Serializable {
     @Column(name = "valor", nullable = false)
     private String valor;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_avaliacao", nullable = false)
     private Avaliacao avaliacao;
 

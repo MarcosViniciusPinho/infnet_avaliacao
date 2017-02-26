@@ -2,6 +2,7 @@ package com.infnet.avaliacao.business.service.impl;
 
 import com.infnet.avaliacao.business.service.IAvaliacaoService;
 import com.infnet.avaliacao.dto.impl.AvaliacaoDTO;
+import com.infnet.avaliacao.entity.Avaliacao;
 import com.infnet.avaliacao.persistence.IAvaliacaoDAO;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +21,9 @@ public class AvaliacaoService implements IAvaliacaoService {
      * {@inheritDoc}
      */
     @Override
-    public void save(AvaliacaoDTO avaliacaoDTO) {
+    public Avaliacao save(AvaliacaoDTO avaliacaoDTO) {
         this.validate(avaliacaoDTO);
-        this.avaliacaoDAO.save(avaliacaoDTO.toEntity());
+        return this.avaliacaoDAO.save(avaliacaoDTO.toEntity());
     }
 
     /**

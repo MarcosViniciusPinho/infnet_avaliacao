@@ -19,7 +19,7 @@ public class Avaliacao implements Serializable {
     @JoinColumn(name = "id_template_avaliacao", nullable = false)
     private TemplateAvaliacao templateAvaliacao;
 
-    @OneToMany(mappedBy = "avaliacao", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "avaliacao")
     private List<Resposta> respostaList;
 
     @ManyToOne
