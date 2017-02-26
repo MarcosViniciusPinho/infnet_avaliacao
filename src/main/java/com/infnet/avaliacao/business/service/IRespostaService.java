@@ -1,6 +1,9 @@
 package com.infnet.avaliacao.business.service;
 
-import com.infnet.avaliacao.dto.impl.AvaliacaoDTO;
+import com.infnet.avaliacao.dto.impl.RespostaDTO;
+import com.infnet.avaliacao.entity.Avaliacao;
+
+import java.util.List;
 
 /**
  * Classe que representa o serviço de resposta.
@@ -8,9 +11,18 @@ import com.infnet.avaliacao.dto.impl.AvaliacaoDTO;
 public interface IRespostaService {
 
     /**
-     * Método que recebe uma avaliacaoDTO para obter algumas informações então é criado uma lista de respostaDTO para aí sim serem persistidas na base.
-     * @param avaliacaoDTO avaliacaoDTO
+     * Método que salva a lista de entidade resposta no banco.
+     * @param respostaDTOList respostaDTOList
      */
-    void save(AvaliacaoDTO avaliacaoDTO);
+    void save(List<RespostaDTO> respostaDTOList);
+
+    /**
+     * Método responsável pela criação do objeto respostaDTO
+     * @param resposta resposta
+     * @param idTemplatePergunta idTemplatePergunta
+     * @param avaliacao avaliacao
+     * @return RespostaDTO
+     */
+    RespostaDTO popularResposta(String resposta, Long idTemplatePergunta, Avaliacao avaliacao);
 
 }

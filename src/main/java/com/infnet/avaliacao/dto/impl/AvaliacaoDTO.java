@@ -112,8 +112,17 @@ public class AvaliacaoDTO implements IDTO<Avaliacao> {
         return this.getTemplateAvaliacaoDTO().getTemplateTopicoDTOList().size() > this.getIndiceTopico();
     }
 
-    public String[] getRespostasAndPerguntasSeparados(String respostaComPerguntaAssociada){
+    private String[] getRespostasAndPerguntasSeparados(String respostaComPerguntaAssociada){
         return respostaComPerguntaAssociada.split("-");
+    }
+
+    public String getValorResposta(String respostaComPerguntaAssociada){
+        return this.getRespostasAndPerguntasSeparados(respostaComPerguntaAssociada)[0];
+    }
+
+    public Long getIdTemplatePergunta(String respostaComPerguntaAssociada){
+        return Long.parseLong(this.getRespostasAndPerguntasSeparados(
+                        respostaComPerguntaAssociada)[1]);
     }
 
     /**
