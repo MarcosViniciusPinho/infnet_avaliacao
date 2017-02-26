@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -28,6 +27,7 @@ public class RespostaAvaliacaoController {
     private static final String VIEW_AGRADECIMENTO = "/agradecimento";
     private static final String EXIBIR_BOTAO_PROXIMO = "exibirBotaoProximo";
     private static final String EXIBIR_BOTAO_SALVAR = "exibirBotaoSalvar";
+    private static final String REDIRECT_LIST = "redirect:";
 
     @Resource
     private IAvaliacaoFacade avaliacaoFacade;
@@ -35,11 +35,10 @@ public class RespostaAvaliacaoController {
     /**
      * Método que salva/altera uma entidade.
      * @param dto dto
-     * @param redirectAttributes redirectAttributes
      * @return String
      */
     @RequestMapping(value = ActionConstant.ACTION_SAVE, method = RequestMethod.POST)
-    public String save(AvaliacaoDTO dto, RedirectAttributes redirectAttributes, Model model){
+    public String save(AvaliacaoDTO dto, Model model){
         try{
             AvaliacaoDTO avaliacaoDTO = this.getFacade().popularAlunoAndTurmaParaAvaliacao(dto.getAlunoDTO().getCpf(),
                     dto.getTurmaDTO().getId());
@@ -48,8 +47,7 @@ public class RespostaAvaliacaoController {
                 this.buscarProximoTopicoComPerguntas(avaliacaoDTO, model);
             } else{
                 this.getFacade().save(avaliacaoDTO);
-                redirectAttributes.addFlashAttribute(MessageConstant.SUCESS, MessageConstant.MENSAGEM_SUCESSO);
-                return getViewAgradecimento();
+                return getRedirectViewAgradecimento();
             }
         } catch (RuntimeException ex) {
             model.addAttribute(MessageConstant.ERROR, ex.getLocalizedMessage());
@@ -74,7 +72,6 @@ public class RespostaAvaliacaoController {
      */
     @RequestMapping(value = ActionConstant.ACTION_LINK_RESPONDER_AVALIACAO)
     public String prepareCreate(@PathVariable Long cpf, @PathVariable Long id, Model model){
-//        this.onLoadView(model);
         boolean existeCpfInformado = this.getFacade().isExisteCpf(cpf);
         if(existeCpfInformado){
             AvaliacaoDTO avaliacaoDTO = this.getFacade().popularAlunoAndTurmaParaAvaliacao(cpf, id);
@@ -84,6 +81,15 @@ public class RespostaAvaliacaoController {
         model.addAttribute(EXIBIR_BOTAO_PROXIMO, Boolean.TRUE);
         model.addAttribute(EXIBIR_BOTAO_SALVAR, Boolean.FALSE);
         return getViewForm();
+    }
+
+    /**
+     * Método que exibe a tela de agradecimento para o usuário.
+     * @return ModelAndView
+     */
+    @RequestMapping(value = ActionConstant.ACTION_AGRADECIMENTO)
+    public String agradecimento(){
+        return this.getViewAgradecimento();
     }
 
     private boolean isVerificarIndiceAtualComTamanhoTotalDaListaDeTopico(AvaliacaoDTO avaliacaoDTO){
@@ -112,7 +118,15 @@ public class RespostaAvaliacaoController {
     }
 
     /**
-     * Método que redireciona para a tela de agradecimento para o usuario.
+     * Método que faz o redirecionamento para a ação de exbir a tela de agradecimento.
+     * @return String
+     */
+    private String getRedirectViewAgradecimento(){
+        return REDIRECT_LIST + getPathView() + ActionConstant.ACTION_AGRADECIMENTO;
+    }
+
+    /**
+     * Método que redireciona para a tela de agradecimento.
      * @return String
      */
     private String getViewAgradecimento(){
