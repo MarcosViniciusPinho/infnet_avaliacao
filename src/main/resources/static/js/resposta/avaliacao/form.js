@@ -33,7 +33,8 @@ function tratarTypeTextArea(i, checkeds){
     var valorResposta = $("#" + i + "textarea").val();
     var idTemplatePergunta = $('#idTemplatePergunta').val();
     if(valorResposta != undefined && idTemplatePergunta != undefined){
-        var respostaComPergunta = valorResposta + '-' + idTemplatePergunta;
+        var valorRespostaOther = valorResposta.replace(/\,/g, '00101100').replace(/\-/g, '00101101');
+        var respostaComPergunta = valorRespostaOther + '-' + idTemplatePergunta;
         checkeds.push(respostaComPergunta);
         $('#respostasSelecionadasComPerguntas').val(checkeds);
     }
