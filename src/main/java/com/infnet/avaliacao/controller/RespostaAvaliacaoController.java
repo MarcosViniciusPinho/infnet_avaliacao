@@ -72,14 +72,19 @@ public class RespostaAvaliacaoController {
      */
     @RequestMapping(value = ActionConstant.ACTION_LINK_RESPONDER_AVALIACAO)
     public String prepareCreate(@PathVariable Long cpf, @PathVariable Long id, Model model){
-        boolean existeCpfInformado = this.getFacade().isExisteCpf(cpf);
-        if(existeCpfInformado){
+        try{
+            this.getFacade().verificarSeExisteCpfDoAluno(cpf);
             AvaliacaoDTO avaliacaoDTO = this.getFacade().popularAlunoAndTurmaParaAvaliacao(cpf, id);
+            this.getFacade().verificarSeAlunoJaRespondeuAvaliacao(
+                    avaliacaoDTO.getTurmaDTO(), avaliacaoDTO.getAlunoDTO());
             model.addAttribute(avaliacaoDTO);
             this.recuperarTopicoComPerguntas(avaliacaoDTO, model);
+            model.addAttribute(EXIBIR_BOTAO_PROXIMO, Boolean.TRUE);
+            model.addAttribute(EXIBIR_BOTAO_SALVAR, Boolean.FALSE);
+        } catch (RuntimeException ex) {
+            model.addAttribute(MessageConstant.ERROR, ex.getLocalizedMessage());
+            this.onLoadView(model);
         }
-        model.addAttribute(EXIBIR_BOTAO_PROXIMO, Boolean.TRUE);
-        model.addAttribute(EXIBIR_BOTAO_SALVAR, Boolean.FALSE);
         return getViewForm();
     }
 

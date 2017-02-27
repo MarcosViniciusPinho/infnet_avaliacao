@@ -39,6 +39,10 @@
             <div class="col-lg-12"> &nbsp; </div>
             <img id="logo" alt="Infnet" th:src="@{/images/imagem_avaliacao.png}"/>
 
+            <div class="alert alert-danger" role="alert" th:if="${!#strings.isEmpty(error)}">
+                <span th:text="#{${error}}"></span>
+            </div>
+
             <div class="col-lg-12"> &nbsp; </div>
             <div th:if="${avaliacaoDTO ne null}">
                 <div class="col-sm-6">
@@ -66,9 +70,6 @@
                 <section layout:fragment="conteudoAvaliacao">
                     <p>Conteúdo principal</p>
                 </section>
-            </div>
-            <div class="alert alert-danger" role="alert" th:if="${avaliacaoDTO eq null}">
-                <span th:text="#{avaliacao.erro.cpf.nao.encontrado}"></span>
             </div>
         </div>
     </div>

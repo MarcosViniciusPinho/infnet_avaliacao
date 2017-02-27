@@ -67,8 +67,19 @@ public class AvaliacaoFacade implements IAvaliacaoFacade {
         return avaliacaoDTO;
     }
 
-    public boolean isExisteCpf(Long cpf){
-        return this.alunoService.findByCpf(cpf) != null ? Boolean.TRUE : Boolean.FALSE;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void verificarSeExisteCpfDoAluno(Long cpf){
+        this.alunoService.verificarSeExisteCpfDoAluno(cpf);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void verificarSeAlunoJaRespondeuAvaliacao(TurmaDTO turmaDTO, AlunoDTO alunoDTO) {
+        this.avaliacaoService.verificarSeAlunoJaRespondeuAvaliacao(turmaDTO.toEntity(), alunoDTO.toEntity());
+    }
 }

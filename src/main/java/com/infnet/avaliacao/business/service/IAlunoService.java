@@ -7,6 +7,8 @@ import com.infnet.avaliacao.entity.Aluno;
  */
 public interface IAlunoService {
 
+    void verificarSeExisteCpfDoAluno(Long cpf);
+
     /**
      * Método que busca um aluno a partir de seu cpf
      * @param cpf cpf

@@ -1,6 +1,8 @@
 package com.infnet.avaliacao.business.facade;
 
+import com.infnet.avaliacao.dto.impl.AlunoDTO;
 import com.infnet.avaliacao.dto.impl.AvaliacaoDTO;
+import com.infnet.avaliacao.dto.impl.TurmaDTO;
 
 /**
  * Classe que representa o facade de avaliacao.
@@ -15,6 +17,8 @@ public interface IAvaliacaoFacade {
 
     AvaliacaoDTO popularAlunoAndTurmaParaAvaliacao(Long cpf, Long idTurma);
 
-    boolean isExisteCpf(Long cpf);
+    void verificarSeExisteCpfDoAluno(Long cpf);
+
+    void verificarSeAlunoJaRespondeuAvaliacao(TurmaDTO turmaDTO, AlunoDTO alunoDTO);
 
 }

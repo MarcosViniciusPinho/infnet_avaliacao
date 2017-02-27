@@ -2,7 +2,10 @@ package com.infnet.avaliacao.business.service.impl;
 
 import com.infnet.avaliacao.business.service.IAvaliacaoService;
 import com.infnet.avaliacao.dto.impl.AvaliacaoDTO;
+import com.infnet.avaliacao.entity.Aluno;
 import com.infnet.avaliacao.entity.Avaliacao;
+import com.infnet.avaliacao.entity.Turma;
+import com.infnet.avaliacao.exception.UniqueException;
 import com.infnet.avaliacao.persistence.IAvaliacaoDAO;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +27,16 @@ public class AvaliacaoService implements IAvaliacaoService {
     public Avaliacao save(AvaliacaoDTO avaliacaoDTO) {
         this.validate(avaliacaoDTO);
         return this.avaliacaoDAO.save(avaliacaoDTO.toEntity());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void verificarSeAlunoJaRespondeuAvaliacao(Turma turma, Aluno aluno){
+        if(this.avaliacaoDAO.findByTurmaAndAluno(turma, aluno) != null){
+            throw new UniqueException("avaliacao.erro.aluno.ja.respondeu");
+        }
     }
 
     /**
