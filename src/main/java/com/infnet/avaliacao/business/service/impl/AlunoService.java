@@ -22,7 +22,7 @@ public class AlunoService implements IAlunoService {
      */
     @Override
     public void verificarSeExisteCpfDoAluno(Long cpf) {
-        if(this.alunoDAO.findByCpf(cpf) == null){
+        if(this.findByCpf(cpf) == null){
             throw new NotFoundException("avaliacao.erro.cpf.nao.encontrado");
         }
     }
