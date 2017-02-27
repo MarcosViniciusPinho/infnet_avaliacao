@@ -21,6 +21,10 @@ public class Turma implements Serializable {
     @OneToMany(mappedBy = "turma")
     private List<Avaliacao> avaliacaoList;
 
+    @ManyToOne
+    @JoinColumn(name = "id_modulo", nullable = false)
+    private Modulo modulo;
+
     public Long getId() {
         return id;
     }
@@ -43,6 +47,14 @@ public class Turma implements Serializable {
 
     public void setAvaliacaoList(List<Avaliacao> avaliacaoList) {
         this.avaliacaoList = avaliacaoList;
+    }
+
+    public Modulo getModulo() {
+        return modulo;
+    }
+
+    public void setModulo(Modulo modulo) {
+        this.modulo = modulo;
     }
 
     @Override
