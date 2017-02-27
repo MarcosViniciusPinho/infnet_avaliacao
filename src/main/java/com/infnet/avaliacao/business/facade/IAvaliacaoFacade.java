@@ -17,8 +17,7 @@ public interface IAvaliacaoFacade {
 
     AvaliacaoDTO popularAlunoAndTurmaParaAvaliacao(Long cpf, Long idTurma);
 
-    void verificarSeExisteCpfDoAluno(Long cpf);
-
     void verificarSeAlunoJaRespondeuAvaliacao(TurmaDTO turmaDTO, AlunoDTO alunoDTO);
 
+    void verificarParametrosEnviadosAoCarregarPagina(Long cpf, Long id);
 }

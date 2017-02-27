@@ -71,8 +71,9 @@ public class AvaliacaoFacade implements IAvaliacaoFacade {
      * {@inheritDoc}
      */
     @Override
-    public void verificarSeExisteCpfDoAluno(Long cpf){
-        this.alunoService.verificarSeExisteCpfDoAluno(cpf);
+    public void verificarParametrosEnviadosAoCarregarPagina(Long cpf, Long id){
+        this.turmaService.verificarSeExisteTurma(id);
+        this.alunoService.verificarSeExisteCpf(cpf);
     }
 
     /**

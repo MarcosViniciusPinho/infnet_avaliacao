@@ -2,6 +2,7 @@ package com.infnet.avaliacao.business.service.impl;
 
 import com.infnet.avaliacao.business.service.ITurmaService;
 import com.infnet.avaliacao.entity.Turma;
+import com.infnet.avaliacao.exception.NotFoundException;
 import com.infnet.avaliacao.persistence.ITurmaDAO;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class TurmaService implements ITurmaService {
      */
     @Override
     public Turma findById(Long id) {
-        return this.turmaDAO.getOne(id);
+        return this.turmaDAO.findById(id);
     }
 
     /**
@@ -30,6 +31,16 @@ public class TurmaService implements ITurmaService {
     @Override
     public Long findTemplateAvaliacaoTurmaById(Long idTurma){
         return this.turmaDAO.findByIdTurmaOnTemplateAvaliacaoTurma(idTurma);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void verificarSeExisteTurma(Long id) {
+        if(this.findById(id) == null){
+            throw new NotFoundException("avaliacao.erro.turma.nao.encontrado");
+        }
     }
 
 }

@@ -18,4 +18,11 @@ public interface ITurmaDAO extends ICrudDAO<Turma>{
     @Query(value = QueryConstant.FIND_BY_ID_TURMA_ON_TEMPLATE_AVALIACAO_TURMA, nativeQuery = true)
     Long findByIdTurmaOnTemplateAvaliacaoTurma(Long idTurma);
 
+    /**
+     * Método que busca uma turma pelo seu respectivo id.
+     * @param id id
+     * @return Turma
+     */
+    Turma findById(Long id);
+
 }

@@ -73,7 +73,7 @@ public class RespostaAvaliacaoController {
     @RequestMapping(value = ActionConstant.ACTION_LINK_RESPONDER_AVALIACAO)
     public String prepareCreate(@PathVariable Long cpf, @PathVariable Long id, Model model){
         try{
-            this.getFacade().verificarSeExisteCpfDoAluno(cpf);
+            this.getFacade().verificarParametrosEnviadosAoCarregarPagina(cpf, id);
             AvaliacaoDTO avaliacaoDTO = this.getFacade().popularAlunoAndTurmaParaAvaliacao(cpf, id);
             this.getFacade().verificarSeAlunoJaRespondeuAvaliacao(
                     avaliacaoDTO.getTurmaDTO(), avaliacaoDTO.getAlunoDTO());

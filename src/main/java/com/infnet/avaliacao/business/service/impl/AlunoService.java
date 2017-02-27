@@ -21,7 +21,7 @@ public class AlunoService implements IAlunoService {
      * {@inheritDoc}
      */
     @Override
-    public void verificarSeExisteCpfDoAluno(Long cpf) {
+    public void verificarSeExisteCpf(Long cpf) {
         if(this.findByCpf(cpf) == null){
             throw new NotFoundException("avaliacao.erro.cpf.nao.encontrado");
         }

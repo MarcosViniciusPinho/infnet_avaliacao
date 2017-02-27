@@ -16,4 +16,6 @@ public interface ITurmaService {
 
     Long findTemplateAvaliacaoTurmaById(Long idTurma);
 
+    void verificarSeExisteTurma(Long id);
+
 }
