@@ -15,6 +15,8 @@ public class TurmaDTO implements IDTO<Turma> {
 
     private List<AvaliacaoDTO> avaliacaoDTOList;
 
+    private ModuloDTO moduloDTO;
+
     /**
      * {@inheritDoc}
      */
@@ -38,6 +40,8 @@ public class TurmaDTO implements IDTO<Turma> {
         TurmaDTO turmaDTO = new TurmaDTO();
         turmaDTO.setId(turma.getId());
         turmaDTO.setNumero(turma.getNumero());
+        turmaDTO.setModuloDTO(
+                ModuloDTO.toDto(turma.getModulo()));
         return turmaDTO;
     }
 
@@ -67,5 +71,13 @@ public class TurmaDTO implements IDTO<Turma> {
 
     public void setAvaliacaoDTOList(List<AvaliacaoDTO> avaliacaoDTOList) {
         this.avaliacaoDTOList = avaliacaoDTOList;
+    }
+
+    public ModuloDTO getModuloDTO() {
+        return moduloDTO;
+    }
+
+    public void setModuloDTO(ModuloDTO moduloDTO) {
+        this.moduloDTO = moduloDTO;
     }
 }
