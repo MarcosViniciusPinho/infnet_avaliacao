@@ -2,6 +2,7 @@ package com.infnet.avaliacao.dto.impl;
 
 import com.infnet.avaliacao.controller.wrapper.PerguntaAssociadaWrapper;
 import com.infnet.avaliacao.dto.IDTO;
+import com.infnet.avaliacao.dto.util.ConversorBinarioUtil;
 import com.infnet.avaliacao.entity.Avaliacao;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.apache.commons.collections.CollectionUtils;
@@ -117,7 +118,9 @@ public class AvaliacaoDTO implements IDTO<Avaliacao> {
     }
 
     public String getValorResposta(String respostaComPerguntaAssociada){
-        return this.getRespostasAndPerguntasSeparados(respostaComPerguntaAssociada)[0];
+        String resposta = this.getRespostasAndPerguntasSeparados(
+                respostaComPerguntaAssociada)[0];
+        return ConversorBinarioUtil.converterBinaryToCharacterInString(resposta);
     }
 
     public Long getIdTemplatePergunta(String respostaComPerguntaAssociada){
