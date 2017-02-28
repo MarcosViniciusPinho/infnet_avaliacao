@@ -1,12 +1,12 @@
 package com.infnet.avaliacao.dto.impl;
 
+import com.infnet.avaliacao.dto.IDTO;
 import com.infnet.avaliacao.entity.Modulo;
 import com.infnet.avaliacao.entity.Turma;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class ModuloDTO implements Serializable {
+public class ModuloDTO implements IDTO<Modulo> {
 
     private static final long serialVersionUID = 1L;
 
@@ -15,6 +15,14 @@ public class ModuloDTO implements Serializable {
     private String descricao;
 
     private List<Turma> turmaList;
+
+    @Override
+    public Modulo toEntity() {
+        Modulo modulo = new Modulo();
+        modulo.setId(this.getId());
+        modulo.setDescricao(this.getDescricao());
+        return modulo;
+    }
 
     /**
      * Método que converte uma entidade para um dto.

@@ -14,6 +14,7 @@
             <input type="hidden" th:field="*{turmaDTO.id}"/>
             <input type="hidden" th:field="*{alunoDTO.nome}"/>
             <input type="hidden" th:field="*{alunoDTO.cpf}"/>
+            <input type="hidden" th:field="*{turmaDTO.moduloDTO.descricao}"/>
             <input type="hidden" th:field="*{indiceTopico}" id="indiceTopico"/>
             <div class="col-sm-12">
                 <span th:each="wrapper : ${perguntaAssociadaWrapperList}">

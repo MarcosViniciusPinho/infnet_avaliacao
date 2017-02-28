@@ -28,6 +28,7 @@ public class TurmaDTO implements IDTO<Turma> {
         turma.setAvaliacaoList(
                 AvaliacaoDTO.convertListDtoToListEntity(
                         this.getAvaliacaoDTOList()));
+        turma.setModulo(this.getModuloDTO().toEntity());
         return turma;
     }
 
