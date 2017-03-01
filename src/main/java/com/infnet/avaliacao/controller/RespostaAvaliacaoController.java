@@ -51,7 +51,6 @@ public class RespostaAvaliacaoController {
             }
         } catch (RuntimeException ex) {
             model.addAttribute(MessageConstant.ERROR, ex.getLocalizedMessage());
-            this.onLoadView(model);
         }
         return getViewForm();
     }
@@ -83,7 +82,6 @@ public class RespostaAvaliacaoController {
             model.addAttribute(EXIBIR_BOTAO_SALVAR, Boolean.FALSE);
         } catch (RuntimeException ex) {
             model.addAttribute(MessageConstant.ERROR, ex.getLocalizedMessage());
-            this.onLoadView(model);
         }
         return getViewForm();
     }
@@ -136,9 +134,6 @@ public class RespostaAvaliacaoController {
      */
     private String getViewAgradecimento(){
         return getPathView() + VIEW_AGRADECIMENTO;
-    }
-
-    private void onLoadView(Model model){
     }
 
     private IAvaliacaoFacade getFacade() {
