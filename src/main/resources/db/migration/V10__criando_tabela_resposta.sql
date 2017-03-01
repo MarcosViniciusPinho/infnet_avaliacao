@@ -1,7 +1,7 @@
 CREATE TABLE resposta(
   id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   id_avaliacao BIGINT NOT NULL,
-  valor TEXT NOT NULL,
+  valor TEXT,
   id_template_pergunta BIGINT NOT NULL
 );
 

@@ -1,11 +1,40 @@
 $(document).ready(function () {
-    clicarEmProximoOuSalvar("#proximo");
-    clicarEmProximoOuSalvar("#salvar");
+    var salvar  ='#salvar';
+    var proximo = '#proximo';
+    clicarEmProximoOuSalvar(proximo);
+    clicarEmProximoOuSalvar(salvar);
+    validarCamposObrigatorios(salvar, proximo);
 });
 
-function clicarEmProximoOuSalvar(elemento){
+function validarCamposObrigatorios(salvar, proximo) {
+    $(proximo).prop("disabled", true);
+    $(salvar).prop("disabled", true);
+    var inputTypeRadio = $("input[type='radio']");
+    var totalInputRadio = inputTypeRadio.length;
+    if(totalInputRadio === 0){
+        $(proximo).prop("disabled", false);
+        $(salvar).prop("disabled", false);
+    } else{
+        validarCamposInputTypeRadio(inputTypeRadio, salvar, proximo);
+    }
+}
+
+function validarCamposInputTypeRadio(inputTypeRadio, salvar, proximo){
+    $(inputTypeRadio).click(function () {
+        var campoPreenchido = validarCampoObrigatorioPreenchido();
+        if (campoPreenchido) {
+            $(proximo).prop("disabled", false);
+            $(salvar).prop("disabled", false);
+        } else {
+            $(proximo).prop("disabled", true);
+            $(salvar).prop("disabled", true);
+        }
+    });
+}
+
+function clicarEmProximoOuSalvar(elemento) {
     var proximoIndiceTopico = $('#indiceTopico').val();
-    $(elemento).click(function() {
+    $(elemento).click(function () {
         proximoIndiceTopico++;
         $('#indiceTopico').val(proximoIndiceTopico);
         addConteudoDaLista();
@@ -19,6 +48,21 @@ function addConteudoDaLista() {
         tratarTypeRadio(i, checkeds);
         tratarTypeTextArea(i, checkeds);
     }
+}
+
+function validarCampoObrigatorioPreenchido(){
+    var campoPreenchido = true;
+    var totalPerguntas = $('#totalPerguntas').val();
+    for(var i = 1;i <= totalPerguntas; i++) {
+        var textArea = $('#' + i +'textarea').val();
+        if(textArea === undefined){
+            var respostasMarcadas = $("input[name='" + i + "radio']:checked").val();
+            if (respostasMarcadas === undefined) {
+                campoPreenchido = false;
+            }
+        }
+    }
+    return campoPreenchido;
 }
 
 function tratarTypeRadio(i, checkeds){
