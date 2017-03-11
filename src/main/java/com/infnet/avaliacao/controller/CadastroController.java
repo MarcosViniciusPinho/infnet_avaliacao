@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.ConstraintViolationException;
+
 /**
  * Classe responsável por executar o comportamento padrão do módulo cadastro da aplicação.
  * @param <V> dto
  */
 public abstract class CadastroController<V> extends InitController<V> {
-
 
     /**
      * Método que faz a listagem dos registros na tela.
@@ -48,7 +49,11 @@ public abstract class CadastroController<V> extends InitController<V> {
             this.getFacade().save(entity);
             redirectAttributes.addFlashAttribute(MessageConstant.SUCESS, MessageConstant.MENSAGEM_SUCESSO);
             return getRedirectViewList();
-        } catch (RuntimeException ex) {
+        } catch (ConstraintViolationException ex) {
+            model.addAttribute(MessageConstant.SET_EXCEPTION, ex.getConstraintViolations());
+            this.onLoadView(model);
+            return getViewForm();
+        } catch (RuntimeException ex){
             model.addAttribute(MessageConstant.ERROR, ex.getLocalizedMessage());
             this.onLoadView(model);
             return getViewForm();

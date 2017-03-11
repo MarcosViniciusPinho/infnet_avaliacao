@@ -27,6 +27,12 @@
                             <span th:text="#{${error}}"></span>
                         </div>
 
+                        <div th:if="${!#lists.isEmpty(setException)}" th:each="error : ${setException}">
+                            <div class="alert alert-danger" role="alert">
+                                <span th:text="#{${error.messageTemplate}}"></span>
+                            </div>
+                        </div>
+
                         <h2 class="cadastrar" th:text="#{usuario.cadastrar}"></h2>
                         <h2 class="alterar" th:text="#{usuario.alterar}"></h2>
                         <hr />

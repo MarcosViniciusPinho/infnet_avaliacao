@@ -1,9 +1,10 @@
 package com.infnet.avaliacao.entity;
 
-
 import com.infnet.avaliacao.entity.domain.PerfilEnum;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -20,15 +21,19 @@ public class Usuario implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @NotBlank(message = "usuario.mensagem.erro.nome")
     @Column(name = "nome", length = 120, nullable = false)
     private String nome;
 
+    @NotBlank(message = "usuario.mensagem.erro.login")
     @Column(name = "login", length = 50, nullable = false, unique = true)
     private String login;
 
+    @NotBlank(message = "usuario.mensagem.erro.senha")
     @Column(name = "senha", length = 10, nullable = false)
     private String senha;
 
+    @NotNull(message = "usuario.mensagem.erro.perfil")
     @Enumerated(value = EnumType.STRING)
     @Column(name = "perfil", length = 3, nullable = false)
     private PerfilEnum perfil;

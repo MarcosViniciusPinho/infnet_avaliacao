@@ -23,7 +23,7 @@ public class CrudService<V extends IDTO<T>, T> implements ICrudService<V, T>{
     public void save(V dto) {
         ParameterExceptionUtil.validateObjectNull(dto);
         this.validate(dto);
-        this.crudDAO.save(dto.toEntity());
+        this.crudDAO.saveAndFlush(dto.toEntity());
     }
 
     /**
