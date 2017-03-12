@@ -23,11 +23,13 @@
                             <li class="active alterar" th:text="#{usuario.alterar}"></li>
                         </ol>
 
-                        <div class="alert alert-danger" role="alert" th:if="${!#strings.isEmpty(error)}">
-                            <span th:text="#{${error}}"></span>
+                        <div th:if="${!#lists.isEmpty(setExceptionBusiness)}" th:each="error : ${setExceptionBusiness}">
+                            <div class="alert alert-danger" role="alert">
+                                <span th:text="#{${error.mensagem}}"></span>
+                            </div>
                         </div>
 
-                        <div th:if="${!#lists.isEmpty(setException)}" th:each="error : ${setException}">
+                        <div th:if="${!#lists.isEmpty(setExceptionRequired)}" th:each="error : ${setExceptionRequired}">
                             <div class="alert alert-danger" role="alert">
                                 <span th:text="#{${error.messageTemplate}}"></span>
                             </div>

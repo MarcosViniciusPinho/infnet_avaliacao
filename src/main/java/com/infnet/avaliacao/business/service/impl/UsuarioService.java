@@ -3,12 +3,15 @@ package com.infnet.avaliacao.business.service.impl;
 import com.infnet.avaliacao.business.service.IUsuarioService;
 import com.infnet.avaliacao.dto.impl.UsuarioDTO;
 import com.infnet.avaliacao.entity.Usuario;
+import com.infnet.avaliacao.exception.BusinessException;
 import com.infnet.avaliacao.exception.UniqueException;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import com.infnet.avaliacao.persistence.IUsuarioDAO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * {@inheritDoc}
@@ -32,9 +35,13 @@ public class UsuarioService extends CrudService<UsuarioDTO, Usuario> implements 
      * @param usuarioDTO usuarioDTO
      */
     private void validarLoginUnico(UsuarioDTO usuarioDTO){
+        Set<BusinessException> businessExceptionSet = new HashSet<>();
         Usuario usuario = usuarioDao.findByLogin(usuarioDTO.getLogin());
         if(usuario != null && usuarioDTO.toEntity().equals(usuario)){
-            throw new UniqueException("usuario.mensagem.erro.login.unico");
+            businessExceptionSet.add(new UniqueException("usuario.mensagem.erro.login.unico"));
+        }
+        if(!businessExceptionSet.isEmpty()){
+            throw new BusinessException(businessExceptionSet);
         }
     }
 

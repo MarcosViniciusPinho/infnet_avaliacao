@@ -2,6 +2,7 @@ package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.controller.util.ActionConstant;
 import com.infnet.avaliacao.controller.util.MessageConstant;
+import com.infnet.avaliacao.exception.BusinessException;
 import com.infnet.avaliacao.exception.ExecutionException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.ConstraintViolationException;
+import java.util.Set;
 
 /**
  * Classe responsável por executar o comportamento padrão do módulo cadastro da aplicação.
@@ -50,14 +52,16 @@ public abstract class CadastroController<V> extends InitController<V> {
             redirectAttributes.addFlashAttribute(MessageConstant.SUCESS, MessageConstant.MENSAGEM_SUCESSO);
             return getRedirectViewList();
         } catch (ConstraintViolationException ex) {
-            model.addAttribute(MessageConstant.SET_EXCEPTION, ex.getConstraintViolations());
-            this.onLoadView(model);
-            return getViewForm();
-        } catch (RuntimeException ex){
-            model.addAttribute(MessageConstant.ERROR, ex.getLocalizedMessage());
-            this.onLoadView(model);
-            return getViewForm();
+            this.tratarExcecao(model, ex.getConstraintViolations(), MessageConstant.SET_EXCEPTION_REQUIRED);
+        } catch (BusinessException ex){
+            this.tratarExcecao(model, ex.getMultipleMessages(), MessageConstant.SET_EXCEPTION_BUSINESS);
         }
+        return getViewForm();
+    }
+
+    private void tratarExcecao(Model model, Set multipleMessages, String keyError){
+        model.addAttribute(keyError, multipleMessages);
+        this.onLoadView(model);
     }
 
     /**
