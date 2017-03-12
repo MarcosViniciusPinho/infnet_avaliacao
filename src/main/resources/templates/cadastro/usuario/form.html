@@ -49,21 +49,21 @@
                                 <h3 th:text="#{usuario.informacoes.basicas}"></h3>
                                 <input type="hidden" th:field="*{id}" id="id"/>
                                 <div class="well col-sm-12">
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-5" th:classappend="*{nome eq ''} ? has-error">
                                         <label for="nome">
                                             <span class="corVermelho">*</span> <span th:text="#{usuario.nome}"></span>:</label>
                                         <input type="text" class="form-control" id="nome" th:field="*{nome}" name="nome" maxlength="120"
                                                th:placeholder="#{usuario.nome.placeholder}"/>
                                     </div>
 
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-4" th:classappend="*{login eq ''} ? has-error">
                                         <label for="login">
                                             <span class="corVermelho">*</span> <span th:text="#{usuario.login}"></span>:</label>
                                         <input type="text" class="form-control" id="login" th:field="*{login}" name="login" maxlength="50"
                                                th:placeholder="#{usuario.login.placeholder}"/>
                                     </div>
 
-                                    <div class="col-sm-3 blocoEditar">
+                                    <div class="col-sm-3 blocoEditar" th:classappend="*{senha eq ''} ? has-error">
                                         <label for="senha">
                                             <span class="corVermelho">*</span> <span th:text="#{usuario.senha}"></span>:</label>
                                         <input type="text" class="form-control" id="senha" th:field="*{senha}" th:placeholder="#{usuario.senha.placeholder}"
