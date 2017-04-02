@@ -1,4 +1,4 @@
-package com.infnet.avaliacao.persistence;
+package com.infnet.avaliacao.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
@@ -8,5 +8,5 @@ import org.springframework.data.repository.NoRepositoryBean;
  * @param <T> entidade
  */
 @NoRepositoryBean
-public interface ICrudDAO<T> extends JpaRepository<T, Long> {
+public interface ICrudRepository<T> extends JpaRepository<T, Long> {
 }

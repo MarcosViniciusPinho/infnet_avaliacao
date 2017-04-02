@@ -1,13 +1,15 @@
-package com.infnet.avaliacao.persistence;
+package com.infnet.avaliacao.repository;
 
 import com.infnet.avaliacao.entity.Turma;
-import com.infnet.avaliacao.persistence.util.QueryConstant;
+import com.infnet.avaliacao.repository.util.QueryConstant;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 /**
  * Classe que serve para fazer as operações de CRUD para a tabela de turma.
  */
-public interface ITurmaDAO extends ICrudDAO<Turma>{
+@Repository
+public interface ITurmaRepository extends ICrudRepository<Turma> {
 
     /**
      * Houve necessidade de criar um SQL pois o mapeamento do hibernate inviabilizou a busca de turmas associadas a tabela associativa

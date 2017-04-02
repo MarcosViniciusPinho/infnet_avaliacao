@@ -6,8 +6,8 @@ import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
 import com.infnet.avaliacao.entity.TemplateAvaliacaoTopicoPergunta;
 import com.infnet.avaliacao.entity.TemplatePergunta;
-import com.infnet.avaliacao.persistence.ITemplateAvaliacaoTopicoPerguntaDAO;
-import com.infnet.avaliacao.persistence.ITemplatePerguntaDAO;
+import com.infnet.avaliacao.repository.ITemplateAvaliacaoTopicoPerguntaRepository;
+import com.infnet.avaliacao.repository.ITemplatePerguntaRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,17 +20,17 @@ import java.util.List;
 public class TemplatePerguntaService extends CrudService<TemplatePerguntaDTO, TemplatePergunta> implements ITemplatePerguntaService {
 
     @Resource
-    private ITemplatePerguntaDAO templatePerguntaDAO;
+    private ITemplatePerguntaRepository templatePerguntaRepository;
 
     @Resource
-    private ITemplateAvaliacaoTopicoPerguntaDAO templateAvaliacaoTopicoPerguntaDAO;
+    private ITemplateAvaliacaoTopicoPerguntaRepository templateAvaliacaoTopicoPerguntaRepository;
 
     /**
      * {@inheritDoc}
      */
     @Override
     public List<TemplatePergunta> getListaTemplatesPerguntasPorId(List<Long> idsTemplateTopico) {
-        return this.templatePerguntaDAO.findByIdIn(idsTemplateTopico);
+        return this.templatePerguntaRepository.findByIdIn(idsTemplateTopico);
     }
 
     /**
@@ -39,9 +39,9 @@ public class TemplatePerguntaService extends CrudService<TemplatePerguntaDTO, Te
     @Override
     public List<TemplatePerguntaDTO> findAllComCheckedPerguntasMarcadas(TemplateTopicoDTO templateTopicoDTO,
                                                                         TemplateAvaliacaoDTO templateAvaliacaoDTO) {
-        List<TemplatePerguntaDTO> templatePerguntaDTOList = TemplatePerguntaDTO.convertListEntityToListDto(templatePerguntaDAO.findAll());
+        List<TemplatePerguntaDTO> templatePerguntaDTOList = TemplatePerguntaDTO.convertListEntityToListDto(templatePerguntaRepository.findAll());
         for(TemplatePerguntaDTO templatePerguntaDTO : templatePerguntaDTOList){
-            TemplateAvaliacaoTopicoPergunta templateAvaliacaoTopicoPergunta = this.templateAvaliacaoTopicoPerguntaDAO.
+            TemplateAvaliacaoTopicoPergunta templateAvaliacaoTopicoPergunta = this.templateAvaliacaoTopicoPerguntaRepository.
                     findByTemplateAvaliacaoAndTemplateTopicoAndTemplatePerguntaEquals(templateAvaliacaoDTO.toEntity(),
                             templateTopicoDTO.toEntity(), templatePerguntaDTO.toEntity());
             if(templateAvaliacaoTopicoPergunta != null) {

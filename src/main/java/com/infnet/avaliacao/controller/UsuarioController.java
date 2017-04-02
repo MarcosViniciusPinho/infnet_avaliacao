@@ -5,6 +5,7 @@ import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.dto.impl.UsuarioDTO;
 import com.infnet.avaliacao.entity.domain.PerfilEnum;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +30,7 @@ public class UsuarioController extends CadastroController<UsuarioDTO>{
      * {@inheritDoc}
      */
     @Override
-    protected ModelAndView onList(){
+    protected ModelAndView onList(Pageable pageable){
         ModelAndView mv = new ModelAndView(getViewList());
         mv.addObject(LISTAR_USUARIOS, this.usuarioFacade.findAll());
         return mv;

@@ -4,6 +4,8 @@ import com.infnet.avaliacao.controller.util.ActionConstant;
 import com.infnet.avaliacao.controller.util.MessageConstant;
 import com.infnet.avaliacao.exception.BusinessException;
 import com.infnet.avaliacao.exception.ExecutionException;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,9 +27,9 @@ public abstract class CadastroController<V> extends InitController<V> {
      * @return ModelAndView
      */
     @RequestMapping(value = ActionConstant.ACTION_LIST)
-    public ModelAndView list(){
+    public ModelAndView list(@PageableDefault(size = 2) Pageable pageable){
         try {
-            return this.onList();
+            return this.onList(pageable);
         } catch (RuntimeException ex) {
             throw new ExecutionException(ex);
         }
@@ -35,9 +37,10 @@ public abstract class CadastroController<V> extends InitController<V> {
 
     /**
      * Método responsável de montar as informacoes no grid da tela e que deve ser implementado nas subclasses.
+     * @param pageable pageable
      * @return ModelAndView
      */
-    protected abstract ModelAndView onList();
+    protected abstract ModelAndView onList(Pageable pageable);
 
     /**
      * Método que salva/altera uma entidade.

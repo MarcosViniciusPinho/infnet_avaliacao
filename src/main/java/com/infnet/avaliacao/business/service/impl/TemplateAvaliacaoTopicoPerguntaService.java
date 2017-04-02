@@ -6,7 +6,7 @@ import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoTopicoPerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
 import com.infnet.avaliacao.entity.TemplateAvaliacaoTopicoPergunta;
-import com.infnet.avaliacao.persistence.ITemplateAvaliacaoTopicoPerguntaDAO;
+import com.infnet.avaliacao.repository.ITemplateAvaliacaoTopicoPerguntaRepository;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
@@ -21,20 +21,20 @@ import java.util.List;
 public class TemplateAvaliacaoTopicoPerguntaService implements ITemplateAvaliacaoTopicoPerguntaService {
 
     @Resource
-    private ITemplateAvaliacaoTopicoPerguntaDAO templateAvaliacaoTopicoPerguntaDAO;
+    private ITemplateAvaliacaoTopicoPerguntaRepository templateAvaliacaoTopicoPerguntaRepository;
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void save(List<TemplateAvaliacaoTopicoPerguntaDTO> templateAvaliacaoTopicoPerguntaDTOList) {
-        this.templateAvaliacaoTopicoPerguntaDAO.save(TemplateAvaliacaoTopicoPerguntaDTO.convertListDtoToListEntity(
+        this.templateAvaliacaoTopicoPerguntaRepository.save(TemplateAvaliacaoTopicoPerguntaDTO.convertListDtoToListEntity(
                 templateAvaliacaoTopicoPerguntaDTOList));
     }
 
     private void inativarTodasMarcacoesDePerguntaDeUmaAvaliacaoPorTopico(TemplateAvaliacaoDTO templateAvaliacaoDTO,
                                                    TemplateTopicoDTO templateTopicoDTO){
-        List<TemplateAvaliacaoTopicoPergunta> lista = this.templateAvaliacaoTopicoPerguntaDAO.findAllByTemplateAvaliacaoAndTemplateTopicoEquals(
+        List<TemplateAvaliacaoTopicoPergunta> lista = this.templateAvaliacaoTopicoPerguntaRepository.findAllByTemplateAvaliacaoAndTemplateTopicoEquals(
                 templateAvaliacaoDTO.toEntity(),
                 templateTopicoDTO.toEntity());
         boolean existePerguntaSelecionada = !this.isNaoExistePerguntaSelecionada(templateTopicoDTO);
@@ -46,7 +46,7 @@ public class TemplateAvaliacaoTopicoPerguntaService implements ITemplateAvaliaca
     private void inativarPerguntas(List<TemplateAvaliacaoTopicoPergunta> lista){
         for(TemplateAvaliacaoTopicoPergunta templateAvaliacaoTopicoPergunta : lista){
             templateAvaliacaoTopicoPergunta.setAtivo(Boolean.FALSE);
-            this.templateAvaliacaoTopicoPerguntaDAO.save(templateAvaliacaoTopicoPergunta);
+            this.templateAvaliacaoTopicoPerguntaRepository.save(templateAvaliacaoTopicoPergunta);
         }
     }
 
@@ -64,7 +64,7 @@ public class TemplateAvaliacaoTopicoPerguntaService implements ITemplateAvaliaca
         this.inativarTodasMarcacoesDePerguntaDeUmaAvaliacaoPorTopico(templateAvaliacaoDTO, templateTopicoDTO);
         List<TemplateAvaliacaoTopicoPerguntaDTO> templateAvaliacaoTopicoPerguntaDTOList = new ArrayList<>();
         for(TemplatePerguntaDTO templatePerguntaDTO : templatePerguntaDTOList){
-            TemplateAvaliacaoTopicoPergunta templateAvaliacaoTopicoPergunta = this.templateAvaliacaoTopicoPerguntaDAO.
+            TemplateAvaliacaoTopicoPergunta templateAvaliacaoTopicoPergunta = this.templateAvaliacaoTopicoPerguntaRepository.
                     findByTemplateAvaliacaoAndTemplateTopicoAndTemplatePerguntaEquals(templateAvaliacaoDTO.toEntity(),
                             templateTopicoDTO.toEntity(), templatePerguntaDTO.toEntity());
             templateAvaliacaoTopicoPerguntaDTOList.add(this.populateTemplateAvaliacaoTopicoPergunta(

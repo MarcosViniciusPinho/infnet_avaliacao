@@ -1,11 +1,13 @@
-package com.infnet.avaliacao.persistence;
+package com.infnet.avaliacao.repository;
 
 import com.infnet.avaliacao.entity.Aluno;
+import org.springframework.stereotype.Repository;
 
 /**
  * Classe que serve para fazer as operações de CRUD para a tabela de aluno.
  */
-public interface IAlunoDAO extends ICrudDAO<Aluno>{
+@Repository
+public interface IAlunoRepository extends ICrudRepository<Aluno> {
 
     /**
      * Método que busca um aluno a partir de seu cpf

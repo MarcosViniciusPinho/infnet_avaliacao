@@ -1,4 +1,4 @@
-package com.infnet.avaliacao.persistence.util;
+package com.infnet.avaliacao.repository.util;
 
 /**
  * Classe responsável por ser o repositório de script SQL em alguns lugares da aplicação.

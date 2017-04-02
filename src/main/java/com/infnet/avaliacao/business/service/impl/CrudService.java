@@ -3,7 +3,7 @@ package com.infnet.avaliacao.business.service.impl;
 import com.infnet.avaliacao.business.service.ICrudService;
 import com.infnet.avaliacao.dto.IDTO;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
-import com.infnet.avaliacao.persistence.ICrudDAO;
+import com.infnet.avaliacao.repository.ICrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
 public class CrudService<V extends IDTO<T>, T> implements ICrudService<V, T>{
 
     @Autowired
-    private ICrudDAO<T> crudDAO;
+    private ICrudRepository<T> crudRepository;
 
     /**
      * {@inheritDoc}
@@ -23,7 +23,7 @@ public class CrudService<V extends IDTO<T>, T> implements ICrudService<V, T>{
     public void save(V dto) {
         ParameterExceptionUtil.validateObjectNull(dto);
         this.validate(dto);
-        this.crudDAO.saveAndFlush(dto.toEntity());
+        this.crudRepository.saveAndFlush(dto.toEntity());
     }
 
     /**
@@ -32,7 +32,7 @@ public class CrudService<V extends IDTO<T>, T> implements ICrudService<V, T>{
     @Override
     public T findById(Long id) {
         ParameterExceptionUtil.validateObjectNull(id);
-        return this.crudDAO.getOne(id);
+        return this.crudRepository.getOne(id);
     }
 
     /**
@@ -40,7 +40,7 @@ public class CrudService<V extends IDTO<T>, T> implements ICrudService<V, T>{
      */
     @Override
     public List<T> findAll() {
-        return this.crudDAO.findAll();
+        return this.crudRepository.findAll();
     }
 
     /**

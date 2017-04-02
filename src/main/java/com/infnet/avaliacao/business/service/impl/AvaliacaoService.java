@@ -6,7 +6,7 @@ import com.infnet.avaliacao.entity.Aluno;
 import com.infnet.avaliacao.entity.Avaliacao;
 import com.infnet.avaliacao.entity.Turma;
 import com.infnet.avaliacao.exception.UniqueException;
-import com.infnet.avaliacao.persistence.IAvaliacaoDAO;
+import com.infnet.avaliacao.repository.IAvaliacaoRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 public class AvaliacaoService implements IAvaliacaoService {
 
     @Resource
-    private IAvaliacaoDAO avaliacaoDAO;
+    private IAvaliacaoRepository avaliacaoRepository;
 
     /**
      * {@inheritDoc}
@@ -26,7 +26,7 @@ public class AvaliacaoService implements IAvaliacaoService {
     @Override
     public Avaliacao save(AvaliacaoDTO avaliacaoDTO) {
         this.validate(avaliacaoDTO);
-        return this.avaliacaoDAO.save(avaliacaoDTO.toEntity());
+        return this.avaliacaoRepository.save(avaliacaoDTO.toEntity());
     }
 
     /**
@@ -34,7 +34,7 @@ public class AvaliacaoService implements IAvaliacaoService {
      */
     @Override
     public void verificarSeAlunoJaRespondeuAvaliacao(Turma turma, Aluno aluno){
-        if(this.avaliacaoDAO.findByTurmaAndAluno(turma, aluno) != null){
+        if(this.avaliacaoRepository.findByTurmaAndAluno(turma, aluno) != null){
             throw new UniqueException("avaliacao.erro.aluno.ja.respondeu");
         }
     }

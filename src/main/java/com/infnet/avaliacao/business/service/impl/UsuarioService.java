@@ -6,7 +6,7 @@ import com.infnet.avaliacao.entity.Usuario;
 import com.infnet.avaliacao.exception.BusinessException;
 import com.infnet.avaliacao.exception.UniqueException;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
-import com.infnet.avaliacao.persistence.IUsuarioDAO;
+import com.infnet.avaliacao.repository.IUsuarioRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,7 +20,7 @@ import java.util.Set;
 public class UsuarioService extends CrudService<UsuarioDTO, Usuario> implements IUsuarioService {
 
     @Resource
-    private IUsuarioDAO usuarioDao;
+    private IUsuarioRepository usuarioRepository;
 
     /**
      * {@inheritDoc}
@@ -36,7 +36,7 @@ public class UsuarioService extends CrudService<UsuarioDTO, Usuario> implements 
      */
     private void validarLoginUnico(UsuarioDTO usuarioDTO){
         Set<BusinessException> businessExceptionSet = new HashSet<>();
-        Usuario usuario = usuarioDao.findByLogin(usuarioDTO.getLogin());
+        Usuario usuario = usuarioRepository.findByLogin(usuarioDTO.getLogin());
         if(usuario != null && usuarioDTO.toEntity().equals(usuario)){
             businessExceptionSet.add(new UniqueException("usuario.mensagem.erro.login.unico"));
         }
@@ -51,7 +51,7 @@ public class UsuarioService extends CrudService<UsuarioDTO, Usuario> implements 
     @Override
     public void delete(Long id) {
         ParameterExceptionUtil.validateObjectNull(id);
-        this.usuarioDao.delete(id);
+        this.usuarioRepository.delete(id);
     }
 
 }
