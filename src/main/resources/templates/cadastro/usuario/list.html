@@ -63,16 +63,25 @@
                             <td colspan="4" th:if="${#lists.isEmpty(listarUsuarios)}"><span th:text="#{nenhumregistroencontrado}"></span></td>
                         </tr>
                         </tbody>
-                        <tfoot>
-                        <tr>
-                            <td colspan="4">
-                                <span th:text="#{texto.rodape.primeira.parte}"></span>
-                                <span th:text="${#lists.size(listarUsuarios)}"> </span>
-                                <span th:text="#{texto.rodape.segunda.parte}"></span>
-                            </td>
-                        </tr>
-                        </tfoot>
                     </table>
+                </div>
+                <div class="col-sm-12  text-center" th:if="${not #lists.isEmpty(listarUsuarios.content)}">
+                    <nav>
+                        <ul class="pagination  pagination-sm">
+                            <li class="disabled">
+                                <a href="#"><span>&laquo;</span></a>
+                            </li>
+                            <th:block th:each="p, status : ${#numbers.sequence(1, listarUsuarios.totalPages)}">
+                                <li>
+                                    <a th:href="|?page=${p - 1}|"><span th:text="${status.count}"></span></a>
+                                </li>
+                            </th:block>
+
+                            <li class="disabled">
+                                <a href="#"><span>&raquo;</span></a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
                 <form class="form-horizontal" th:attr="data-url-base=@{/cadastro/usuario/delete/}" method="POST" id="formExcluir">
                     <input type="hidden" th:value="#{usuario.confirmacaoexclusao}" id="mensagemExcluir"/>
