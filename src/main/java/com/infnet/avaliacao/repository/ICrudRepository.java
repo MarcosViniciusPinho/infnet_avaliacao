@@ -8,5 +8,5 @@ import org.springframework.data.repository.NoRepositoryBean;
  * @param <T> entidade
  */
 @NoRepositoryBean
-public interface ICrudRepository<T> extends JpaRepository<T, Long> {
+public interface ICrudRepository<T> extends JpaRepository<T, Long>, IPageRepository<T> {
 }

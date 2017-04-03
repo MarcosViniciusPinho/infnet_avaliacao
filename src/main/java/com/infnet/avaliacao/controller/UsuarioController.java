@@ -5,6 +5,8 @@ import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.dto.impl.UsuarioDTO;
 import com.infnet.avaliacao.entity.domain.PerfilEnum;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
+import com.infnet.avaliacao.repository.IUsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,13 +28,17 @@ public class UsuarioController extends CadastroController<UsuarioDTO>{
     @Resource
     private IUsuarioFacade usuarioFacade;
 
+    @Autowired
+    private IUsuarioRepository usuarioRepository;
+
     /**
      * {@inheritDoc}
      */
     @Override
     protected ModelAndView onList(Pageable pageable){
         ModelAndView mv = new ModelAndView(getViewList());
-        mv.addObject(LISTAR_USUARIOS, this.usuarioFacade.findAll());
+//        mv.addObject(LISTAR_USUARIOS, this.usuarioFacade.findAll());
+        mv.addObject(LISTAR_USUARIOS, this.usuarioRepository.findAll(pageable));
         return mv;
     }
 
