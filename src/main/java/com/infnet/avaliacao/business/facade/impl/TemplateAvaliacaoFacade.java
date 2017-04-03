@@ -29,7 +29,7 @@ public class TemplateAvaliacaoFacade implements ITemplateAvaliacaoFacade {
 
     @Override
     public Page<TemplateAvaliacaoDTO> findAllPaginated(Pageable pageable) {
-        return null;
+        return TemplateAvaliacaoDTO.convertPageEntityToPageDto(this.templateAvaliacaoService.findAllPaginated(pageable), pageable);
     }
 
     @Override

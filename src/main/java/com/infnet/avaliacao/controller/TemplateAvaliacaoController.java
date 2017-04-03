@@ -7,6 +7,8 @@ import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.controller.wrapper.PerguntaAssociadaWrapper;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.exception.ExecutionException;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,10 +41,10 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      * @return ModelAndView
      */
     @RequestMapping(value = ActionConstant.ACTION_LIST)
-    public ModelAndView list(){
+    public ModelAndView list(@PageableDefault(size = 2) Pageable pageable){
         try {
             ModelAndView mv = new ModelAndView(getViewList());
-            mv.addObject(LISTAR_TEMPLATE_AVALIACAO, this.templateAvaliacaoFacade.findAll());
+            mv.addObject(LISTAR_TEMPLATE_AVALIACAO, this.templateAvaliacaoFacade.findAllPaginated(pageable));
             return mv;
         } catch (RuntimeException ex) {
             throw new ExecutionException(ex);
