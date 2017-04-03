@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * {@inheritDoc}
  */
 @Service
-public class TemplateAvaliacaoService extends CrudService<TemplateAvaliacaoDTO, TemplateAvaliacao> implements ITemplateAvaliacaoService {
+public class TemplateAvaliacaoServiceImpl extends CrudServiceImpl<TemplateAvaliacaoDTO, TemplateAvaliacao> implements ITemplateAvaliacaoService {
 
     @Override
     public void validate(TemplateAvaliacaoDTO dto) {

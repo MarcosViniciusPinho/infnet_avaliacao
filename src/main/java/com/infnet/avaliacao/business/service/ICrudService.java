@@ -1,5 +1,8 @@
 package com.infnet.avaliacao.business.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 
 /**
@@ -31,5 +34,12 @@ public interface ICrudService<V, T> {
      * @param dto dto
      */
     void validate(V dto);
+
+    /**
+     * Método que lista todos os registros no banco
+     * @param pageable pageable
+     * @return List<T>
+     */
+    Page<T> findAllPaginated(Pageable pageable);
 
 }

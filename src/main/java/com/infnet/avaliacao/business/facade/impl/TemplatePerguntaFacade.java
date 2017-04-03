@@ -7,6 +7,8 @@ import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoTopicoPerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -30,6 +32,11 @@ public class TemplatePerguntaFacade implements ITemplatePerguntaFacade {
     @Override
     public List<TemplatePerguntaDTO> findAll() {
         return TemplatePerguntaDTO.convertListEntityToListDto(this.templatePerguntaService.findAll());
+    }
+
+    @Override
+    public Page<TemplatePerguntaDTO> findAllPaginated(Pageable pageable) {
+        return null;
     }
 
     @Override

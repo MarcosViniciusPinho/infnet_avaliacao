@@ -15,7 +15,7 @@ import java.util.List;
  * {@inheritDoc}
  */
 @Service
-public class TemplateTopicoService extends CrudService<TemplateTopicoDTO, TemplateTopico> implements ITemplateTopicoService {
+public class TemplateTopicoServiceImpl extends CrudServiceImpl<TemplateTopicoDTO, TemplateTopico> implements ITemplateTopicoService {
 
     @Resource
     private ITemplateTopicoRepository templateTopicoRepository;

@@ -3,6 +3,8 @@ package com.infnet.avaliacao.business.facade.impl;
 import com.infnet.avaliacao.business.facade.ITemplateAvaliacaoFacade;
 import com.infnet.avaliacao.business.service.ITemplateAvaliacaoService;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -23,6 +25,11 @@ public class TemplateAvaliacaoFacade implements ITemplateAvaliacaoFacade {
     @Override
     public List<TemplateAvaliacaoDTO> findAll() {
         return TemplateAvaliacaoDTO.convertListEntityToListDto(this.templateAvaliacaoService.findAll());
+    }
+
+    @Override
+    public Page<TemplateAvaliacaoDTO> findAllPaginated(Pageable pageable) {
+        return null;
     }
 
     @Override

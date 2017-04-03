@@ -5,13 +5,15 @@ import com.infnet.avaliacao.dto.IDTO;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import com.infnet.avaliacao.repository.ICrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 /**
  * Classe que representa o serviço generico
  */
-public class CrudService<V extends IDTO<T>, T> implements ICrudService<V, T>{
+public class CrudServiceImpl<V extends IDTO<T>, T> implements ICrudService<V, T>{
 
     @Autowired
     private ICrudRepository<T> crudRepository;
@@ -33,6 +35,14 @@ public class CrudService<V extends IDTO<T>, T> implements ICrudService<V, T>{
     public T findById(Long id) {
         ParameterExceptionUtil.validateObjectNull(id);
         return this.crudRepository.getOne(id);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Page<T> findAllPaginated(Pageable pageable) {
+        return this.crudRepository.findAll(pageable);
     }
 
     /**

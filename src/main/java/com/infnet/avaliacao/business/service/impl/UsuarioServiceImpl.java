@@ -17,7 +17,7 @@ import java.util.Set;
  * {@inheritDoc}
  */
 @Service
-public class UsuarioService extends CrudService<UsuarioDTO, Usuario> implements IUsuarioService {
+public class UsuarioServiceImpl extends CrudServiceImpl<UsuarioDTO, Usuario> implements IUsuarioService {
 
     @Resource
     private IUsuarioRepository usuarioRepository;

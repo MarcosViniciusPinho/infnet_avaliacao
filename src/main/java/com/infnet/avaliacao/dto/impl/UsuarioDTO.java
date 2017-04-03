@@ -6,6 +6,9 @@ import com.infnet.avaliacao.entity.Usuario;
 import com.infnet.avaliacao.entity.domain.PerfilEnum;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.apache.commons.collections.CollectionUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +74,22 @@ public class UsuarioDTO implements IDTO<Usuario> {
             }
         }
         return lista;
+    }
+
+    /**
+     * Método que converte uma lista de entidade para uma lista de dto.
+     * @param entities entities
+     * @param pageable pageable
+     * @return Page<UsuarioDTO>
+     */
+    public static Page<UsuarioDTO> convertPageEntityToPageDto(Page<Usuario> entities, Pageable pageable){
+        List<UsuarioDTO> lista = new ArrayList<>();
+        if(CollectionUtils.isNotEmpty(entities.getContent())){
+            for(Usuario usuario : entities.getContent()){
+                lista.add(toDto(usuario));
+            }
+        }
+        return new PageImpl<>(lista, pageable, entities.getTotalElements());
     }
 
     /**

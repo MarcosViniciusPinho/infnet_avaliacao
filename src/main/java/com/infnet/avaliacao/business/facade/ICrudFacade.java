@@ -1,5 +1,8 @@
 package com.infnet.avaliacao.business.facade;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 
 /**
@@ -25,5 +28,11 @@ public interface ICrudFacade<V> {
      * @return List<V>
      */
     List<V> findAll();
+
+    /**
+     * Método que lista todos os registros no banco
+     * @return Page<V>
+     */
+    Page<V> findAllPaginated(Pageable pageable);
 
 }
