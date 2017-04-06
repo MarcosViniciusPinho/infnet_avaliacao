@@ -41,7 +41,7 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      * @return ModelAndView
      */
     @RequestMapping(value = ActionConstant.ACTION_LIST)
-    public ModelAndView list(@PageableDefault(size = 2) Pageable pageable){
+    public ModelAndView list(@PageableDefault Pageable pageable){
         try {
             ModelAndView mv = new ModelAndView(getViewList());
             mv.addObject(LISTAR_TEMPLATE_AVALIACAO, this.templateAvaliacaoFacade.findAllPaginated(pageable));
@@ -66,12 +66,20 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      * {@inheritDoc}
      */
     @Override
+    protected void onLoadViewPaginated(Model model, Pageable pageable){
+        model.addAttribute(LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAllPaginated(pageable));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected void onLoadView(Model model){
         model.addAttribute(LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAll());
     }
 
-    private void onEdit(Long id, Model model){
-        this.onLoadView(model);
+    private void onEdit(Long id, Model model, Pageable pageable){
+        this.onLoadViewPaginated(model, pageable);
         TemplateAvaliacaoDTO templateAvaliacaoDTO = this.templateAvaliacaoFacade.findById(id);
         model.addAttribute(templateAvaliacaoDTO.carregarTopicosCadastradosParaFicarSelecionados());
     }
@@ -83,8 +91,8 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      * @return String
      */
     @RequestMapping(value = ActionConstant.ACTION_EDIT)
-    public String prepareUpdate(@PathVariable Long id, Model model){
-        this.onEdit(id, model);
+    public String prepareUpdate(@PathVariable Long id, Model model, @PageableDefault Pageable pageable){
+        this.onEdit(id, model, pageable);
         return getViewForm();
     }
 
@@ -111,8 +119,8 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      * @return String
      */
     @RequestMapping(value = ActionConstant.ACTION_ERROR)
-    public String prepareError(@PathVariable Long id, Model model){
-        this.onError(id, model);
+    public String prepareError(@PathVariable Long id, Model model, @PageableDefault Pageable pageable){
+        this.onError(id, model, pageable);
         return getViewForm();
     }
 
@@ -133,9 +141,9 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      * @param id id
      * @param model model
      */
-    private void onError(Long id, Model model){
+    private void onError(Long id, Model model, Pageable pageable){
         model.addAttribute(this.templateAvaliacaoFacade.findById(id));
-        this.onLoadView(model);
+        this.onLoadViewPaginated(model, pageable);
     }
 
     /**

@@ -8,6 +8,7 @@ import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -125,6 +126,11 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
     @Override
     protected String getRedirectViewError(){
         return REDIRECT_LIST + getPathView() + ActionConstant.ACTION_ERROR_CUSTOM;
+    }
+
+    @Override
+    protected void onLoadViewPaginated(Model model, Pageable pageable) {
+        model.addAttribute(LISTAR_TEMPLATE_PERGUNTA, templatePerguntaFacade.findAllPaginated(pageable));
     }
 
     /**

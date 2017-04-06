@@ -2,6 +2,8 @@ package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.controller.util.ActionConstant;
 import com.infnet.avaliacao.controller.util.MessageConstant;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +23,7 @@ public abstract class TemplateController<V> extends InitController<V> {
      * @return String
      */
     @RequestMapping(value = ActionConstant.ACTION_SAVE, method = RequestMethod.POST)
-    public String save(V entity, RedirectAttributes redirectAttributes, Model model){
+    public String save(V entity, RedirectAttributes redirectAttributes, Model model, @PageableDefault Pageable pageable){
         try{
             this.onForm(entity, model, redirectAttributes);
             this.getFacade().save(entity);
@@ -29,7 +31,7 @@ public abstract class TemplateController<V> extends InitController<V> {
             return this.getRedirectViewEdit();
         } catch (RuntimeException ex) {
             redirectAttributes.addFlashAttribute(MessageConstant.ERROR, ex.getLocalizedMessage());
-            this.onLoadView(model);
+            this.onLoadViewPaginated(model, pageable);
             return this.getRedirectViewError();
         }
     }
@@ -53,5 +55,12 @@ public abstract class TemplateController<V> extends InitController<V> {
      * @return String
      */
     protected abstract String getRedirectViewError();
+
+    /**
+     * Método para carregar informações em comum para as telas de Salvar e Alterar.
+     * @param model model
+     * @param pageable pageable
+     */
+    protected abstract void onLoadViewPaginated(Model model, Pageable pageable);
 
 }

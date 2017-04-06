@@ -34,7 +34,7 @@ public class TemplateTopicoFacade implements ITemplateTopicoFacade {
 
     @Override
     public Page<TemplateTopicoDTO> findAllPaginated(Pageable pageable) {
-        return null;
+        return TemplateTopicoDTO.convertPageEntityToPageDto(this.templateTopicoService.findAllPaginated(pageable), pageable);
     }
 
     @Override
