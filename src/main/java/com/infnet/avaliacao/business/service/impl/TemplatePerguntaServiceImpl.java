@@ -8,6 +8,7 @@ import com.infnet.avaliacao.entity.TemplateAvaliacaoTopicoPergunta;
 import com.infnet.avaliacao.entity.TemplatePergunta;
 import com.infnet.avaliacao.repository.ITemplateAvaliacaoTopicoPerguntaRepository;
 import com.infnet.avaliacao.repository.ITemplatePerguntaRepository;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -37,9 +38,9 @@ public class TemplatePerguntaServiceImpl extends CrudServiceImpl<TemplatePergunt
      * {@inheritDoc}
      */
     @Override
-    public List<TemplatePerguntaDTO> findAllComCheckedPerguntasMarcadas(TemplateTopicoDTO templateTopicoDTO,
-                                                                        TemplateAvaliacaoDTO templateAvaliacaoDTO) {
-        List<TemplatePerguntaDTO> templatePerguntaDTOList = TemplatePerguntaDTO.convertListEntityToListDto(templatePerguntaRepository.findAll());
+    public Page<TemplatePerguntaDTO> findAllComCheckedPerguntasMarcadas(TemplateTopicoDTO templateTopicoDTO,
+                                                                        TemplateAvaliacaoDTO templateAvaliacaoDTO,
+                                                                        Page<TemplatePerguntaDTO> templatePerguntaDTOList) {
         for(TemplatePerguntaDTO templatePerguntaDTO : templatePerguntaDTOList){
             TemplateAvaliacaoTopicoPergunta templateAvaliacaoTopicoPergunta = this.templateAvaliacaoTopicoPerguntaRepository.
                     findByTemplateAvaliacaoAndTemplateTopicoAndTemplatePerguntaEquals(templateAvaliacaoDTO.toEntity(),

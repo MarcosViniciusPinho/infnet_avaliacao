@@ -4,6 +4,7 @@ import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
 import com.infnet.avaliacao.entity.TemplatePergunta;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -23,9 +24,11 @@ public interface ITemplatePerguntaService extends ICrudService<TemplatePerguntaD
      * Método que lista as perguntas com seu checkbox devidamente associado ao seu respectivo topico de uma avaliação.
      * @param templateTopicoDTO templateTopicoDTO
      * @param templateAvaliacaoDTO templateAvaliacaoDTO
-     * @return List<TemplatePerguntaDTO>
+     * @param templatePerguntaDTOList templatePerguntaDTOList
+     * @return Page<TemplatePerguntaDTO>
      */
-    List<TemplatePerguntaDTO> findAllComCheckedPerguntasMarcadas(TemplateTopicoDTO templateTopicoDTO,
-                                                                 TemplateAvaliacaoDTO templateAvaliacaoDTO);
+    Page<TemplatePerguntaDTO> findAllComCheckedPerguntasMarcadas(TemplateTopicoDTO templateTopicoDTO,
+                                                                 TemplateAvaliacaoDTO templateAvaliacaoDTO,
+                                                                 Page<TemplatePerguntaDTO> templatePerguntaDTOList);
 
 }

@@ -9,6 +9,7 @@ import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -61,7 +62,7 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
         model.addAttribute(LISTAR_TEMPLATE_PERGUNTA, templatePerguntaFacade.findAll());
     }
 
-    private void onEdit(Long id, Long idAvaliacao, Model model){
+    private void onEdit(Long id, Long idAvaliacao, Model model, Pageable pageable){
         TemplateTopicoDTO templateTopicoDTO = this.templateTopicoFacade.findById(id);
         templateTopicoDTO.setIdAvaliacao(idAvaliacao);
         TemplateAvaliacaoDTO templateAvaliacaoDTO = this.templateAvaliacaoFacade.findById(idAvaliacao);
@@ -69,7 +70,7 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
         model.addAttribute(templateTopicoDTO);
         model.addAttribute(LISTAR_TEMPLATE_PERGUNTA,
                 this.templatePerguntaFacade.findAllComCheckedPerguntasMarcadas(
-                        templateTopicoDTO, templateAvaliacaoDTO));
+                        templateTopicoDTO, templateAvaliacaoDTO, pageable));
     }
 
     /**
@@ -80,8 +81,8 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
      * @return String
      */
     @RequestMapping(value = ActionConstant.ACTION_EDIT_CUSTOM)
-    public String prepareUpdate(@PathVariable Long id, @PathVariable Long idAvaliacao, Model model){
-        this.onEdit(id, idAvaliacao, model);
+    public String prepareUpdate(@PathVariable Long id, @PathVariable Long idAvaliacao, Model model, @PageableDefault Pageable pageable){
+        this.onEdit(id, idAvaliacao, model, pageable);
         return getViewForm();
     }
 
@@ -93,23 +94,23 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
      * @return String
      */
     @RequestMapping(value = ActionConstant.ACTION_ERROR_CUSTOM)
-    public String prepareError(@PathVariable Long id, @PathVariable Long idAvaliacao, Model model){
-        this.onErrorOrDetail(id, idAvaliacao, model);
+    public String prepareError(@PathVariable Long id, @PathVariable Long idAvaliacao, Model model, @PageableDefault Pageable pageable){
+        this.onError(id, idAvaliacao, model, pageable);
         return getViewForm();
     }
 
     /**
-     * Método usado para quando houver uma exceção na tela de form e também reaproveitado para ser usado no momento de detalhar.
+     * Método usado para quando houver uma exceção na tela de form.
      * @param id id
      * @param idAvaliacao idAvaliacao
      * @param model model
      */
-    private void onErrorOrDetail(Long id, Long idAvaliacao, Model model){
+    private void onError(Long id, Long idAvaliacao, Model model, Pageable pageable){
         TemplateTopicoDTO templateTopicoDTO = this.templateTopicoFacade.findById(id);
         templateTopicoDTO.setIdAvaliacao(idAvaliacao);
         model.addAttribute(templateTopicoDTO);
         model.addAttribute(this.templateAvaliacaoFacade.findById(idAvaliacao));
-        this.onLoadView(model);
+        this.onLoadViewPaginated(model, pageable);
     }
 
     /**

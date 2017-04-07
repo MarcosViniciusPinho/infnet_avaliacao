@@ -4,6 +4,8 @@ import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoTopicoPerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -27,9 +29,11 @@ public interface ITemplatePerguntaFacade extends ICrudFacade<TemplatePerguntaDTO
      * Método que lista as perguntas com seu checkbox devidamente associado ao seu respectivo topico de uma avaliação.
      * @param templateTopicoDTO templateTopicoDTO
      * @param templateAvaliacaoDTO templateAvaliacaoDTO
-     * @return List<TemplatePerguntaDTO>
+     * @param pageable pageable
+     * @return Page<TemplatePerguntaDTO>
      */
-    List<TemplatePerguntaDTO> findAllComCheckedPerguntasMarcadas(TemplateTopicoDTO templateTopicoDTO,
-                                                                 TemplateAvaliacaoDTO templateAvaliacaoDTO);
+    Page<TemplatePerguntaDTO> findAllComCheckedPerguntasMarcadas(TemplateTopicoDTO templateTopicoDTO,
+                                                                 TemplateAvaliacaoDTO templateAvaliacaoDTO,
+                                                                 Pageable pageable);
 
 }

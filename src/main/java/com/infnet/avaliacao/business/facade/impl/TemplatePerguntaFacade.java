@@ -34,11 +34,17 @@ public class TemplatePerguntaFacade implements ITemplatePerguntaFacade {
         return TemplatePerguntaDTO.convertListEntityToListDto(this.templatePerguntaService.findAll());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Page<TemplatePerguntaDTO> findAllPaginated(Pageable pageable) {
-        return null;
+        return TemplatePerguntaDTO.convertPageEntityToPageDto(this.templatePerguntaService.findAllPaginated(pageable), pageable);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void save(TemplatePerguntaDTO dto) {
         this.templatePerguntaService.save(dto);
@@ -75,9 +81,11 @@ public class TemplatePerguntaFacade implements ITemplatePerguntaFacade {
      * {@inheritDoc}
      */
     @Override
-    public List<TemplatePerguntaDTO> findAllComCheckedPerguntasMarcadas(TemplateTopicoDTO templateTopicoDTO,
-                                                                        TemplateAvaliacaoDTO templateAvaliacaoDTO) {
-        return this.templatePerguntaService.findAllComCheckedPerguntasMarcadas(templateTopicoDTO, templateAvaliacaoDTO);
+    public Page<TemplatePerguntaDTO> findAllComCheckedPerguntasMarcadas(TemplateTopicoDTO templateTopicoDTO,
+                                                                        TemplateAvaliacaoDTO templateAvaliacaoDTO,
+                                                                        Pageable pageable) {
+        Page<TemplatePerguntaDTO> templatePerguntaDTOList = this.findAllPaginated(pageable);
+        return this.templatePerguntaService.findAllComCheckedPerguntasMarcadas(templateTopicoDTO, templateAvaliacaoDTO, templatePerguntaDTOList);
     }
 
 }

@@ -32,11 +32,17 @@ public class TemplateTopicoFacade implements ITemplateTopicoFacade {
                 this.templateTopicoService.findAll());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Page<TemplateTopicoDTO> findAllPaginated(Pageable pageable) {
         return TemplateTopicoDTO.convertPageEntityToPageDto(this.templateTopicoService.findAllPaginated(pageable), pageable);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void save(TemplateTopicoDTO dto) {
         this.templateTopicoService.save(dto);
