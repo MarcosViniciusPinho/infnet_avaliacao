@@ -1,7 +1,7 @@
 package com.infnet.avaliacao.dto.impl;
 
 import com.infnet.avaliacao.controller.wrapper.PerguntaAssociadaWrapper;
-import com.infnet.avaliacao.dto.IDTO;
+import com.infnet.avaliacao.dto.DTO;
 import com.infnet.avaliacao.dto.util.ConversorBinarioUtil;
 import com.infnet.avaliacao.entity.Avaliacao;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
@@ -10,7 +10,7 @@ import org.apache.commons.collections.CollectionUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AvaliacaoDTO implements IDTO<Avaliacao> {
+public class AvaliacaoDTO implements DTO<Avaliacao> {
 
     private static final long serialVersionUID = 1L;
 

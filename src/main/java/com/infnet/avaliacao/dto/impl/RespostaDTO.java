@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.dto.impl;
 
-import com.infnet.avaliacao.dto.IDTO;
+import com.infnet.avaliacao.dto.DTO;
 import com.infnet.avaliacao.entity.Avaliacao;
 import com.infnet.avaliacao.entity.Resposta;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
@@ -9,7 +9,7 @@ import org.apache.commons.collections.CollectionUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RespostaDTO implements IDTO<Resposta> {
+public class RespostaDTO implements DTO<Resposta> {
 
     private static final long serialVersionUID = 1L;
 

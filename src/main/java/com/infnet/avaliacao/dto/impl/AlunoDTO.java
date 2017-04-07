@@ -1,11 +1,11 @@
 package com.infnet.avaliacao.dto.impl;
 
 
-import com.infnet.avaliacao.dto.IDTO;
+import com.infnet.avaliacao.dto.DTO;
 import com.infnet.avaliacao.entity.Aluno;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 
-public class AlunoDTO implements IDTO<Aluno> {
+public class AlunoDTO implements DTO<Aluno> {
 
     private static final long serialVersionUID = 1L;
 

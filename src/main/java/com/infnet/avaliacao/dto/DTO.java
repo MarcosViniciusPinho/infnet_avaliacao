@@ -2,7 +2,7 @@ package com.infnet.avaliacao.dto;
 
 import java.io.Serializable;
 
-public interface IDTO<T> extends Serializable {
+public interface DTO<T> extends Serializable {
 
     /**
      * Método que converte um dto para uma entidade.

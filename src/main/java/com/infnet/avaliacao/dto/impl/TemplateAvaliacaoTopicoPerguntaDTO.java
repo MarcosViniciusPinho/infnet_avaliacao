@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.dto.impl;
 
-import com.infnet.avaliacao.dto.IDTO;
+import com.infnet.avaliacao.dto.DTO;
 import com.infnet.avaliacao.entity.TemplateAvaliacao;
 import com.infnet.avaliacao.entity.TemplateAvaliacaoTopicoPergunta;
 import com.infnet.avaliacao.entity.TemplatePergunta;
@@ -11,7 +11,7 @@ import org.apache.commons.collections.CollectionUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TemplateAvaliacaoTopicoPerguntaDTO implements IDTO<TemplateAvaliacaoTopicoPergunta> {
+public class TemplateAvaliacaoTopicoPerguntaDTO implements DTO<TemplateAvaliacaoTopicoPergunta> {
 
     private static final long serialVersionUID = 1L;
 

@@ -1,7 +1,7 @@
 package com.infnet.avaliacao.dto.impl;
 
 
-import com.infnet.avaliacao.dto.IDTO;
+import com.infnet.avaliacao.dto.DTO;
 import com.infnet.avaliacao.entity.Usuario;
 import com.infnet.avaliacao.entity.domain.PerfilEnum;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Classe que representa a tela de usuario.
  */
-public class UsuarioDTO implements IDTO<Usuario> {
+public class UsuarioDTO implements DTO<Usuario> {
 
     private static final long serialVersionUID = 1L;
 

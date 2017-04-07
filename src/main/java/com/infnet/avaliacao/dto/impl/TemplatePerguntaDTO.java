@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.dto.impl;
 
-import com.infnet.avaliacao.dto.IDTO;
+import com.infnet.avaliacao.dto.DTO;
 import com.infnet.avaliacao.dto.domain.MultiplaEscolhaEnum;
 import com.infnet.avaliacao.entity.TemplatePergunta;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TemplatePerguntaDTO implements IDTO<TemplatePergunta> {
+public class TemplatePerguntaDTO implements DTO<TemplatePergunta> {
 
     private static final long serialVersionUID = 1L;
 
