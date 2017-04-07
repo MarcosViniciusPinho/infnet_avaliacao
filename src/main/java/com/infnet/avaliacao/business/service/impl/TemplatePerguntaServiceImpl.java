@@ -6,8 +6,8 @@ import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
 import com.infnet.avaliacao.entity.TemplateAvaliacaoTopicoPergunta;
 import com.infnet.avaliacao.entity.TemplatePergunta;
-import com.infnet.avaliacao.repository.ITemplateAvaliacaoTopicoPerguntaRepository;
-import com.infnet.avaliacao.repository.ITemplatePerguntaRepository;
+import com.infnet.avaliacao.repository.TemplateAvaliacaoTopicoPerguntaRepository;
+import com.infnet.avaliacao.repository.TemplatePerguntaRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +21,10 @@ import java.util.List;
 public class TemplatePerguntaServiceImpl extends CrudServiceImpl<TemplatePerguntaDTO, TemplatePergunta> implements ITemplatePerguntaService {
 
     @Resource
-    private ITemplatePerguntaRepository templatePerguntaRepository;
+    private TemplatePerguntaRepository templatePerguntaRepository;
 
     @Resource
-    private ITemplateAvaliacaoTopicoPerguntaRepository templateAvaliacaoTopicoPerguntaRepository;
+    private TemplateAvaliacaoTopicoPerguntaRepository templateAvaliacaoTopicoPerguntaRepository;
 
     /**
      * {@inheritDoc}

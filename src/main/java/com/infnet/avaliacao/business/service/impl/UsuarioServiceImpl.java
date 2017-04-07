@@ -6,7 +6,7 @@ import com.infnet.avaliacao.entity.Usuario;
 import com.infnet.avaliacao.exception.BusinessException;
 import com.infnet.avaliacao.exception.UniqueException;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
-import com.infnet.avaliacao.repository.IUsuarioRepository;
+import com.infnet.avaliacao.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,7 +20,7 @@ import java.util.Set;
 public class UsuarioServiceImpl extends CrudServiceImpl<UsuarioDTO, Usuario> implements IUsuarioService {
 
     @Resource
-    private IUsuarioRepository usuarioRepository;
+    private UsuarioRepository usuarioRepository;
 
     /**
      * {@inheritDoc}

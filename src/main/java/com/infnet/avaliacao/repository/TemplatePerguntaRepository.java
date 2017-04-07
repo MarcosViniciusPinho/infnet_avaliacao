@@ -9,7 +9,7 @@ import java.util.List;
  * Classe que serve para fazer as operações de CRUD para a tabela de template pergunta.
  */
 @Repository
-public interface ITemplatePerguntaRepository extends ICrudRepository<TemplatePergunta> {
+public interface TemplatePerguntaRepository extends CrudRepository<TemplatePergunta> {
 
     /**
      * Recupera os templates pergunta a partir de uma lista de seus respectivos ids.

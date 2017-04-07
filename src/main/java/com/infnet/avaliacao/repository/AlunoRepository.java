@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
  * Classe que serve para fazer as operações de CRUD para a tabela de aluno.
  */
 @Repository
-public interface IAlunoRepository extends ICrudRepository<Aluno> {
+public interface AlunoRepository extends CrudRepository<Aluno> {
 
     /**
      * Método que busca um aluno a partir de seu cpf

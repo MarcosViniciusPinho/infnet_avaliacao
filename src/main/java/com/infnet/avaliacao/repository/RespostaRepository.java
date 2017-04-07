@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
  * Classe que serve para fazer as operações de CRUD para a tabela de resposta.
  */
 @Repository
-public interface IRespostaRepository extends ICrudRepository<Resposta> {
+public interface RespostaRepository extends CrudRepository<Resposta> {
 }

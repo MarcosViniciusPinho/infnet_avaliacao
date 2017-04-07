@@ -6,7 +6,7 @@ import com.infnet.avaliacao.entity.Aluno;
 import com.infnet.avaliacao.entity.Avaliacao;
 import com.infnet.avaliacao.entity.Turma;
 import com.infnet.avaliacao.exception.UniqueException;
-import com.infnet.avaliacao.repository.IAvaliacaoRepository;
+import com.infnet.avaliacao.repository.AvaliacaoRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 public class AvaliacaoService implements IAvaliacaoService {
 
     @Resource
-    private IAvaliacaoRepository avaliacaoRepository;
+    private AvaliacaoRepository avaliacaoRepository;
 
     /**
      * {@inheritDoc}

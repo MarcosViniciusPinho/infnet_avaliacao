@@ -3,7 +3,7 @@ package com.infnet.avaliacao.business.service.impl;
 import com.infnet.avaliacao.business.service.ITurmaService;
 import com.infnet.avaliacao.entity.Turma;
 import com.infnet.avaliacao.exception.NotFoundException;
-import com.infnet.avaliacao.repository.ITurmaRepository;
+import com.infnet.avaliacao.repository.TurmaRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 public class TurmaService implements ITurmaService {
 
     @Resource
-    private ITurmaRepository turmaRepository;
+    private TurmaRepository turmaRepository;
 
     /**
      * {@inheritDoc}

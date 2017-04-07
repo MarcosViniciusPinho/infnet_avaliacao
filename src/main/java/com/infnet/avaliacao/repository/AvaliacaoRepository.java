@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * Classe que serve para fazer as operações de CRUD para a tabela de avaliação.
  */
 @Repository
-public interface IAvaliacaoRepository extends ICrudRepository<Avaliacao> {
+public interface AvaliacaoRepository extends CrudRepository<Avaliacao> {
 
     /**
      * Método que verifica se um aluno já realizou a avaliação para aquela turma.

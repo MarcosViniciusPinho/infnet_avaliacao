@@ -4,8 +4,8 @@ import com.infnet.avaliacao.business.service.IRespostaService;
 import com.infnet.avaliacao.dto.impl.RespostaDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import com.infnet.avaliacao.entity.Avaliacao;
-import com.infnet.avaliacao.repository.IRespostaRepository;
-import com.infnet.avaliacao.repository.ITemplatePerguntaRepository;
+import com.infnet.avaliacao.repository.RespostaRepository;
+import com.infnet.avaliacao.repository.TemplatePerguntaRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,10 +18,10 @@ import java.util.List;
 public class RespostaService implements IRespostaService {
 
     @Resource
-    private IRespostaRepository respostaRepository;
+    private RespostaRepository respostaRepository;
 
     @Resource
-    private ITemplatePerguntaRepository templatePerguntaRepository;
+    private TemplatePerguntaRepository templatePerguntaRepository;
 
     /**
      * {@inheritDoc}

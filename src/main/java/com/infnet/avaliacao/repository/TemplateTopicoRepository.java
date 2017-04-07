@@ -9,7 +9,7 @@ import java.util.List;
  * Classe que serve para fazer as operações de CRUD para a tabela de template topico.
  */
 @Repository
-public interface ITemplateTopicoRepository extends ICrudRepository<TemplateTopico> {
+public interface TemplateTopicoRepository extends CrudRepository<TemplateTopico> {
 
     /**
      * Recupera os templates topicos a partir de uma lista de seus respectivos ids.

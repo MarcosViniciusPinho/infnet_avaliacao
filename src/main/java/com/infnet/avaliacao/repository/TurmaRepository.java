@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * Classe que serve para fazer as operações de CRUD para a tabela de turma.
  */
 @Repository
-public interface ITurmaRepository extends ICrudRepository<Turma> {
+public interface TurmaRepository extends CrudRepository<Turma> {
 
     /**
      * Houve necessidade de criar um SQL pois o mapeamento do hibernate inviabilizou a busca de turmas associadas a tabela associativa

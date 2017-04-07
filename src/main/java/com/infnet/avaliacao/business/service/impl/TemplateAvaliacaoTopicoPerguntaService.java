@@ -6,7 +6,7 @@ import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoTopicoPerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
 import com.infnet.avaliacao.entity.TemplateAvaliacaoTopicoPergunta;
-import com.infnet.avaliacao.repository.ITemplateAvaliacaoTopicoPerguntaRepository;
+import com.infnet.avaliacao.repository.TemplateAvaliacaoTopicoPerguntaRepository;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,7 @@ import java.util.List;
 public class TemplateAvaliacaoTopicoPerguntaService implements ITemplateAvaliacaoTopicoPerguntaService {
 
     @Resource
-    private ITemplateAvaliacaoTopicoPerguntaRepository templateAvaliacaoTopicoPerguntaRepository;
+    private TemplateAvaliacaoTopicoPerguntaRepository templateAvaliacaoTopicoPerguntaRepository;
 
     /**
      * {@inheritDoc}

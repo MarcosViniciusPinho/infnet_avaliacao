@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.repository.impl;
 
-import com.infnet.avaliacao.repository.IPageRepository;
+import com.infnet.avaliacao.repository.PageRepository;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-public abstract class PageRepositoryImpl<T> implements IPageRepository<T>{
+public abstract class PageRepositoryImpl<T> implements PageRepository<T> {
 
     @PersistenceContext
     private EntityManager entityManager;

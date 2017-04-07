@@ -12,7 +12,7 @@ import java.util.List;
  * Classe que serve para fazer as operações de CRUD para a tabela associativa entre Template Avaliação, Template Tópico e Template Pergunta
  */
 @Repository
-public interface ITemplateAvaliacaoTopicoPerguntaRepository extends ICrudRepository<TemplateAvaliacaoTopicoPergunta> {
+public interface TemplateAvaliacaoTopicoPerguntaRepository extends CrudRepository<TemplateAvaliacaoTopicoPergunta> {
 
     TemplateAvaliacaoTopicoPergunta findByTemplateAvaliacaoAndTemplateTopicoAndTemplatePerguntaEquals(TemplateAvaliacao templateAvaliacao,
                                                                                                       TemplateTopico templateTopico,
