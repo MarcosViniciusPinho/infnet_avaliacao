@@ -2,7 +2,7 @@ package com.infnet.avaliacao.mailer;
 
 import javax.mail.MessagingException;
 
-public interface ISmtpMailSender {
+public interface SmtpMailSender {
 
     /**
      * Método de envio de e-mails para os alunos do infnet

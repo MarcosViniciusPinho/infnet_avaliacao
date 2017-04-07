@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.mailer.impl;
 
-import com.infnet.avaliacao.mailer.ISmtpMailSender;
+import com.infnet.avaliacao.mailer.SmtpMailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -10,7 +10,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 @Component
-public class SmtpMailSender implements ISmtpMailSender{
+public class SmtpMailSenderImpl implements SmtpMailSender {
 
     @Autowired
     private JavaMailSender javaMailSender;

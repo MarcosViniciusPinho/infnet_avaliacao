@@ -1,7 +1,7 @@
 package com.infnet.avaliacao.business.service.impl;
 
 import com.infnet.avaliacao.business.service.IEmailService;
-import com.infnet.avaliacao.mailer.ISmtpMailSender;
+import com.infnet.avaliacao.mailer.SmtpMailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import javax.mail.MessagingException;
 public class EmailService implements IEmailService{
 
     @Autowired
-    private ISmtpMailSender mailSender;
+    private SmtpMailSender mailSender;
 
     /**
      * {@inheritDoc}
