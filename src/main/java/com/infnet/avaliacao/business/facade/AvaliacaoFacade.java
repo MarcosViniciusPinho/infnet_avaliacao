@@ -7,7 +7,7 @@ import com.infnet.avaliacao.dto.impl.TurmaDTO;
 /**
  * Classe que representa o facade de avaliacao.
  */
-public interface IAvaliacaoFacade {
+public interface AvaliacaoFacade {
 
     /**
      * Método que salva/altera a entidade no banco.

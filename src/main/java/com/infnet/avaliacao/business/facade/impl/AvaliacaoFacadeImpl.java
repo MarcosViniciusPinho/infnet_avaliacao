@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.business.facade.impl;
 
-import com.infnet.avaliacao.business.facade.IAvaliacaoFacade;
+import com.infnet.avaliacao.business.facade.AvaliacaoFacade;
 import com.infnet.avaliacao.business.service.*;
 import com.infnet.avaliacao.dto.impl.*;
 import com.infnet.avaliacao.entity.Avaliacao;
@@ -14,7 +14,7 @@ import java.util.List;
  * {@inheritDoc}
  */
 @Service
-public class AvaliacaoFacade implements IAvaliacaoFacade {
+public class AvaliacaoFacadeImpl implements AvaliacaoFacade {
 
     @Resource
     private IAvaliacaoService avaliacaoService;

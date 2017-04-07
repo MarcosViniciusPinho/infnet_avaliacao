@@ -1,8 +1,8 @@
 package com.infnet.avaliacao.controller;
 
-import com.infnet.avaliacao.business.facade.ITemplateAvaliacaoFacade;
-import com.infnet.avaliacao.business.facade.ITemplatePerguntaFacade;
-import com.infnet.avaliacao.business.facade.ITemplateTopicoFacade;
+import com.infnet.avaliacao.business.facade.TemplateAvaliacaoFacade;
+import com.infnet.avaliacao.business.facade.TemplatePerguntaFacade;
+import com.infnet.avaliacao.business.facade.TemplateTopicoFacade;
 import com.infnet.avaliacao.controller.util.ActionConstant;
 import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
@@ -29,13 +29,13 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
     private static final String LISTAR_TEMPLATE_PERGUNTA = "listarTemplatePergunta";
 
     @Resource
-    private ITemplateTopicoFacade templateTopicoFacade;
+    private TemplateTopicoFacade templateTopicoFacade;
 
     @Resource
-    private ITemplatePerguntaFacade templatePerguntaFacade;
+    private TemplatePerguntaFacade templatePerguntaFacade;
 
     @Resource
-    private ITemplateAvaliacaoFacade templateAvaliacaoFacade;
+    private TemplateAvaliacaoFacade templateAvaliacaoFacade;
 
     /**
      * {@inheritDoc}
@@ -146,7 +146,7 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
      * {@inheritDoc}
      */
     @Override
-    protected ITemplateTopicoFacade getFacade() {
+    protected TemplateTopicoFacade getFacade() {
         return templateTopicoFacade;
     }
 

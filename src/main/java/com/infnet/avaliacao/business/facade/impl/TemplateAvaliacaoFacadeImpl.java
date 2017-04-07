@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.business.facade.impl;
 
-import com.infnet.avaliacao.business.facade.ITemplateAvaliacaoFacade;
+import com.infnet.avaliacao.business.facade.TemplateAvaliacaoFacade;
 import com.infnet.avaliacao.business.service.ITemplateAvaliacaoService;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import org.springframework.data.domain.Page;
@@ -14,7 +14,7 @@ import java.util.List;
  * {@inheritDoc}
  */
 @Service
-public class TemplateAvaliacaoFacade implements ITemplateAvaliacaoFacade {
+public class TemplateAvaliacaoFacadeImpl implements TemplateAvaliacaoFacade {
 
     @Resource
     private ITemplateAvaliacaoService templateAvaliacaoService;

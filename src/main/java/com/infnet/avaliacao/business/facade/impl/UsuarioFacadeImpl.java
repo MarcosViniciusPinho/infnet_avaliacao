@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.business.facade.impl;
 
-import com.infnet.avaliacao.business.facade.IUsuarioFacade;
+import com.infnet.avaliacao.business.facade.UsuarioFacade;
 import com.infnet.avaliacao.business.service.IUsuarioService;
 import com.infnet.avaliacao.dto.impl.UsuarioDTO;
 import org.springframework.data.domain.Page;
@@ -14,7 +14,7 @@ import java.util.List;
  * {@inheritDoc}
  */
 @Service
-public class UsuarioFacade implements IUsuarioFacade {
+public class UsuarioFacadeImpl implements UsuarioFacade {
 
     @Resource
     private IUsuarioService usuarioService;

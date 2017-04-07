@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Classe que representa o façade de template pergunta.
  */
-public interface ITemplatePerguntaFacade extends ICrudFacade<TemplatePerguntaDTO> {
+public interface TemplatePerguntaFacade extends CrudFacade<TemplatePerguntaDTO> {
 
     /**
      * Recupera a lista de templates pergunta a partir de uma lista de seus respectivos ids.

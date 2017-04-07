@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Classe que representa o façade de template topico.
  */
-public interface ITemplateTopicoFacade extends ICrudFacade<TemplateTopicoDTO> {
+public interface TemplateTopicoFacade extends CrudFacade<TemplateTopicoDTO> {
 
     /**
      * Recupera a lista de templates topicos a partir de uma lista de seus respectivos ids.

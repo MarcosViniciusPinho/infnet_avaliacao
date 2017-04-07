@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Classe que representa o facade generico
  */
-public interface ICrudFacade<V> {
+public interface CrudFacade<V> {
 
     /**
      * Método que salva/altera a entidade no banco.

@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.controller;
 
-import com.infnet.avaliacao.business.facade.IUsuarioFacade;
+import com.infnet.avaliacao.business.facade.UsuarioFacade;
 import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.dto.impl.UsuarioDTO;
 import com.infnet.avaliacao.entity.domain.PerfilEnum;
@@ -24,7 +24,7 @@ public class UsuarioController extends CadastroController<UsuarioDTO>{
     private static final String LISTAR_PERFIS = "listarPerfis";
 
     @Resource
-    private IUsuarioFacade usuarioFacade;
+    private UsuarioFacade usuarioFacade;
 
     /**
      * {@inheritDoc}
@@ -78,7 +78,7 @@ public class UsuarioController extends CadastroController<UsuarioDTO>{
      * {@inheritDoc}
      */
     @Override
-    protected IUsuarioFacade getFacade() {
+    protected UsuarioFacade getFacade() {
         return usuarioFacade;
     }
 

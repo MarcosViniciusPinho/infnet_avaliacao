@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.business.facade.impl;
 
-import com.infnet.avaliacao.business.facade.ITemplateTopicoFacade;
+import com.infnet.avaliacao.business.facade.TemplateTopicoFacade;
 import com.infnet.avaliacao.business.service.ITemplateAvaliacaoTopicoPerguntaService;
 import com.infnet.avaliacao.business.service.ITemplateTopicoService;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
@@ -15,7 +15,7 @@ import java.util.List;
  * {@inheritDoc}
  */
 @Service
-public class TemplateTopicoFacade implements ITemplateTopicoFacade {
+public class TemplateTopicoFacadeImpl implements TemplateTopicoFacade {
 
     @Resource
     private ITemplateTopicoService templateTopicoService;

@@ -1,7 +1,7 @@
 package com.infnet.avaliacao.controller;
 
-import com.infnet.avaliacao.business.facade.ITemplateAvaliacaoFacade;
-import com.infnet.avaliacao.business.facade.ITemplateTopicoFacade;
+import com.infnet.avaliacao.business.facade.TemplateAvaliacaoFacade;
+import com.infnet.avaliacao.business.facade.TemplateTopicoFacade;
 import com.infnet.avaliacao.controller.util.ActionConstant;
 import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.controller.wrapper.PerguntaAssociadaWrapper;
@@ -31,10 +31,10 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
     private static final String LISTAR_TEMPLATE_TOPICO = "listarTemplateTopico";
 
     @Resource
-    private ITemplateAvaliacaoFacade templateAvaliacaoFacade;
+    private TemplateAvaliacaoFacade templateAvaliacaoFacade;
 
     @Resource
-    private ITemplateTopicoFacade templateTopicoFacade;
+    private TemplateTopicoFacade templateTopicoFacade;
 
     /**
      * Método que faz a listagem dos registros na tela.
@@ -172,7 +172,7 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      * {@inheritDoc}
      */
     @Override
-    protected ITemplateAvaliacaoFacade getFacade() {
+    protected TemplateAvaliacaoFacade getFacade() {
         return templateAvaliacaoFacade;
     }
 

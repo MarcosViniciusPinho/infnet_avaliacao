@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.controller;
 
-import com.infnet.avaliacao.business.facade.IAvaliacaoFacade;
+import com.infnet.avaliacao.business.facade.AvaliacaoFacade;
 import com.infnet.avaliacao.controller.util.ActionConstant;
 import com.infnet.avaliacao.controller.util.MessageConstant;
 import com.infnet.avaliacao.controller.util.PathConstant;
@@ -30,7 +30,7 @@ public class RespostaAvaliacaoController {
     private static final String REDIRECT_LIST = "redirect:";
 
     @Resource
-    private IAvaliacaoFacade avaliacaoFacade;
+    private AvaliacaoFacade avaliacaoFacade;
 
     /**
      * Método que salva/altera uma entidade.
@@ -136,7 +136,7 @@ public class RespostaAvaliacaoController {
         return getPathView() + VIEW_AGRADECIMENTO;
     }
 
-    private IAvaliacaoFacade getFacade() {
+    private AvaliacaoFacade getFacade() {
         return this.avaliacaoFacade;
     }
 

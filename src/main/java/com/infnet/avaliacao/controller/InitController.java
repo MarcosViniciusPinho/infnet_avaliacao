@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.controller;
 
-import com.infnet.avaliacao.business.facade.ICrudFacade;
+import com.infnet.avaliacao.business.facade.CrudFacade;
 import org.springframework.ui.Model;
 
 /**
@@ -16,9 +16,9 @@ public abstract class InitController<V> {
 
     /**
      * Método que deverá ser sempre implementado por suas subclasses.
-     * @return ICrudFacade<T>
+     * @return CrudFacade<T>
      */
-    protected abstract ICrudFacade<V> getFacade();
+    protected abstract CrudFacade<V> getFacade();
 
     /**
      * Pega o contexto do controler que sera usado para view.
