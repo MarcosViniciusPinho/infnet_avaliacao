@@ -1,8 +1,8 @@
 package com.infnet.avaliacao.business.facade.impl;
 
 import com.infnet.avaliacao.business.facade.TemplateTopicoFacade;
-import com.infnet.avaliacao.business.service.ITemplateAvaliacaoTopicoPerguntaService;
-import com.infnet.avaliacao.business.service.ITemplateTopicoService;
+import com.infnet.avaliacao.business.service.TemplateAvaliacaoTopicoPerguntaService;
+import com.infnet.avaliacao.business.service.TemplateTopicoService;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,10 +18,10 @@ import java.util.List;
 public class TemplateTopicoFacadeImpl implements TemplateTopicoFacade {
 
     @Resource
-    private ITemplateTopicoService templateTopicoService;
+    private TemplateTopicoService templateTopicoService;
 
     @Resource
-    private ITemplateAvaliacaoTopicoPerguntaService templateAvaliacaoTopicoPerguntaService;
+    private TemplateAvaliacaoTopicoPerguntaService templateAvaliacaoTopicoPerguntaService;
 
     /**
      * {@inheritDoc}

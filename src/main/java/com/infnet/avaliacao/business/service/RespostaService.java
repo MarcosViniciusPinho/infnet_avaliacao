@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Classe que representa o serviço de resposta.
  */
-public interface IRespostaService {
+public interface RespostaService {
 
     /**
      * Método que salva a lista de entidade resposta no banco.

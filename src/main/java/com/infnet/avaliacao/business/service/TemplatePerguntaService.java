@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Classe que representa o serviço de template pergunta.
  */
-public interface ITemplatePerguntaService extends ICrudService<TemplatePerguntaDTO, TemplatePergunta> {
+public interface TemplatePerguntaService extends CrudService<TemplatePerguntaDTO, TemplatePergunta> {
 
     /**
      * Recupera a lista de templates perguntas a partir de uma lista de seus respectivos ids.

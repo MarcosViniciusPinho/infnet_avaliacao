@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.business.service.impl;
 
-import com.infnet.avaliacao.business.service.ITurmaService;
+import com.infnet.avaliacao.business.service.TurmaService;
 import com.infnet.avaliacao.entity.Turma;
 import com.infnet.avaliacao.exception.NotFoundException;
 import com.infnet.avaliacao.repository.TurmaRepository;
@@ -12,7 +12,7 @@ import javax.annotation.Resource;
  * {@inheritDoc}
  */
 @Service
-public class TurmaService implements ITurmaService {
+public class TurmaServiceImpl implements TurmaService {
 
     @Resource
     private TurmaRepository turmaRepository;

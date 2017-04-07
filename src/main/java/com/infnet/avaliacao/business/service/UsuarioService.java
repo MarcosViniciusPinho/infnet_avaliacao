@@ -6,7 +6,7 @@ import com.infnet.avaliacao.entity.Usuario;
 /**
  * Classe que representa o serviço de usuario.
  */
-public interface IUsuarioService extends ICrudService<UsuarioDTO, Usuario> {
+public interface UsuarioService extends CrudService<UsuarioDTO, Usuario> {
 
     /**
      * Método que exclui uma entidade de usuario.

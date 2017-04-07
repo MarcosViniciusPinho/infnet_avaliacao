@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.business.service.impl;
 
-import com.infnet.avaliacao.business.service.ITemplatePerguntaService;
+import com.infnet.avaliacao.business.service.TemplatePerguntaService;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
@@ -18,7 +18,7 @@ import java.util.List;
  * {@inheritDoc}
  */
 @Service
-public class TemplatePerguntaServiceImpl extends CrudServiceImpl<TemplatePerguntaDTO, TemplatePergunta> implements ITemplatePerguntaService {
+public class TemplatePerguntaServiceImpl extends CrudServiceImpl<TemplatePerguntaDTO, TemplatePergunta> implements TemplatePerguntaService {
 
     @Resource
     private TemplatePerguntaRepository templatePerguntaRepository;

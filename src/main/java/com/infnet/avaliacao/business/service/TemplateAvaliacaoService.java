@@ -6,5 +6,5 @@ import com.infnet.avaliacao.entity.TemplateAvaliacao;
 /**
  * Classe que representa o serviço de template avaliacao.
  */
-public interface ITemplateAvaliacaoService extends ICrudService<TemplateAvaliacaoDTO, TemplateAvaliacao> {
+public interface TemplateAvaliacaoService extends CrudService<TemplateAvaliacaoDTO, TemplateAvaliacao> {
 }

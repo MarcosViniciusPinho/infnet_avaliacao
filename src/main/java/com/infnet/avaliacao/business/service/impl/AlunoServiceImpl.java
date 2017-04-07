@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.business.service.impl;
 
-import com.infnet.avaliacao.business.service.IAlunoService;
+import com.infnet.avaliacao.business.service.AlunoService;
 import com.infnet.avaliacao.entity.Aluno;
 import com.infnet.avaliacao.exception.NotFoundException;
 import com.infnet.avaliacao.repository.AlunoRepository;
@@ -12,7 +12,7 @@ import javax.annotation.Resource;
  * {@inheritDoc}
  */
 @Service
-public class AlunoService implements IAlunoService {
+public class AlunoServiceImpl implements AlunoService {
 
     @Resource
     private AlunoRepository alunoRepository;

@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.business.service.impl;
 
-import com.infnet.avaliacao.business.service.IAvaliacaoService;
+import com.infnet.avaliacao.business.service.AvaliacaoService;
 import com.infnet.avaliacao.dto.impl.AvaliacaoDTO;
 import com.infnet.avaliacao.entity.Aluno;
 import com.infnet.avaliacao.entity.Avaliacao;
@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  * {@inheritDoc}
  */
 @Service
-public class AvaliacaoService implements IAvaliacaoService {
+public class AvaliacaoServiceImpl implements AvaliacaoService {
 
     @Resource
     private AvaliacaoRepository avaliacaoRepository;

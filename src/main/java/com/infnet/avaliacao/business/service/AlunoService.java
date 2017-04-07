@@ -5,7 +5,7 @@ import com.infnet.avaliacao.entity.Aluno;
 /**
  * Classe que representa o serviço de aluno.
  */
-public interface IAlunoService {
+public interface AlunoService {
 
     void verificarSeExisteCpf(Long cpf);
 

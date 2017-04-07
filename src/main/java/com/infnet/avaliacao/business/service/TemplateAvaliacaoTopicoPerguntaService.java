@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Classe que representa o serviço de TemplateAvaliacaoTopicoPergunta
  */
-public interface ITemplateAvaliacaoTopicoPerguntaService {
+public interface TemplateAvaliacaoTopicoPerguntaService {
 
     void save(List<TemplateAvaliacaoTopicoPerguntaDTO> templateAvaliacaoTopicoPerguntaDTOList);
 

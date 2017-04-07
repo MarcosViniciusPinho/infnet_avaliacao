@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.business.service.impl;
 
-import com.infnet.avaliacao.business.service.IRespostaService;
+import com.infnet.avaliacao.business.service.RespostaService;
 import com.infnet.avaliacao.dto.impl.RespostaDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import com.infnet.avaliacao.entity.Avaliacao;
@@ -15,7 +15,7 @@ import java.util.List;
  * {@inheritDoc}
  */
 @Service
-public class RespostaService implements IRespostaService {
+public class RespostaServiceImpl implements RespostaService {
 
     @Resource
     private RespostaRepository respostaRepository;

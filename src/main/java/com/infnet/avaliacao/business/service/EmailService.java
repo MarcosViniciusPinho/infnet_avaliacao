@@ -2,7 +2,7 @@ package com.infnet.avaliacao.business.service;
 
 import javax.mail.MessagingException;
 
-public interface IEmailService {
+public interface EmailService {
 
     /**
      * Método de envio de e-mails para os alunos do infnet

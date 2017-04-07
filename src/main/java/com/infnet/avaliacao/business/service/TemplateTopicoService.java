@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Classe que representa o serviço de template topico.
  */
-public interface ITemplateTopicoService extends ICrudService<TemplateTopicoDTO, TemplateTopico> {
+public interface TemplateTopicoService extends CrudService<TemplateTopicoDTO, TemplateTopico> {
 
     /**
      * Recupera a lista de templates topicos a partir de uma lista de seus respectivos ids.

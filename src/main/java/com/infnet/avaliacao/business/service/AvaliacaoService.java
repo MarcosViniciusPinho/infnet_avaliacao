@@ -8,7 +8,7 @@ import com.infnet.avaliacao.entity.Turma;
 /**
  * Classe que representa o serviço de avaliacao.
  */
-public interface IAvaliacaoService {
+public interface AvaliacaoService {
 
     /**
      * Método que salva/altera a entidade no banco.

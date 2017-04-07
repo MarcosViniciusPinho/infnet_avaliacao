@@ -17,19 +17,19 @@ import java.util.List;
 public class AvaliacaoFacadeImpl implements AvaliacaoFacade {
 
     @Resource
-    private IAvaliacaoService avaliacaoService;
+    private AvaliacaoService avaliacaoService;
 
     @Resource
-    private IAlunoService alunoService;
+    private AlunoService alunoService;
 
     @Resource
-    private ITurmaService turmaService;
+    private TurmaService turmaService;
 
     @Resource
-    private ITemplateAvaliacaoService templateAvaliacaoService;
+    private TemplateAvaliacaoService templateAvaliacaoService;
 
     @Resource
-    private IRespostaService respostaService;
+    private RespostaService respostaService;
 
     /**
      * {@inheritDoc}

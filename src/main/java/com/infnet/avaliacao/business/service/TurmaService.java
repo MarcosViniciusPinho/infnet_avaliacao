@@ -5,7 +5,7 @@ import com.infnet.avaliacao.entity.Turma;
 /**
  * Classe que representa o serviço de turma.
  */
-public interface ITurmaService {
+public interface TurmaService {
 
     /**
      * Método que busca uma turma a partir de seu id

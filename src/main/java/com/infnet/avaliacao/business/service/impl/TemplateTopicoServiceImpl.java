@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.business.service.impl;
 
-import com.infnet.avaliacao.business.service.ITemplateTopicoService;
+import com.infnet.avaliacao.business.service.TemplateTopicoService;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
 import com.infnet.avaliacao.entity.TemplateTopico;
 import com.infnet.avaliacao.exception.CampoObrigatorioException;
@@ -15,7 +15,7 @@ import java.util.List;
  * {@inheritDoc}
  */
 @Service
-public class TemplateTopicoServiceImpl extends CrudServiceImpl<TemplateTopicoDTO, TemplateTopico> implements ITemplateTopicoService {
+public class TemplateTopicoServiceImpl extends CrudServiceImpl<TemplateTopicoDTO, TemplateTopico> implements TemplateTopicoService {
 
     @Resource
     private TemplateTopicoRepository templateTopicoRepository;

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Classe que representa o serviço generico
  */
-public interface ICrudService<V, T> {
+public interface CrudService<V, T> {
 
     /**
      * Método que salva/altera a entidade no banco.

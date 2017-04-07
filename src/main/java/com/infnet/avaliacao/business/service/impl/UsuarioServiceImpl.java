@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.business.service.impl;
 
-import com.infnet.avaliacao.business.service.IUsuarioService;
+import com.infnet.avaliacao.business.service.UsuarioService;
 import com.infnet.avaliacao.dto.impl.UsuarioDTO;
 import com.infnet.avaliacao.entity.Usuario;
 import com.infnet.avaliacao.exception.BusinessException;
@@ -17,7 +17,7 @@ import java.util.Set;
  * {@inheritDoc}
  */
 @Service
-public class UsuarioServiceImpl extends CrudServiceImpl<UsuarioDTO, Usuario> implements IUsuarioService {
+public class UsuarioServiceImpl extends CrudServiceImpl<UsuarioDTO, Usuario> implements UsuarioService {
 
     @Resource
     private UsuarioRepository usuarioRepository;
