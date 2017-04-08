@@ -9,6 +9,7 @@
     <title th:text="#{infnet}"></title>
     <link rel="stylesheet" th:href="@{/css/login.css}"/>
     <link rel="stylesheet" th:href="@{/css/avaliacao.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <script th:src="@{/js/avaliacao.min.js}"></script>
 </head>
 
@@ -32,6 +33,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
+                <div class="text-center corVermelho" th:if="${#bools.isTrue(param.error)}">
+                    <span th:text="#{login.erro.autenticacao}"></span>
+                </div>
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h3 class="text-center" th:text="#{login}"><br/><br/></h3>
