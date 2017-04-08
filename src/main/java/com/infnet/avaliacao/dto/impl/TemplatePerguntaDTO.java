@@ -1,16 +1,19 @@
 package com.infnet.avaliacao.dto.impl;
 
-import com.infnet.avaliacao.dto.IDTO;
+import com.infnet.avaliacao.dto.DTO;
 import com.infnet.avaliacao.dto.domain.MultiplaEscolhaEnum;
 import com.infnet.avaliacao.entity.TemplatePergunta;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.apache.commons.collections.CollectionUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TemplatePerguntaDTO implements IDTO<TemplatePergunta> {
+public class TemplatePerguntaDTO implements DTO<TemplatePergunta> {
 
     private static final long serialVersionUID = 1L;
 
@@ -57,6 +60,22 @@ public class TemplatePerguntaDTO implements IDTO<TemplatePergunta> {
             }
         }
         return lista;
+    }
+
+    /**
+     * Método que converte uma lista de entidade para uma lista de dto.
+     * @param entities entities
+     * @param pageable pageable
+     * @return Page<TemplatePerguntaDTO>
+     */
+    public static Page<TemplatePerguntaDTO> convertPageEntityToPageDto(Page<TemplatePergunta> entities, Pageable pageable){
+        List<TemplatePerguntaDTO> lista = new ArrayList<>();
+        if(CollectionUtils.isNotEmpty(entities.getContent())){
+            for(TemplatePergunta templatePergunta : entities.getContent()){
+                lista.add(toDto(templatePergunta));
+            }
+        }
+        return new PageImpl<>(lista, pageable, entities.getTotalElements());
     }
 
     public Long getId() {

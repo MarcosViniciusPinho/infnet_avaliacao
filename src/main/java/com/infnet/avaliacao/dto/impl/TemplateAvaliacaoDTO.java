@@ -1,15 +1,18 @@
 package com.infnet.avaliacao.dto.impl;
 
 import com.infnet.avaliacao.controller.wrapper.PerguntaAssociadaWrapper;
-import com.infnet.avaliacao.dto.IDTO;
+import com.infnet.avaliacao.dto.DTO;
 import com.infnet.avaliacao.entity.TemplateAvaliacao;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.apache.commons.collections.CollectionUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TemplateAvaliacaoDTO implements IDTO<TemplateAvaliacao> {
+public class TemplateAvaliacaoDTO implements DTO<TemplateAvaliacao> {
 
     private static final long serialVersionUID = 1L;
 
@@ -62,6 +65,23 @@ public class TemplateAvaliacaoDTO implements IDTO<TemplateAvaliacao> {
             }
         }
         return lista;
+    }
+
+
+    /**
+     * Método que converte uma lista de entidade para uma lista de dto.
+     * @param entities entities
+     * @param pageable pageable
+     * @return Page<TemplateAvaliacaoDTO>
+     */
+    public static Page<TemplateAvaliacaoDTO> convertPageEntityToPageDto(Page<TemplateAvaliacao> entities, Pageable pageable){
+        List<TemplateAvaliacaoDTO> lista = new ArrayList<>();
+        if(CollectionUtils.isNotEmpty(entities.getContent())){
+            for(TemplateAvaliacao templateAvaliacao : entities.getContent()){
+                lista.add(toDto(templateAvaliacao));
+            }
+        }
+        return new PageImpl<>(lista, pageable, entities.getTotalElements());
     }
 
     /**

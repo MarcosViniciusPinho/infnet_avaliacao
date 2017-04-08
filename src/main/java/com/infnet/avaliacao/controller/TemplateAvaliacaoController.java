@@ -1,12 +1,14 @@
 package com.infnet.avaliacao.controller;
 
-import com.infnet.avaliacao.business.facade.ITemplateAvaliacaoFacade;
-import com.infnet.avaliacao.business.facade.ITemplateTopicoFacade;
+import com.infnet.avaliacao.business.facade.TemplateAvaliacaoFacade;
+import com.infnet.avaliacao.business.facade.TemplateTopicoFacade;
 import com.infnet.avaliacao.controller.util.ActionConstant;
 import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.controller.wrapper.PerguntaAssociadaWrapper;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.exception.ExecutionException;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,20 +31,20 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
     private static final String LISTAR_TEMPLATE_TOPICO = "listarTemplateTopico";
 
     @Resource
-    private ITemplateAvaliacaoFacade templateAvaliacaoFacade;
+    private TemplateAvaliacaoFacade templateAvaliacaoFacade;
 
     @Resource
-    private ITemplateTopicoFacade templateTopicoFacade;
+    private TemplateTopicoFacade templateTopicoFacade;
 
     /**
      * Método que faz a listagem dos registros na tela.
      * @return ModelAndView
      */
     @RequestMapping(value = ActionConstant.ACTION_LIST)
-    public ModelAndView list(){
+    public ModelAndView list(@PageableDefault Pageable pageable){
         try {
             ModelAndView mv = new ModelAndView(getViewList());
-            mv.addObject(LISTAR_TEMPLATE_AVALIACAO, this.templateAvaliacaoFacade.findAll());
+            mv.addObject(LISTAR_TEMPLATE_AVALIACAO, this.templateAvaliacaoFacade.findAllPaginated(pageable));
             return mv;
         } catch (RuntimeException ex) {
             throw new ExecutionException(ex);
@@ -64,12 +66,20 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      * {@inheritDoc}
      */
     @Override
+    protected void onLoadViewPaginated(Model model, Pageable pageable){
+        model.addAttribute(LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAllPaginated(pageable));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected void onLoadView(Model model){
         model.addAttribute(LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAll());
     }
 
-    private void onEdit(Long id, Model model){
-        this.onLoadView(model);
+    private void onEdit(Long id, Model model, Pageable pageable){
+        this.onLoadViewPaginated(model, pageable);
         TemplateAvaliacaoDTO templateAvaliacaoDTO = this.templateAvaliacaoFacade.findById(id);
         model.addAttribute(templateAvaliacaoDTO.carregarTopicosCadastradosParaFicarSelecionados());
     }
@@ -81,8 +91,8 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      * @return String
      */
     @RequestMapping(value = ActionConstant.ACTION_EDIT)
-    public String prepareUpdate(@PathVariable Long id, Model model){
-        this.onEdit(id, model);
+    public String prepareUpdate(@PathVariable Long id, Model model, @PageableDefault Pageable pageable){
+        this.onEdit(id, model, pageable);
         return getViewForm();
     }
 
@@ -109,8 +119,8 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      * @return String
      */
     @RequestMapping(value = ActionConstant.ACTION_ERROR)
-    public String prepareError(@PathVariable Long id, Model model){
-        this.onError(id, model);
+    public String prepareError(@PathVariable Long id, Model model, @PageableDefault Pageable pageable){
+        this.onError(id, model, pageable);
         return getViewForm();
     }
 
@@ -131,9 +141,9 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      * @param id id
      * @param model model
      */
-    private void onError(Long id, Model model){
+    private void onError(Long id, Model model, Pageable pageable){
         model.addAttribute(this.templateAvaliacaoFacade.findById(id));
-        this.onLoadView(model);
+        this.onLoadViewPaginated(model, pageable);
     }
 
     /**
@@ -162,7 +172,7 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      * {@inheritDoc}
      */
     @Override
-    protected ITemplateAvaliacaoFacade getFacade() {
+    protected TemplateAvaliacaoFacade getFacade() {
         return templateAvaliacaoFacade;
     }
 

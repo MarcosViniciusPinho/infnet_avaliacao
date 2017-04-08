@@ -1,13 +1,15 @@
 package com.infnet.avaliacao.controller;
 
-import com.infnet.avaliacao.business.facade.ITemplateAvaliacaoFacade;
-import com.infnet.avaliacao.business.facade.ITemplatePerguntaFacade;
-import com.infnet.avaliacao.business.facade.ITemplateTopicoFacade;
+import com.infnet.avaliacao.business.facade.TemplateAvaliacaoFacade;
+import com.infnet.avaliacao.business.facade.TemplatePerguntaFacade;
+import com.infnet.avaliacao.business.facade.TemplateTopicoFacade;
 import com.infnet.avaliacao.controller.util.ActionConstant;
 import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,13 +29,13 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
     private static final String LISTAR_TEMPLATE_PERGUNTA = "listarTemplatePergunta";
 
     @Resource
-    private ITemplateTopicoFacade templateTopicoFacade;
+    private TemplateTopicoFacade templateTopicoFacade;
 
     @Resource
-    private ITemplatePerguntaFacade templatePerguntaFacade;
+    private TemplatePerguntaFacade templatePerguntaFacade;
 
     @Resource
-    private ITemplateAvaliacaoFacade templateAvaliacaoFacade;
+    private TemplateAvaliacaoFacade templateAvaliacaoFacade;
 
     /**
      * {@inheritDoc}
@@ -60,7 +62,7 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
         model.addAttribute(LISTAR_TEMPLATE_PERGUNTA, templatePerguntaFacade.findAll());
     }
 
-    private void onEdit(Long id, Long idAvaliacao, Model model){
+    private void onEdit(Long id, Long idAvaliacao, Model model, Pageable pageable){
         TemplateTopicoDTO templateTopicoDTO = this.templateTopicoFacade.findById(id);
         templateTopicoDTO.setIdAvaliacao(idAvaliacao);
         TemplateAvaliacaoDTO templateAvaliacaoDTO = this.templateAvaliacaoFacade.findById(idAvaliacao);
@@ -68,7 +70,7 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
         model.addAttribute(templateTopicoDTO);
         model.addAttribute(LISTAR_TEMPLATE_PERGUNTA,
                 this.templatePerguntaFacade.findAllComCheckedPerguntasMarcadas(
-                        templateTopicoDTO, templateAvaliacaoDTO));
+                        templateTopicoDTO, templateAvaliacaoDTO, pageable));
     }
 
     /**
@@ -79,8 +81,8 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
      * @return String
      */
     @RequestMapping(value = ActionConstant.ACTION_EDIT_CUSTOM)
-    public String prepareUpdate(@PathVariable Long id, @PathVariable Long idAvaliacao, Model model){
-        this.onEdit(id, idAvaliacao, model);
+    public String prepareUpdate(@PathVariable Long id, @PathVariable Long idAvaliacao, Model model, @PageableDefault Pageable pageable){
+        this.onEdit(id, idAvaliacao, model, pageable);
         return getViewForm();
     }
 
@@ -92,23 +94,23 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
      * @return String
      */
     @RequestMapping(value = ActionConstant.ACTION_ERROR_CUSTOM)
-    public String prepareError(@PathVariable Long id, @PathVariable Long idAvaliacao, Model model){
-        this.onErrorOrDetail(id, idAvaliacao, model);
+    public String prepareError(@PathVariable Long id, @PathVariable Long idAvaliacao, Model model, @PageableDefault Pageable pageable){
+        this.onError(id, idAvaliacao, model, pageable);
         return getViewForm();
     }
 
     /**
-     * Método usado para quando houver uma exceção na tela de form e também reaproveitado para ser usado no momento de detalhar.
+     * Método usado para quando houver uma exceção na tela de form.
      * @param id id
      * @param idAvaliacao idAvaliacao
      * @param model model
      */
-    private void onErrorOrDetail(Long id, Long idAvaliacao, Model model){
+    private void onError(Long id, Long idAvaliacao, Model model, Pageable pageable){
         TemplateTopicoDTO templateTopicoDTO = this.templateTopicoFacade.findById(id);
         templateTopicoDTO.setIdAvaliacao(idAvaliacao);
         model.addAttribute(templateTopicoDTO);
         model.addAttribute(this.templateAvaliacaoFacade.findById(idAvaliacao));
-        this.onLoadView(model);
+        this.onLoadViewPaginated(model, pageable);
     }
 
     /**
@@ -127,6 +129,11 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
         return REDIRECT_LIST + getPathView() + ActionConstant.ACTION_ERROR_CUSTOM;
     }
 
+    @Override
+    protected void onLoadViewPaginated(Model model, Pageable pageable) {
+        model.addAttribute(LISTAR_TEMPLATE_PERGUNTA, templatePerguntaFacade.findAllPaginated(pageable));
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -139,7 +146,7 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
      * {@inheritDoc}
      */
     @Override
-    protected ITemplateTopicoFacade getFacade() {
+    protected TemplateTopicoFacade getFacade() {
         return templateTopicoFacade;
     }
 

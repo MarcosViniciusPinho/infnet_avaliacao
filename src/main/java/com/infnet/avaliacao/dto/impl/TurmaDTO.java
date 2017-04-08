@@ -1,11 +1,11 @@
 package com.infnet.avaliacao.dto.impl;
 
-import com.infnet.avaliacao.dto.IDTO;
+import com.infnet.avaliacao.dto.DTO;
 import com.infnet.avaliacao.entity.Turma;
 
 import java.util.List;
 
-public class TurmaDTO implements IDTO<Turma> {
+public class TurmaDTO implements DTO<Turma> {
 
     private static final long serialVersionUID = 1L;
 

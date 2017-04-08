@@ -22,6 +22,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<commons-collections.version>3.2.1</commons-collections.version>
+		<commons-lang.version>2.3</commons-lang.version>
+		<maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
+		<flyway-maven-plugin.version>4.0.3</flyway-maven-plugin.version>
 
 		<!--Usar local-->
 		<database.url>jdbc:h2:file:./banco/avaliacao</database.url>
@@ -68,19 +72,34 @@
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
-			<version>3.2.1</version>
+			<version>${commons-collections.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
-			<version>2.3</version>
+			<version>${commons-lang.version}</version>
 		</dependency>
 
 		<!--Para envio de e-mail-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring-security.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring-security.version}</version>
+			<scope>compile</scope>
 		</dependency>
 
 	</dependencies>
@@ -94,7 +113,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.5.1</version>
+				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
@@ -103,7 +122,7 @@
 			<plugin>
 				<groupId>org.flywaydb</groupId>
 				<artifactId>flyway-maven-plugin</artifactId>
-				<version>4.0.3</version>
+				<version>${flyway-maven-plugin.version}</version>
 				<configuration>
 					<url>${database.url}</url>
 					<user>${database.user}</user>

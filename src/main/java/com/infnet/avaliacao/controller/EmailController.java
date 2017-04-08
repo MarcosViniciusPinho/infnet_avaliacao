@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.controller;
 
-import com.infnet.avaliacao.business.service.IEmailService;
+import com.infnet.avaliacao.business.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +11,7 @@ import javax.mail.MessagingException;
 public class EmailController {
 
     @Autowired
-    private IEmailService emailService;
+    private EmailService emailService;
 
     @RequestMapping("/enviarEmail")
     public String enviarEmail() {
