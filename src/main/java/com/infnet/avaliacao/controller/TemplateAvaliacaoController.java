@@ -101,7 +101,7 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      */
     @Override
     protected String getRedirectViewEdit(){
-        return REDIRECT_LIST + getPathView() + ActionConstant.ACTION_EDIT;
+        return ActionConstant.REDIRECT + getPathView() + ActionConstant.ACTION_EDIT;
     }
 
     /**
@@ -109,7 +109,7 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      */
     @Override
     protected String getRedirectViewError(){
-        return REDIRECT_LIST + getPathView() + ActionConstant.ACTION_ERROR;
+        return ActionConstant.REDIRECT + getPathView() + ActionConstant.ACTION_ERROR;
     }
 
     /**

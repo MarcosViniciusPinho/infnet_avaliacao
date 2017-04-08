@@ -144,7 +144,7 @@ public abstract class CadastroController<V> extends InitController<V> {
      * @return String
      */
     protected String getRedirectViewList(){
-        return REDIRECT_LIST + getPathView() + ActionConstant.ACTION_LIST;
+        return ActionConstant.REDIRECT + getPathView() + ActionConstant.ACTION_LIST;
     }
 
 }

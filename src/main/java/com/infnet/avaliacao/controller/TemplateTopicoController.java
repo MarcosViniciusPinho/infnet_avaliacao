@@ -118,7 +118,7 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
      */
     @Override
     protected String getRedirectViewEdit(){
-        return REDIRECT_LIST + getPathView() + ActionConstant.ACTION_EDIT_CUSTOM;
+        return ActionConstant.REDIRECT + getPathView() + ActionConstant.ACTION_EDIT_CUSTOM;
     }
 
     /**
@@ -126,7 +126,7 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
      */
     @Override
     protected String getRedirectViewError(){
-        return REDIRECT_LIST + getPathView() + ActionConstant.ACTION_ERROR_CUSTOM;
+        return ActionConstant.REDIRECT + getPathView() + ActionConstant.ACTION_ERROR_CUSTOM;
     }
 
     @Override
