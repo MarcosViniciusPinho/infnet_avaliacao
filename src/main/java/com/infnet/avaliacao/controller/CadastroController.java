@@ -27,7 +27,7 @@ public abstract class CadastroController<V> extends InitController<V> {
      * @return ModelAndView
      */
     @RequestMapping(value = ActionConstant.ACTION_LIST)
-    public ModelAndView list(@PageableDefault(size = 2) Pageable pageable){
+    public ModelAndView list(@PageableDefault Pageable pageable){
         try {
             return this.onList(pageable);
         } catch (RuntimeException ex) {
