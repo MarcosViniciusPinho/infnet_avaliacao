@@ -30,7 +30,7 @@ public class Usuario implements Serializable {
     private String login;
 
     @NotBlank(message = "usuario.mensagem.erro.senha")
-    @Column(name = "senha", length = 10, nullable = false)
+    @Column(name = "senha", length = 200, nullable = false)
     private String senha;
 
     @NotNull(message = "usuario.mensagem.erro.perfil")
