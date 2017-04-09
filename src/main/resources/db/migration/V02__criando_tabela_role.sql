@@ -1,0 +1,7 @@
+CREATE TABLE role(
+  id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(50) NOT NULL,
+  id_perfil BIGINT NOT NULL
+);
+
+ALTER TABLE role ADD CONSTRAINT fk_perf_role_id FOREIGN KEY (id_perfil) REFERENCES perfil (id);

@@ -2,8 +2,8 @@ package com.infnet.avaliacao.dto.impl;
 
 
 import com.infnet.avaliacao.dto.DTO;
+import com.infnet.avaliacao.entity.Perfil;
 import com.infnet.avaliacao.entity.Usuario;
-import com.infnet.avaliacao.entity.domain.PerfilEnum;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.data.domain.Page;
@@ -28,7 +28,7 @@ public class UsuarioDTO implements DTO<Usuario> {
 
     private String senha;
 
-    private PerfilEnum perfil;
+    private Perfil perfil;
 
 
     /**
@@ -128,11 +128,11 @@ public class UsuarioDTO implements DTO<Usuario> {
         this.senha = senha;
     }
 
-    public PerfilEnum getPerfil() {
+    public Perfil getPerfil() {
         return perfil;
     }
 
-    public void setPerfil(PerfilEnum perfil) {
+    public void setPerfil(Perfil perfil) {
         this.perfil = perfil;
     }
 }

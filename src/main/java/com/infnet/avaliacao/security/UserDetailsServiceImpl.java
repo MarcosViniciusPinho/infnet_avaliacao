@@ -1,7 +1,9 @@
 package com.infnet.avaliacao.security;
 
-import com.infnet.avaliacao.entity.Usuario;
+import com.infnet.avaliacao.dto.impl.UsuarioDTO;
 import com.infnet.avaliacao.repository.UsuarioRepository;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,7 +11,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -19,12 +23,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        Usuario usuario = this.usuarioRepository.findByLogin(login);
-        if(usuario == null){
+        UsuarioDTO usuarioDTO = UsuarioDTO.toDto(this.usuarioRepository.findByLogin(login));
+        if(usuarioDTO == null){
             throw new UsernameNotFoundException("login.erro.usuario.nao.encontrado");
         }
-        return new User(usuario.getLogin(), usuario.getSenha(), new HashSet<>());
+        return new User(usuarioDTO.getLogin(), usuarioDTO.getSenha(), getPermissoes(usuarioDTO));
     }
+
+    private Collection<? extends GrantedAuthority> getPermissoes(UsuarioDTO usuarioDTO) {
+        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+        usuarioDTO.getPerfil().getRoleList().forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getNome().toUpperCase())));
+        return authorities;
+    }
+
 //
 //    public static void main(String[] args){
 //        BCryptPasswordEncoder criptografar = new BCryptPasswordEncoder();

@@ -36,12 +36,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
+                    .antMatchers("/cadastro/usuario/list").hasAuthority("LISTAR_USUARIO")
+                    .antMatchers("/cadastro/usuario/create").hasAuthority("CADASTRAR_USUARIO")
+                    .antMatchers("/cadastro/usuario/edit").hasAuthority("ALTERAR_USUARIO")
+                    .anyRequest().authenticated()
+                    .and()
                 .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
+                    .loginPage("/login")
+                    .permitAll()
+                    .and()
                 .csrf().disable();
     }
 

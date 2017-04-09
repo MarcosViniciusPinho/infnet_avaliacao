@@ -3,7 +3,6 @@ package com.infnet.avaliacao.controller;
 import com.infnet.avaliacao.business.facade.UsuarioFacade;
 import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.dto.impl.UsuarioDTO;
-import com.infnet.avaliacao.entity.domain.PerfilEnum;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -71,7 +70,7 @@ public class UsuarioController extends CadastroController<UsuarioDTO>{
      */
     @Override
     protected void onLoadView(Model model){
-        model.addAttribute(LISTAR_PERFIS, PerfilEnum.values());
+        model.addAttribute(LISTAR_PERFIS, this.usuarioFacade.findAllPerfil());
     }
 
     /**
