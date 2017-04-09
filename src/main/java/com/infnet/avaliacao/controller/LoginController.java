@@ -14,6 +14,9 @@ public class LoginController {
     private static final String VIEW_LOGIN = "login";
     private static final String ACTION_LOGIN = "/login";
     private static final String ACTION_HOME = "/";
+    private static final String ACTION_ACESSO_NEGADO = "/acessoNegado";
+    private static final String VIEW_ACESSO_NEGADO = "/acessoNegado";
+
 
     @RequestMapping(value = ACTION_HOME)
     public String home(){
@@ -26,6 +29,11 @@ public class LoginController {
             return ActionConstant.REDIRECT + ACTION_HOME;
         }
         return VIEW_LOGIN;
+    }
+
+    @RequestMapping(ACTION_ACESSO_NEGADO)
+    public String acessoNegado(){
+        return VIEW_ACESSO_NEGADO;
     }
 
 }

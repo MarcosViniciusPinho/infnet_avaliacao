@@ -36,10 +36,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return authorities;
     }
 
-//
-//    public static void main(String[] args){
-//        BCryptPasswordEncoder criptografar = new BCryptPasswordEncoder();
-//        System.out.println(criptografar.encode("maria"));
-//    }
-
 }
