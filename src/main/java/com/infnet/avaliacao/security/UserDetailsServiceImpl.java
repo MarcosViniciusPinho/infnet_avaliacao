@@ -4,7 +4,6 @@ import com.infnet.avaliacao.dto.impl.UsuarioDTO;
 import com.infnet.avaliacao.repository.UsuarioRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,7 +26,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if(usuarioDTO == null){
             throw new UsernameNotFoundException("login.erro.usuario.nao.encontrado");
         }
-        return new User(usuarioDTO.getLogin(), usuarioDTO.getSenha(), getPermissoes(usuarioDTO));
+        return new UsuarioLogado(usuarioDTO, getPermissoes(usuarioDTO));
     }
 
     private Collection<? extends GrantedAuthority> getPermissoes(UsuarioDTO usuarioDTO) {

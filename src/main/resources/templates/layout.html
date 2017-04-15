@@ -54,12 +54,12 @@
                                 <div class="aw-logged-user">
                                     <img src="https://api.adorable.io/avatars/80/joaodascouves"
                                          width="80" height="80" alt="João das Couves" class="aw-logged-user__picture" />
-                                    <span class="aw-logged-user__name" th:text="${#authentication.name}">João das Couves</span>
+                                    <span class="aw-logged-user__name" th:text="${#authentication.principal.usuarioDTO.nome}">João das Couves</span>
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#" th:text="#{dropdown.versao}"></a></li>
-                            <li><a href="#" th:text="#{dropdown.administrador}"></a></li>
+                            <li><a href="#" th:text="${#authentication.principal.usuarioDTO.perfil.nome}"></a></li>
                             <li><a href="#" th:text="#{dropdown.alterarsenha}"></a></li>
                         </ul>
                     </li>
