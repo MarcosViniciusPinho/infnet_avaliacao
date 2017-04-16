@@ -74,7 +74,7 @@
                                     <div class="col-sm-3" th:classappend="*{perfil eq null} and ${!#lists.isEmpty(setExceptionRequired)} ? has-error">
                                         <label for="perfil">
                                             <span class="corVermelho">*</span> <span th:text="#{usuario.perfil}"></span>:</label>
-                                        <select id="perfil" class="form-control" th:field="*{perfil}" name="perfil">
+                                        <select id="perfil" class="form-control" th:field="*{perfil.id}" name="perfil">
                                             <option value="" th:text="#{usuario.select.perfil}"></option>
                                             <option th:each="perfil : ${listarPerfis}" th:value="${perfil.id}" th:text="${perfil.nome}"></option>
                                         </select>
