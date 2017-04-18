@@ -35,9 +35,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private HttpSecurity verificarPermissao(HttpSecurity http) throws Exception {
         return http.authorizeRequests()
-                    .antMatchers("/cadastro/usuario/list").hasRole("LISTAR_USUARIO")
-                    .antMatchers("/cadastro/usuario/create").hasRole("CADASTRAR_USUARIO")
-                    .antMatchers("/cadastro/usuario/edit").hasRole("ALTERAR_USUARIO")
+                    .antMatchers("/cadastro/usuario/list").hasAuthority("LISTAR_USUARIO")
+                    .antMatchers("/cadastro/usuario/create").hasAuthority("CADASTRAR_USUARIO")
+                    .antMatchers("/cadastro/usuario/edit").hasAuthority("ALTERAR_USUARIO")
                     .anyRequest().authenticated().and();
     }
 
