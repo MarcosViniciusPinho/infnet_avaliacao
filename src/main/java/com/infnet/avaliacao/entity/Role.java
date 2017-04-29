@@ -20,10 +20,6 @@ public class Role implements Serializable {
     @Column(name = "nome", length = 50, nullable = false)
     private String nome;
 
-    @ManyToOne
-    @JoinColumn(name = "id_perfil", nullable = false)
-    private Perfil perfil;
-
     public Long getId() {
         return id;
     }
@@ -38,14 +34,6 @@ public class Role implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Perfil getPerfil() {
-        return perfil;
-    }
-
-    public void setPerfil(Perfil perfil) {
-        this.perfil = perfil;
     }
 
     @Override

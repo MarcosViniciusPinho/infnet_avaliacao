@@ -21,7 +21,12 @@ public class Perfil implements Serializable {
     @Column(name = "nome", length = 50, nullable = false)
     private String nome;
 
-    @OneToMany(mappedBy = "perfil", fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "perfil_role", joinColumns = {
+            @JoinColumn(name = "id_perfil", nullable = false)
+    }, inverseJoinColumns = {
+            @JoinColumn(name = "id_role", nullable = false)
+    })
     private List<Role> roleList;
 
     public Long getId() {
