@@ -44,6 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/template/avaliacao/list").hasRole("LISTAR_AVALIACAO")
                 .antMatchers("/template/avaliacao/detail/{id}").hasRole("DETALHAR_AVALIACAO")
                 .antMatchers("/template/avaliacao/edit/{id}").hasRole("ASSOCIAR_TOPICO")
+                .antMatchers("template/avaliacao/save").hasRole("SALVAR_TEMPLATE_TOPICO")
+                .antMatchers("template/avaliacao/topico/edit/{id}/avaliacao/{idAvaliacao}").hasRole("ASSOCIAR_TEMPLATE_PERGUNTA")
                 .antMatchers("/login").permitAll()
                 .antMatchers("/").permitAll()
                 .anyRequest().denyAll().and();

@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}"
-       xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
     <title th:text="#{avaliacao}"></title>
@@ -74,7 +75,8 @@
                                                 </a>
                                                 <a th:class="'btnPergunta'+${templateTopico.id}" href="#" th:title="#{template.avaliacao.hint.associar.pergunta}"
                                                     th:if="${#lists.contains(templateAvaliacaoDTO.idsTemplateTopicoSelecionados, templateTopico.id)}"
-                                                    th:href="@{/template/avaliacao/topico/edit/{id}/avaliacao/{idAvaliacao}(id=${templateTopico.id},idAvaliacao=${templateAvaliacaoDTO.id})}">
+                                                    th:href="@{/template/avaliacao/topico/edit/{id}/avaliacao/{idAvaliacao}(id=${templateTopico.id},idAvaliacao=${templateAvaliacaoDTO.id})}"
+                                                    sec:authorize="hasRole('ASSOCIAR_TEMPLATE_PERGUNTA')">
                                                     <span class="glyphicon glyphicon-plus"></span>
                                                 </a>
                                             </td>
@@ -105,7 +107,7 @@
                                 </div>
                                 <input type="hidden" th:field="*{idsTemplateTopicoSelecionados}" id="idsTemplateTopicoSelecionados"/>
                             </div>
-                            <input id="salvar" type="submit" class="btn btn-primary" th:value="#{btn.salvar}"/>
+                            <input id="salvar" type="submit" class="btn btn-primary" th:value="#{btn.salvar}" sec:authorize="hasRole('SALVAR_TEMPLATE_TOPICO')"/>
                         </form>
                     </div>
                 </div>
