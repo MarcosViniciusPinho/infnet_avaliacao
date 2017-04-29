@@ -24,49 +24,49 @@
                         <h2 th:text="#{template.avaliacao.tela.detalhar}"></h2>
                         <hr />
                             <div class="form-group">
-                                <div class="well col-sm-12">
-                                    <div class="col-sm-12">
+                                <div class="well col-xs-12">
+                                    <div class="col-xs-12">
                                         <label>
                                             <span th:text="#{template.avaliacao.titulo}"></span>:
                                         </label>&nbsp; <span th:text="${templateAvaliacaoDTO.titulo}"/>
                                     </div>
 
-                                    <div class="col-sm-12">&nbsp;</div>
-                                    <div class="col-sm-6">
+                                    <div class="col-xs-12">&nbsp;</div>
+                                    <div class="col-xs-6">
                                         <label>
                                             <span th:text="#{template.avaliacao.aluno}"></span>:
                                         </label>
                                     </div>
 
-                                    <div class="col-sm-6">
+                                    <div class="col-xs-6">
                                         <label>
                                             <span th:text="#{template.avaliacao.cpf}"></span>:
                                         </label>
                                     </div>
 
-                                    <div class="col-sm-12">&nbsp;</div>
-                                    <div class="col-sm-12">
+                                    <div class="col-xs-12">&nbsp;</div>
+                                    <div class="col-xs-12">
                                         <label>
                                             <span th:text="#{template.avaliacao.modulo}"></span>:
                                         </label>
                                     </div>
 
-                                    <div class="col-sm-12">&nbsp;</div>
-                                    <div class="col-sm-12">
+                                    <div class="col-xs-12">&nbsp;</div>
+                                    <div class="col-xs-12">
                                         <span th:text="#{template.avaliacao.texto.padrao}"></span>
                                     </div>
-                                    <div class="col-sm-12">&nbsp;</div>
-                                    <div class="col-sm-12">
+                                    <div class="col-xs-12">&nbsp;</div>
+                                    <div class="col-xs-12">
                                         <span th:each="wrapper : ${perguntaAssociadaWrapperList}">
                                             <strong><span th:text="${wrapper.templateTopicoDTO.enunciado}"></span>:</strong>
                                             <span th:each="templatePergunta,status : ${wrapper.templatePerguntaDTOList}">
-                                                <div class="col-sm-12">
+                                                <div class="col-xs-12">
                                                     <span th:text="${status.count + '.' }"></span>
                                                     <span th:text="${templatePergunta.questao}"></span>
                                                 </div>
-                                                <div class="col-sm-12" th:if="${!#strings.contains(templatePergunta.questao, '?')}">
+                                                <div class="col-xs-12" th:if="${!#strings.contains(templatePergunta.questao, '?')}">
                                                     <span th:each="multiplaEscolha : ${templatePergunta.multiplaEscolhaEnumList}">
-                                                        <div class="col-sm-4">
+                                                        <div class="col-xs-4">
                                                             <input type="radio" th:value="${multiplaEscolha}" disabled="disabled"/>
                                                             <span th:text="#{${multiplaEscolha.id}}"></span>
                                                         </div>
