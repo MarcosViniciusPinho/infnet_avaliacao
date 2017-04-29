@@ -45,11 +45,11 @@
                             <td th:text="${templateAvaliacao.titulo}"></td>
                             <td>
                                 <a th:title="#{hint.detalhar}" class="btn btn-link btn-xs" th:href="@{/template/avaliacao/detail/{id}(id=${templateAvaliacao.id})}"
-                                   sec:authorize="hasRole('DETALHAR_AVALIACAO')">
+                                   sec:authorize="hasRole('DETALHAR_TEMPLATE_AVALIACAO')">
                                     <span class="glyphicon glyphicon-th-list"></span>
                                 </a>
                                 <a th:title="#{template.avaliacao.hint.associar.topico}" class="btn btn-link btn-xs" th:href="@{/template/avaliacao/edit/{id}(id=${templateAvaliacao.id})}"
-                                   sec:authorize="hasRole('ASSOCIAR_TOPICO')">
+                                   sec:authorize="hasRole('ASSOCIAR_TEMPLATE_TOPICO')">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </a>
                             </td>
