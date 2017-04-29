@@ -85,7 +85,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div layout:include="modalVisualizar"></div>
+                                <div layout:insert="~{modalVisualizar}"></div>
                                 <div class="col-sm-12  text-center" th:if="${not #lists.isEmpty(listarTemplatePergunta.content)}">
                                     <nav>
                                         <ul class="pagination  pagination-sm">
