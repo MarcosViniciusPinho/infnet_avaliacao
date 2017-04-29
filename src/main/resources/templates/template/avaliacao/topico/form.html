@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout"
+      layout:decorate="~{layout}"
        xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title th:text="#{avaliacao}"></title>
-    <script th:src="@{/js/template/avaliacao/topico/form.js}"/>
-    <script th:src="@{/js/util/modalVisualizar.js}"/>
-    <script th:src="@{/js/util/form.js}"/>
+    <script th:src="@{/js/template/avaliacao/topico/form.js}"></script>
+    <script th:src="@{/js/util/modalVisualizar.js}"></script>
+    <script th:src="@{/js/util/form.js}"></script>
 </head>
 
 <body>

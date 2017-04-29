@@ -92,14 +92,14 @@
                             </ul>
                         </li>
 
-                        <li class="aw-menu__item  is-active">
+                        <li class="aw-menu__item  is-active" sec:authorize="hasRole('MANTER_AVALIACAO')">
                             <a href="#">
                                 <i class="fa  fa-fw  fa-file-text"></i><span th:text="#{avaliacao}"></span>
                                 <i class="aw-menu__navigation-icon  fa"></i>
                             </a>
 
                             <ul class="aw-menu__list  aw-menu__list--sublist">
-                                <li class="aw-menu__item  aw-menu__item--link">
+                                <li class="aw-menu__item  aw-menu__item--link" sec:authorize="hasRole('LISTAR_AVALIACAO')">
                                     <a th:href="@{/template/avaliacao/list}" th:text="#{montar}"></a>
                                 </li>
                             </ul>
