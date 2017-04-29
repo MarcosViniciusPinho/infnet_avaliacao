@@ -54,9 +54,9 @@ public abstract class CadastroController<V> extends InitController<V> {
             this.getFacade().save(entity);
             redirectAttributes.addFlashAttribute(MessageConstant.SUCESS, MessageConstant.MENSAGEM_SUCESSO);
             return getRedirectViewList();
-        } catch (ConstraintViolationException ex) {
+        } catch (ConstraintViolationException ex) {//Validação de campos obrigatórios
             this.tratarExcecao(model, ex.getConstraintViolations(), MessageConstant.SET_EXCEPTION_REQUIRED);
-        } catch (BusinessException ex){
+        } catch (BusinessException ex){//Validação de negócio
             this.tratarExcecao(model, ex.getMultipleMessages(), MessageConstant.SET_EXCEPTION_BUSINESS);
         }
         return getViewForm();
