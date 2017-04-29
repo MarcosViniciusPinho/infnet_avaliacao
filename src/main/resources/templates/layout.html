@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -9,118 +10,117 @@
 
     <title th:text="#{infnet}"></title>
 
-    <link rel="stylesheet" th:href="@{/css/avaliacao.min.css}"/>
-    <link rel="stylesheet" th:href="@{/css/infnet.min.css}"/>
-    <link rel="stylesheet" th:href="@{/css/application.css}"/>
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>
-    <script th:src="@{/js/avaliacao.min.js}"/>
-    <script th:src="@{/js/infnet.min.js}"/>
+    <link rel="stylesheet" th:href="@{/css/avaliacao.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/infnet.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/application.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css"/>
+    <script th:src="@{/js/avaliacao.min.js}"></script>
+    <script th:src="@{/js/infnet.min.js}"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <!--<![endif]&ndash;&gt;-->
 </head>
 <body>
+    <div class="aw-layout-page">
 
-<div class="aw-layout-page">
+        <nav class="navbar  navbar-fixed-top  navbar-default  js-sticky-reference" id="main-navbar">
+            <div class="container-fluid">
 
-    <nav class="navbar  navbar-fixed-top  navbar-default  js-sticky-reference" id="main-navbar">
-        <div class="container-fluid">
-
-            <div class="navbar-header">
-                <a class="navbar-brand  hidden-xs" href="#">
-                    <img id="logo" alt="Infnet" th:src="@{/images/logo_infnet.png}" width="80px" height="50px"
-                    th:title="#{institutoinfnet}"/>
-                </a>
-
-                <ul class="nav  navbar-nav">
-                    <li>
-                        <a href="#" class="js-sidebar-toggle" title="Menu"><i class="fa  fa-bars"></i></a>
-                    </li>
-                </ul>
-            </div>
-
-            <ul class="nav navbar-nav  navbar-right">
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa  fa-user"></i>
+                <div class="navbar-header">
+                    <a class="navbar-brand  hidden-xs" href="#">
+                        <img id="logo" alt="Infnet" th:src="@{/images/logo_infnet.png}" width="80px" height="50px"
+                        th:title="#{institutoinfnet}"/>
                     </a>
 
-                    <ul class="dropdown-menu">
+                    <ul class="nav  navbar-nav">
                         <li>
-                            <div class="aw-logged-user">
-                                <img src="https://api.adorable.io/avatars/80/joaodascouves"
-                                     width="80" height="80" alt="João das Couves" class="aw-logged-user__picture" />
-                                <span class="aw-logged-user__name">João das Couves</span>
-                            </div>
+                            <a href="#" class="js-sidebar-toggle" title="Menu"><i class="fa  fa-bars"></i></a>
                         </li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#" th:text="#{dropdown.versao}"></a></li>
-                        <li><a href="#" th:text="#{dropdown.administrador}"></a></li>
-                        <li><a href="#" th:text="#{dropdown.alterarsenha}"></a></li>
                     </ul>
-                </li>
+                </div>
 
-                <li>
-                    <a th:href="@{/}" th:title="#{logout}"><em class="fa  fa-sign-out"></em></a>
-                </li>
-            </ul>
+                <ul class="nav navbar-nav  navbar-right">
 
-        </div>
-    </nav>
-
-    <aside class="aw-layout-sidebar js-sidebar is-toggled">
-        <div class="aw-layout-sidebar__content">
-
-            <nav class="aw-menu  js-menu">
-                <ul class="aw-menu__list">
-
-                    <li class="aw-menu__item  is-active">
-                        <a href="#">
-                            <i class="fa  fa-fw  fa-file-text"></i><span th:text="#{cadastro}"></span>
-                            <i class="aw-menu__navigation-icon  fa"></i>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa  fa-user"></i>
                         </a>
 
-                        <ul class="aw-menu__list  aw-menu__list--sublist">
-                            <li class="aw-menu__item  aw-menu__item--link">
-                                <a th:href="@{/cadastro/usuario/list}" th:text="#{cadastrodeusuario}"></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="aw-logged-user">
+                                    <img src="https://api.adorable.io/avatars/80/joaodascouves"
+                                         width="80" height="80" alt="João das Couves" class="aw-logged-user__picture" />
+                                    <span class="aw-logged-user__name" th:text="${#authentication.principal.usuarioDTO.nome}">João das Couves</span>
+                                </div>
                             </li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#" th:text="#{dropdown.versao}"></a></li>
+                            <li><a href="#" th:text="${#authentication.principal.usuarioDTO.perfil.nome}"></a></li>
+                            <li><a href="#" th:text="#{dropdown.alterarsenha}"></a></li>
                         </ul>
                     </li>
 
-                    <li class="aw-menu__item  is-active">
-                        <a href="#">
-                            <i class="fa  fa-fw  fa-file-text"></i><span th:text="#{avaliacao}"></span>
-                            <i class="aw-menu__navigation-icon  fa"></i>
-                        </a>
-
-                        <ul class="aw-menu__list  aw-menu__list--sublist">
-                            <li class="aw-menu__item  aw-menu__item--link">
-                                <a th:href="@{/template/avaliacao/list}" th:text="#{montar}"></a>
-                            </li>
-                        </ul>
+                    <li>
+                        <a th:href="@{/logout}" th:title="#{logout}"><em class="fa  fa-sign-out"></em></a>
                     </li>
                 </ul>
-            </nav>
 
-        </div>
-    </aside>
+            </div>
+        </nav>
 
-    <section layout:fragment="conteudo" class="aw-layout-content ajustarPosicaoElementosNaTela">
-        <p>Conteúdo principal</p>
-    </section>
+        <aside class="aw-layout-sidebar js-sidebar is-toggled">
+            <div class="aw-layout-sidebar__content">
 
-    <footer class="aw-layout-footer js-content is-toggled">
-        <div class="container-fluid">
-            <span class="aw-footer-disclaimer">&copy; <span th:text="#{rodapetemplate}"></span></span>
-        </div>
-    </footer>
+                <nav class="aw-menu  js-menu">
+                    <ul class="aw-menu__list">
 
-</div>
+                        <li class="aw-menu__item  is-active" sec:authorize="hasRole('MANTER_CADASTRO')">
+                            <a href="#">
+                                <i class="fa  fa-fw  fa-file-text"></i><span th:text="#{cadastro}"></span>
+                                <i class="aw-menu__navigation-icon  fa"></i>
+                            </a>
+
+                            <ul class="aw-menu__list  aw-menu__list--sublist">
+                                <li class="aw-menu__item  aw-menu__item--link" sec:authorize="hasRole('LISTAR_USUARIO')">
+                                    <a th:href="@{/cadastro/usuario/list}" th:text="#{cadastrodeusuario}"></a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="aw-menu__item  is-active" sec:authorize="hasRole('MANTER_TEMPLATE_AVALIACAO')">
+                            <a href="#">
+                                <i class="fa  fa-fw  fa-file-text"></i><span th:text="#{avaliacao}"></span>
+                                <i class="aw-menu__navigation-icon  fa"></i>
+                            </a>
+
+                            <ul class="aw-menu__list  aw-menu__list--sublist">
+                                <li class="aw-menu__item  aw-menu__item--link" sec:authorize="hasRole('LISTAR_TEMPLATE_AVALIACAO')">
+                                    <a th:href="@{/template/avaliacao/list}" th:text="#{montar}"></a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+        </aside>
+
+        <section layout:fragment="conteudo" class="aw-layout-content ajustarPosicaoElementosNaTela">
+            <p>Conteúdo principal</p>
+        </section>
+
+        <footer class="aw-layout-footer js-content is-toggled">
+            <div class="container-fluid">
+                <span class="aw-footer-disclaimer">&copy; <span th:text="#{rodapetemplate}"></span></span>
+            </div>
+        </footer>
+
+    </div>
 
 </body>
 </html>

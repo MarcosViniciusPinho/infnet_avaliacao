@@ -12,7 +12,6 @@ public abstract class InitController<V> {
     private static final String VIEW_LIST = "/list";
     private static final String VIEW_FORM = "/form";
     private static final String VIEW_DETAIL = "/detail";
-    protected static final String REDIRECT_LIST = "redirect:";
 
     /**
      * Método que deverá ser sempre implementado por suas subclasses.

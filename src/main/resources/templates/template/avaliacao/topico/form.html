@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout"
-       xmlns:th="http://www.thymeleaf.org">
+      layout:decorate="~{layout}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
     <title th:text="#{avaliacao}"></title>
-    <script th:src="@{/js/template/avaliacao/topico/form.js}"/>
-    <script th:src="@{/js/util/modalVisualizar.js}"/>
-    <script th:src="@{/js/util/form.js}"/>
+    <script th:src="@{/js/template/avaliacao/topico/form.js}"></script>
+    <script th:src="@{/js/util/modalVisualizar.js}"></script>
+    <script th:src="@{/js/util/form.js}"></script>
 </head>
 
 <body>
@@ -19,7 +20,7 @@
                     <div class="col-lg-12"> &nbsp; </div>
                     <div class="col-lg-12">
                         <ol class="breadcrumb">
-                            <li><a th:href="@{/home}" th:text="#{home}"></a></li>
+                            <li><a th:href="@{/}" th:text="#{home}"></a></li>
                             <li><a th:href="@{/template/avaliacao/list}" th:text="#{avaliacao}"></a></li>
                             <li><a th:href="@{/template/avaliacao/edit/{id}(id=${templateTopicoDTO.idAvaliacao})}" th:text="#{template.avaliacao.topico}"></a></li>
                             <li class="active" th:text="#{template.avaliacao.montarPergunta}"></li>
@@ -43,7 +44,7 @@
                         <hr />
 
                         <div class="textoCamposObrigatorios">
-                            <small class="col-sm-offset-10">(<span class="corVermelho">*</span>)
+                            <small class="col-xs-offset-10">(<span class="corVermelho">*</span>)
                                 <span th:text="#{campo.obrigatorio}"></span></small>
                         </div>
 
@@ -84,8 +85,8 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div layout:include="modalVisualizar"></div>
-                                <div class="col-sm-12  text-center" th:if="${not #lists.isEmpty(listarTemplatePergunta.content)}">
+                                <div layout:insert="~{modalVisualizar}"></div>
+                                <div class="col-xs-12  text-center" th:if="${not #lists.isEmpty(listarTemplatePergunta.content)}">
                                     <nav>
                                         <ul class="pagination  pagination-sm">
                                             <li class="disabled">
@@ -105,7 +106,7 @@
                                 </div>
                                 <input type="hidden" th:field="*{idsTemplatePerguntaSelecionados}" id="idsTemplatePerguntaSelecionados"/>
                             </div>
-                            <input id="salvar" type="submit" class="btn btn-primary" th:value="#{btn.salvar}"/>
+                            <input id="salvar" type="submit" class="btn btn-primary" th:value="#{btn.salvar}" sec:authorize="hasRole('SALVAR_TEMPLATE_PERGUNTA')"/>
                         </form>
                     </div>
                 </div>

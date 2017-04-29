@@ -13,5 +13,6 @@ public final class ActionConstant {
     public static final String ACTION_CREATE = "/create";
     public static final String ACTION_LINK_RESPONDER_AVALIACAO = "/aluno/{cpf}/turma/{id}";
     public static final String ACTION_AGRADECIMENTO = "/agradecimento";
+    public static final String REDIRECT = "redirect:";
 
 }

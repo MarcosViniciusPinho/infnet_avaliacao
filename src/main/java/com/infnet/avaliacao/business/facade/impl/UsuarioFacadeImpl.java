@@ -1,8 +1,10 @@
 package com.infnet.avaliacao.business.facade.impl;
 
 import com.infnet.avaliacao.business.facade.UsuarioFacade;
+import com.infnet.avaliacao.business.service.PerfilService;
 import com.infnet.avaliacao.business.service.UsuarioService;
 import com.infnet.avaliacao.dto.impl.UsuarioDTO;
+import com.infnet.avaliacao.entity.Perfil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,9 @@ public class UsuarioFacadeImpl implements UsuarioFacade {
 
     @Resource
     private UsuarioService usuarioService;
+
+    @Resource
+    private PerfilService perfilService;
 
     /**
      * {@inheritDoc}
@@ -41,6 +46,11 @@ public class UsuarioFacadeImpl implements UsuarioFacade {
     @Override
     public void delete(Long id) {
         this.usuarioService.delete(id);
+    }
+
+    @Override
+    public List<Perfil> findAllPerfil() {
+        return this.perfilService.findAll();
     }
 
     /**

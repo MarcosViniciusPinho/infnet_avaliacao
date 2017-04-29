@@ -1,6 +1,5 @@
 package com.infnet.avaliacao.entity;
 
-import com.infnet.avaliacao.entity.domain.PerfilEnum;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -30,13 +29,13 @@ public class Usuario implements Serializable {
     private String login;
 
     @NotBlank(message = "usuario.mensagem.erro.senha")
-    @Column(name = "senha", length = 10, nullable = false)
+    @Column(name = "senha", length = 200, nullable = false)
     private String senha;
 
     @NotNull(message = "usuario.mensagem.erro.perfil")
-    @Enumerated(value = EnumType.STRING)
-    @Column(name = "perfil", length = 3, nullable = false)
-    private PerfilEnum perfil;
+    @OneToOne
+    @JoinColumn(name = "id_perfil", nullable = false)
+    private Perfil perfil;
 
     public Long getId() {
         return id;
@@ -70,11 +69,11 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
-    public PerfilEnum getPerfil() {
+    public Perfil getPerfil() {
         return perfil;
     }
 
-    public void setPerfil(PerfilEnum perfil) {
+    public void setPerfil(Perfil perfil) {
         this.perfil = perfil;
     }
 

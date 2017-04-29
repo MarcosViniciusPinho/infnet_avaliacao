@@ -1,0 +1,10 @@
+CREATE TABLE usuario(
+  id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(120) NOT NULL,
+  login VARCHAR(50) NOT NULL,
+  senha VARCHAR(200) NOT NULL,
+  id_perfil BIGINT NOT NULL
+);
+
+ALTER TABLE usuario ADD CONSTRAINT un_login UNIQUE (login);
+ALTER TABLE usuario ADD CONSTRAINT fk_perf_usuario_id FOREIGN KEY (id_perfil) REFERENCES perfil (id);

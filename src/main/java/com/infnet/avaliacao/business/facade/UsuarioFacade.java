@@ -1,6 +1,9 @@
 package com.infnet.avaliacao.business.facade;
 
 import com.infnet.avaliacao.dto.impl.UsuarioDTO;
+import com.infnet.avaliacao.entity.Perfil;
+
+import java.util.List;
 
 /**
  * Classe que representa o facade de usuario.
@@ -12,5 +15,7 @@ public interface UsuarioFacade extends CrudFacade<UsuarioDTO> {
      * @param id id
      */
     void delete(Long id);
+
+    List<Perfil> findAllPerfil();
 
 }

@@ -9,6 +9,7 @@
     <title th:text="#{infnet}"></title>
     <link rel="stylesheet" th:href="@{/css/login.css}"/>
     <link rel="stylesheet" th:href="@{/css/avaliacao.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <script th:src="@{/js/avaliacao.min.js}"></script>
 </head>
 
@@ -28,28 +29,31 @@
              th:title="#{icone.espanha}"/>
     </a>
 </div>
-<form class="form-signin">
+<form class="form-signin" th:action="@{/login}" method="post">
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
+                <div class="text-center corVermelho" th:if="${#bools.isTrue(param.error)}">
+                    <span th:text="#{login.erro.autenticacao}"></span>
+                </div>
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <form class="form-signin">
-                            <h3 class="text-center" th:text="#{login}"> <br/><br/></h3>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                                    <input type="text" class="form-control" th:placeholder="#{usuario}"/>
-                                </div>
+                        <h3 class="text-center" th:text="#{login}"><br/><br/></h3>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                                <input type="text" class="form-control" th:placeholder="#{usuario}"
+                                       autofocus="autofocus" name="username"/>
                             </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                    <input type="password" class="form-control" th:placeholder="#{senha}"/>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                <input type="password" class="form-control" th:placeholder="#{senha}"
+                                       autofocus="autofocus" name="password"/>
                             </div>
-                            <a th:href="@{/home}" class="btn btn-lg btn-primary btn-block" th:text="#{entrar}"></a>
-                        </form>
+                        </div>
+                        <input id="salvar" type="submit" class="btn btn-lg btn-primary btn-block" th:value="#{entrar}"/>
                     </div>
                 </div>
             </div>

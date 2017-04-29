@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout"
-      xmlns:th="http://www.thymeleaf.org">
+      layout:decorate="~{layout}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
     <title th:text="#{avaliacao}"></title>
-    <script th:src="@{/js/util/modalExcluir.js}"/>
+    <script th:src="@{/js/util/modalExcluir.js}"></script>
 </head>
 
 <body>
@@ -17,7 +18,7 @@
                 <div class="col-lg-12"> &nbsp; </div>
                 <div class="col-lg-12">
                     <ol class="breadcrumb">
-                        <li><a th:href="@{/home}" th:text="#{home}"></a></li>
+                        <li><a th:href="@{/}" th:text="#{home}"></a></li>
                         <li class="active" th:text="#{avaliacao}"></li>
                     </ol>
 
@@ -43,10 +44,12 @@
                         <tr th:each="templateAvaliacao : ${listarTemplateAvaliacao}">
                             <td th:text="${templateAvaliacao.titulo}"></td>
                             <td>
-                                <a th:title="#{hint.detalhar}" class="btn btn-link btn-xs" th:href="@{/template/avaliacao/detail/{id}(id=${templateAvaliacao.id})}">
+                                <a th:title="#{hint.detalhar}" class="btn btn-link btn-xs" th:href="@{/template/avaliacao/detail/{id}(id=${templateAvaliacao.id})}"
+                                   sec:authorize="hasRole('DETALHAR_TEMPLATE_AVALIACAO')">
                                     <span class="glyphicon glyphicon-th-list"></span>
                                 </a>
-                                <a th:title="#{template.avaliacao.hint.associar.topico}" class="btn btn-link btn-xs" th:href="@{/template/avaliacao/edit/{id}(id=${templateAvaliacao.id})}">
+                                <a th:title="#{template.avaliacao.hint.associar.topico}" class="btn btn-link btn-xs" th:href="@{/template/avaliacao/edit/{id}(id=${templateAvaliacao.id})}"
+                                   sec:authorize="hasRole('ASSOCIAR_TEMPLATE_TOPICO')">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </a>
                             </td>
@@ -57,7 +60,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-sm-12  text-center" th:if="${not #lists.isEmpty(listarTemplateAvaliacao.content)}">
+                <div class="col-xs-12  text-center" th:if="${not #lists.isEmpty(listarTemplateAvaliacao.content)}">
                     <nav>
                         <ul class="pagination  pagination-sm">
                             <li class="disabled">

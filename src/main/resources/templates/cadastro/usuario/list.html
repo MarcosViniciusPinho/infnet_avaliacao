@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout"
-      xmlns:th="http://www.thymeleaf.org">
+      layout:decorate="~{layout}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
     <title th:text="#{usuario}"></title>
-    <script th:src="@{/js/util/modalExcluir.js}"/>
+    <script th:src="@{/js/util/modalExcluir.js}"></script>
 </head>
 
 <body>
@@ -17,7 +18,7 @@
                 <div class="col-lg-12"> &nbsp; </div>
                 <div class="col-lg-12">
                     <ol class="breadcrumb">
-                        <li><a th:href="@{/home}" th:text="#{home}"></a></li>
+                        <li><a th:href="@{/}" th:text="#{home}"></a></li>
                         <li class="active" th:text="#{usuario}"></li>
                     </ol>
 
@@ -28,7 +29,7 @@
                     <h2 th:text="#{usuario}"></h2>
                     <hr />
 
-                    <a th:href="@{/cadastro/usuario/create}" class="btn btn-primary" th:text="#{novo}"></a>
+                    <a th:href="@{/cadastro/usuario/create}" class="btn btn-primary" th:text="#{novo}" sec:authorize="hasRole('CADASTRAR_USUARIO')"></a>
 
                     <div class="col-lg-12"> &nbsp; </div>
 
@@ -45,16 +46,19 @@
                         <tr th:each="usuario : ${listarUsuarios}">
                             <td th:text="${usuario.nome}"></td>
                             <td th:text="${usuario.login}"></td>
-                            <td th:text="#{${usuario.perfil.id}}"></td>
+                            <td th:text="${usuario.perfil.nome}"></td>
                             <td>
-                                <a th:title="#{hint.detalhar}" class="btn btn-link btn-xs" th:href="@{/cadastro/usuario/detail/{id}(id=${usuario.id})}">
+                                <a th:title="#{hint.detalhar}" class="btn btn-link btn-xs" th:href="@{/cadastro/usuario/detail/{id}(id=${usuario.id})}"
+                                   sec:authorize="hasRole('DETALHAR_USUARIO')">
                                     <span class="glyphicon glyphicon-th-list"></span>
                                 </a>
-                                <a th:title="#{hint.editar}" class="btn btn-link btn-xs" th:href="@{/cadastro/usuario/edit/{id}(id=${usuario.id})}">
+                                <a th:title="#{hint.editar}" class="btn btn-link btn-xs" th:href="@{/cadastro/usuario/edit/{id}(id=${usuario.id})}"
+                                   sec:authorize="hasRole('ALTERAR_USUARIO')">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </a>
                                 <a th:title="#{hint.excluir}" class="btn btn-link btn-xs" href="#"
-                                    th:attr="data-id=${usuario.id}, data-nome=${usuario.nome}" data-toggle="modal" data-target="#modalExcluir">
+                                    th:attr="data-id=${usuario.id}, data-nome=${usuario.nome}" data-toggle="modal" data-target="#modalExcluir"
+                                    sec:authorize="hasRole('REMOVER_USUARIO')">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </a>
                             </td>
@@ -65,7 +69,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-sm-12  text-center" th:if="${not #lists.isEmpty(listarUsuarios.content)}">
+                <div class="col-xs-12  text-center" th:if="${not #lists.isEmpty(listarUsuarios.content)}">
                     <nav>
                         <ul class="pagination  pagination-sm">
                             <li class="disabled">
@@ -85,7 +89,7 @@
                 </div>
                 <form class="form-horizontal" th:attr="data-url-base=@{/cadastro/usuario/delete/}" method="POST" id="formExcluir">
                     <input type="hidden" th:value="#{usuario.confirmacaoexclusao}" id="mensagemExcluir"/>
-                    <div layout:include="modal"></div>
+                    <div layout:insert="~{modal}"></div>
                 </form>
             </div>
         </div>

@@ -2,10 +2,12 @@ package com.infnet.avaliacao.dto.impl;
 
 
 import com.infnet.avaliacao.dto.DTO;
+import com.infnet.avaliacao.dto.util.CriptografiaUtil;
+import com.infnet.avaliacao.entity.Perfil;
 import com.infnet.avaliacao.entity.Usuario;
-import com.infnet.avaliacao.entity.domain.PerfilEnum;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -28,7 +30,7 @@ public class UsuarioDTO implements DTO<Usuario> {
 
     private String senha;
 
-    private PerfilEnum perfil;
+    private Perfil perfil;
 
 
     /**
@@ -125,14 +127,14 @@ public class UsuarioDTO implements DTO<Usuario> {
     }
 
     public void setSenha(String senha) {
-        this.senha = senha;
+        this.senha = CriptografiaUtil.getSenhaCriptografada(senha, this.getId());
     }
 
-    public PerfilEnum getPerfil() {
+    public Perfil getPerfil() {
         return perfil;
     }
 
-    public void setPerfil(PerfilEnum perfil) {
+    public void setPerfil(Perfil perfil) {
         this.perfil = perfil;
     }
 }
