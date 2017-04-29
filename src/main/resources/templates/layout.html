@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -78,14 +79,14 @@
                 <nav class="aw-menu  js-menu">
                     <ul class="aw-menu__list">
 
-                        <li class="aw-menu__item  is-active">
+                        <li class="aw-menu__item  is-active" sec:authorize="hasRole('MANTER_CADASTRO')">
                             <a href="#">
                                 <i class="fa  fa-fw  fa-file-text"></i><span th:text="#{cadastro}"></span>
                                 <i class="aw-menu__navigation-icon  fa"></i>
                             </a>
 
                             <ul class="aw-menu__list  aw-menu__list--sublist">
-                                <li class="aw-menu__item  aw-menu__item--link">
+                                <li class="aw-menu__item  aw-menu__item--link" sec:authorize="hasRole('LISTAR_USUARIO')">
                                     <a th:href="@{/cadastro/usuario/list}" th:text="#{cadastrodeusuario}"></a>
                                 </li>
                             </ul>

@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}"
-       xmlns:th="http://www.thymeleaf.org">
+       xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
     <title th:text="#{usuario}"></title>
@@ -47,9 +48,10 @@
                                 </div>
                             </div>
 
-                        <a th:href="@{/cadastro/usuario/edit/{id}(id=${usuarioDTO.id})}" class="btn btn-primary" th:text="#{hint.editar}"></a>
+                        <a th:href="@{/cadastro/usuario/edit/{id}(id=${usuarioDTO.id})}" class="btn btn-primary" th:text="#{hint.editar}"
+                           sec:authorize="hasRole('ALTERAR_USUARIO')"></a>
                         <a th:attr="data-id=${usuarioDTO.id}, data-nome=${usuarioDTO.nome}" data-toggle="modal" data-target="#modalExcluir"
-                           class="btn btn-primary" th:text="#{hint.excluir}"></a>
+                           class="btn btn-primary" th:text="#{hint.excluir}" sec:authorize="hasRole('REMOVER_USUARIO')"></a>
                     </div>
                 </div>
             </div>

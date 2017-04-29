@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
     <title th:text="#{usuario}"></title>
@@ -28,7 +29,7 @@
                     <h2 th:text="#{usuario}"></h2>
                     <hr />
 
-                    <a th:href="@{/cadastro/usuario/create}" class="btn btn-primary" th:text="#{novo}"></a>
+                    <a th:href="@{/cadastro/usuario/create}" class="btn btn-primary" th:text="#{novo}" sec:authorize="hasRole('CADASTRAR_USUARIO')"></a>
 
                     <div class="col-lg-12"> &nbsp; </div>
 
@@ -47,14 +48,17 @@
                             <td th:text="${usuario.login}"></td>
                             <td th:text="${usuario.perfil.nome}"></td>
                             <td>
-                                <a th:title="#{hint.detalhar}" class="btn btn-link btn-xs" th:href="@{/cadastro/usuario/detail/{id}(id=${usuario.id})}">
+                                <a th:title="#{hint.detalhar}" class="btn btn-link btn-xs" th:href="@{/cadastro/usuario/detail/{id}(id=${usuario.id})}"
+                                   sec:authorize="hasRole('DETALHAR_USUARIO')">
                                     <span class="glyphicon glyphicon-th-list"></span>
                                 </a>
-                                <a th:title="#{hint.editar}" class="btn btn-link btn-xs" th:href="@{/cadastro/usuario/edit/{id}(id=${usuario.id})}">
+                                <a th:title="#{hint.editar}" class="btn btn-link btn-xs" th:href="@{/cadastro/usuario/edit/{id}(id=${usuario.id})}"
+                                   sec:authorize="hasRole('ALTERAR_USUARIO')">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </a>
                                 <a th:title="#{hint.excluir}" class="btn btn-link btn-xs" href="#"
-                                    th:attr="data-id=${usuario.id}, data-nome=${usuario.nome}" data-toggle="modal" data-target="#modalExcluir">
+                                    th:attr="data-id=${usuario.id}, data-nome=${usuario.nome}" data-toggle="modal" data-target="#modalExcluir"
+                                    sec:authorize="hasRole('REMOVER_USUARIO')">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </a>
                             </td>
