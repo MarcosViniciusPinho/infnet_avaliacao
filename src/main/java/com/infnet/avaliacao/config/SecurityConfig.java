@@ -42,6 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/cadastro/usuario/detail/{id}").hasRole("DETALHAR_USUARIO")
                 .antMatchers("/cadastro/usuario/delete/{id}").hasRole("REMOVER_USUARIO")
                 .antMatchers("/template/avaliacao/list").hasRole("LISTAR_AVALIACAO")
+                .antMatchers("/template/avaliacao/detail/{id}").hasRole("DETALHAR_AVALIACAO")
+                .antMatchers("/template/avaliacao/edit/{id}").hasRole("ASSOCIAR_TOPICO")
                 .antMatchers("/login").permitAll()
                 .antMatchers("/").permitAll()
                 .anyRequest().denyAll().and();
