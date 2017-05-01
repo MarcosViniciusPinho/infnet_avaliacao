@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+
     @Resource
     private UserDetailsService userDetailsService;
 
