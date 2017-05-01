@@ -3,3 +3,7 @@ script:
  - mvn clean install test jacoco:report coveralls:report
 jdk:
  - oraclejdk8
+notifications:
+  email:
+    recipients:
+      - marcosjava2008@gmail.com
