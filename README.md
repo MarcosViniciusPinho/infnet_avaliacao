@@ -1,6 +1,6 @@
 # infnet_avaliacao
 Projeto de TCC que representa o sistema de avaliação da infnet
-
+[![Build Status](https://travis-ci.org/MarcosViniciusPinho/infnet_avaliacao.svg?branch=master)](https://travis-ci.org/MarcosViniciusPinho/infnet_avaliacao)
 O projeto ainda não tem sua versão em produção, portando para poder executar e utilizar o sistema deverá ser feita localmente no pc e seguindo os seguintes passos:<br />
 **1º passo)** Fazer o checkout do projeto: `https://github.com/MarcosViniciusPinho/infnet_avaliacao.git`<br />
 **2º passo)** Assim que terminar o checkout deverá ser configurado/executado os seguintes comandos via maven:<br />&nbsp;&nbsp;&nbsp;
