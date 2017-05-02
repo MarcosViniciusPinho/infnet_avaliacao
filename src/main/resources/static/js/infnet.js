@@ -24,16 +24,6 @@ AW.onSearchModalCloseRequest = function(event) {
   $('body').removeClass('aw-no-scroll');
 };
 
-//AW.onFormLoadingSubmit = function(event) {
-  //event.preventDefault();
-
-  //AW.showLoadingComponent();
-
-  //setTimeout(function() {
-  //  AW.hideLoadingComponent();
-  //}, 2000);
-//};
-
 AW.showLoadingComponent = function() {
   $('.js-loading-overlay').css('display', 'table').hide().fadeIn('slow');
 };
@@ -82,5 +72,4 @@ $(function() {
   $('.js-sidebar-toggle').bind('click', AW.onSidebarToggleRequest);
   $('.js-search-modal-trigger-show').bind('click', AW.onSearchModalShowRequest);
   $('.js-search-modal-close').bind('click', AW.onSearchModalCloseRequest);
-  //$('.js-form-loading').bind('submit', AW.onFormLoadingSubmit);
 });
