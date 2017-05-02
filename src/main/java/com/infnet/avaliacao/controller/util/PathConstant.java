@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.controller.util;
 
-public final class PathConstant {
+public final class PathConstant {//NOSONAR desnecessário implementação que acusa o sonar.
 
     public static final String PATH_USUARIO = "/cadastro/usuario";
     public static final String PATH_TEMPLATE_AVALIACAO = "/template/avaliacao";

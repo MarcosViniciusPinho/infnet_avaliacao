@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.controller.util;
 
-public final class ActionConstant {
+public final class ActionConstant {//NOSONAR desnecessário implementação que acusa o sonar.
 
     public static final String ACTION_LIST = "/list";
     public static final String ACTION_EDIT = "/edit/{id}";

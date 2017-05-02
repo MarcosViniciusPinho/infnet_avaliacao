@@ -4,7 +4,7 @@ package com.infnet.avaliacao.dto.util;
  * Classe criada pois houve a necessidade de pegar os caracteres especiais (',' e '-') de suas formas binárias vindos da tela.
  * Portando esta classe faz a descodificação e os retorna para suas formas de origem (',' e '-').
  */
-public class ConversorBinarioUtil {
+public class ConversorBinarioUtil {//NOSONAR desnecessário implementação que acusa o sonar.
 
     private static final String BINARIO_VIRGULA = "00101100";
     private static final String BINARIO_HIFEN = "00101101";

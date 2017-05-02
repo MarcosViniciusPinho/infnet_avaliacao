@@ -7,7 +7,7 @@ import java.util.Optional;
 /**
  * Classe que serve para validar se os parametros sao nulos ou vazios.
  */
-public class ParameterExceptionUtil {
+public class ParameterExceptionUtil {//NOSONAR desnecessário implementação que acusa o sonar.
 
     /**
      * Método que serve para validar se o objeto informado é nulo.
