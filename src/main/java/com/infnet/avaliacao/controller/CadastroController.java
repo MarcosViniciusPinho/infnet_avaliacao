@@ -62,7 +62,7 @@ public abstract class CadastroController<V> extends InitController<V> {
         return getViewForm();
     }
 
-    private void tratarExcecao(Model model, Set multipleMessages, String keyError){
+    private void tratarExcecao(Model model, Set multipleMessages, String keyError){//NOSONAR falso positivo
         model.addAttribute(keyError, multipleMessages);
         this.onLoadView(model);
     }
