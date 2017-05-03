@@ -61,8 +61,12 @@ public class Aluno implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
         Aluno aluno = (Aluno) o;
         return id != null ? !id.equals(aluno.id) : aluno.id != null;
     }

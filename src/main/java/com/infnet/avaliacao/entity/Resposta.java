@@ -59,8 +59,12 @@ public class Resposta implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
         Resposta resposta = (Resposta) o;
         return id != null ? id.equals(resposta.id) : resposta.id == null;
     }

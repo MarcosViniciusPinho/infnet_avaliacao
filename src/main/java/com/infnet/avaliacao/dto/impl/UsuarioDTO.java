@@ -7,7 +7,6 @@ import com.infnet.avaliacao.entity.Perfil;
 import com.infnet.avaliacao.entity.Usuario;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;

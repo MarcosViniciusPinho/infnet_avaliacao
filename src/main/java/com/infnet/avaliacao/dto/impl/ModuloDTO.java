@@ -62,8 +62,12 @@ public class ModuloDTO implements DTO<Modulo> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
         ModuloDTO turma = (ModuloDTO) o;
         return id != null ? id.equals(turma.id) : turma.id == null;
     }

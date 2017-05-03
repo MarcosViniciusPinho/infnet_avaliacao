@@ -55,8 +55,12 @@ public class Perfil implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
         Perfil usuario = (Perfil) o;
         return id != null ? !id.equals(usuario.id) : usuario.id != null;
     }
