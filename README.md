@@ -13,7 +13,8 @@ O projeto ainda não tem sua versão em produção, portando para poder executar
 em seu terminal(cmd), feito isto o sonar irá fornecer um link com o dashboard da qualidade do código.<br /> 
 Exemplo: /mnt/dados/Desenvolvimento/Instituicao_INFNET/infnet_avaliacao/.sonarlint/sonarlint-report.html<br /> 
 
-**Ps: Antes de executar este passo 3 é necessário baixar o seguinte ZIP em http://www.sonarlint.org/commandline/**<br />
+**Ps: Antes de executar este passo 3 é necessário baixar o seguinte ZIP em http://www.sonarlint.org/commandline/ 
+Logo em seguida descompactar e configurar a variavel de ambiente com este zip** <br />
 
 Todos estes passos podem ser executados via terminal(cmd) desde que você tenha configurado o maven em sua máquina.
 Para poder fazer a chamada da aplicação na url basta digitar: _http://localhost:8081/sai/_
