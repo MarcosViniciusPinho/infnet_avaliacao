@@ -1,5 +1,6 @@
 package com.infnet.avaliacao.config;
 
+import com.infnet.avaliacao.ApplicationConstant;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -47,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/template/avaliacao/save").hasRole("SALVAR_TEMPLATE_TOPICO")
                 .antMatchers("/template/avaliacao/topico/edit/{id}/avaliacao/{idAvaliacao}").hasRole("ASSOCIAR_TEMPLATE_PERGUNTA")
                 .antMatchers("/template/avaliacao/topico/save").hasRole("SALVAR_TEMPLATE_PERGUNTA")
-                .antMatchers("/login").permitAll()
+                .antMatchers(ApplicationConstant.ACTION_LOGIN).permitAll()
                 .antMatchers("/").permitAll()
                 .anyRequest().denyAll().and();
     }
@@ -56,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         this.verificarPermissao(http)
                 .formLogin()
-                    .loginPage("/login")
+                    .loginPage(ApplicationConstant.ACTION_LOGIN)
                     .permitAll()
                     .and()
                 .logout()
@@ -66,9 +67,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .accessDeniedPage("/acessoNegado")
                     .and()
                 .sessionManagement()
-                    .invalidSessionUrl("/login")
+                    .invalidSessionUrl(ApplicationConstant.ACTION_LOGIN)
                     .maximumSessions(1)
-                    .expiredUrl("/login");
+                    .expiredUrl(ApplicationConstant.ACTION_LOGIN);
     }
 
     @Bean
