@@ -1,0 +1,1 @@
+sonarlint --src "src/main/**" --exclude "src/main/resources/static/js/terceiros/**"
