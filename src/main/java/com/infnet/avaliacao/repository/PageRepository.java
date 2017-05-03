@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
  * Classe responsável pela paginação por demanda da aplicação
  * @param <T>
  */
+@FunctionalInterface
 public interface PageRepository<T> {
 
     Page<T> findAll(Pageable pageable);

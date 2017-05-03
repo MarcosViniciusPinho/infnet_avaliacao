@@ -2,6 +2,7 @@ package com.infnet.avaliacao.business.service;
 
 import javax.mail.MessagingException;
 
+@FunctionalInterface
 public interface EmailService {
 
     /**

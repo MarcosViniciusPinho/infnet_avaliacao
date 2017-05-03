@@ -2,6 +2,7 @@ package com.infnet.avaliacao.mailer;
 
 import javax.mail.MessagingException;
 
+@FunctionalInterface
 public interface SmtpMailSender {
 
     /**
