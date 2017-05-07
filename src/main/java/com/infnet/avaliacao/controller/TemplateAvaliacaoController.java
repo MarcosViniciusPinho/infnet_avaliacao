@@ -3,6 +3,7 @@ package com.infnet.avaliacao.controller;
 import com.infnet.avaliacao.business.facade.TemplateAvaliacaoFacade;
 import com.infnet.avaliacao.business.facade.TemplateTopicoFacade;
 import com.infnet.avaliacao.controller.util.ActionConstant;
+import com.infnet.avaliacao.controller.util.ApplicationConstant;
 import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.controller.wrapper.PerguntaAssociadaWrapper;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
@@ -27,9 +28,6 @@ import java.util.List;
 @RequestMapping(value = PathConstant.PATH_TEMPLATE_AVALIACAO)
 public class TemplateAvaliacaoController extends TemplateController<TemplateAvaliacaoDTO>{
 
-    private static final String LISTAR_TEMPLATE_AVALIACAO = "listarTemplateAvaliacao";
-    private static final String LISTAR_TEMPLATE_TOPICO = "listarTemplateTopico";
-
     @Resource
     private TemplateAvaliacaoFacade templateAvaliacaoFacade;
 
@@ -44,7 +42,7 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
     public ModelAndView list(@PageableDefault Pageable pageable){
         try {
             ModelAndView mv = new ModelAndView(getViewList());
-            mv.addObject(LISTAR_TEMPLATE_AVALIACAO, this.templateAvaliacaoFacade.findAllPaginated(pageable));
+            mv.addObject(ApplicationConstant.LISTAR_TEMPLATE_AVALIACAO, this.templateAvaliacaoFacade.findAllPaginated(pageable));
             return mv;
         } catch (RuntimeException ex) {
             throw new ExecutionException(ex);
@@ -67,7 +65,7 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      */
     @Override
     protected void onLoadViewPaginated(Model model, Pageable pageable){
-        model.addAttribute(LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAllPaginated(pageable));
+        model.addAttribute(ApplicationConstant.LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAllPaginated(pageable));
     }
 
     /**
@@ -75,7 +73,7 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      */
     @Override
     protected void onLoadView(Model model){
-        model.addAttribute(LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAll());
+        model.addAttribute(ApplicationConstant.LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAll());
     }
 
     private void onEdit(Long id, Model model, Pageable pageable){

@@ -1,6 +1,7 @@
 package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.business.facade.CrudFacade;
+import com.infnet.avaliacao.controller.util.ViewConstant;
 import org.springframework.ui.Model;
 
 /**
@@ -8,10 +9,6 @@ import org.springframework.ui.Model;
  * @param <V> dto
  */
 public abstract class InitController<V> {
-
-    private static final String VIEW_LIST = "/list";
-    private static final String VIEW_FORM = "/form";
-    private static final String VIEW_DETAIL = "/detail";
 
     /**
      * Método que deverá ser sempre implementado por suas subclasses.
@@ -30,7 +27,7 @@ public abstract class InitController<V> {
      * @return String
      */
     protected String getViewForm(){
-        return getPathView() + VIEW_FORM;
+        return getPathView() + ViewConstant.VIEW_FORM;
     }
 
     /**
@@ -38,7 +35,7 @@ public abstract class InitController<V> {
      * @return String
      */
     protected String getViewDetail(){
-        return getPathView() + VIEW_DETAIL;
+        return getPathView() + ViewConstant.VIEW_DETAIL;
     }
 
     /**
@@ -46,7 +43,7 @@ public abstract class InitController<V> {
      * @return String
      */
     protected String getViewList(){
-        return getPathView() + VIEW_LIST;
+        return getPathView() + ViewConstant.VIEW_LIST;
     }
 
     /**

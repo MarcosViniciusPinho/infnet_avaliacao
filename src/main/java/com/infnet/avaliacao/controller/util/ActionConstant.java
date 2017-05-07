@@ -14,5 +14,8 @@ public final class ActionConstant {//NOSONAR desnecessário implementação que 
     public static final String ACTION_LINK_RESPONDER_AVALIACAO = "/aluno/{cpf}/turma/{id}";
     public static final String ACTION_AGRADECIMENTO = "/agradecimento";
     public static final String REDIRECT = "redirect:";
+    public static final String ACTION_LOGIN = "/login";
+    public static final String ACTION_HOME = "/";
+    public static final String ACTION_ACESSO_NEGADO = "/acessoNegado";
 
 }

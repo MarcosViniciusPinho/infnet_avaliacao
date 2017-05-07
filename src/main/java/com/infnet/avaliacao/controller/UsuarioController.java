@@ -1,6 +1,7 @@
 package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.business.facade.UsuarioFacade;
+import com.infnet.avaliacao.controller.util.ApplicationConstant;
 import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.dto.impl.UsuarioDTO;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
@@ -19,9 +20,6 @@ import javax.annotation.Resource;
 @RequestMapping(value = PathConstant.PATH_USUARIO)
 public class UsuarioController extends CadastroController<UsuarioDTO>{
 
-    private static final String LISTAR_USUARIOS = "listarUsuarios";
-    private static final String LISTAR_PERFIS = "listarPerfis";
-
     @Resource
     private UsuarioFacade usuarioFacade;
 
@@ -31,7 +29,7 @@ public class UsuarioController extends CadastroController<UsuarioDTO>{
     @Override
     protected ModelAndView onList(Pageable pageable){
         ModelAndView mv = new ModelAndView(getViewList());
-        mv.addObject(LISTAR_USUARIOS, this.usuarioFacade.findAllPaginated(pageable));
+        mv.addObject(ApplicationConstant.LISTAR_USUARIOS, this.usuarioFacade.findAllPaginated(pageable));
         return mv;
     }
 
@@ -70,7 +68,7 @@ public class UsuarioController extends CadastroController<UsuarioDTO>{
      */
     @Override
     protected void onLoadView(Model model){
-        model.addAttribute(LISTAR_PERFIS, this.usuarioFacade.findAllPerfil());
+        model.addAttribute(ApplicationConstant.LISTAR_PERFIS, this.usuarioFacade.findAllPerfil());
     }
 
     /**

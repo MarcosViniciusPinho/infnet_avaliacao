@@ -4,6 +4,7 @@ import com.infnet.avaliacao.business.facade.TemplateAvaliacaoFacade;
 import com.infnet.avaliacao.business.facade.TemplatePerguntaFacade;
 import com.infnet.avaliacao.business.facade.TemplateTopicoFacade;
 import com.infnet.avaliacao.controller.util.ActionConstant;
+import com.infnet.avaliacao.controller.util.ApplicationConstant;
 import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
@@ -25,8 +26,6 @@ import java.util.List;
 @Controller
 @RequestMapping(value = PathConstant.PATH_TEMPLATE_TOPICO)
 public class TemplateTopicoController extends TemplateController<TemplateTopicoDTO>{
-
-    private static final String LISTAR_TEMPLATE_PERGUNTA = "listarTemplatePergunta";
 
     @Resource
     private TemplateTopicoFacade templateTopicoFacade;
@@ -59,7 +58,7 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
      */
     @Override
     protected void onLoadView(Model model){
-        model.addAttribute(LISTAR_TEMPLATE_PERGUNTA, templatePerguntaFacade.findAll());
+        model.addAttribute(ApplicationConstant.LISTAR_TEMPLATE_PERGUNTA, templatePerguntaFacade.findAll());
     }
 
     private void onEdit(Long id, Long idAvaliacao, Model model, Pageable pageable){
@@ -68,7 +67,7 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
         TemplateAvaliacaoDTO templateAvaliacaoDTO = this.templateAvaliacaoFacade.findById(idAvaliacao);
         model.addAttribute(templateAvaliacaoDTO);
         model.addAttribute(templateTopicoDTO);
-        model.addAttribute(LISTAR_TEMPLATE_PERGUNTA,
+        model.addAttribute(ApplicationConstant.LISTAR_TEMPLATE_PERGUNTA,
                 this.templatePerguntaFacade.findAllComCheckedPerguntasMarcadas(
                         templateTopicoDTO, templateAvaliacaoDTO, pageable));
     }
@@ -131,7 +130,7 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
 
     @Override
     protected void onLoadViewPaginated(Model model, Pageable pageable) {
-        model.addAttribute(LISTAR_TEMPLATE_PERGUNTA, templatePerguntaFacade.findAllPaginated(pageable));
+        model.addAttribute(ApplicationConstant.LISTAR_TEMPLATE_PERGUNTA, templatePerguntaFacade.findAllPaginated(pageable));
     }
 
     /**

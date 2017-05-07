@@ -1,9 +1,7 @@
 package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.business.facade.AvaliacaoFacade;
-import com.infnet.avaliacao.controller.util.ActionConstant;
-import com.infnet.avaliacao.controller.util.MessageConstant;
-import com.infnet.avaliacao.controller.util.PathConstant;
+import com.infnet.avaliacao.controller.util.*;
 import com.infnet.avaliacao.controller.wrapper.PerguntaAssociadaWrapper;
 import com.infnet.avaliacao.dto.impl.AvaliacaoDTO;
 import org.springframework.stereotype.Controller;
@@ -22,12 +20,6 @@ import java.util.List;
 @Controller
 @RequestMapping(value = PathConstant.PATH_RESPOSTA_AVALIACAO)
 public class RespostaAvaliacaoController {
-
-    private static final String VIEW_FORM = "/form";
-    private static final String VIEW_AGRADECIMENTO = "/agradecimento";
-    private static final String EXIBIR_BOTAO_PROXIMO = "exibirBotaoProximo";
-    private static final String EXIBIR_BOTAO_SALVAR = "exibirBotaoSalvar";
-    private static final String REDIRECT_LIST = "redirect:";
 
     @Resource
     private AvaliacaoFacade avaliacaoFacade;
@@ -60,8 +52,8 @@ public class RespostaAvaliacaoController {
         avaliacaoDTO.setTotalTemplateTopicos(avaliacaoDTO.getTemplateAvaliacaoDTO().getTemplateTopicoDTOList().size());
         avaliacaoDTO.setRespostasSelecionadasComPerguntas(dto.getRespostasSelecionadasComPerguntas());
         int calculoParaBotaoProximo = (avaliacaoDTO.getTotalTemplateTopicos()-1) - avaliacaoDTO.getIndiceTopico();
-        model.addAttribute(EXIBIR_BOTAO_PROXIMO, calculoParaBotaoProximo > 0);
-        model.addAttribute(EXIBIR_BOTAO_SALVAR, calculoParaBotaoProximo == 0);
+        model.addAttribute(ApplicationConstant.EXIBIR_BOTAO_PROXIMO, calculoParaBotaoProximo > 0);
+        model.addAttribute(ApplicationConstant.EXIBIR_BOTAO_SALVAR, calculoParaBotaoProximo == 0);
     }
 
     /**
@@ -78,8 +70,8 @@ public class RespostaAvaliacaoController {
                     avaliacaoDTO.getTurmaDTO(), avaliacaoDTO.getAlunoDTO());
             model.addAttribute(avaliacaoDTO);
             this.recuperarTopicoComPerguntas(avaliacaoDTO, model);
-            model.addAttribute(EXIBIR_BOTAO_PROXIMO, Boolean.TRUE);
-            model.addAttribute(EXIBIR_BOTAO_SALVAR, Boolean.FALSE);
+            model.addAttribute(ApplicationConstant.EXIBIR_BOTAO_PROXIMO, Boolean.TRUE);
+            model.addAttribute(ApplicationConstant.EXIBIR_BOTAO_SALVAR, Boolean.FALSE);
         } catch (RuntimeException ex) {
             model.addAttribute(MessageConstant.ERROR, ex.getLocalizedMessage());
         }
@@ -117,7 +109,7 @@ public class RespostaAvaliacaoController {
      * @return String
      */
     private String getViewForm(){
-        return getPathView() + VIEW_FORM;
+        return getPathView() + ViewConstant.VIEW_FORM;
     }
 
     /**
@@ -125,7 +117,7 @@ public class RespostaAvaliacaoController {
      * @return String
      */
     private String getRedirectViewAgradecimento(){
-        return REDIRECT_LIST + getPathView() + ActionConstant.ACTION_AGRADECIMENTO;
+        return ActionConstant.REDIRECT + getPathView() + ActionConstant.ACTION_AGRADECIMENTO;
     }
 
     /**
@@ -133,7 +125,7 @@ public class RespostaAvaliacaoController {
      * @return String
      */
     private String getViewAgradecimento(){
-        return getPathView() + VIEW_AGRADECIMENTO;
+        return getPathView() + ViewConstant.VIEW_AGRADECIMENTO;
     }
 
     private AvaliacaoFacade getFacade() {
