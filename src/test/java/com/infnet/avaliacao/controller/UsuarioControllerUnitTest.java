@@ -48,11 +48,4 @@ public class UsuarioControllerUnitTest {
 		Assert.assertEquals(modelViemEsperado.getViewName(), this.usuarioController.onList(pageable).getViewName());
 	}
 
-	@Test
-	public void testOnPrepareCreate(){
-		String urlEsperada = "/cadastro/usuario/form";
-		Assert.assertNotNull(this.usuarioController.onPrepareCreate(model));
-		Assert.assertEquals(urlEsperada, this.usuarioController.onPrepareCreate(model));
-	}
-
 }
