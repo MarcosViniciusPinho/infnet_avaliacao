@@ -2,6 +2,7 @@ package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.business.facade.UsuarioFacade;
 import com.infnet.avaliacao.dto.impl.UsuarioDTO;
+import com.infnet.avaliacao.entity.Perfil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,7 +52,9 @@ public class UsuarioControllerUnitTest {
 	@Test
 	public void testOnPrepareCreate(){
 		String urlEsperada = "/cadastro/usuario/form";
-		Mockito.when(this.usuarioFacade.findAllPerfil()).thenReturn(new ArrayList<>());
+		List<Perfil> perfilList = new ArrayList<>();
+		perfilList.add(new Perfil());
+		Mockito.when(this.usuarioFacade.findAllPerfil()).thenReturn(perfilList);
 		Assert.assertNotNull(this.usuarioController.onPrepareCreate(model));
 		Assert.assertEquals(urlEsperada, this.usuarioController.onPrepareCreate(model));
 	}
