@@ -28,6 +28,7 @@ public class UsuarioController extends CadastroController<UsuarioDTO>{
      */
     @Override
     protected ModelAndView onList(Pageable pageable){
+        ParameterExceptionUtil.validateObjectNull(pageable);
         ModelAndView mv = new ModelAndView(getViewList());
         mv.addObject(ApplicationConstant.LISTAR_USUARIOS, this.usuarioFacade.findAllPaginated(pageable));
         return mv;
@@ -38,6 +39,7 @@ public class UsuarioController extends CadastroController<UsuarioDTO>{
      */
     @Override
     protected String onPrepareCreate(Model model){
+        ParameterExceptionUtil.validateObjectNull(model);
         this.onLoadView(model);
         model.addAttribute(new UsuarioDTO());
         return getViewForm();
@@ -50,6 +52,7 @@ public class UsuarioController extends CadastroController<UsuarioDTO>{
     protected String onPrepareUpdateOrDetail(String view, Long id, Model model){
         ParameterExceptionUtil.validateObjectNull(view);
         ParameterExceptionUtil.validateObjectNull(id);
+        ParameterExceptionUtil.validateObjectNull(model);
         this.onLoadView(model);
         model.addAttribute(this.usuarioFacade.findById(id));
         return view;
@@ -60,6 +63,7 @@ public class UsuarioController extends CadastroController<UsuarioDTO>{
      */
     @Override
     protected void onDelete(Long id) {
+        ParameterExceptionUtil.validateObjectNull(id);
         this.getFacade().delete(id);
     }
 
@@ -68,6 +72,7 @@ public class UsuarioController extends CadastroController<UsuarioDTO>{
      */
     @Override
     protected void onLoadView(Model model){
+        ParameterExceptionUtil.validateObjectNull(model);
         model.addAttribute(ApplicationConstant.LISTAR_PERFIS, this.usuarioFacade.findAllPerfil());
     }
 
