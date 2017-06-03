@@ -97,4 +97,26 @@ public class TemplateAvaliacaoControllerUnitTest {
 		this.templateAvaliacaoController.onForm(new TemplateAvaliacaoDTO(), model, null);
 	}
 
+	@Test
+	public void testOnLoadViewPaginated(){
+		Model model = new ExtendedModelMap();
+		List<TemplateTopicoDTO> templateTopicoDTOList = new ArrayList<>();
+		templateTopicoDTOList.add(new TemplateTopicoDTO());
+		Page<TemplateTopicoDTO> pageList = new PageImpl<>(templateTopicoDTOList, this.pageable, 1);
+		Mockito.when(templateTopicoFacade.findAllPaginated(this.pageable)).thenReturn(pageList);
+		this.templateAvaliacaoController.onLoadViewPaginated(model, this.pageable);
+		Assert.assertEquals(pageList, model.asMap().get(ApplicationConstant.LISTAR_TEMPLATE_TOPICO));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testOnLoadViewPaginatedFailedModelNull(){
+		this.templateAvaliacaoController.onLoadViewPaginated(null, this.pageable);
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testOnLoadViewPaginatedFailedPageableNull(){
+		Model model = new ExtendedModelMap();
+		this.templateAvaliacaoController.onLoadViewPaginated(model, null);
+	}
+
 }

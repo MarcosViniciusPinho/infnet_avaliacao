@@ -70,6 +70,8 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      */
     @Override
     protected void onLoadViewPaginated(Model model, Pageable pageable){
+        ParameterExceptionUtil.validateObjectNull(model);
+        ParameterExceptionUtil.validateObjectNull(pageable);
         model.addAttribute(ApplicationConstant.LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAllPaginated(pageable));
     }
 
