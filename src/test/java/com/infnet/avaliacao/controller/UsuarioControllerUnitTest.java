@@ -1,6 +1,7 @@
 package com.infnet.avaliacao.controller;
 
 import com.infnet.avaliacao.business.facade.UsuarioFacade;
+import com.infnet.avaliacao.controller.util.ApplicationConstant;
 import com.infnet.avaliacao.dto.impl.UsuarioDTO;
 import com.infnet.avaliacao.entity.Perfil;
 import com.infnet.avaliacao.exception.NullParameterException;
@@ -41,7 +42,7 @@ public class UsuarioControllerUnitTest {
 		usuarioDTOList.add(new UsuarioDTO());
 		ModelAndView modelViemEsperado = new ModelAndView("/cadastro/usuario/list");
 		Page<UsuarioDTO> pageList = new PageImpl<>(usuarioDTOList, this.pageable, 1);
-		modelViemEsperado.addObject("listarUsuarios", pageList);
+		modelViemEsperado.addObject(ApplicationConstant.LISTAR_USUARIOS, pageList);
 		Mockito.when(this.usuarioFacade.findAllPaginated(this.pageable)).thenReturn(pageList);
 		Assert.assertNotNull(this.usuarioController.onList(this.pageable));
 		Assert.assertEquals(modelViemEsperado.getModel(), this.usuarioController.onList(this.pageable).getModel());
@@ -58,7 +59,7 @@ public class UsuarioControllerUnitTest {
 		Model model = new ExtendedModelMap();
 		Assert.assertNotNull(this.usuarioController.onPrepareCreate(model));
 		Assert.assertEquals("/cadastro/usuario/form", this.usuarioController.onPrepareCreate(model));
-		Assert.assertEquals(new ArrayList<Perfil>(), model.asMap().get("listarPerfis"));
+		Assert.assertEquals(new ArrayList<Perfil>(), model.asMap().get(ApplicationConstant.LISTAR_PERFIS));
 		Assert.assertTrue(model.containsAttribute("usuarioDTO"));
 	}
 
@@ -76,7 +77,7 @@ public class UsuarioControllerUnitTest {
 		Mockito.when(this.usuarioFacade.findById(id)).thenReturn(usuarioDTO);
 		Assert.assertNotNull(this.usuarioController.onPrepareUpdateOrDetail("/cadastro/usuario/form", id, model));
 		Assert.assertEquals("/cadastro/usuario/form", usuarioController.onPrepareUpdateOrDetail("/cadastro/usuario/form", 1L, model));
-		Assert.assertEquals(new ArrayList<Perfil>(), model.asMap().get("listarPerfis"));
+		Assert.assertEquals(new ArrayList<Perfil>(), model.asMap().get(ApplicationConstant.LISTAR_PERFIS));
 		Assert.assertEquals(usuarioDTO, model.asMap().get("usuarioDTO"));
 	}
 
@@ -111,7 +112,7 @@ public class UsuarioControllerUnitTest {
 	public void testOnLoadView(){
 		Model model = new ExtendedModelMap();
 		this.usuarioController.onLoadView(model);
-		Assert.assertEquals(new ArrayList<Perfil>(), model.asMap().get("listarPerfis"));
+		Assert.assertEquals(new ArrayList<Perfil>(), model.asMap().get(ApplicationConstant.LISTAR_PERFIS));
 	}
 
 	@Test(expected = NullParameterException.class)
