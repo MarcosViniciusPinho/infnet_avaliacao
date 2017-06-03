@@ -119,4 +119,19 @@ public class TemplateAvaliacaoControllerUnitTest {
 		this.templateAvaliacaoController.onLoadViewPaginated(model, null);
 	}
 
+	@Test
+	public void testOnLoadView(){
+		Model model = new ExtendedModelMap();
+		List<TemplateTopicoDTO> templateTopicoDTOList = new ArrayList<>();
+		templateTopicoDTOList.add(new TemplateTopicoDTO());
+		Mockito.when(templateTopicoFacade.findAll()).thenReturn(templateTopicoDTOList);
+		this.templateAvaliacaoController.onLoadView(model);
+		Assert.assertEquals(templateTopicoDTOList, model.asMap().get(ApplicationConstant.LISTAR_TEMPLATE_TOPICO));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testOnLoadViewFailed(){
+		this.templateAvaliacaoController.onLoadView(null);
+	}
+
 }

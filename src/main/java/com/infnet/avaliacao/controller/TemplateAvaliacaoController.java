@@ -80,6 +80,7 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      */
     @Override
     protected void onLoadView(Model model){
+        ParameterExceptionUtil.validateObjectNull(model);
         model.addAttribute(ApplicationConstant.LISTAR_TEMPLATE_TOPICO, templateTopicoFacade.findAll());
     }
 
