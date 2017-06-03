@@ -82,19 +82,19 @@ public class UsuarioControllerUnitTest {
 	}
 
 	@Test(expected = NullParameterException.class)
-	public void testOnPrepareUpdateOrDetailFailedIdNUll(){
+	public void testOnPrepareUpdateOrDetailFailedIdNull(){
 		Model model = new ExtendedModelMap();
 		Assert.assertNotNull(this.usuarioController.onPrepareUpdateOrDetail("/cadastro/usuario/form", null, model));
 	}
 
 	@Test(expected = NullParameterException.class)
-	public void testOnPrepareUpdateOrDetailFailedViewNUll(){
+	public void testOnPrepareUpdateOrDetailFailedViewNull(){
 		Model model = new ExtendedModelMap();
 		Assert.assertNotNull(this.usuarioController.onPrepareUpdateOrDetail(null, 1L, model));
 	}
 
 	@Test(expected = NullParameterException.class)
-	public void testOnPrepareUpdateOrDetailFailedModelNUll(){
+	public void testOnPrepareUpdateOrDetailFailedModelNull(){
 		Assert.assertNotNull(this.usuarioController.onPrepareUpdateOrDetail("/cadastro/usuario/form", 1L, null));
 	}
 

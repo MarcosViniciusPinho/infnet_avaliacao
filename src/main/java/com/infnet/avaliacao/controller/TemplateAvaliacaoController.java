@@ -8,6 +8,7 @@ import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.controller.wrapper.PerguntaAssociadaWrapper;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.exception.ExecutionException;
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -40,6 +41,7 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      */
     @RequestMapping(value = ActionConstant.ACTION_LIST)
     public ModelAndView list(@PageableDefault Pageable pageable){
+        ParameterExceptionUtil.validateObjectNull(pageable);
         try {
             ModelAndView mv = new ModelAndView(getViewList());
             mv.addObject(ApplicationConstant.LISTAR_TEMPLATE_AVALIACAO, this.templateAvaliacaoFacade.findAllPaginated(pageable));
@@ -54,6 +56,9 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      */
     @Override
     protected void onForm(TemplateAvaliacaoDTO entity, Model model, RedirectAttributes redirectAttributes) {
+        ParameterExceptionUtil.validateObjectNull(entity);
+        ParameterExceptionUtil.validateObjectNull(model);
+        ParameterExceptionUtil.validateObjectNull(redirectAttributes);
         List<Long> idsTopicosSelecionados = entity.getIdsTemplateTopicoSelecionados();
         entity.setTemplateTopicoDTOList(
                 this.templateTopicoFacade.getListaTemplatesTopicosPorId(idsTopicosSelecionados));
