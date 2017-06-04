@@ -144,6 +144,8 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      */
     @RequestMapping(value = ActionConstant.ACTION_DETAIL)
     public String prepareDetail(@PathVariable Long id, Model model){
+        ParameterExceptionUtil.validateObjectNull(id);
+        ParameterExceptionUtil.validateObjectNull(model);
         this.onDetail(id, model);
         return getViewDetail();
     }

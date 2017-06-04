@@ -3,7 +3,10 @@ package com.infnet.avaliacao.controller;
 import com.infnet.avaliacao.business.facade.TemplateAvaliacaoFacade;
 import com.infnet.avaliacao.business.facade.TemplateTopicoFacade;
 import com.infnet.avaliacao.controller.util.ApplicationConstant;
+import com.infnet.avaliacao.controller.wrapper.PerguntaAssociadaWrapper;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
+import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoTopicoPerguntaDTO;
+import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
 import com.infnet.avaliacao.exception.NullParameterException;
 import org.junit.Assert;
@@ -59,7 +62,7 @@ public class TemplateAvaliacaoControllerUnitTest {
 
 	@Test(expected = NullParameterException.class)
 	public void testListFailed(){
-		Assert.assertNotNull(this.templateAvaliacaoController.list(null));
+		this.templateAvaliacaoController.list(null);
 	}
 
 	@Test
@@ -155,18 +158,18 @@ public class TemplateAvaliacaoControllerUnitTest {
 	@Test(expected = NullParameterException.class)
 	public void testPrepareUpdateFailedIdNull(){
 		Model model = new ExtendedModelMap();
-		Assert.assertNotNull(this.templateAvaliacaoController.prepareUpdate(null, model, pageable));
+		this.templateAvaliacaoController.prepareUpdate(null, model, pageable);
 	}
 
 	@Test(expected = NullParameterException.class)
 	public void testPrepareUpdateFailedModelNull(){
-		Assert.assertNotNull(this.templateAvaliacaoController.prepareUpdate(1L, null, pageable));
+		this.templateAvaliacaoController.prepareUpdate(1L, null, pageable);
 	}
 
 	@Test(expected = NullParameterException.class)
 	public void testPrepareUpdateFailedPageableNull(){
 		Model model = new ExtendedModelMap();
-		Assert.assertNotNull(this.templateAvaliacaoController.prepareUpdate(1L, model, null));
+		this.templateAvaliacaoController.prepareUpdate(1L, model, null);
 	}
 
 	@Test
@@ -183,18 +186,64 @@ public class TemplateAvaliacaoControllerUnitTest {
 	@Test(expected = NullParameterException.class)
 	public void testPrepareErrorFailedIdNull(){
 		Model model = new ExtendedModelMap();
-		Assert.assertNotNull(this.templateAvaliacaoController.prepareError(null, model, pageable));
+		this.templateAvaliacaoController.prepareError(null, model, pageable);
 	}
 
 	@Test(expected = NullParameterException.class)
 	public void testPrepareErrorFailedModelNull(){
-		Assert.assertNotNull(this.templateAvaliacaoController.prepareError(1L, null, pageable));
+		this.templateAvaliacaoController.prepareError(1L, null, pageable);
 	}
 
 	@Test(expected = NullParameterException.class)
 	public void testPrepareErrorFailedPageableNull(){
 		Model model = new ExtendedModelMap();
-		Assert.assertNotNull(this.templateAvaliacaoController.prepareError(1L, model, null));
+		this.templateAvaliacaoController.prepareError(1L, model, null);
+	}
+
+	@Test
+	public void testPrepareDetail(){
+		Model model = new ExtendedModelMap();
+		TemplateAvaliacaoDTO templateAvaliacaoDTO = new TemplateAvaliacaoDTO();
+		templateAvaliacaoDTO.setId(1L);
+		TemplateTopicoDTO templateTopicoDTO = new TemplateTopicoDTO();
+		templateTopicoDTO.setId(2L);
+		TemplatePerguntaDTO templatePerguntaDTO = new TemplatePerguntaDTO();
+		templatePerguntaDTO.setId(3L);
+		TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO = new TemplateAvaliacaoTopicoPerguntaDTO();
+		templateAvaliacaoTopicoPerguntaDTO.setId(3L);
+		templateAvaliacaoTopicoPerguntaDTO.setAtivo(Boolean.TRUE);
+		templateAvaliacaoTopicoPerguntaDTO.setTemplateTopico(templateTopicoDTO.toEntity());
+		templateAvaliacaoTopicoPerguntaDTO.setTemplateAvaliacao(templateAvaliacaoDTO.toEntity());
+		templateAvaliacaoTopicoPerguntaDTO.setTemplatePergunta(templatePerguntaDTO.toEntity());
+		List<TemplateAvaliacaoTopicoPerguntaDTO> templateAvaliacaoTopicoPerguntaDTOList = new ArrayList<>();
+		templateAvaliacaoTopicoPerguntaDTOList.add(templateAvaliacaoTopicoPerguntaDTO);
+		templateTopicoDTO.setTemplateAvaliacaoTopicoPerguntaDTOList(templateAvaliacaoTopicoPerguntaDTOList);
+		List<TemplateTopicoDTO> templateTopicoDTOList = new ArrayList<>();
+		templateTopicoDTOList.add(templateTopicoDTO);
+		templateAvaliacaoDTO.setTemplateTopicoDTOList(templateTopicoDTOList);
+		List<TemplatePerguntaDTO> templatePerguntaDTOList = new ArrayList<>();
+		templatePerguntaDTOList.add(templatePerguntaDTO);
+		PerguntaAssociadaWrapper perguntaAssociadaWrapper = new PerguntaAssociadaWrapper();
+		perguntaAssociadaWrapper.setTemplateTopicoDTO(templateTopicoDTO);
+		perguntaAssociadaWrapper.setTemplatePerguntaDTOList(templatePerguntaDTOList);
+		List<PerguntaAssociadaWrapper> perguntaAssociadaWrapperList = new ArrayList<>();
+		perguntaAssociadaWrapperList.add(perguntaAssociadaWrapper);
+		Mockito.when(this.templateAvaliacaoFacade.findById(1L)).thenReturn(templateAvaliacaoDTO);
+		Assert.assertNotNull(this.templateAvaliacaoController.prepareDetail(1L, model));
+		Assert.assertEquals(templateAvaliacaoDTO, model.asMap().get("templateAvaliacaoDTO"));
+		Assert.assertEquals(perguntaAssociadaWrapperList, model.asMap().get("perguntaAssociadaWrapperList"));
+		Assert.assertEquals("/template/avaliacao/detail", this.templateAvaliacaoController.prepareDetail(1L, model));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPrepareDetailFailedIdNull(){
+		Model model = new ExtendedModelMap();
+		this.templateAvaliacaoController.prepareDetail(null, model);
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPrepareDetailFailedModelNull(){
+		this.templateAvaliacaoController.prepareDetail(1L, null);
 	}
 
 }
