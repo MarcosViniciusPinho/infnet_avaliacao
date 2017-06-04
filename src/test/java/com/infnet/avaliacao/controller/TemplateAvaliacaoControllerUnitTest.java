@@ -169,4 +169,32 @@ public class TemplateAvaliacaoControllerUnitTest {
 		Assert.assertNotNull(this.templateAvaliacaoController.prepareUpdate(1L, model, null));
 	}
 
+	@Test
+	public void testPrepareError(){
+		Model model = new ExtendedModelMap();
+		TemplateAvaliacaoDTO templateAvaliacaoDTO = new TemplateAvaliacaoDTO();
+		templateAvaliacaoDTO.setId(1L);
+		Mockito.when(this.templateAvaliacaoFacade.findById(templateAvaliacaoDTO.getId())).thenReturn(templateAvaliacaoDTO);
+		Assert.assertNotNull(this.templateAvaliacaoController.prepareError(templateAvaliacaoDTO.getId(), model, pageable));
+		Assert.assertEquals(templateAvaliacaoDTO, model.asMap().get("templateAvaliacaoDTO"));
+		Assert.assertEquals("/template/avaliacao/form", this.templateAvaliacaoController.prepareError(templateAvaliacaoDTO.getId(), model, pageable));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPrepareErrorFailedIdNull(){
+		Model model = new ExtendedModelMap();
+		Assert.assertNotNull(this.templateAvaliacaoController.prepareError(null, model, pageable));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPrepareErrorFailedModelNull(){
+		Assert.assertNotNull(this.templateAvaliacaoController.prepareError(1L, null, pageable));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPrepareErrorFailedPageableNull(){
+		Model model = new ExtendedModelMap();
+		Assert.assertNotNull(this.templateAvaliacaoController.prepareError(1L, model, null));
+	}
+
 }
