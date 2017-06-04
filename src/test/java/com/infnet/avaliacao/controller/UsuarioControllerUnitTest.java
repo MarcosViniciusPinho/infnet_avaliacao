@@ -84,18 +84,18 @@ public class UsuarioControllerUnitTest {
 	@Test(expected = NullParameterException.class)
 	public void testOnPrepareUpdateOrDetailFailedIdNull(){
 		Model model = new ExtendedModelMap();
-		Assert.assertNotNull(this.usuarioController.onPrepareUpdateOrDetail("/cadastro/usuario/form", null, model));
+		this.usuarioController.onPrepareUpdateOrDetail("/cadastro/usuario/form", null, model);
 	}
 
 	@Test(expected = NullParameterException.class)
 	public void testOnPrepareUpdateOrDetailFailedViewNull(){
 		Model model = new ExtendedModelMap();
-		Assert.assertNotNull(this.usuarioController.onPrepareUpdateOrDetail(null, 1L, model));
+		this.usuarioController.onPrepareUpdateOrDetail(null, 1L, model);
 	}
 
 	@Test(expected = NullParameterException.class)
 	public void testOnPrepareUpdateOrDetailFailedModelNull(){
-		Assert.assertNotNull(this.usuarioController.onPrepareUpdateOrDetail("/cadastro/usuario/form", 1L, null));
+		this.usuarioController.onPrepareUpdateOrDetail("/cadastro/usuario/form", 1L, null);
 	}
 
 	@Test
@@ -118,5 +118,17 @@ public class UsuarioControllerUnitTest {
 	@Test(expected = NullParameterException.class)
 	public void testOnLoadViewFailed(){
 		this.usuarioController.onLoadView(null);
+	}
+
+	@Test
+	public void testGetFacade(){
+		Assert.assertNotNull(this.usuarioFacade);
+		Assert.assertEquals(this.usuarioFacade, this.usuarioController.getFacade());
+	}
+
+	@Test
+	public void testGetPathView(){
+		Assert.assertNotNull(this.usuarioController.getPathView());
+		Assert.assertEquals("/cadastro/usuario", this.usuarioController.getPathView());
 	}
 }
