@@ -17,11 +17,5 @@ public interface AvaliacaoService {
      */
     Avaliacao save(AvaliacaoDTO avaliacaoDTO);
 
-    /**
-     * Método que serve para fazer as validacoes
-     * @param avaliacaoDTO avaliacaoDTO
-     */
-    void validate(AvaliacaoDTO avaliacaoDTO);
-
     void verificarSeAlunoJaRespondeuAvaliacao(Turma turma, Aluno aluno);
 }

@@ -25,7 +25,6 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
      */
     @Override
     public Avaliacao save(AvaliacaoDTO avaliacaoDTO) {
-        this.validate(avaliacaoDTO);
         return this.avaliacaoRepository.save(avaliacaoDTO.toEntity());
     }
 
@@ -38,11 +37,5 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
             throw new UniqueException("avaliacao.erro.aluno.ja.respondeu");
         }
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void validate(AvaliacaoDTO avaliacaoDTO) {}
 
 }
