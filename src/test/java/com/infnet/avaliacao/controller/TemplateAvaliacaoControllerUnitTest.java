@@ -134,4 +134,39 @@ public class TemplateAvaliacaoControllerUnitTest {
 		this.templateAvaliacaoController.onLoadView(null);
 	}
 
+	@Test
+	public void testPrepareUpdate(){
+		Long id = 1L;
+		List<Long> ids = new ArrayList<>();
+		ids.add(id);
+		Model model = new ExtendedModelMap();
+		TemplateAvaliacaoDTO templateAvaliacaoDTO = new TemplateAvaliacaoDTO();
+		TemplateTopicoDTO templateTopicoDTO = new TemplateTopicoDTO();
+		templateTopicoDTO.setId(id);
+		List<TemplateTopicoDTO> templateTopicoDTOList = new ArrayList<>();
+		templateTopicoDTOList.add(templateTopicoDTO);
+		templateAvaliacaoDTO.setTemplateTopicoDTOList(templateTopicoDTOList);
+		Mockito.when(this.templateAvaliacaoFacade.findById(id)).thenReturn(templateAvaliacaoDTO);
+		Assert.assertNotNull(this.templateAvaliacaoController.prepareUpdate(id, model, pageable));
+		Assert.assertEquals(ids, templateAvaliacaoDTO.getIdsTemplateTopicoSelecionados());
+		Assert.assertEquals("/template/avaliacao/form", this.templateAvaliacaoController.prepareUpdate(id, model, pageable));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPrepareUpdateFailedIdNull(){
+		Model model = new ExtendedModelMap();
+		Assert.assertNotNull(this.templateAvaliacaoController.prepareUpdate(null, model, pageable));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPrepareUpdateFailedModelNull(){
+		Assert.assertNotNull(this.templateAvaliacaoController.prepareUpdate(1L, null, pageable));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPrepareUpdateFailedPageableNull(){
+		Model model = new ExtendedModelMap();
+		Assert.assertNotNull(this.templateAvaliacaoController.prepareUpdate(1L, model, null));
+	}
+
 }

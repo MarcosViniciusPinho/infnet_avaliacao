@@ -98,6 +98,9 @@ public class TemplateAvaliacaoController extends TemplateController<TemplateAval
      */
     @RequestMapping(value = ActionConstant.ACTION_EDIT)
     public String prepareUpdate(@PathVariable Long id, Model model, @PageableDefault Pageable pageable){
+        ParameterExceptionUtil.validateObjectNull(id);
+        ParameterExceptionUtil.validateObjectNull(model);
+        ParameterExceptionUtil.validateObjectNull(pageable);
         this.onEdit(id, model, pageable);
         return getViewForm();
     }
