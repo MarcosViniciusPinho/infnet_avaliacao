@@ -41,7 +41,7 @@ public class RespostaAvaliacaoController {
                 this.getFacade().save(avaliacaoDTO);
                 return getRedirectViewAgradecimento();
             }
-        } catch (RuntimeException ex) {
+        } catch (RuntimeException ex) {//NOSONAR a exceção é direcionada para a camada de visão da aplicação, portanto o uso do 'throw' neste ponto não é utilizado.
             model.addAttribute(MessageConstant.ERROR, ex.getLocalizedMessage());
         }
         return getViewForm();
@@ -72,7 +72,7 @@ public class RespostaAvaliacaoController {
             this.recuperarTopicoComPerguntas(avaliacaoDTO, model);
             model.addAttribute(ApplicationConstant.EXIBIR_BOTAO_PROXIMO, Boolean.TRUE);
             model.addAttribute(ApplicationConstant.EXIBIR_BOTAO_SALVAR, Boolean.FALSE);
-        } catch (RuntimeException ex) {
+        } catch (RuntimeException ex) {//NOSONAR a exceção é direcionada para a camada de visão da aplicação, portanto o uso do 'throw' neste ponto não é utilizado.
             model.addAttribute(MessageConstant.ERROR, ex.getLocalizedMessage());
         }
         return getViewForm();

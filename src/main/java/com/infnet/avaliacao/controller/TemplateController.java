@@ -29,7 +29,7 @@ public abstract class TemplateController<V> extends InitController<V> {
             this.getFacade().save(entity);
             redirectAttributes.addFlashAttribute(MessageConstant.SUCESS, MessageConstant.MENSAGEM_SUCESSO);
             return this.getRedirectViewEdit();
-        } catch (RuntimeException ex) {
+        } catch (RuntimeException ex) {//NOSONAR a exceção é direcionada para a camada de visão da aplicação, portanto o uso do 'throw' neste ponto não é utilizado.
             redirectAttributes.addFlashAttribute(MessageConstant.ERROR, ex.getLocalizedMessage());
             this.onLoadViewPaginated(model, pageable);
             return this.getRedirectViewError();
