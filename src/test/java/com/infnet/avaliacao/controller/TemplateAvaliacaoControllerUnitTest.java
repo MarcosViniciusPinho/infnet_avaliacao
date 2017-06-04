@@ -3,6 +3,7 @@ package com.infnet.avaliacao.controller;
 import com.infnet.avaliacao.business.facade.TemplateAvaliacaoFacade;
 import com.infnet.avaliacao.business.facade.TemplateTopicoFacade;
 import com.infnet.avaliacao.controller.util.ApplicationConstant;
+import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.controller.wrapper.PerguntaAssociadaWrapper;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoTopicoPerguntaDTO;
@@ -244,6 +245,30 @@ public class TemplateAvaliacaoControllerUnitTest {
 	@Test(expected = NullParameterException.class)
 	public void testPrepareDetailFailedModelNull(){
 		this.templateAvaliacaoController.prepareDetail(1L, null);
+	}
+
+	@Test
+	public void testGetPathView(){
+		Assert.assertNotNull(this.templateAvaliacaoController.getPathView());
+		Assert.assertEquals(PathConstant.PATH_TEMPLATE_AVALIACAO, this.templateAvaliacaoController.getPathView());
+	}
+
+	@Test
+	public void testGetRedirectViewError(){
+		Assert.assertNotNull(this.templateAvaliacaoController.getRedirectViewError());
+		Assert.assertEquals("redirect:/template/avaliacao/error/{id}", this.templateAvaliacaoController.getRedirectViewError());
+	}
+
+	@Test
+	public void testGetRedirectViewEdit(){
+		Assert.assertNotNull(this.templateAvaliacaoController.getRedirectViewEdit());
+		Assert.assertEquals("redirect:/template/avaliacao/edit/{id}", this.templateAvaliacaoController.getRedirectViewEdit());
+	}
+
+	@Test
+	public void testGetFacade(){
+		Assert.assertNotNull(this.templateAvaliacaoController.getFacade());
+		Assert.assertEquals(this.templateAvaliacaoFacade, this.templateAvaliacaoController.getFacade());
 	}
 
 }
