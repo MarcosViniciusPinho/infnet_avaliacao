@@ -1,4 +1,4 @@
-package com.infnet.avaliacao;
+package com.infnet.avaliacao.util;
 
 public final class ApplicationConstant {//NOSONAR desnecessário implementação que acusa o sonar.
 

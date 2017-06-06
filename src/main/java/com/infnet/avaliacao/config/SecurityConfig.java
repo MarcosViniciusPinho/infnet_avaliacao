@@ -1,6 +1,6 @@
 package com.infnet.avaliacao.config;
 
-import com.infnet.avaliacao.ApplicationConstant;
+import com.infnet.avaliacao.util.ApplicationConstant;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
