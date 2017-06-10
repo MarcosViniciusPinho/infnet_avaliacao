@@ -9,6 +9,7 @@ import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -41,6 +42,9 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
      */
     @Override
     protected void onForm(TemplateTopicoDTO entity, Model model, RedirectAttributes redirectAttributes) {
+        ParameterExceptionUtil.validateObjectNull(entity);
+        ParameterExceptionUtil.validateObjectNull(model);
+        ParameterExceptionUtil.validateObjectNull(redirectAttributes);
         List<Long> idsPerguntasSelecionados = entity.getIdsTemplatePerguntaSelecionados();
         List<TemplatePerguntaDTO> templatePerguntaDTOList = this.templatePerguntaFacade.getListaTemplatesPerguntasPorId(idsPerguntasSelecionados);
         TemplateAvaliacaoDTO templateAvaliacaoDTO = this.templateAvaliacaoFacade.findById(entity.getIdAvaliacao());

@@ -25,6 +25,7 @@ import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,9 +45,6 @@ public class TemplateAvaliacaoControllerUnitTest {
 
 	@Mock
 	private Pageable pageable;
-
-	@Mock
-	private RedirectAttributes redirectAttributes;
 
 	@Test
 	public void testList(){
@@ -68,6 +66,7 @@ public class TemplateAvaliacaoControllerUnitTest {
 
 	@Test
 	public void testOnForm(){
+		RedirectAttributes redirectAttributes = new RedirectAttributesModelMap();
 		TemplateTopicoDTO templateTopicoDTO = new TemplateTopicoDTO();
 		templateTopicoDTO.setId(2L);
 		List<TemplateTopicoDTO> templateTopicoDTOList = new ArrayList<>();
@@ -81,17 +80,19 @@ public class TemplateAvaliacaoControllerUnitTest {
 		Mockito.when(this.templateTopicoFacade.getListaTemplatesTopicosPorId(ids)).thenReturn(templateTopicoDTOList);
 		this.templateAvaliacaoController.onForm(entity, model, redirectAttributes);
 		Assert.assertEquals(templateTopicoDTOList, entity.getTemplateTopicoDTOList());
-//		Assert.assertEquals(entity.getId(), redirectAttributes.asMap().get("id"));
+		Assert.assertEquals(entity.getId().toString(), redirectAttributes.asMap().get("id"));
 	}
 
 	@Test(expected = NullParameterException.class)
 	public void testOnFormFailedTemplateNull(){
+		RedirectAttributes redirectAttributes = new RedirectAttributesModelMap();
 		Model model = new ExtendedModelMap();
 		this.templateAvaliacaoController.onForm(null, model, redirectAttributes);
 	}
 
 	@Test(expected = NullParameterException.class)
 	public void testOnFormFailedModelNull(){
+		RedirectAttributes redirectAttributes = new RedirectAttributesModelMap();
 		this.templateAvaliacaoController.onForm(new TemplateAvaliacaoDTO(), null, redirectAttributes);
 	}
 
