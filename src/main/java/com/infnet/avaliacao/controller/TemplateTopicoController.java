@@ -86,6 +86,10 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
      */
     @RequestMapping(value = ActionConstant.ACTION_EDIT_CUSTOM)
     public String prepareUpdate(@PathVariable Long id, @PathVariable Long idAvaliacao, Model model, @PageableDefault Pageable pageable){
+        ParameterExceptionUtil.validateObjectNull(id);
+        ParameterExceptionUtil.validateObjectNull(idAvaliacao);
+        ParameterExceptionUtil.validateObjectNull(model);
+        ParameterExceptionUtil.validateObjectNull(pageable);
         this.onEdit(id, idAvaliacao, model, pageable);
         return getViewForm();
     }
@@ -133,6 +137,9 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
         return ActionConstant.REDIRECT + getPathView() + ActionConstant.ACTION_ERROR_CUSTOM;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void onLoadViewPaginated(Model model, Pageable pageable) {
         model.addAttribute(ApplicationConstant.LISTAR_TEMPLATE_PERGUNTA, templatePerguntaFacade.findAllPaginated(pageable));

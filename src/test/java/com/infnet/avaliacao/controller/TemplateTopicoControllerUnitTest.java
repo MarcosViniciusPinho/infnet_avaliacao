@@ -16,6 +16,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
@@ -40,6 +43,9 @@ public class TemplateTopicoControllerUnitTest {
 
 	@Mock
 	private TemplateAvaliacaoFacade templateAvaliacaoFacade;
+
+	@Mock
+	private Pageable pageable;
 
 	@Test
 	public void testOnForm(){
@@ -109,6 +115,57 @@ public class TemplateTopicoControllerUnitTest {
 	@Test(expected = NullParameterException.class)
 	public void testOnLoadFailedModelNullView(){
 		this.templateTopicoController.onLoadView(null);
+	}
+
+	@Test
+	public void testPrepareUpdate(){
+		Long idAvaliacao = 3L;
+		Model model = new ExtendedModelMap();
+		TemplateTopicoDTO templateTopicoDTO = new TemplateTopicoDTO();
+		templateTopicoDTO.setId(1L);
+
+		TemplateAvaliacaoDTO templateAvaliacaoDTO = new TemplateAvaliacaoDTO();
+		templateAvaliacaoDTO.setId(3L);
+
+		List<TemplatePerguntaDTO> templatePerguntaDTOList = new ArrayList<>();
+		templatePerguntaDTOList.add(this.createTemplatePerguntaDTO(1L));
+		templatePerguntaDTOList.add(this.createTemplatePerguntaDTO(3L));
+
+		Page<TemplatePerguntaDTO> templatePerguntaDtoPage = new PageImpl<>(templatePerguntaDTOList, pageable, templatePerguntaDTOList.size());
+
+		Mockito.when(this.templateTopicoFacade.findById(templateTopicoDTO.getId())).thenReturn(templateTopicoDTO);
+		Mockito.when(this.templateAvaliacaoFacade.findById(idAvaliacao)).thenReturn(templateAvaliacaoDTO);
+		Mockito.when(this.templatePerguntaFacade.findAllComCheckedPerguntasMarcadas(
+				templateTopicoDTO, templateAvaliacaoDTO, pageable)).thenReturn(templatePerguntaDtoPage);
+		Assert.assertNotNull(this.templateTopicoController.prepareUpdate(1L, idAvaliacao, model, this.pageable));
+		Assert.assertEquals("/template/avaliacao/topico/form", this.templateTopicoController.prepareUpdate(1L, idAvaliacao, model, this.pageable));
+		Assert.assertEquals(templateTopicoDTO.getIdAvaliacao(), idAvaliacao);
+		Assert.assertEquals(templateAvaliacaoDTO, model.asMap().get("templateAvaliacaoDTO"));
+		Assert.assertEquals(templateTopicoDTO, model.asMap().get("templateTopicoDTO"));
+		Assert.assertEquals(templatePerguntaDtoPage, model.asMap().get(ApplicationConstant.LISTAR_TEMPLATE_PERGUNTA));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPrepareUpdateFailedIdNull(){
+		Model model = new ExtendedModelMap();
+		this.templateTopicoController.prepareUpdate(null, 3L, model, this.pageable);
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPrepareUpdateFailedIdAvaliacaoNull(){
+		Model model = new ExtendedModelMap();
+		this.templateTopicoController.prepareUpdate(1L, null, model, this.pageable);
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPrepareUpdateFailedModelNull(){
+		this.templateTopicoController.prepareUpdate(1L, 3L, null, this.pageable);
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPrepareUpdateFailedPageableNull(){
+		Model model = new ExtendedModelMap();
+		this.templateTopicoController.prepareUpdate(1L, 3L, model, null);
 	}
 
 	/**
