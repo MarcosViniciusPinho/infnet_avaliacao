@@ -3,6 +3,7 @@ package com.infnet.avaliacao.controller;
 import com.infnet.avaliacao.business.facade.TemplateAvaliacaoFacade;
 import com.infnet.avaliacao.business.facade.TemplatePerguntaFacade;
 import com.infnet.avaliacao.business.facade.TemplateTopicoFacade;
+import com.infnet.avaliacao.controller.util.ApplicationConstant;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoTopicoPerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
@@ -92,6 +93,22 @@ public class TemplateTopicoControllerUnitTest {
 	public void testOnFormFailedRedirectNull(){
 		Model model = new ExtendedModelMap();
 		this.templateTopicoController.onForm(null, model, null);
+	}
+
+	@Test
+	public void testOnLoadView(){
+		Model model = new ExtendedModelMap();
+		List<TemplatePerguntaDTO> templatePerguntaDTOList = new ArrayList<>();
+		templatePerguntaDTOList.add(this.createTemplatePerguntaDTO(1L));
+		templatePerguntaDTOList.add(this.createTemplatePerguntaDTO(2L));
+		Mockito.when(this.templatePerguntaFacade.findAll()).thenReturn(templatePerguntaDTOList);
+		this.templateTopicoController.onLoadView(model);
+		Assert.assertEquals(templatePerguntaDTOList, model.asMap().get(ApplicationConstant.LISTAR_TEMPLATE_PERGUNTA));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testOnLoadFailedModelNullView(){
+		this.templateTopicoController.onLoadView(null);
 	}
 
 	/**

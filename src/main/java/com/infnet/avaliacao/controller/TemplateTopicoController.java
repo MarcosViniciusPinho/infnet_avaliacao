@@ -62,6 +62,7 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
      */
     @Override
     protected void onLoadView(Model model){
+        ParameterExceptionUtil.validateObjectNull(model);
         model.addAttribute(ApplicationConstant.LISTAR_TEMPLATE_PERGUNTA, templatePerguntaFacade.findAll());
     }
 
