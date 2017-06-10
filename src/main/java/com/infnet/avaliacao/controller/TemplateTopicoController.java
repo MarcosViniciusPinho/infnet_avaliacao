@@ -103,6 +103,10 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
      */
     @RequestMapping(value = ActionConstant.ACTION_ERROR_CUSTOM)
     public String prepareError(@PathVariable Long id, @PathVariable Long idAvaliacao, Model model, @PageableDefault Pageable pageable){
+        ParameterExceptionUtil.validateObjectNull(id);
+        ParameterExceptionUtil.validateObjectNull(idAvaliacao);
+        ParameterExceptionUtil.validateObjectNull(model);
+        ParameterExceptionUtil.validateObjectNull(pageable);
         this.onError(id, idAvaliacao, model, pageable);
         return getViewForm();
     }

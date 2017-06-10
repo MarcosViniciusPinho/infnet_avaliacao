@@ -168,6 +168,46 @@ public class TemplateTopicoControllerUnitTest {
 		this.templateTopicoController.prepareUpdate(1L, 3L, model, null);
 	}
 
+	@Test
+	public void testPrepareError(){
+		Long idAvaliacao = 5L;
+		Model model = new ExtendedModelMap();
+		TemplateTopicoDTO templateTopicoDTO = new TemplateTopicoDTO();
+		templateTopicoDTO.setId(1L);
+		TemplateAvaliacaoDTO templateAvaliacaoDTO = new TemplateAvaliacaoDTO();
+		templateAvaliacaoDTO.setId(3L);
+		Mockito.when(this.templateTopicoFacade.findById(templateTopicoDTO.getId())).thenReturn(templateTopicoDTO);
+		Mockito.when(this.templateAvaliacaoFacade.findById(idAvaliacao)).thenReturn(templateAvaliacaoDTO);
+		Assert.assertNotNull(this.templateTopicoController.prepareError(1L, idAvaliacao, model, this.pageable));
+		Assert.assertEquals("/template/avaliacao/topico/form", this.templateTopicoController.prepareError(1L, idAvaliacao, model, this.pageable));
+		Assert.assertEquals(templateTopicoDTO.getIdAvaliacao(), idAvaliacao);
+		Assert.assertEquals(templateTopicoDTO, model.asMap().get("templateTopicoDTO"));
+		Assert.assertEquals(templateAvaliacaoDTO, model.asMap().get("templateAvaliacaoDTO"));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPrepareErrorFailedIdNull(){
+		Model model = new ExtendedModelMap();
+		this.templateTopicoController.prepareError(null, 5L, model, this.pageable);
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPrepareErrorFailedIdAvaliacaoNull(){
+		Model model = new ExtendedModelMap();
+		this.templateTopicoController.prepareError(1L, null, model, this.pageable);
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPrepareErrorFailedModelNull(){
+		this.templateTopicoController.prepareError(1L, 5L, null, this.pageable);
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPrepareErrorFailedPageableNull(){
+		Model model = new ExtendedModelMap();
+		this.templateTopicoController.prepareError(1L, 5L, model, null);
+	}
+
 	/**
 	 * Métodos auxiliares dos testes para não precisar escrever muito código.
 	 */
