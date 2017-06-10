@@ -4,6 +4,7 @@ import com.infnet.avaliacao.business.facade.TemplateAvaliacaoFacade;
 import com.infnet.avaliacao.business.facade.TemplatePerguntaFacade;
 import com.infnet.avaliacao.business.facade.TemplateTopicoFacade;
 import com.infnet.avaliacao.controller.util.ApplicationConstant;
+import com.infnet.avaliacao.controller.util.PathConstant;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoTopicoPerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
@@ -206,6 +207,56 @@ public class TemplateTopicoControllerUnitTest {
 	public void testPrepareErrorFailedPageableNull(){
 		Model model = new ExtendedModelMap();
 		this.templateTopicoController.prepareError(1L, 5L, model, null);
+	}
+
+	@Test
+	public void testGetRedirectViewEdit(){
+		Assert.assertNotNull(this.templateTopicoController.getRedirectViewEdit());
+		Assert.assertEquals("redirect:/template/avaliacao/topico/edit/{id}/avaliacao/{idAvaliacao}", this.templateTopicoController.getRedirectViewEdit());
+	}
+
+	@Test
+	public void testGetRedirectViewError(){
+		Assert.assertNotNull(this.templateTopicoController.getRedirectViewError());
+		Assert.assertEquals("redirect:/template/avaliacao/topico/error/{id}/avaliacao/{idAvaliacao}", this.templateTopicoController.getRedirectViewError());
+	}
+
+	@Test
+	public void testOnLoadViewPaginated(){
+		Model model = new ExtendedModelMap();
+
+		List<TemplatePerguntaDTO> templatePerguntaDTOList = new ArrayList<>();
+		templatePerguntaDTOList.add(this.createTemplatePerguntaDTO(5L));
+		templatePerguntaDTOList.add(this.createTemplatePerguntaDTO(7L));
+
+		Page<TemplatePerguntaDTO> templatePerguntaDtoPage = new PageImpl<>(templatePerguntaDTOList, pageable, templatePerguntaDTOList.size());
+
+		Mockito.when(templatePerguntaFacade.findAllPaginated(pageable)).thenReturn(templatePerguntaDtoPage);
+		this.templateTopicoController.onLoadViewPaginated(model, this.pageable);
+		Assert.assertEquals(templatePerguntaDtoPage, model.asMap().get(ApplicationConstant.LISTAR_TEMPLATE_PERGUNTA));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testOnLoadViewPaginatedFailedModelNull(){
+		this.templateTopicoController.onLoadViewPaginated(null, this.pageable);
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testOnLoadViewPaginatedFailedPageableNull(){
+		Model model = new ExtendedModelMap();
+		this.templateTopicoController.onLoadViewPaginated(model, null);
+	}
+
+	@Test
+	public void testGetPathView(){
+		Assert.assertNotNull(this.templateTopicoController.getPathView());
+		Assert.assertEquals(PathConstant.PATH_TEMPLATE_TOPICO, this.templateTopicoController.getPathView());
+	}
+
+	@Test
+	public void testGetFacade(){
+		Assert.assertNotNull(this.templateTopicoController.getFacade());
+		Assert.assertEquals(this.templateTopicoFacade, this.templateTopicoController.getFacade());
 	}
 
 	/**

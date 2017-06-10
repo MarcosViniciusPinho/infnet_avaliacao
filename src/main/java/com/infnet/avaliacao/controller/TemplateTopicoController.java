@@ -146,6 +146,8 @@ public class TemplateTopicoController extends TemplateController<TemplateTopicoD
      */
     @Override
     protected void onLoadViewPaginated(Model model, Pageable pageable) {
+        ParameterExceptionUtil.validateObjectNull(model);
+        ParameterExceptionUtil.validateObjectNull(pageable);
         model.addAttribute(ApplicationConstant.LISTAR_TEMPLATE_PERGUNTA, templatePerguntaFacade.findAllPaginated(pageable));
     }
 
