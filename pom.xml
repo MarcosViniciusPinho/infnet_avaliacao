@@ -165,6 +165,9 @@
 						<exclude>**/CadastroController.class</exclude>
 						<exclude>**/InitController.class</exclude>
 						<exclude>**/TemplateController.class</exclude>
+						<exclude>**/EmailController.class</exclude>
+						<exclude>**/AvaliacaoApplication.class</exclude>
+						<exclude>**/ServletInitializer.class</exclude>
 					</excludes>
 				</configuration>
 				<executions>
