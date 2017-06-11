@@ -166,7 +166,7 @@
 						<exclude>**/InitController.class</exclude>
 						<exclude>**/TemplateController.class</exclude>
 						<exclude>**/EmailController.class</exclude>
-						<exclude>**/AvaliacaoApplication.class</exclude>
+						<exclude>**/ServletInitializer.class</exclude>
 					</excludes>
 				</configuration>
 				<executions>
@@ -188,7 +188,7 @@
 						<param>com.infnet.avaliacao.controller.InitController</param>
 						<param>com.infnet.avaliacao.controller.TemplateController</param>
 						<param>com.infnet.avaliacao.controller.EmailController</param>
-						<param>com.infnet.avaliacao.AvaliacaoApplication</param>
+						<param>com.infnet.avaliacao.ServletInitializer</param>
 					</excludedClasses>
 				</configuration>
 			</plugin>
