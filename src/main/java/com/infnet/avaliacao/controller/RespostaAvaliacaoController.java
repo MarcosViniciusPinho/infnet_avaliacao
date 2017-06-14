@@ -4,6 +4,7 @@ import com.infnet.avaliacao.business.facade.AvaliacaoFacade;
 import com.infnet.avaliacao.controller.util.*;
 import com.infnet.avaliacao.controller.wrapper.PerguntaAssociadaWrapper;
 import com.infnet.avaliacao.dto.impl.AvaliacaoDTO;
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +32,8 @@ public class RespostaAvaliacaoController {
      */
     @RequestMapping(value = ActionConstant.ACTION_SAVE, method = RequestMethod.POST)
     public String save(AvaliacaoDTO dto, Model model){
+        ParameterExceptionUtil.validateObjectNull(dto);
+        ParameterExceptionUtil.validateObjectNull(model);
         try{
             AvaliacaoDTO avaliacaoDTO = this.getFacade().popularAlunoAndTurmaParaAvaliacao(dto.getAlunoDTO().getCpf(),
                     dto.getTurmaDTO().getId());
