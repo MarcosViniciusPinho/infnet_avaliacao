@@ -14,6 +14,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -31,6 +34,9 @@ public class UsuarioFacadeImplUnitTest {
 
 	@Mock
 	private PerfilService perfilService;
+
+	@Mock
+	private Pageable pageable;
 
 	@Test
 	public void testSave(){
@@ -92,7 +98,7 @@ public class UsuarioFacadeImplUnitTest {
 	}
 
 	@Test
-	public void test(){
+	public void testFindAll(){
 		List<UsuarioDTO> usuarioDTOList = new ArrayList<>();
 		usuarioDTOList.add(this.createUsuarioDTO(1L));
 		usuarioDTOList.add(this.createUsuarioDTO(6L));
@@ -106,6 +112,28 @@ public class UsuarioFacadeImplUnitTest {
 		Mockito.when(this.usuarioService.findAll()).thenReturn(usuarioList);
 		Assert.assertNotNull(this.usuarioFacadeImpl.findAll());
 		Assert.assertEquals(usuarioDTOList, this.usuarioFacadeImpl.findAll());
+	}
+
+	@Test
+	public void testFindAllPaginated(){
+		List<Usuario> usuarioList = new ArrayList<>();
+		usuarioList.add(this.createUsuario(2L));
+		usuarioList.add(this.createUsuario(4L));
+		Page<Usuario> pageList = new PageImpl<>(usuarioList, this.pageable, 2);
+
+		List<UsuarioDTO> usuarioDTOList = new ArrayList<>();
+		usuarioDTOList.add(this.createUsuarioDTO(2L));
+		usuarioDTOList.add(this.createUsuarioDTO(4L));
+		Page<UsuarioDTO> pageLisDto = new PageImpl<>(usuarioDTOList, this.pageable, 2);
+
+		Mockito.when(this.usuarioService.findAllPaginated(this.pageable)).thenReturn(pageList);
+		Assert.assertNotNull(this.usuarioFacadeImpl.findAllPaginated(this.pageable));
+		Assert.assertEquals(pageLisDto, this.usuarioFacadeImpl.findAllPaginated(this.pageable));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testFindAllPaginatedFailedPageableNull(){
+		this.usuarioFacadeImpl.findAllPaginated(null);
 	}
 
 	private Usuario createUsuario(Long id){

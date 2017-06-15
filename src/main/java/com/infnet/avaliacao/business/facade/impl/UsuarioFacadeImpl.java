@@ -73,6 +73,7 @@ public class UsuarioFacadeImpl implements UsuarioFacade {
      */
     @Override
     public Page<UsuarioDTO> findAllPaginated(Pageable pageable) {
+        ParameterExceptionUtil.validateObjectNull(pageable);
         return UsuarioDTO.convertPageEntityToPageDto(this.usuarioService.findAllPaginated(pageable), pageable);
     }
 
