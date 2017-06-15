@@ -4,6 +4,7 @@ import com.infnet.avaliacao.business.facade.impl.UsuarioFacadeImpl;
 import com.infnet.avaliacao.business.service.PerfilService;
 import com.infnet.avaliacao.business.service.UsuarioService;
 import com.infnet.avaliacao.dto.impl.UsuarioDTO;
+import com.infnet.avaliacao.entity.Perfil;
 import com.infnet.avaliacao.entity.Usuario;
 import com.infnet.avaliacao.exception.NullParameterException;
 import org.junit.Assert;
@@ -14,6 +15,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -64,6 +68,33 @@ public class UsuarioFacadeImplUnitTest {
 	@Test(expected = NullParameterException.class)
 	public void testFindByIdFailedIdNull(){
 		this.usuarioFacadeImpl.findById(null);
+	}
+
+	@Test
+	public void testDelete(){
+		this.usuarioFacadeImpl.delete(1L);
+	}
+
+	@Test
+	public void testDeleteFaildeIdNull(){
+		this.usuarioFacadeImpl.delete(null);
+	}
+
+	@Test
+	public void testFindAllPerfil(){
+		List<Perfil> perfilList = new ArrayList<>();
+		perfilList.add(this.createPerfil(2L));
+		perfilList.add(this.createPerfil(1L));
+		perfilList.add(this.createPerfil(5L));
+		Mockito.when(this.perfilService.findAll()).thenReturn(perfilList);
+		Assert.assertNotNull(this.usuarioFacadeImpl.findAllPerfil());
+		Assert.assertEquals(perfilList, this.usuarioFacadeImpl.findAllPerfil());
+	}
+
+	private Perfil createPerfil(Long id){
+		Perfil perfil = new Perfil();
+		perfil.setId(id);
+		return perfil;
 	}
 
 }

@@ -48,9 +48,13 @@ public class UsuarioFacadeImpl implements UsuarioFacade {
      */
     @Override
     public void delete(Long id) {
+        ParameterExceptionUtil.validateObjectNull(id);
         this.usuarioService.delete(id);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Perfil> findAllPerfil() {
         return this.perfilService.findAll();

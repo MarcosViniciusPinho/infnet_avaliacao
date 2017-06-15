@@ -61,12 +61,12 @@ public class Perfil implements Serializable {
         if (o == null || getClass() != o.getClass()){
             return false;
         }
-        Perfil usuario = (Perfil) o;
-        return id != null ? !id.equals(usuario.id) : usuario.id != null;
+        Perfil perfil = (Perfil) o;
+        return (this.id != null && perfil.id != null) && id.equals(perfil.id);
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        return this.id != null ? id.hashCode() : 0;
     }
 }
