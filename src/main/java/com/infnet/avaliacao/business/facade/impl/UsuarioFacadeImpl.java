@@ -39,6 +39,7 @@ public class UsuarioFacadeImpl implements UsuarioFacade {
      */
     @Override
     public UsuarioDTO findById(Long id) {
+        ParameterExceptionUtil.validateObjectNull(id);
         return UsuarioDTO.toDto(this.usuarioService.findById(id));
     }
 

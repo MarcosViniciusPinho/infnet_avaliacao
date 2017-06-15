@@ -136,4 +136,21 @@ public class UsuarioDTO implements DTO<Usuario> {
     public void setPerfil(Perfil perfil) {
         this.perfil = perfil;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
+        UsuarioDTO other = (UsuarioDTO) o;
+        return (this.id != null && other.id != null) && id.equals(other.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.id != null ? id.hashCode() : 0;
+    }
 }
