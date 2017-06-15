@@ -75,7 +75,7 @@ public class UsuarioFacadeImplUnitTest {
 		this.usuarioFacadeImpl.delete(1L);
 	}
 
-	@Test
+	@Test(expected = NullParameterException.class)
 	public void testDeleteFaildeIdNull(){
 		this.usuarioFacadeImpl.delete(null);
 	}
@@ -89,6 +89,35 @@ public class UsuarioFacadeImplUnitTest {
 		Mockito.when(this.perfilService.findAll()).thenReturn(perfilList);
 		Assert.assertNotNull(this.usuarioFacadeImpl.findAllPerfil());
 		Assert.assertEquals(perfilList, this.usuarioFacadeImpl.findAllPerfil());
+	}
+
+	@Test
+	public void test(){
+		List<UsuarioDTO> usuarioDTOList = new ArrayList<>();
+		usuarioDTOList.add(this.createUsuarioDTO(1L));
+		usuarioDTOList.add(this.createUsuarioDTO(6L));
+		usuarioDTOList.add(this.createUsuarioDTO(3L));
+
+		List<Usuario> usuarioList = new ArrayList<>();
+		usuarioList.add(this.createUsuario(1L));
+		usuarioList.add(this.createUsuario(6L));
+		usuarioList.add(this.createUsuario(3L));
+
+		Mockito.when(this.usuarioService.findAll()).thenReturn(usuarioList);
+		Assert.assertNotNull(this.usuarioFacadeImpl.findAll());
+		Assert.assertEquals(usuarioDTOList, this.usuarioFacadeImpl.findAll());
+	}
+
+	private Usuario createUsuario(Long id){
+		Usuario usuario = new Usuario();
+		usuario.setId(id);
+		return usuario;
+	}
+
+	private UsuarioDTO createUsuarioDTO(Long id){
+		UsuarioDTO usuarioDTO = new UsuarioDTO();
+		usuarioDTO.setId(id);
+		return usuarioDTO;
 	}
 
 	private Perfil createPerfil(Long id){
