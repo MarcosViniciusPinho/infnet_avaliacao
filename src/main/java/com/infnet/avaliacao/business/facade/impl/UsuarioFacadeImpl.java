@@ -5,6 +5,7 @@ import com.infnet.avaliacao.business.service.PerfilService;
 import com.infnet.avaliacao.business.service.UsuarioService;
 import com.infnet.avaliacao.dto.impl.UsuarioDTO;
 import com.infnet.avaliacao.entity.Perfil;
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,7 @@ public class UsuarioFacadeImpl implements UsuarioFacade {
      */
     @Override
     public void save(UsuarioDTO usuarioDTO) {
+        ParameterExceptionUtil.validateObjectNull(usuarioDTO);
         this.usuarioService.save(usuarioDTO);
     }
 
