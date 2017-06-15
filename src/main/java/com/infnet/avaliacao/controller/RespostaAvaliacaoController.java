@@ -114,7 +114,7 @@ public class RespostaAvaliacaoController {
      * Método que redireciona para a tela de cadastrar/alterar.
      * @return String
      */
-    protected String getViewForm(){
+    private String getViewForm(){
         return getPathView() + ViewConstant.VIEW_FORM;
     }
 
@@ -122,7 +122,7 @@ public class RespostaAvaliacaoController {
      * Método que faz o redirecionamento para a ação de exbir a tela de agradecimento.
      * @return String
      */
-    protected String getRedirectViewAgradecimento(){
+    private String getRedirectViewAgradecimento(){
         return ActionConstant.REDIRECT + getPathView() + ActionConstant.ACTION_AGRADECIMENTO;
     }
 
@@ -130,7 +130,7 @@ public class RespostaAvaliacaoController {
      * Método que redireciona para a tela de agradecimento.
      * @return String
      */
-    protected String getViewAgradecimento(){
+    private String getViewAgradecimento(){
         return getPathView() + ViewConstant.VIEW_AGRADECIMENTO;
     }
 

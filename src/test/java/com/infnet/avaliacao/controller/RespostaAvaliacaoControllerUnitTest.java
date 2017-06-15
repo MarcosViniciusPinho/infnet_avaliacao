@@ -190,24 +190,6 @@ public class RespostaAvaliacaoControllerUnitTest {
 	}
 
 	@Test
-	public void testGetViewForm(){
-		Assert.assertNotNull(this.respostaAvaliacaoController.getViewForm());
-		Assert.assertEquals("/resposta/avaliacao/form", this.respostaAvaliacaoController.getViewForm());
-	}
-
-	@Test
-	public void testGetRedirectViewAgradecimento(){
-		Assert.assertNotNull(this.respostaAvaliacaoController.getRedirectViewAgradecimento());
-		Assert.assertEquals("redirect:/resposta/avaliacao/agradecimento", this.respostaAvaliacaoController.getRedirectViewAgradecimento());
-	}
-
-	@Test
-	public void testGetViewAgradecimento(){
-		Assert.assertNotNull(this.respostaAvaliacaoController.getViewAgradecimento());
-		Assert.assertEquals("/resposta/avaliacao/agradecimento", this.respostaAvaliacaoController.getViewAgradecimento());
-	}
-
-	@Test
 	public void testGetFacade(){
 		Assert.assertNotNull(this.avaliacaoFacade);
 		Assert.assertEquals(this.avaliacaoFacade, this.respostaAvaliacaoController.getFacade());
