@@ -51,6 +51,16 @@ public class UsuarioFacadeImplUnitTest {
 		Assert.assertEquals(usuarioDTO, this.usuarioFacadeImpl.findById(1L));
 	}
 
+	@Test
+	public void testFindByIdNaoSaoIguais(){
+		UsuarioDTO usuarioDTO = new UsuarioDTO();
+		usuarioDTO.setId(1L);
+
+		Mockito.when(this.usuarioService.findById(1L)).thenReturn(new Usuario());
+		Assert.assertNotNull(this.usuarioFacadeImpl.findById(1L));
+		Assert.assertNotEquals(usuarioDTO, this.usuarioFacadeImpl.findById(1L));
+	}
+
 	@Test(expected = NullParameterException.class)
 	public void testFindByIdFailedIdNull(){
 		this.usuarioFacadeImpl.findById(null);
