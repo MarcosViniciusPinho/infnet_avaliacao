@@ -66,6 +66,9 @@ public class RespostaAvaliacaoController {
      */
     @RequestMapping(value = ActionConstant.ACTION_LINK_RESPONDER_AVALIACAO)
     public String prepareCreate(@PathVariable Long cpf, @PathVariable Long id, Model model){
+        ParameterExceptionUtil.validateObjectNull(cpf);
+        ParameterExceptionUtil.validateObjectNull(id);
+        ParameterExceptionUtil.validateObjectNull(model);
         try{
             this.getFacade().verificarParametrosEnviadosAoCarregarPagina(cpf, id);
             AvaliacaoDTO avaliacaoDTO = this.getFacade().popularAlunoAndTurmaParaAvaliacao(cpf, id);
@@ -86,7 +89,7 @@ public class RespostaAvaliacaoController {
      * @return ModelAndView
      */
     @RequestMapping(value = ActionConstant.ACTION_AGRADECIMENTO)
-    public String agradecimento(){
+    public String viewAgradecimento(){
         return this.getViewAgradecimento();
     }
 

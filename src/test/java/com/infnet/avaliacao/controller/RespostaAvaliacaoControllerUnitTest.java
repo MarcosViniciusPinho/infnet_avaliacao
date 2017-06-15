@@ -134,6 +134,55 @@ public class RespostaAvaliacaoControllerUnitTest {
 		this.respostaAvaliacaoController.save(dto, null);
 	}
 
+	@Test
+	public void testPrepareCreate(){
+		Model model = new ExtendedModelMap();
+		TemplateAvaliacaoDTO templateAvaliacaoDTO = new TemplateAvaliacaoDTO();
+		templateAvaliacaoDTO.setId(7L);
+
+		List<TemplateTopicoDTO> templateTopicoDTOList = new ArrayList<>();
+		templateTopicoDTOList.add(this.createTemplateTopicoComTemplateAvaliacaoTopicoPergunta(22L, 5L, Boolean.TRUE, templateAvaliacaoDTO));
+		templateTopicoDTOList.add(this.createTemplateTopicoComTemplateAvaliacaoTopicoPergunta(10L, 2L, Boolean.TRUE, templateAvaliacaoDTO));
+		templateTopicoDTOList.add(this.createTemplateTopicoComTemplateAvaliacaoTopicoPergunta(1L, 15L, Boolean.TRUE, templateAvaliacaoDTO));
+		templateTopicoDTOList.add(this.createTemplateTopicoComTemplateAvaliacaoTopicoPergunta(13L, 20L, Boolean.TRUE, templateAvaliacaoDTO));
+		templateTopicoDTOList.add(this.createTemplateTopicoComTemplateAvaliacaoTopicoPergunta(50L, 24L, Boolean.TRUE, templateAvaliacaoDTO));
+
+		templateAvaliacaoDTO.setTemplateTopicoDTOList(templateTopicoDTOList);
+
+		AvaliacaoDTO dto = this.getDto();
+		AvaliacaoDTO avaliacaoDTO = this.getAvaliacaoDTO(templateAvaliacaoDTO);
+		Mockito.when(this.avaliacaoFacade.popularAlunoAndTurmaParaAvaliacao(dto.getAlunoDTO().getCpf(), dto.getTurmaDTO().getId())).thenReturn(avaliacaoDTO);
+		Assert.assertNotNull(this.respostaAvaliacaoController.prepareCreate(dto.getAlunoDTO().getCpf(), dto.getTurmaDTO().getId(), model));
+		Assert.assertEquals("/resposta/avaliacao/form", this.respostaAvaliacaoController.prepareCreate(dto.getAlunoDTO().getCpf(), dto.getTurmaDTO().getId(), model));
+		Assert.assertEquals(avaliacaoDTO, model.asMap().get("avaliacaoDTO"));
+		Assert.assertEquals(Boolean.TRUE, model.asMap().get(ApplicationConstant.EXIBIR_BOTAO_PROXIMO));
+		Assert.assertEquals(Boolean.FALSE, model.asMap().get(ApplicationConstant.EXIBIR_BOTAO_SALVAR));
+	}
+
+	@Test
+	public void testPrepareCreateFalha(){
+		Model model = new ExtendedModelMap();
+		this.respostaAvaliacaoController.prepareCreate(4564564L, 79L, model);
+		Assert.assertNull(model.asMap().get(MessageConstant.ERROR));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPrepareCreateFailedCpfNull(){
+		Model model = new ExtendedModelMap();
+		this.respostaAvaliacaoController.prepareCreate(null, 79L, model);
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPrepareCreateFailedIdNull(){
+		Model model = new ExtendedModelMap();
+		this.respostaAvaliacaoController.prepareCreate(4564564L, null, model);
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPrepareCreateFailedModelNull(){
+		this.respostaAvaliacaoController.prepareCreate(4564564L, 564L, null);
+	}
+
 	/**
 	 * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
 	 */
