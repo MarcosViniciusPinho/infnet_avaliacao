@@ -183,6 +183,42 @@ public class RespostaAvaliacaoControllerUnitTest {
 		this.respostaAvaliacaoController.prepareCreate(4564564L, 564L, null);
 	}
 
+	@Test
+	public void testViewAgradecimento(){
+		Assert.assertNotNull(this.respostaAvaliacaoController.viewAgradecimento());
+		Assert.assertEquals("/resposta/avaliacao/agradecimento", this.respostaAvaliacaoController.viewAgradecimento());
+	}
+
+	@Test
+	public void testGetViewForm(){
+		Assert.assertNotNull(this.respostaAvaliacaoController.getViewForm());
+		Assert.assertEquals("/resposta/avaliacao/form", this.respostaAvaliacaoController.getViewForm());
+	}
+
+	@Test
+	public void testGetRedirectViewAgradecimento(){
+		Assert.assertNotNull(this.respostaAvaliacaoController.getRedirectViewAgradecimento());
+		Assert.assertEquals("redirect:/resposta/avaliacao/agradecimento", this.respostaAvaliacaoController.getRedirectViewAgradecimento());
+	}
+
+	@Test
+	public void testGetViewAgradecimento(){
+		Assert.assertNotNull(this.respostaAvaliacaoController.getViewAgradecimento());
+		Assert.assertEquals("/resposta/avaliacao/agradecimento", this.respostaAvaliacaoController.getViewAgradecimento());
+	}
+
+	@Test
+	public void testGetFacade(){
+		Assert.assertNotNull(this.avaliacaoFacade);
+		Assert.assertEquals(this.avaliacaoFacade, this.respostaAvaliacaoController.getFacade());
+	}
+
+	@Test
+	public void testGetPathView(){
+		Assert.assertNotNull(this.respostaAvaliacaoController.getPathView());
+		Assert.assertEquals("/resposta/avaliacao", this.respostaAvaliacaoController.getPathView());
+	}
+
 	/**
 	 * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
 	 */
