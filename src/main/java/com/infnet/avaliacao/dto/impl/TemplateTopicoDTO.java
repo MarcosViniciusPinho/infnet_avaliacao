@@ -144,4 +144,21 @@ public class TemplateTopicoDTO implements DTO<TemplateTopico> {
     public void setIdAvaliacao(Long idAvaliacao) {
         this.idAvaliacao = idAvaliacao;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
+        TemplateTopicoDTO other = (TemplateTopicoDTO) o;
+        return (this.id != null && other.id != null) && id.equals(other.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.id != null ? id.hashCode() : 0;
+    }
 }

@@ -86,7 +86,7 @@ public class Usuario implements Serializable {
             return false;
         }
         Usuario usuario = (Usuario) o;
-        return id != null ? !id.equals(usuario.id) : usuario.id != null;
+        return (this.id != null && usuario.id != null) && id.equals(usuario.id);
     }
 
     @Override
