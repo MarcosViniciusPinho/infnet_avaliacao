@@ -119,12 +119,12 @@ public class UsuarioFacadeImplUnitTest {
 		List<Usuario> usuarioList = new ArrayList<>();
 		usuarioList.add(this.createUsuario(2L));
 		usuarioList.add(this.createUsuario(4L));
-		Page<Usuario> pageList = new PageImpl<>(usuarioList, this.pageable, 2);
+		Page<Usuario> pageList = new PageImpl<>(usuarioList, this.pageable, usuarioList.size());
 
 		List<UsuarioDTO> usuarioDTOList = new ArrayList<>();
 		usuarioDTOList.add(this.createUsuarioDTO(2L));
 		usuarioDTOList.add(this.createUsuarioDTO(4L));
-		Page<UsuarioDTO> pageLisDto = new PageImpl<>(usuarioDTOList, this.pageable, 2);
+		Page<UsuarioDTO> pageLisDto = new PageImpl<>(usuarioDTOList, this.pageable, usuarioDTOList.size());
 
 		Mockito.when(this.usuarioService.findAllPaginated(this.pageable)).thenReturn(pageList);
 		Assert.assertNotNull(this.usuarioFacadeImpl.findAllPaginated(this.pageable));
