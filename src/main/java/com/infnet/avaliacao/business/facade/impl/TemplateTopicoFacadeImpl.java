@@ -47,6 +47,8 @@ public class TemplateTopicoFacadeImpl implements TemplateTopicoFacade {
      */
     @Override
     public void save(TemplateTopicoDTO dto) {
+        ParameterExceptionUtil.validateObjectNull(dto);
+        ParameterExceptionUtil.validateObjectNull(dto.getTemplateAvaliacaoTopicoPerguntaDTOList());
         this.templateTopicoService.save(dto);
         this.templateAvaliacaoTopicoPerguntaService.save(dto.getTemplateAvaliacaoTopicoPerguntaDTOList());
     }

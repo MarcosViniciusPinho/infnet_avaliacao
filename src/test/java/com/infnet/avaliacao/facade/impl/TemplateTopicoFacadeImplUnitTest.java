@@ -3,7 +3,10 @@ package com.infnet.avaliacao.facade.impl;
 import com.infnet.avaliacao.business.facade.impl.TemplateTopicoFacadeImpl;
 import com.infnet.avaliacao.business.service.TemplateAvaliacaoTopicoPerguntaService;
 import com.infnet.avaliacao.business.service.TemplateTopicoService;
+import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoTopicoPerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
+import com.infnet.avaliacao.entity.TemplateAvaliacao;
+import com.infnet.avaliacao.entity.TemplatePergunta;
 import com.infnet.avaliacao.entity.TemplateTopico;
 import com.infnet.avaliacao.exception.NullParameterException;
 import org.junit.Assert;
@@ -40,8 +43,8 @@ public class TemplateTopicoFacadeImplUnitTest {
 	@Test
 	public void testFindAll(){
 		List<TemplateTopicoDTO> templateTopicoDTOList = new ArrayList<>();
-		templateTopicoDTOList.add(this.createTemplateTopicoDTO(3L));
-		templateTopicoDTOList.add(this.createTemplateTopicoDTO(5L));
+		templateTopicoDTOList.add(this.createTemplateTopicoDTO(3L, null));
+		templateTopicoDTOList.add(this.createTemplateTopicoDTO(5L, null));
 
 		List<TemplateTopico> templateTopicoList = new ArrayList<>();
 		templateTopicoList.add(this.createTemplateTopico(3L));
@@ -54,9 +57,9 @@ public class TemplateTopicoFacadeImplUnitTest {
 	@Test
 	public void testFindAllPaginated(){
 		List<TemplateTopicoDTO> templateTopicoDTOList = new ArrayList<>();
-		templateTopicoDTOList.add(this.createTemplateTopicoDTO(2L));
-		templateTopicoDTOList.add(this.createTemplateTopicoDTO(4L));
-		templateTopicoDTOList.add(this.createTemplateTopicoDTO(6L));
+		templateTopicoDTOList.add(this.createTemplateTopicoDTO(2L, null));
+		templateTopicoDTOList.add(this.createTemplateTopicoDTO(4L, null));
+		templateTopicoDTOList.add(this.createTemplateTopicoDTO(6L, null));
 		Page<TemplateTopicoDTO> pageLisDto = new PageImpl<>(templateTopicoDTOList, this.pageable, templateTopicoDTOList.size());
 
 		List<TemplateTopico> templateTopicoList = new ArrayList<>();
@@ -75,9 +78,48 @@ public class TemplateTopicoFacadeImplUnitTest {
 		this.templateTopicoFacadeImpl.findAllPaginated(null);
 	}
 
-	private TemplateTopicoDTO createTemplateTopicoDTO(Long id){
+	@Test
+	public void testSave(){
+		List<TemplateAvaliacaoTopicoPerguntaDTO> templateAvaliacaoTopicoPerguntaDTOList = new ArrayList<>();
+		templateAvaliacaoTopicoPerguntaDTOList.add(this.createTemplateAvaliacaoTopicoPerguntaDTO(8L));
+		templateAvaliacaoTopicoPerguntaDTOList.add(this.createTemplateAvaliacaoTopicoPerguntaDTO(3L));
+		templateAvaliacaoTopicoPerguntaDTOList.add(this.createTemplateAvaliacaoTopicoPerguntaDTO(7L));
+		this.templateTopicoFacadeImpl.save(this.createTemplateTopicoDTO(2L, templateAvaliacaoTopicoPerguntaDTOList));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testSaveFailedDtoNull(){
+		this.templateTopicoFacadeImpl.save(null);
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testSaveFailedTemplateAvaliacaoTopicoPerguntaListNull(){
+		this.templateTopicoFacadeImpl.save(this.createTemplateTopicoDTO(2L, null));
+	}
+
+	private TemplateAvaliacaoTopicoPerguntaDTO createTemplateAvaliacaoTopicoPerguntaDTO(Long id){
+		TemplateAvaliacao templateAvaliacao = new TemplateAvaliacao();
+		templateAvaliacao.setId(1L);
+
+		TemplateTopico templateTopico = new TemplateTopico();
+		templateTopico.setId(2L);
+
+		TemplatePergunta templatePergunta = new TemplatePergunta();
+		templatePergunta.setId(5L);
+
+		TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO = new TemplateAvaliacaoTopicoPerguntaDTO();
+		templateAvaliacaoTopicoPerguntaDTO.setId(id);
+		templateAvaliacaoTopicoPerguntaDTO.setTemplateAvaliacao(templateAvaliacao);
+		templateAvaliacaoTopicoPerguntaDTO.setTemplateTopico(templateTopico);
+		templateAvaliacaoTopicoPerguntaDTO.setTemplatePergunta(templatePergunta);
+
+		return templateAvaliacaoTopicoPerguntaDTO;
+	}
+
+	private TemplateTopicoDTO createTemplateTopicoDTO(Long id, List<TemplateAvaliacaoTopicoPerguntaDTO> templateAvaliacaoTopicoPerguntaDTOList){
 		TemplateTopicoDTO templateTopicoDTO = new TemplateTopicoDTO();
 		templateTopicoDTO.setId(id);
+		templateTopicoDTO.setTemplateAvaliacaoTopicoPerguntaDTOList(templateAvaliacaoTopicoPerguntaDTOList);
 		return templateTopicoDTO;
 	}
 
