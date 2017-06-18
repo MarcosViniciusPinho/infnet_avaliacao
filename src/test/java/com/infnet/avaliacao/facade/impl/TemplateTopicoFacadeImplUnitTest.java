@@ -109,6 +109,37 @@ public class TemplateTopicoFacadeImplUnitTest {
 		this.templateTopicoFacadeImpl.findById(null);
 	}
 
+	@Test
+	public void testGetListaTemplatesTopicosPorId(){
+		List<Long> idsTemplateTopico = new ArrayList<>();
+		idsTemplateTopico.add(3L);
+		idsTemplateTopico.add(5L);
+		idsTemplateTopico.add(7L);
+
+		List<TemplateTopicoDTO> templateTopicoDTOList = new ArrayList<>();
+		templateTopicoDTOList.add(this.createTemplateTopicoDTO(3L, null));
+		templateTopicoDTOList.add(this.createTemplateTopicoDTO(5L, null));
+		templateTopicoDTOList.add(this.createTemplateTopicoDTO(7L, null));
+
+		List<TemplateTopico> templateTopicoList = new ArrayList<>();
+		templateTopicoList.add(this.createTemplateTopico(3L));
+		templateTopicoList.add(this.createTemplateTopico(5L));
+		templateTopicoList.add(this.createTemplateTopico(7L));
+
+		Mockito.when(this.templateTopicoService.getListaTemplatesTopicosPorId(idsTemplateTopico)).thenReturn(templateTopicoList);
+		Assert.assertNotNull(this.templateTopicoFacadeImpl.getListaTemplatesTopicosPorId(idsTemplateTopico));
+		Assert.assertEquals(templateTopicoDTOList, this.templateTopicoFacadeImpl.getListaTemplatesTopicosPorId(idsTemplateTopico));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testGetListaTemplatesTopicosPorIdFailedIdsNull(){
+		this.templateTopicoFacadeImpl.getListaTemplatesTopicosPorId(null);
+	}
+
+	/**
+	 * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
+	 */
+
 	private TemplateAvaliacaoTopicoPerguntaDTO createTemplateAvaliacaoTopicoPerguntaDTO(Long id){
 		TemplateAvaliacao templateAvaliacao = new TemplateAvaliacao();
 		templateAvaliacao.setId(1L);

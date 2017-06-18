@@ -136,6 +136,10 @@ public class UsuarioFacadeImplUnitTest {
 		this.usuarioFacadeImpl.findAllPaginated(null);
 	}
 
+	/**
+	 * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
+	 */
+
 	private Usuario createUsuario(Long id){
 		Usuario usuario = new Usuario();
 		usuario.setId(id);

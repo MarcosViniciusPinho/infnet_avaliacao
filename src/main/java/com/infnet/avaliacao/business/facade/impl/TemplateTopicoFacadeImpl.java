@@ -67,6 +67,7 @@ public class TemplateTopicoFacadeImpl implements TemplateTopicoFacade {
      */
     @Override
     public List<TemplateTopicoDTO> getListaTemplatesTopicosPorId(List<Long> idsTemplateTopico) {
+        ParameterExceptionUtil.validateObjectNull(idsTemplateTopico);
         return TemplateTopicoDTO.convertListEntityToListDto(
                 this.templateTopicoService.getListaTemplatesTopicosPorId(idsTemplateTopico));
     }
