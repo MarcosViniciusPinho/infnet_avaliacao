@@ -97,6 +97,18 @@ public class TemplateTopicoFacadeImplUnitTest {
 		this.templateTopicoFacadeImpl.save(this.createTemplateTopicoDTO(2L, null));
 	}
 
+	@Test
+	public void testFindById(){
+		Mockito.when(this.templateTopicoService.findById(2L)).thenReturn(this.createTemplateTopico(2L));
+		Assert.assertNotNull(this.templateTopicoFacadeImpl.findById(2L));
+		Assert.assertEquals(this.createTemplateTopicoDTO(2L, null), this.templateTopicoFacadeImpl.findById(2L));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testFindByIdFailedIdNull(){
+		this.templateTopicoFacadeImpl.findById(null);
+	}
+
 	private TemplateAvaliacaoTopicoPerguntaDTO createTemplateAvaliacaoTopicoPerguntaDTO(Long id){
 		TemplateAvaliacao templateAvaliacao = new TemplateAvaliacao();
 		templateAvaliacao.setId(1L);

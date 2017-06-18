@@ -58,6 +58,7 @@ public class TemplateTopicoFacadeImpl implements TemplateTopicoFacade {
      */
     @Override
     public TemplateTopicoDTO findById(Long id) {
+        ParameterExceptionUtil.validateObjectNull(id);
         return TemplateTopicoDTO.toDto(this.templateTopicoService.findById(id));
     }
 
