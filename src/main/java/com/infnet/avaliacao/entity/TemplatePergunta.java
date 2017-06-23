@@ -41,12 +41,12 @@ public class TemplatePergunta implements Serializable {
         if (o == null || getClass() != o.getClass()){
             return false;
         }
-        TemplatePergunta that = (TemplatePergunta) o;
-        return id != null ? id.equals(that.id) : that.id == null;
+        TemplatePergunta other = (TemplatePergunta) o;
+        return (this.id != null && other.id != null) && id.equals(other.id);
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        return this.id != null ? id.hashCode() : 0;
     }
 }
