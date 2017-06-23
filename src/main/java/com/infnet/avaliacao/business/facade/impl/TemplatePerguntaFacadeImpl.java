@@ -7,6 +7,7 @@ import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoTopicoPerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,7 @@ public class TemplatePerguntaFacadeImpl implements TemplatePerguntaFacade {
      */
     @Override
     public Page<TemplatePerguntaDTO> findAllPaginated(Pageable pageable) {
+        ParameterExceptionUtil.validateObjectNull(pageable);
         return TemplatePerguntaDTO.convertPageEntityToPageDto(this.templatePerguntaService.findAllPaginated(pageable), pageable);
     }
 
@@ -47,6 +49,7 @@ public class TemplatePerguntaFacadeImpl implements TemplatePerguntaFacade {
      */
     @Override
     public void save(TemplatePerguntaDTO dto) {
+        ParameterExceptionUtil.validateObjectNull(dto);
         this.templatePerguntaService.save(dto);
     }
 
@@ -55,6 +58,7 @@ public class TemplatePerguntaFacadeImpl implements TemplatePerguntaFacade {
      */
     @Override
     public TemplatePerguntaDTO findById(Long id) {
+        ParameterExceptionUtil.validateObjectNull(id);
         return TemplatePerguntaDTO.toDto(this.templatePerguntaService.findById(id));
     }
 
