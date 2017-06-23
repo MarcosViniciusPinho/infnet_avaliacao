@@ -34,12 +34,12 @@ public class PerguntaAssociadaWrapper {
         if (o == null || getClass() != o.getClass()){
             return false;
         }
-        PerguntaAssociadaWrapper that = (PerguntaAssociadaWrapper) o;
-        return templatePerguntaDTOList != null ? !templatePerguntaDTOList.equals(that.templatePerguntaDTOList) : that.templatePerguntaDTOList != null;
+        PerguntaAssociadaWrapper other = (PerguntaAssociadaWrapper) o;
+        return (this.templatePerguntaDTOList != null && other.templatePerguntaDTOList != null) && templatePerguntaDTOList.equals(other.templatePerguntaDTOList);
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        return this.templatePerguntaDTOList != null ? templatePerguntaDTOList.hashCode() : 0;
     }
 }
