@@ -89,9 +89,11 @@ public class TemplatePerguntaFacadeImpl implements TemplatePerguntaFacade {
      * {@inheritDoc}
      */
     @Override
-    public Page<TemplatePerguntaDTO> findAllComCheckedPerguntasMarcadas(TemplateTopicoDTO templateTopicoDTO,
-                                                                        TemplateAvaliacaoDTO templateAvaliacaoDTO,
+    public Page<TemplatePerguntaDTO> findAllComCheckedPerguntasMarcadas(TemplateTopicoDTO templateTopicoDTO, TemplateAvaliacaoDTO templateAvaliacaoDTO,
                                                                         Pageable pageable) {
+        ParameterExceptionUtil.validateObjectNull(templateTopicoDTO);
+        ParameterExceptionUtil.validateObjectNull(templateAvaliacaoDTO);
+        ParameterExceptionUtil.validateObjectNull(pageable);
         Page<TemplatePerguntaDTO> templatePerguntaDTOList = this.findAllPaginated(pageable);
         return this.templatePerguntaService.findAllComCheckedPerguntasMarcadas(templateTopicoDTO, templateAvaliacaoDTO, templatePerguntaDTOList);
     }

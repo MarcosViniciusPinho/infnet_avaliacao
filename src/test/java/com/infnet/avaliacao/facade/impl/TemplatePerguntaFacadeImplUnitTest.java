@@ -191,6 +191,62 @@ public class TemplatePerguntaFacadeImplUnitTest {
 				templateTopicoDTO, null);
 	}
 
+	@Test
+	public void testFindAllComCheckedPerguntasMarcadas(){
+		List<TemplatePergunta> templateTopicoList = new ArrayList<>();
+		templateTopicoList.add(this.createTemplatePergunta(2L));
+		templateTopicoList.add(this.createTemplatePergunta(6L));
+		Page<TemplatePergunta> pageList = new PageImpl<>(templateTopicoList, this.pageable, templateTopicoList.size());
+
+		List<TemplatePerguntaDTO> templatePerguntaDTOList = new ArrayList<>();
+		templatePerguntaDTOList.add(this.createTemplatePerguntaDTO(2L));
+		templatePerguntaDTOList.add(this.createTemplatePerguntaDTO(6L));
+
+		Page<TemplatePerguntaDTO> pageDTOList = new PageImpl<>(templatePerguntaDTOList, this.pageable, templatePerguntaDTOList.size());
+
+		TemplateTopicoDTO templateTopicoDTO = new TemplateTopicoDTO();
+		templateTopicoDTO.setId(4L);
+
+		TemplateAvaliacaoDTO templateAvaliacaoDTO = new TemplateAvaliacaoDTO();
+		templateAvaliacaoDTO.setId(2L);
+
+		Mockito.when(this.templatePerguntaService.findAllPaginated(this.pageable)).thenReturn(pageList);
+		Mockito.when(this.templatePerguntaService.findAllComCheckedPerguntasMarcadas(templateTopicoDTO,
+				templateAvaliacaoDTO, pageDTOList)).thenReturn(pageDTOList);
+		Assert.assertNotNull(this.templatePerguntaFacadeImpl.findAllComCheckedPerguntasMarcadas(templateTopicoDTO,
+				templateAvaliacaoDTO, this.pageable));
+		Assert.assertEquals(pageDTOList, this.templatePerguntaFacadeImpl.findAllComCheckedPerguntasMarcadas(templateTopicoDTO,
+				templateAvaliacaoDTO, this.pageable));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testFindAllComCheckedPerguntasMarcadasFailedTemplateTopicoDTONull(){
+		TemplateAvaliacaoDTO templateAvaliacaoDTO = new TemplateAvaliacaoDTO();
+		templateAvaliacaoDTO.setId(2L);
+		this.templatePerguntaFacadeImpl.findAllComCheckedPerguntasMarcadas(null,
+				templateAvaliacaoDTO, this.pageable);
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testFindAllComCheckedPerguntasMarcadasFailedTemplateAvaliacaoDTONull(){
+		TemplateTopicoDTO templateTopicoDTO = new TemplateTopicoDTO();
+		templateTopicoDTO.setId(4L);
+		this.templatePerguntaFacadeImpl.findAllComCheckedPerguntasMarcadas(templateTopicoDTO,
+				null, this.pageable);
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testFindAllComCheckedPerguntasMarcadasFailedPageableNull(){
+		TemplateTopicoDTO templateTopicoDTO = new TemplateTopicoDTO();
+		templateTopicoDTO.setId(4L);
+
+		TemplateAvaliacaoDTO templateAvaliacaoDTO = new TemplateAvaliacaoDTO();
+		templateAvaliacaoDTO.setId(2L);
+
+		this.templatePerguntaFacadeImpl.findAllComCheckedPerguntasMarcadas(templateTopicoDTO,
+				templateAvaliacaoDTO, null);
+	}
+
 	/**
 	 * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
 	 */
