@@ -3,6 +3,7 @@ package com.infnet.avaliacao.dto.impl;
 import com.infnet.avaliacao.dto.DTO;
 import com.infnet.avaliacao.entity.Modulo;
 import com.infnet.avaliacao.entity.Turma;
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class ModuloDTO implements DTO<Modulo> {
      * @return ModuloDTO
      */
     public static ModuloDTO toDto(Modulo modulo){
+        ParameterExceptionUtil.validateObjectNull(modulo);
         ModuloDTO moduloDTO = new ModuloDTO();
         moduloDTO.setId(modulo.getId());
         moduloDTO.setDescricao(modulo.getDescricao());

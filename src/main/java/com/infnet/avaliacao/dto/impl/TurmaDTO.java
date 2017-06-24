@@ -2,6 +2,7 @@ package com.infnet.avaliacao.dto.impl;
 
 import com.infnet.avaliacao.dto.DTO;
 import com.infnet.avaliacao.entity.Turma;
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class TurmaDTO implements DTO<Turma> {
      * @return TurmaDTO
      */
     public static TurmaDTO toDto(Turma turma){
+        ParameterExceptionUtil.validateObjectNull(turma);
         TurmaDTO turmaDTO = new TurmaDTO();
         turmaDTO.setId(turma.getId());
         turmaDTO.setNumero(turma.getNumero());

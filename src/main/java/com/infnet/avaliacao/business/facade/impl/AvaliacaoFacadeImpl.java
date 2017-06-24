@@ -4,6 +4,7 @@ import com.infnet.avaliacao.business.facade.AvaliacaoFacade;
 import com.infnet.avaliacao.business.service.*;
 import com.infnet.avaliacao.dto.impl.*;
 import com.infnet.avaliacao.entity.Avaliacao;
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -36,6 +37,7 @@ public class AvaliacaoFacadeImpl implements AvaliacaoFacade {
      */
     @Override
     public void save(AvaliacaoDTO avaliacaoDTO) {
+        ParameterExceptionUtil.validateObjectNull(avaliacaoDTO);
         AvaliacaoDTO avaliacaoDTOBase =
                 AvaliacaoDTO.toDto(this.avaliacaoService.save(avaliacaoDTO));
         avaliacaoDTOBase.setRespostasSelecionadasComPerguntas(
