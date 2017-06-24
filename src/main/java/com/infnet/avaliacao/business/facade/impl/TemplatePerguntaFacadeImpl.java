@@ -68,6 +68,7 @@ public class TemplatePerguntaFacadeImpl implements TemplatePerguntaFacade {
      */
     @Override
     public List<TemplatePerguntaDTO> getListaTemplatesPerguntasPorId(List<Long> idsTemplateTopico) {
+        ParameterExceptionUtil.validateObjectNull(idsTemplateTopico);
         return TemplatePerguntaDTO.convertListEntityToListDto(
                 this.templatePerguntaService.getListaTemplatesPerguntasPorId(idsTemplateTopico));
     }

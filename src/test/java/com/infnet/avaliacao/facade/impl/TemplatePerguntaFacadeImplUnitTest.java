@@ -97,6 +97,30 @@ public class TemplatePerguntaFacadeImplUnitTest {
 		this.templatePerguntaFacadeImpl.findById(null);
 	}
 
+	@Test
+	public void testGetListaTemplatesPerguntasPorId(){
+		List<Long> idsTemplateTopico = new ArrayList<>();
+		idsTemplateTopico.add(3L);
+		idsTemplateTopico.add(5L);
+
+		List<TemplatePerguntaDTO> templatePerguntaDTOList = new ArrayList<>();
+		templatePerguntaDTOList.add(this.createTemplatePerguntaDTO(3L));
+		templatePerguntaDTOList.add(this.createTemplatePerguntaDTO(5L));
+
+		List<TemplatePergunta> templatePerguntaList = new ArrayList<>();
+		templatePerguntaList.add(this.createTemplatePergunta(3L));
+		templatePerguntaList.add(this.createTemplatePergunta(5L));
+
+		Mockito.when(this.templatePerguntaService.getListaTemplatesPerguntasPorId(idsTemplateTopico)).thenReturn(templatePerguntaList);
+		Assert.assertNotNull(this.templatePerguntaFacadeImpl.getListaTemplatesPerguntasPorId(idsTemplateTopico));
+		Assert.assertEquals(templatePerguntaDTOList, this.templatePerguntaFacadeImpl.getListaTemplatesPerguntasPorId(idsTemplateTopico));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testGetListaTemplatesPerguntasPorIdFailedIdsTemplateTopico(){
+		this.templatePerguntaFacadeImpl.getListaTemplatesPerguntasPorId(null);
+	}
+
 	/**
 	 * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
 	 */
