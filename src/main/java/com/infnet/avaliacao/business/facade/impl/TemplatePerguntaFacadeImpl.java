@@ -79,6 +79,9 @@ public class TemplatePerguntaFacadeImpl implements TemplatePerguntaFacade {
     @Override
     public List<TemplateAvaliacaoTopicoPerguntaDTO> getListaPerguntasAssociadasAoTopicoPorAvaliacao(
             List<TemplatePerguntaDTO> templatePerguntaDTOList, TemplateTopicoDTO templateTopicoDTO, TemplateAvaliacaoDTO templateAvaliacaoDTO) {
+        ParameterExceptionUtil.validateObjectNull(templatePerguntaDTOList);
+        ParameterExceptionUtil.validateObjectNull(templateTopicoDTO);
+        ParameterExceptionUtil.validateObjectNull(templateAvaliacaoDTO);
         return this.templateAvaliacaoTopicoPerguntaService.produceAssociativeClass(templatePerguntaDTOList, templateTopicoDTO, templateAvaliacaoDTO);
     }
 

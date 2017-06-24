@@ -3,8 +3,13 @@ package com.infnet.avaliacao.facade.impl;
 import com.infnet.avaliacao.business.facade.impl.TemplatePerguntaFacadeImpl;
 import com.infnet.avaliacao.business.service.TemplateAvaliacaoTopicoPerguntaService;
 import com.infnet.avaliacao.business.service.TemplatePerguntaService;
+import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
+import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoTopicoPerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
+import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
+import com.infnet.avaliacao.entity.TemplateAvaliacao;
 import com.infnet.avaliacao.entity.TemplatePergunta;
+import com.infnet.avaliacao.entity.TemplateTopico;
 import com.infnet.avaliacao.exception.NullParameterException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -121,9 +126,90 @@ public class TemplatePerguntaFacadeImplUnitTest {
 		this.templatePerguntaFacadeImpl.getListaTemplatesPerguntasPorId(null);
 	}
 
+	@Test
+	public void testGetListaPerguntasAssociadasAoTopicoPorAvaliacao(){
+		List<TemplateAvaliacaoTopicoPerguntaDTO> templateAvaliacaoTopicoPerguntaDTOList = new ArrayList<>();
+		templateAvaliacaoTopicoPerguntaDTOList.add(this.createTemplateAvaliacaoTopicoPerguntaDTO(
+				3L, 5L, 7L, 9L));
+		templateAvaliacaoTopicoPerguntaDTOList.add(this.createTemplateAvaliacaoTopicoPerguntaDTO(
+				5L, 7L, 11L, 1L));
+
+		List<TemplatePerguntaDTO> templatePerguntaDTOList = new ArrayList<>();
+		templatePerguntaDTOList.add(this.createTemplatePerguntaDTO(7L));
+		templatePerguntaDTOList.add(this.createTemplatePerguntaDTO(11L));
+
+		TemplateTopicoDTO templateTopicoDTO = new TemplateTopicoDTO();
+		templateTopicoDTO.setId(4L);
+
+		TemplateAvaliacaoDTO templateAvaliacaoDTO = new TemplateAvaliacaoDTO();
+		templateAvaliacaoDTO.setId(2L);
+
+		Mockito.when(this.templateAvaliacaoTopicoPerguntaService.produceAssociativeClass(templatePerguntaDTOList,
+				templateTopicoDTO, templateAvaliacaoDTO)).thenReturn(templateAvaliacaoTopicoPerguntaDTOList);
+
+		Assert.assertNotNull(this.templatePerguntaFacadeImpl.getListaPerguntasAssociadasAoTopicoPorAvaliacao(templatePerguntaDTOList,
+				templateTopicoDTO, templateAvaliacaoDTO));
+		Assert.assertEquals(templateAvaliacaoTopicoPerguntaDTOList, this.templatePerguntaFacadeImpl.getListaPerguntasAssociadasAoTopicoPorAvaliacao(templatePerguntaDTOList,
+				templateTopicoDTO, templateAvaliacaoDTO));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testGetListaPerguntasAssociadasAoTopicoPorAvaliacaoFailedTemplatePerguntaDTOListNull(){
+		TemplateTopicoDTO templateTopicoDTO = new TemplateTopicoDTO();
+		templateTopicoDTO.setId(4L);
+
+		TemplateAvaliacaoDTO templateAvaliacaoDTO = new TemplateAvaliacaoDTO();
+		templateAvaliacaoDTO.setId(2L);
+
+		this.templatePerguntaFacadeImpl.getListaPerguntasAssociadasAoTopicoPorAvaliacao(null,
+				templateTopicoDTO, templateAvaliacaoDTO);
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testGetListaPerguntasAssociadasAoTopicoPorAvaliacaoFailedTemplateTopicoDTONull(){
+		List<TemplatePerguntaDTO> templatePerguntaDTOList = new ArrayList<>();
+		templatePerguntaDTOList.add(this.createTemplatePerguntaDTO(7L));
+		templatePerguntaDTOList.add(this.createTemplatePerguntaDTO(11L));
+
+		TemplateAvaliacaoDTO templateAvaliacaoDTO = new TemplateAvaliacaoDTO();
+		templateAvaliacaoDTO.setId(2L);
+
+		this.templatePerguntaFacadeImpl.getListaPerguntasAssociadasAoTopicoPorAvaliacao(templatePerguntaDTOList,
+				null, templateAvaliacaoDTO);
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testGetListaPerguntasAssociadasAoTopicoPorAvaliacaoFailedTemplateAvaliacaoDTONull(){
+		List<TemplatePerguntaDTO> templatePerguntaDTOList = new ArrayList<>();
+		templatePerguntaDTOList.add(this.createTemplatePerguntaDTO(7L));
+		templatePerguntaDTOList.add(this.createTemplatePerguntaDTO(11L));
+
+		TemplateTopicoDTO templateTopicoDTO = new TemplateTopicoDTO();
+		templateTopicoDTO.setId(4L);
+
+		this.templatePerguntaFacadeImpl.getListaPerguntasAssociadasAoTopicoPorAvaliacao(templatePerguntaDTOList,
+				templateTopicoDTO, null);
+	}
+
 	/**
 	 * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
 	 */
+
+	private TemplateAvaliacaoTopicoPerguntaDTO createTemplateAvaliacaoTopicoPerguntaDTO(Long idTemplateAvaliacao, Long idTemplateTopico,
+																					 Long idTemplatePergunta, Long id){
+		TemplateAvaliacao templateAvaliacao = new TemplateAvaliacao();
+		templateAvaliacao.setId(idTemplateAvaliacao);
+
+		TemplateTopico templateTopico = new TemplateTopico();
+		templateTopico.setId(idTemplateTopico);
+
+		TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO = new TemplateAvaliacaoTopicoPerguntaDTO();
+		templateAvaliacaoTopicoPerguntaDTO.setId(id);
+		templateAvaliacaoTopicoPerguntaDTO.setTemplateAvaliacao(templateAvaliacao);
+		templateAvaliacaoTopicoPerguntaDTO.setTemplateTopico(templateTopico);
+		templateAvaliacaoTopicoPerguntaDTO.setTemplatePergunta(this.createTemplatePergunta(idTemplatePergunta));
+		return templateAvaliacaoTopicoPerguntaDTO;
+	}
 
 	private TemplatePerguntaDTO createTemplatePerguntaDTO(Long id){
 		TemplatePerguntaDTO templatePerguntaDTO = new TemplatePerguntaDTO();
