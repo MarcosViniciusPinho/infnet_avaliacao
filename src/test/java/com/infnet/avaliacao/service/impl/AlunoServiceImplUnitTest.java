@@ -5,6 +5,7 @@ import com.infnet.avaliacao.entity.Aluno;
 import com.infnet.avaliacao.exception.NotFoundException;
 import com.infnet.avaliacao.exception.NullParameterException;
 import com.infnet.avaliacao.repository.AlunoRepository;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -38,6 +39,19 @@ public class AlunoServiceImplUnitTest {
 	@Test(expected = NullParameterException.class)
 	public void testVerificarSeExisteCpfFailedCpfNull(){
 		this.alunoServiceImpl.verificarSeExisteCpf(null);
+	}
+
+	@Test
+	public void testFindByCpf(){
+		Aluno aluno = this.createAluno(7L);
+		Mockito.when(this.alunoRepository.findByCpf(5465456L)).thenReturn(aluno);
+		Assert.assertNotNull(this.alunoServiceImpl.findByCpf(5465456L));
+		Assert.assertEquals(aluno, this.alunoServiceImpl.findByCpf(5465456L));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testFindByCpfFailedCpfNull(){
+		this.alunoServiceImpl.findByCpf(null);
 	}
 
 	/**

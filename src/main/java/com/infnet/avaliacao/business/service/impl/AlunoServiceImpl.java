@@ -34,6 +34,7 @@ public class AlunoServiceImpl implements AlunoService {
      */
     @Override
     public Aluno findByCpf(Long cpf){
+        ParameterExceptionUtil.validateObjectNull(cpf);
         return this.alunoRepository.findByCpf(cpf);
     }
 }
