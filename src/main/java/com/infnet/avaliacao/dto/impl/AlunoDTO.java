@@ -81,4 +81,21 @@ public class AlunoDTO implements DTO<Aluno> {
         this.nome = nome;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
+        AlunoDTO other = (AlunoDTO) o;
+        return (this.id != null && other.id != null) && id.equals(other.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.id != null ? id.hashCode() : 0;
+    }
+
 }

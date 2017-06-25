@@ -59,18 +59,18 @@ public class Turma implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
+        if (this == o){
             return true;
         }
         if (o == null || getClass() != o.getClass()){
             return false;
         }
-        Turma turma = (Turma) o;
-        return id != null ? id.equals(turma.id) : turma.id == null;
+        Turma other = (Turma) o;
+        return (this.id != null && other.id != null) && id.equals(other.id);
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        return this.id != null ? id.hashCode() : 0;
     }
 }

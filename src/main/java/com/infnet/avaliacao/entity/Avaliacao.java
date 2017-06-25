@@ -78,12 +78,17 @@ public class Avaliacao implements Serializable {
         if (o == null || getClass() != o.getClass()){
             return false;
         }
-        Avaliacao avaliacao = (Avaliacao) o;
-        return id != null ? id.equals(avaliacao.id) : avaliacao.id == null;
+        Avaliacao other = (Avaliacao) o;
+        return ((this.templateAvaliacao != null && other.templateAvaliacao != null) && this.templateAvaliacao.equals(other.templateAvaliacao))
+                && ((this.turma != null && other.turma != null) && this.turma.equals(other.turma))
+                && ((this.aluno != null && other.aluno != null) && this.aluno.equals(other.aluno));
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        int result = this.templateAvaliacao != null ? templateAvaliacao.hashCode() : 0;
+        result += this.turma != null ? turma.hashCode() : 0;
+        result += this.aluno != null ? aluno.hashCode() : 0;
+        return result;
     }
 }

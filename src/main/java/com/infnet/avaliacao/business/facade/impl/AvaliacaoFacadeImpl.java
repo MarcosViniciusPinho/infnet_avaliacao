@@ -57,6 +57,8 @@ public class AvaliacaoFacadeImpl implements AvaliacaoFacade {
     }
 
     public AvaliacaoDTO popularAlunoAndTurmaParaAvaliacao(Long cpf, Long idTurma){
+        ParameterExceptionUtil.validateObjectNull(cpf);
+        ParameterExceptionUtil.validateObjectNull(idTurma);
         AvaliacaoDTO avaliacaoDTO = new AvaliacaoDTO();
         Long idTemplateAvaliacao = this.turmaService.findTemplateAvaliacaoTurmaById(idTurma);
         avaliacaoDTO.setAlunoDTO(

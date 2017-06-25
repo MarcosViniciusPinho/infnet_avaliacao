@@ -195,4 +195,27 @@ public class AvaliacaoDTO implements DTO<Avaliacao> {
     public void setRespostasSelecionadasComPerguntas(List<String> respostasSelecionadasComPerguntas) {
         this.respostasSelecionadasComPerguntas = respostasSelecionadasComPerguntas;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
+        AvaliacaoDTO other = (AvaliacaoDTO) o;
+        return ((this.templateAvaliacaoDTO != null && other.templateAvaliacaoDTO != null) && this.templateAvaliacaoDTO.equals(other.templateAvaliacaoDTO))
+                && ((this.turmaDTO != null && other.turmaDTO != null) && this.turmaDTO.equals(other.turmaDTO))
+                && ((this.alunoDTO != null && other.alunoDTO != null) && this.alunoDTO.equals(other.alunoDTO));
+    }
+
+    @Override
+    public int hashCode() {
+        int result = this.templateAvaliacaoDTO != null ? templateAvaliacaoDTO.hashCode() : 0;
+        result += this.turmaDTO != null ? turmaDTO.hashCode() : 0;
+        result += this.alunoDTO != null ? alunoDTO.hashCode() : 0;
+        return result;
+    }
+
 }

@@ -67,12 +67,12 @@ public class Aluno implements Serializable {
         if (o == null || getClass() != o.getClass()){
             return false;
         }
-        Aluno aluno = (Aluno) o;
-        return id != null ? !id.equals(aluno.id) : aluno.id != null;
+        Aluno other = (Aluno) o;
+        return (this.id != null && other.id != null) && id.equals(other.id);
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        return this.id != null ? id.hashCode() : 0;
     }
 }

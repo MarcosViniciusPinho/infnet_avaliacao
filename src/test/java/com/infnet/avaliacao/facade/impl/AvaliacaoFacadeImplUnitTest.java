@@ -1,10 +1,14 @@
 package com.infnet.avaliacao.facade.impl;
 
 import com.infnet.avaliacao.business.facade.impl.AvaliacaoFacadeImpl;
-import com.infnet.avaliacao.business.service.*;
+import com.infnet.avaliacao.business.service.AlunoService;
+import com.infnet.avaliacao.business.service.AvaliacaoService;
+import com.infnet.avaliacao.business.service.TemplateAvaliacaoService;
+import com.infnet.avaliacao.business.service.TurmaService;
 import com.infnet.avaliacao.dto.impl.AvaliacaoDTO;
 import com.infnet.avaliacao.entity.*;
 import com.infnet.avaliacao.exception.NullParameterException;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -35,9 +39,6 @@ public class AvaliacaoFacadeImplUnitTest {
 	@Mock
 	private TemplateAvaliacaoService templateAvaliacaoService;
 
-	@Mock
-	private RespostaService respostaService;
-
 	@Test
 	public void testSave(){
 		Avaliacao avaliacao = this.createAvaliacao(3L);
@@ -50,6 +51,29 @@ public class AvaliacaoFacadeImplUnitTest {
 	@Test(expected = NullParameterException.class)
 	public void testSaveFailedDtoNull(){
 		this.avaliacaoFacadeImpl.save(null);
+	}
+
+	@Test
+	public void testPopularAlunoAndTurmaParaAvaliacao(){
+		Avaliacao avaliacao = this.createAvaliacao(null);
+		AvaliacaoDTO avaliacaoDTO = AvaliacaoDTO.toDto(avaliacao);
+
+		Mockito.when(this.turmaService.findTemplateAvaliacaoTurmaById(4L)).thenReturn(3L);
+		Mockito.when(this.alunoService.findByCpf(5464894654L)).thenReturn(avaliacao.getAluno());
+		Mockito.when(this.turmaService.findById(4L)).thenReturn(avaliacao.getTurma());
+		Mockito.when(this.templateAvaliacaoService.findById(3L)).thenReturn(avaliacao.getTemplateAvaliacao());
+		Assert.assertNotNull(this.avaliacaoFacadeImpl.popularAlunoAndTurmaParaAvaliacao(5464894654L, 4L));
+		Assert.assertEquals(avaliacaoDTO, this.avaliacaoFacadeImpl.popularAlunoAndTurmaParaAvaliacao(5464894654L, 4L));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPopularAlunoAndTurmaParaAvaliacaoFailedCpfNull(){
+		this.avaliacaoFacadeImpl.popularAlunoAndTurmaParaAvaliacao(null, 4L);
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPopularAlunoAndTurmaParaAvaliacaoFailedIdTurmaNull(){
+		this.avaliacaoFacadeImpl.popularAlunoAndTurmaParaAvaliacao(5464894654L, null);
 	}
 
 	/**
@@ -79,6 +103,7 @@ public class AvaliacaoFacadeImplUnitTest {
 
 		Aluno aluno = new Aluno();
 		aluno.setId(7L);
+		aluno.setCpf(5464894654L);
 
 		Avaliacao avaliacao = new Avaliacao();
 		avaliacao.setId(id);
