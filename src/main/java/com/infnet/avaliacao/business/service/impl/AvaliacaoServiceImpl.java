@@ -35,6 +35,8 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
      */
     @Override
     public void verificarSeAlunoJaRespondeuAvaliacao(Turma turma, Aluno aluno){
+        ParameterExceptionUtil.validateObjectNull(turma);
+        ParameterExceptionUtil.validateObjectNull(aluno);
         if(this.avaliacaoRepository.findByTurmaAndAluno(turma, aluno) != null){
             throw new UniqueException("avaliacao.erro.aluno.ja.respondeu");
         }

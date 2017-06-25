@@ -3,6 +3,7 @@ package com.infnet.avaliacao.business.service.impl;
 import com.infnet.avaliacao.dto.impl.AvaliacaoDTO;
 import com.infnet.avaliacao.entity.*;
 import com.infnet.avaliacao.exception.NullParameterException;
+import com.infnet.avaliacao.exception.UniqueException;
 import com.infnet.avaliacao.repository.AvaliacaoRepository;
 import org.junit.Assert;
 import org.junit.Test;
@@ -35,6 +36,31 @@ public class AvaliacaoServiceImplUnitTest {
 	@Test(expected = NullParameterException.class)
 	public void testSaveFailedAvaliacaoDTONull(){
 		this.avaliacaoServiceImpl.save(null);
+	}
+
+	@Test(expected = UniqueException.class)
+	public void testVerificarSeAlunoJaRespondeuAvaliacao(){
+		Avaliacao avaliacao = this.createAvaliacao(4L);
+		Mockito.when(this.avaliacaoRepository.findByTurmaAndAluno(avaliacao.getTurma(), avaliacao.getAluno())).thenReturn(avaliacao);
+		this.avaliacaoServiceImpl.verificarSeAlunoJaRespondeuAvaliacao(avaliacao.getTurma(), avaliacao.getAluno());
+	}
+
+	@Test
+	public void testVerificarSeAlunoJaRespondeuAvaliacaoAlunoNaoRespondeuAvaliacao(){
+		Avaliacao avaliacao = this.createAvaliacao(4L);
+		this.avaliacaoServiceImpl.verificarSeAlunoJaRespondeuAvaliacao(avaliacao.getTurma(), avaliacao.getAluno());
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testVerificarSeAlunoJaRespondeuAvaliacaoFailedTurmaNull(){
+		Avaliacao avaliacao = this.createAvaliacao(4L);
+		this.avaliacaoServiceImpl.verificarSeAlunoJaRespondeuAvaliacao(null, avaliacao.getAluno());
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testVerificarSeAlunoJaRespondeuAvaliacaoFailedAlunoNull(){
+		Avaliacao avaliacao = this.createAvaliacao(4L);
+		this.avaliacaoServiceImpl.verificarSeAlunoJaRespondeuAvaliacao(avaliacao.getTurma(), null);
 	}
 
 	/**
