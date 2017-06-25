@@ -1,11 +1,9 @@
 package com.infnet.avaliacao.facade.impl;
 
 import com.infnet.avaliacao.business.facade.impl.AvaliacaoFacadeImpl;
-import com.infnet.avaliacao.business.service.AlunoService;
-import com.infnet.avaliacao.business.service.AvaliacaoService;
-import com.infnet.avaliacao.business.service.TemplateAvaliacaoService;
-import com.infnet.avaliacao.business.service.TurmaService;
+import com.infnet.avaliacao.business.service.*;
 import com.infnet.avaliacao.dto.impl.AvaliacaoDTO;
+import com.infnet.avaliacao.dto.impl.RespostaDTO;
 import com.infnet.avaliacao.entity.*;
 import com.infnet.avaliacao.exception.NullParameterException;
 import org.junit.Assert;
@@ -39,12 +37,17 @@ public class AvaliacaoFacadeImplUnitTest {
 	@Mock
 	private TemplateAvaliacaoService templateAvaliacaoService;
 
+	@Mock
+	private RespostaService respostaService;
+
 	@Test
 	public void testSave(){
 		Avaliacao avaliacao = this.createAvaliacao(3L);
 		AvaliacaoDTO avaliacaoDTO = this.createAvaliacaoDTO(3L);
 
 		Mockito.when(this.avaliacaoService.save(avaliacaoDTO)).thenReturn(avaliacao);
+		Mockito.when(this.respostaService.popularResposta("Opção 1", 4L, avaliacao)).thenReturn(this.createRespostaDTO(3L));
+		Mockito.when(this.respostaService.popularResposta("Opção 2", 3L, avaliacao)).thenReturn(this.createRespostaDTO(5L));
 		this.avaliacaoFacadeImpl.save(avaliacaoDTO);
 	}
 
@@ -80,12 +83,17 @@ public class AvaliacaoFacadeImplUnitTest {
 	 * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
 	 */
 
+	private RespostaDTO createRespostaDTO(Long id){
+		RespostaDTO respostaDTO = new RespostaDTO();
+		respostaDTO.setId(id);
+		return respostaDTO;
+	}
+
 	private AvaliacaoDTO createAvaliacaoDTO(Long id){
 		List<String> respostasSelecionadasComPerguntas = new ArrayList<>();
 		respostasSelecionadasComPerguntas.add("Opção 1-4");
 		respostasSelecionadasComPerguntas.add("Opção 2-3");
-		AvaliacaoDTO avaliacaoDTO = new AvaliacaoDTO();
-		avaliacaoDTO.setId(id);
+		AvaliacaoDTO avaliacaoDTO = AvaliacaoDTO.toDto(this.createAvaliacao(id));
 		avaliacaoDTO.setRespostasSelecionadasComPerguntas(respostasSelecionadasComPerguntas);
 		return avaliacaoDTO;
 	}
