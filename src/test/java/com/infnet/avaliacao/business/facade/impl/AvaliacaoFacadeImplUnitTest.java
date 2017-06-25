@@ -1,6 +1,5 @@
-package com.infnet.avaliacao.facade.impl;
+package com.infnet.avaliacao.business.facade.impl;
 
-import com.infnet.avaliacao.business.facade.impl.AvaliacaoFacadeImpl;
 import com.infnet.avaliacao.business.service.*;
 import com.infnet.avaliacao.dto.impl.AvaliacaoDTO;
 import com.infnet.avaliacao.dto.impl.RespostaDTO;

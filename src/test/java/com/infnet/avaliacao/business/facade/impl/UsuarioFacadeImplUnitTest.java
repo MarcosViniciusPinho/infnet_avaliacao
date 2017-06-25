@@ -1,6 +1,5 @@
-package com.infnet.avaliacao.facade.impl;
+package com.infnet.avaliacao.business.facade.impl;
 
-import com.infnet.avaliacao.business.facade.impl.UsuarioFacadeImpl;
 import com.infnet.avaliacao.business.service.PerfilService;
 import com.infnet.avaliacao.business.service.UsuarioService;
 import com.infnet.avaliacao.dto.impl.UsuarioDTO;

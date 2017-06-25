@@ -6,6 +6,7 @@ import com.infnet.avaliacao.entity.Aluno;
 import com.infnet.avaliacao.entity.Avaliacao;
 import com.infnet.avaliacao.entity.Turma;
 import com.infnet.avaliacao.exception.UniqueException;
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import com.infnet.avaliacao.repository.AvaliacaoRepository;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
      */
     @Override
     public Avaliacao save(AvaliacaoDTO avaliacaoDTO) {
+        ParameterExceptionUtil.validateObjectNull(avaliacaoDTO);
         return this.avaliacaoRepository.save(avaliacaoDTO.toEntity());
     }
 

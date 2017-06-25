@@ -1,6 +1,5 @@
-package com.infnet.avaliacao.facade.impl;
+package com.infnet.avaliacao.business.facade.impl;
 
-import com.infnet.avaliacao.business.facade.impl.TemplateAvaliacaoFacadeImpl;
 import com.infnet.avaliacao.business.service.TemplateAvaliacaoService;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoDTO;
 import com.infnet.avaliacao.entity.TemplateAvaliacao;

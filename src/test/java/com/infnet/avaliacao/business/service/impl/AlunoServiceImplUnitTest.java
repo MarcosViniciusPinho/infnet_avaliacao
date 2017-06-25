@@ -1,6 +1,5 @@
-package com.infnet.avaliacao.service.impl;
+package com.infnet.avaliacao.business.service.impl;
 
-import com.infnet.avaliacao.business.service.impl.AlunoServiceImpl;
 import com.infnet.avaliacao.entity.Aluno;
 import com.infnet.avaliacao.exception.NotFoundException;
 import com.infnet.avaliacao.exception.NullParameterException;
