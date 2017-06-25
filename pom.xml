@@ -167,6 +167,8 @@
 						<exclude>**/TemplateController.class</exclude>
 						<exclude>**/EmailController.class</exclude>
 						<exclude>**/ServletInitializer.class</exclude>
+						<exclude>**/EmailServiceImpl.class</exclude>
+						<exclude>**/CrudServiceImpl.class</exclude>
 					</excludes>
 				</configuration>
 				<executions>
@@ -189,6 +191,8 @@
 						<param>com.infnet.avaliacao.controller.TemplateController</param>
 						<param>com.infnet.avaliacao.controller.EmailController</param>
 						<param>com.infnet.avaliacao.ServletInitializer</param>
+						<param>com.infnet.avaliacao.business.service.impl.EmailServiceImpl</param>
+						<param>com.infnet.avaliacao.business.service.impl.CrudServiceImpl</param>
 					</excludedClasses>
 				</configuration>
 			</plugin>
