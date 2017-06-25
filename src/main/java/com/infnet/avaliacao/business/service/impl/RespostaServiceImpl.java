@@ -4,6 +4,7 @@ import com.infnet.avaliacao.business.service.RespostaService;
 import com.infnet.avaliacao.dto.impl.RespostaDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import com.infnet.avaliacao.entity.Avaliacao;
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import com.infnet.avaliacao.repository.RespostaRepository;
 import com.infnet.avaliacao.repository.TemplatePerguntaRepository;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ public class RespostaServiceImpl implements RespostaService {
      */
     @Override
     public void save(List<RespostaDTO> respostaDTOList) {
+        ParameterExceptionUtil.validateObjectNull(respostaDTOList);
         this.respostaRepository.save(
                RespostaDTO.convertListDtoToListEntity(respostaDTOList));
     }
