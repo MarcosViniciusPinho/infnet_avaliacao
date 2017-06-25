@@ -1,6 +1,5 @@
 package com.infnet.avaliacao.business.facade.impl;
 
-import com.infnet.avaliacao.business.service.TemplateAvaliacaoTopicoPerguntaService;
 import com.infnet.avaliacao.business.service.TemplateTopicoService;
 import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoTopicoPerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
@@ -32,9 +31,6 @@ public class TemplateTopicoFacadeImplUnitTest {
 
 	@Mock
 	private TemplateTopicoService templateTopicoService;
-
-	@Mock
-	private TemplateAvaliacaoTopicoPerguntaService templateAvaliacaoTopicoPerguntaService;
 
 	@Mock
 	private Pageable pageable;
