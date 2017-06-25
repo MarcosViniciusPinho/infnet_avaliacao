@@ -87,6 +87,8 @@ public class AvaliacaoFacadeImpl implements AvaliacaoFacade {
      */
     @Override
     public void verificarSeAlunoJaRespondeuAvaliacao(TurmaDTO turmaDTO, AlunoDTO alunoDTO) {
+        ParameterExceptionUtil.validateObjectNull(turmaDTO);
+        ParameterExceptionUtil.validateObjectNull(alunoDTO);
         this.avaliacaoService.verificarSeAlunoJaRespondeuAvaliacao(turmaDTO.toEntity(), alunoDTO.toEntity());
     }
 }

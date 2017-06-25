@@ -94,6 +94,24 @@ public class AvaliacaoFacadeImplUnitTest {
 		this.avaliacaoFacadeImpl.verificarParametrosEnviadosAoCarregarPagina(8798798L, null);
 	}
 
+	@Test
+	public void testVerificarSeAlunoJaRespondeuAvaliacao(){
+		AvaliacaoDTO avaliacaoDTO = this.createAvaliacaoDTO(1L);
+		this.avaliacaoFacadeImpl.verificarSeAlunoJaRespondeuAvaliacao(avaliacaoDTO.getTurmaDTO(), avaliacaoDTO.getAlunoDTO());
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testVerificarSeAlunoJaRespondeuAvaliacaoFailedTurmaDTONull(){
+		AvaliacaoDTO avaliacaoDTO = this.createAvaliacaoDTO(1L);
+		this.avaliacaoFacadeImpl.verificarSeAlunoJaRespondeuAvaliacao(null, avaliacaoDTO.getAlunoDTO());
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testVerificarSeAlunoJaRespondeuAvaliacaoFailedAlunoDTONull(){
+		AvaliacaoDTO avaliacaoDTO = this.createAvaliacaoDTO(1L);
+		this.avaliacaoFacadeImpl.verificarSeAlunoJaRespondeuAvaliacao(avaliacaoDTO.getTurmaDTO(), null);
+	}
+
 	/**
 	 * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
 	 */
