@@ -76,6 +76,8 @@ public class AvaliacaoFacadeImpl implements AvaliacaoFacade {
      */
     @Override
     public void verificarParametrosEnviadosAoCarregarPagina(Long cpf, Long id){
+        ParameterExceptionUtil.validateObjectNull(cpf);
+        ParameterExceptionUtil.validateObjectNull(id);
         this.turmaService.verificarSeExisteTurma(id);
         this.alunoService.verificarSeExisteCpf(cpf);
     }

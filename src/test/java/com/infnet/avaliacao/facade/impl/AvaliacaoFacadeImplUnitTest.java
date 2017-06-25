@@ -79,6 +79,21 @@ public class AvaliacaoFacadeImplUnitTest {
 		this.avaliacaoFacadeImpl.popularAlunoAndTurmaParaAvaliacao(5464894654L, null);
 	}
 
+	@Test
+	public void testVerificarParametrosEnviadosAoCarregarPagina(){
+		this.avaliacaoFacadeImpl.verificarParametrosEnviadosAoCarregarPagina(8798798L, 6L);
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testVerificarParametrosEnviadosAoCarregarPaginaFailedCpfNull(){
+		this.avaliacaoFacadeImpl.verificarParametrosEnviadosAoCarregarPagina(null, 6L);
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testVerificarParametrosEnviadosAoCarregarPaginaFailedIdNull(){
+		this.avaliacaoFacadeImpl.verificarParametrosEnviadosAoCarregarPagina(8798798L, null);
+	}
+
 	/**
 	 * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
 	 */
