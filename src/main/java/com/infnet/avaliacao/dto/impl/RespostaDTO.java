@@ -8,6 +8,7 @@ import org.apache.commons.collections.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class RespostaDTO implements DTO<Resposta> {
 
@@ -116,5 +117,22 @@ public class RespostaDTO implements DTO<Resposta> {
 
     public void setTemplatePerguntaDTO(TemplatePerguntaDTO templatePerguntaDTO) {
         this.templatePerguntaDTO = templatePerguntaDTO;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
+        RespostaDTO other = (RespostaDTO) o;
+        return Objects.equals(id, other.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.id != null ? id.hashCode() : 0;
     }
 }

@@ -39,6 +39,9 @@ public class RespostaServiceImpl implements RespostaService {
      */
     @Override
     public RespostaDTO popularResposta(String resposta, Long idTemplatePergunta, Avaliacao avaliacao){
+        ParameterExceptionUtil.validateObjectNull(resposta);
+        ParameterExceptionUtil.validateObjectNull(idTemplatePergunta);
+        ParameterExceptionUtil.validateObjectNull(avaliacao);
         TemplatePerguntaDTO templatePerguntaDTO = TemplatePerguntaDTO.toDto(
                 this.templatePerguntaRepository.getOne(idTemplatePergunta));
         RespostaDTO respostaDTO = new RespostaDTO();

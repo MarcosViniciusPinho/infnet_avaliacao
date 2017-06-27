@@ -7,10 +7,12 @@ import com.infnet.avaliacao.entity.TemplatePergunta;
 import com.infnet.avaliacao.exception.NullParameterException;
 import com.infnet.avaliacao.repository.RespostaRepository;
 import com.infnet.avaliacao.repository.TemplatePerguntaRepository;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -43,6 +45,33 @@ public class RespostaServiceImplUnitTest {
 		this.respostaServiceImpl.save(null);
 	}
 
+	@Test
+	public void testPopularResposta(){
+		Resposta resposta = this.createResposta(null);
+		RespostaDTO respostaDTO = this.createRespostaDTO(null);
+		Mockito.when(this.templatePerguntaRepository.getOne(4L)).thenReturn(resposta.getTemplatePergunta());
+		Assert.assertNotNull(this.respostaServiceImpl.popularResposta("A", resposta.getTemplatePergunta().getId(), resposta.getAvaliacao()));
+		Assert.assertEquals(respostaDTO, this.respostaServiceImpl.popularResposta("A", resposta.getTemplatePergunta().getId(), resposta.getAvaliacao()));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPopularRespostaFailedRespostaNull(){
+		Resposta resposta = this.createResposta(8L);
+		this.respostaServiceImpl.popularResposta(null, resposta.getTemplatePergunta().getId(), resposta.getAvaliacao());
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPopularRespostaFailedIdTemplatePerguntaNull(){
+		Resposta resposta = this.createResposta(8L);
+		this.respostaServiceImpl.popularResposta("A", null, resposta.getAvaliacao());
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testPopularRespostaFailedAvaliacaoNull(){
+		Resposta resposta = this.createResposta(4L);
+		this.respostaServiceImpl.popularResposta("A", resposta.getTemplatePergunta().getId(), null);
+	}
+
 	/**
 	 * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
 	 */
@@ -56,10 +85,11 @@ public class RespostaServiceImplUnitTest {
 		avaliacao.setId(5L);
 
 		TemplatePergunta templatePergunta = new TemplatePergunta();
-		templatePergunta.setId(3L);
+		templatePergunta.setId(4L);
 
 		Resposta resposta = new Resposta();
 		resposta.setId(id);
+		resposta.setValor("A");
 		resposta.setAvaliacao(avaliacao);
 		resposta.setTemplatePergunta(templatePergunta);
 		return resposta;
