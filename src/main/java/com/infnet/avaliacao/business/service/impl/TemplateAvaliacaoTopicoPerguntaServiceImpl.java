@@ -6,6 +6,7 @@ import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoTopicoPerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
 import com.infnet.avaliacao.entity.TemplateAvaliacaoTopicoPergunta;
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import com.infnet.avaliacao.repository.TemplateAvaliacaoTopicoPerguntaRepository;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ public class TemplateAvaliacaoTopicoPerguntaServiceImpl implements TemplateAvali
      */
     @Override
     public void save(List<TemplateAvaliacaoTopicoPerguntaDTO> templateAvaliacaoTopicoPerguntaDTOList) {
+        ParameterExceptionUtil.validateObjectNull(templateAvaliacaoTopicoPerguntaDTOList);
         this.templateAvaliacaoTopicoPerguntaRepository.save(TemplateAvaliacaoTopicoPerguntaDTO.convertListDtoToListEntity(
                 templateAvaliacaoTopicoPerguntaDTOList));
     }
