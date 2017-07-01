@@ -38,6 +38,20 @@ public class TurmaServiceImplUnitTest {
 		this.turmaServiceImpl.findById(null);
 	}
 
+	@Test
+	public void testFindTemplateAvaliacaoTurmaById(){
+		Long idTurma = 4L;
+		Long idTurmaEsperado = 7L;
+		Mockito.when(this.turmaRepository.findByIdTurmaOnTemplateAvaliacaoTurma(idTurma)).thenReturn(idTurmaEsperado);
+		Assert.assertNotNull(this.turmaServiceImpl.findTemplateAvaliacaoTurmaById(idTurma));
+		Assert.assertEquals(idTurmaEsperado, this.turmaServiceImpl.findTemplateAvaliacaoTurmaById(idTurma));
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testFindTemplateAvaliacaoTurmaByIdFailedIdTurmaNull(){
+		this.turmaServiceImpl.findTemplateAvaliacaoTurmaById(null);
+	}
+
 	/**
 	 * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
 	 */

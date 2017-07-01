@@ -32,6 +32,7 @@ public class TurmaServiceImpl implements TurmaService {
      */
     @Override
     public Long findTemplateAvaliacaoTurmaById(Long idTurma){
+        ParameterExceptionUtil.validateObjectNull(idTurma);
         return this.turmaRepository.findByIdTurmaOnTemplateAvaliacaoTurma(idTurma);
     }
 
