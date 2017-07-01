@@ -43,6 +43,9 @@ public class TemplatePerguntaServiceImpl extends CrudServiceImpl<TemplatePergunt
     public Page<TemplatePerguntaDTO> findAllComCheckedPerguntasMarcadas(TemplateTopicoDTO templateTopicoDTO,
                                                                         TemplateAvaliacaoDTO templateAvaliacaoDTO,
                                                                         Page<TemplatePerguntaDTO> templatePerguntaDTOList) {
+        ParameterExceptionUtil.validateObjectNull(templateTopicoDTO);
+        ParameterExceptionUtil.validateObjectNull(templateAvaliacaoDTO);
+        ParameterExceptionUtil.validateObjectNull(templatePerguntaDTOList);
         for(TemplatePerguntaDTO templatePerguntaDTO : templatePerguntaDTOList){
             TemplateAvaliacaoTopicoPergunta templateAvaliacaoTopicoPergunta = this.templateAvaliacaoTopicoPerguntaRepository.
                     findByTemplateAvaliacaoAndTemplateTopicoAndTemplatePerguntaEquals(templateAvaliacaoDTO.toEntity(),
