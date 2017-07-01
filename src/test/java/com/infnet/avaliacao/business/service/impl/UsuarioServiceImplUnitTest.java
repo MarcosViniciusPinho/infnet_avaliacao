@@ -45,6 +45,16 @@ public class UsuarioServiceImplUnitTest {
 		this.usuarioServiceImpl.validate(null);
 	}
 
+	@Test
+	public void testDelete(){
+		this.usuarioServiceImpl.delete(4L);
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testDeleteFailedIdNull(){
+		this.usuarioServiceImpl.delete(null);
+	}
+
 
 	/**
 	 * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
