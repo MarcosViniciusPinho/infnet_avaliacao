@@ -1,6 +1,9 @@
 package com.infnet.avaliacao.business.service.impl;
 
+import com.infnet.avaliacao.dto.impl.TemplateAvaliacaoTopicoPerguntaDTO;
+import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
 import com.infnet.avaliacao.entity.TemplateTopico;
+import com.infnet.avaliacao.exception.CampoObrigatorioException;
 import com.infnet.avaliacao.exception.NullParameterException;
 import com.infnet.avaliacao.repository.TemplateTopicoRepository;
 import org.junit.Assert;
@@ -47,15 +50,43 @@ public class TemplateTopicoServiceImplUnitTest {
 		this.templateTopicoServiceImpl.getListaTemplatesTopicosPorId(null);
 	}
 
+	@Test
+	public void testValidate(){
+		List<TemplateAvaliacaoTopicoPerguntaDTO> templateTopicoDTOList = new ArrayList<>();
+		templateTopicoDTOList.add(this.createTemplateAvaliacaoTopicoPerguntaDTO(4L));
+		templateTopicoDTOList.add(this.createTemplateAvaliacaoTopicoPerguntaDTO(5L));
+		templateTopicoDTOList.add(this.createTemplateAvaliacaoTopicoPerguntaDTO(9L));
+
+		TemplateTopicoDTO templateTopicoDTO = new TemplateTopicoDTO();
+		templateTopicoDTO.setTemplateAvaliacaoTopicoPerguntaDTOList(templateTopicoDTOList);
+		this.templateTopicoServiceImpl.validate(templateTopicoDTO);
+	}
+
+	@Test(expected = CampoObrigatorioException.class)
+	public void testValidateFailedCamposObrigatorios(){
+		TemplateTopicoDTO templateTopicoDTO = new TemplateTopicoDTO();
+		this.templateTopicoServiceImpl.validate(templateTopicoDTO);
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testValidateFailedDtoNull(){
+		this.templateTopicoServiceImpl.validate(null);
+	}
+
 	/**
 	 * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
 	 */
+
+	private TemplateAvaliacaoTopicoPerguntaDTO createTemplateAvaliacaoTopicoPerguntaDTO(Long id){
+		TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO = new TemplateAvaliacaoTopicoPerguntaDTO();
+		templateAvaliacaoTopicoPerguntaDTO.setId(id);
+		return templateAvaliacaoTopicoPerguntaDTO;
+	}
 
 	private TemplateTopico createTemplateTopico(Long id){
 		TemplateTopico templateTopico = new TemplateTopico();
 		templateTopico.setId(id);
 		return templateTopico;
 	}
-
 
 }

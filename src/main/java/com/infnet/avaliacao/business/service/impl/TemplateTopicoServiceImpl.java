@@ -32,6 +32,7 @@ public class TemplateTopicoServiceImpl extends CrudServiceImpl<TemplateTopicoDTO
      */
     @Override
     public void validate(TemplateTopicoDTO dto) {
+        ParameterExceptionUtil.validateObjectNull(dto);
         if(CollectionUtils.isEmpty(dto.getTemplateAvaliacaoTopicoPerguntaDTOList())){
             throw new CampoObrigatorioException("template.avaliacao.erro.pergunta.obrigatorio");
         }
