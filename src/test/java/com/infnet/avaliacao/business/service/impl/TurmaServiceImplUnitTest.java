@@ -1,6 +1,7 @@
 package com.infnet.avaliacao.business.service.impl;
 
 import com.infnet.avaliacao.entity.Turma;
+import com.infnet.avaliacao.exception.NotFoundException;
 import com.infnet.avaliacao.exception.NullParameterException;
 import com.infnet.avaliacao.repository.TurmaRepository;
 import org.junit.Assert;
@@ -41,15 +42,33 @@ public class TurmaServiceImplUnitTest {
 	@Test
 	public void testFindTemplateAvaliacaoTurmaById(){
 		Long idTurma = 4L;
-		Long idTurmaEsperado = 7L;
-		Mockito.when(this.turmaRepository.findByIdTurmaOnTemplateAvaliacaoTurma(idTurma)).thenReturn(idTurmaEsperado);
+		Mockito.when(this.turmaRepository.findByIdTurmaOnTemplateAvaliacaoTurma(idTurma)).thenReturn(idTurma);
 		Assert.assertNotNull(this.turmaServiceImpl.findTemplateAvaliacaoTurmaById(idTurma));
-		Assert.assertEquals(idTurmaEsperado, this.turmaServiceImpl.findTemplateAvaliacaoTurmaById(idTurma));
+		Assert.assertEquals(idTurma, this.turmaServiceImpl.findTemplateAvaliacaoTurmaById(idTurma));
 	}
 
 	@Test(expected = NullParameterException.class)
 	public void testFindTemplateAvaliacaoTurmaByIdFailedIdTurmaNull(){
 		this.turmaServiceImpl.findTemplateAvaliacaoTurmaById(null);
+	}
+
+	@Test
+	public void testVerificarSeExisteTurma(){
+		Long idTurma = 4L;
+		Turma turma = this.createTurma(idTurma);
+		Mockito.when(this.turmaRepository.findById(idTurma)).thenReturn(turma);
+		this.turmaServiceImpl.verificarSeExisteTurma(idTurma);
+	}
+
+	@Test(expected = NotFoundException.class)
+	public void testVerificarSeExisteTurmaFailedTurmaNaoEncontrada(){
+		Long idTurma = 4L;
+		this.turmaServiceImpl.verificarSeExisteTurma(idTurma);
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testVerificarSeExisteTurmaFailedIdNull(){
+		this.turmaServiceImpl.verificarSeExisteTurma(null);
 	}
 
 	/**

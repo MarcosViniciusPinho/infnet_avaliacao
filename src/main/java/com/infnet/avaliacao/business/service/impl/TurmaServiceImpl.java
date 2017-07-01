@@ -41,6 +41,7 @@ public class TurmaServiceImpl implements TurmaService {
      */
     @Override
     public void verificarSeExisteTurma(Long id) {
+        ParameterExceptionUtil.validateObjectNull(id);
         if(this.findById(id) == null){
             throw new NotFoundException("avaliacao.erro.turma.nao.encontrado");
         }
