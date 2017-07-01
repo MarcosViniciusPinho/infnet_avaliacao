@@ -27,6 +27,7 @@ public class UsuarioServiceImpl extends CrudServiceImpl<UsuarioDTO, Usuario> imp
      */
     @Override
     public void validate(UsuarioDTO usuarioDTO) {
+        ParameterExceptionUtil.validateObjectNull(usuarioDTO);
         this.validarLoginUnico(usuarioDTO);
     }
 
