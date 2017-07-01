@@ -169,6 +169,7 @@
 						<exclude>**/ServletInitializer.class</exclude>
 						<exclude>**/EmailServiceImpl.class</exclude>
 						<exclude>**/CrudServiceImpl.class</exclude>
+						<exclude>**/PageRepositoryImpl.class</exclude>
 					</excludes>
 				</configuration>
 				<executions>
@@ -193,6 +194,7 @@
 						<param>com.infnet.avaliacao.ServletInitializer</param>
 						<param>com.infnet.avaliacao.business.service.impl.EmailServiceImpl</param>
 						<param>com.infnet.avaliacao.business.service.impl.CrudServiceImpl</param>
+						<param>com.infnet.avaliacao.repository.impl.PageRepositoryImpl</param>
 					</excludedClasses>
 				</configuration>
 			</plugin>
