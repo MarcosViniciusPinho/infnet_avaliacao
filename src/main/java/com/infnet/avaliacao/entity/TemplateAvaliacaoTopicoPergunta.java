@@ -2,6 +2,7 @@ package com.infnet.avaliacao.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Foi necessário criar esta classe para poder mapear esta entidade associativa pois para a mesma existem 3 atributos, portanto o hibernate
@@ -73,5 +74,22 @@ public class TemplateAvaliacaoTopicoPergunta implements Serializable {
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
+        TemplateAvaliacaoTopicoPergunta other = (TemplateAvaliacaoTopicoPergunta) o;
+        return Objects.equals(id, other.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.id != null ? id.hashCode() : 0;
     }
 }

@@ -63,6 +63,9 @@ public class TemplateAvaliacaoTopicoPerguntaServiceImpl implements TemplateAvali
     public List<TemplateAvaliacaoTopicoPerguntaDTO> produceAssociativeClass(List<TemplatePerguntaDTO> templatePerguntaDTOList,
                                                                                    TemplateTopicoDTO templateTopicoDTO,
                                                                                    TemplateAvaliacaoDTO templateAvaliacaoDTO){
+        ParameterExceptionUtil.validateObjectNull(templatePerguntaDTOList);
+        ParameterExceptionUtil.validateObjectNull(templateTopicoDTO);
+        ParameterExceptionUtil.validateObjectNull(templateAvaliacaoDTO);
         this.inativarTodasMarcacoesDePerguntaDeUmaAvaliacaoPorTopico(templateAvaliacaoDTO, templateTopicoDTO);
         List<TemplateAvaliacaoTopicoPerguntaDTO> templateAvaliacaoTopicoPerguntaDTOList = new ArrayList<>();
         for(TemplatePerguntaDTO templatePerguntaDTO : templatePerguntaDTOList){
