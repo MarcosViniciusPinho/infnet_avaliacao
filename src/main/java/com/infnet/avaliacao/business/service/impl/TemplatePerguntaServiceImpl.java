@@ -6,6 +6,7 @@ import com.infnet.avaliacao.dto.impl.TemplatePerguntaDTO;
 import com.infnet.avaliacao.dto.impl.TemplateTopicoDTO;
 import com.infnet.avaliacao.entity.TemplateAvaliacaoTopicoPergunta;
 import com.infnet.avaliacao.entity.TemplatePergunta;
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import com.infnet.avaliacao.repository.TemplateAvaliacaoTopicoPerguntaRepository;
 import com.infnet.avaliacao.repository.TemplatePerguntaRepository;
 import org.springframework.data.domain.Page;
@@ -31,6 +32,7 @@ public class TemplatePerguntaServiceImpl extends CrudServiceImpl<TemplatePergunt
      */
     @Override
     public List<TemplatePergunta> getListaTemplatesPerguntasPorId(List<Long> idsTemplateTopico) {
+        ParameterExceptionUtil.validateObjectNull(idsTemplateTopico);
         return this.templatePerguntaRepository.findByIdIn(idsTemplateTopico);
     }
 
