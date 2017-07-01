@@ -3,6 +3,7 @@ package com.infnet.avaliacao.business.service.impl;
 import com.infnet.avaliacao.business.service.TurmaService;
 import com.infnet.avaliacao.entity.Turma;
 import com.infnet.avaliacao.exception.NotFoundException;
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import com.infnet.avaliacao.repository.TurmaRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ public class TurmaServiceImpl implements TurmaService {
      */
     @Override
     public Turma findById(Long id) {
+        ParameterExceptionUtil.validateObjectNull(id);
         return this.turmaRepository.findById(id);
     }
 
