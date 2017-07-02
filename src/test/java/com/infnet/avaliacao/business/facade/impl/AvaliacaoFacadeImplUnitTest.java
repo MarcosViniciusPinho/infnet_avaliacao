@@ -139,6 +139,12 @@ public class AvaliacaoFacadeImplUnitTest {
 
 		Turma turma = new Turma();
 		turma.setId(4L);
+
+		List<Turma> turmaList = new ArrayList<>();
+		turmaList.add(turma);
+
+		modulo.setTurmaList(turmaList);
+
 		turma.setModulo(modulo);
 
 		Aluno aluno = new Aluno();
