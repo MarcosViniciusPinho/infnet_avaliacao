@@ -6,7 +6,11 @@ import com.infnet.avaliacao.exception.NullParameterException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -15,6 +19,9 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UsuarioDTOUnitTest {
+
+    @Mock
+    private Pageable pageable;
 
     @Test
     public void testToEntity(){
@@ -57,6 +64,34 @@ public class UsuarioDTOUnitTest {
     public void testConvertListEntityToListDtoEmpty(){
         Assert.assertNotNull(UsuarioDTO.convertListEntityToListDto(new ArrayList<>()));
         Assert.assertEquals(new ArrayList<UsuarioDTO>(), UsuarioDTO.convertListEntityToListDto(new ArrayList<>()));
+    }
+
+    @Test
+    public void testConvertPageEntityToPageDto(){
+        List<UsuarioDTO> usuarioDTOList = new ArrayList<>();
+        usuarioDTOList.add(this.createUsuarioDTO(7L));
+        usuarioDTOList.add(this.createUsuarioDTO(2L));
+        usuarioDTOList.add(this.createUsuarioDTO(5L));
+
+        Page<UsuarioDTO> pageDtoList = new PageImpl<>(usuarioDTOList, pageable, usuarioDTOList.size());
+
+        List<Usuario> usuarioList = new ArrayList<>();
+        usuarioList.add(this.createUsuario(7L));
+        usuarioList.add(this.createUsuario(2L));
+        usuarioList.add(this.createUsuario(5L));
+
+        Page<Usuario> pageList = new PageImpl<>(usuarioList, pageable, usuarioList.size());
+
+        Assert.assertNotNull(UsuarioDTO.convertPageEntityToPageDto(pageList, this.pageable));
+        Assert.assertEquals(pageDtoList, UsuarioDTO.convertPageEntityToPageDto(pageList, this.pageable));
+    }
+
+    @Test
+    public void testConvertPageEntityToPageDtoEmpty(){
+        Page<UsuarioDTO> pageDtoList = new PageImpl<>(new ArrayList<>(), pageable, 0);
+        Page<Usuario> pageList = new PageImpl<>(new ArrayList<>(), pageable, 0);
+        Assert.assertNotNull(UsuarioDTO.convertPageEntityToPageDto(pageList, this.pageable));
+        Assert.assertEquals(pageDtoList, UsuarioDTO.convertPageEntityToPageDto(pageList, this.pageable));
     }
 
     /**
