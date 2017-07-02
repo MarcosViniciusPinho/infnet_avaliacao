@@ -94,6 +94,20 @@ public class UsuarioDTOUnitTest {
         Assert.assertEquals(pageDtoList, UsuarioDTO.convertPageEntityToPageDto(pageList, this.pageable));
     }
 
+    @Test
+    public void testLimparCampoSenha(){
+        UsuarioDTO usuarioDTO = this.createUsuarioDTO(null);
+        usuarioDTO.limparCampoSenha();
+        Assert.assertNull(usuarioDTO.getSenha());
+    }
+
+    @Test
+    public void testLimparCampoSenhaIdFornecido(){
+        UsuarioDTO usuarioDTO = this.createUsuarioDTO(3L);
+        usuarioDTO.limparCampoSenha();
+        Assert.assertNotNull(usuarioDTO.getSenha());
+    }
+
     /**
      * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
      */
