@@ -108,6 +108,20 @@ public class UsuarioDTOUnitTest {
         Assert.assertNotNull(usuarioDTO.getSenha());
     }
 
+    @Test
+    public void testIsLoginExistente(){
+        Usuario usuario = this.createUsuario(3L);
+        UsuarioDTO usuarioDTO = this.createUsuarioDTO(4L);
+        Assert.assertTrue(usuarioDTO.isLoginExistente(usuario));
+    }
+
+    @Test
+    public void testIsLoginExistenteComIdsIguais(){
+        Usuario usuario = this.createUsuario(3L);
+        UsuarioDTO usuarioDTO = this.createUsuarioDTO(3L);
+        Assert.assertFalse(usuarioDTO.isLoginExistente(usuario));
+    }
+
     /**
      * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
      */
