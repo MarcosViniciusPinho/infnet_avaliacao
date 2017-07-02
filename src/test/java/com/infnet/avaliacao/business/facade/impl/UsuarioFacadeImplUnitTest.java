@@ -142,13 +142,13 @@ public class UsuarioFacadeImplUnitTest {
 	private Usuario createUsuario(Long id){
 		Usuario usuario = new Usuario();
 		usuario.setId(id);
+		usuario.setNome("Marcos");
+		usuario.setLogin("LoginMarcos");
 		return usuario;
 	}
 
 	private UsuarioDTO createUsuarioDTO(Long id){
-		UsuarioDTO usuarioDTO = new UsuarioDTO();
-		usuarioDTO.setId(id);
-		return usuarioDTO;
+		return UsuarioDTO.toDto(this.createUsuario(id));
 	}
 
 	private Perfil createPerfil(Long id){

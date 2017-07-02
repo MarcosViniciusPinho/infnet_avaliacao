@@ -34,7 +34,7 @@ public class UserDetailsServiceImplUnitTest {
 
 	@Test
 	public void testLoadUserByUsername(){
-		String login = "Marcos";
+		String login = "MarcosLogin";
 		Usuario usuario = this.createUsuario(4L);
 		Mockito.when(this.usuarioRepository.findByLogin(login)).thenReturn(usuario);
 		Assert.assertNotNull(this.userDetailsServiceImpl.loadUserByUsername(login));
@@ -73,7 +73,8 @@ public class UserDetailsServiceImplUnitTest {
 		Usuario usuario = new Usuario();
 		usuario.setId(id);
 		usuario.setPerfil(this.createPerfil(roleList));
-		usuario.setLogin("Marcos");
+		usuario.setNome("Marcos");
+		usuario.setLogin("MarcosLogin");
 		usuario.setSenha("12354");
 		return usuario;
 	}

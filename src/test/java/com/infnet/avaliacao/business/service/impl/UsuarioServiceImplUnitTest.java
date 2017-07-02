@@ -68,6 +68,7 @@ public class UsuarioServiceImplUnitTest {
 		Usuario usuario = new Usuario();
 		usuario.setId(id);
 		usuario.setLogin("Login");
+		usuario.setNome("Marcos");
 		return usuario;
 	}
 
