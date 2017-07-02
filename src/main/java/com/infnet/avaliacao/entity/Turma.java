@@ -3,6 +3,7 @@ package com.infnet.avaliacao.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "turma")
@@ -66,7 +67,7 @@ public class Turma implements Serializable {
             return false;
         }
         Turma other = (Turma) o;
-        return (this.id != null && other.id != null) && id.equals(other.id);
+        return Objects.equals(id, other.id);
     }
 
     @Override

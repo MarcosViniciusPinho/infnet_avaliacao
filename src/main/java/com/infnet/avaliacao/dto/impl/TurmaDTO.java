@@ -5,6 +5,7 @@ import com.infnet.avaliacao.entity.Turma;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 
 import java.util.List;
+import java.util.Objects;
 
 public class TurmaDTO implements DTO<Turma> {
 
@@ -93,7 +94,7 @@ public class TurmaDTO implements DTO<Turma> {
             return false;
         }
         TurmaDTO other = (TurmaDTO) o;
-        return (this.id != null && other.id != null) && id.equals(other.id);
+        return Objects.equals(id, other.id);
     }
 
     @Override
