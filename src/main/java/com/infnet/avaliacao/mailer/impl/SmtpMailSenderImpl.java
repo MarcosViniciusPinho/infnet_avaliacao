@@ -1,5 +1,6 @@
 package com.infnet.avaliacao.mailer.impl;
 
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import com.infnet.avaliacao.mailer.SmtpMailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -24,6 +25,7 @@ public class SmtpMailSenderImpl implements SmtpMailSender {
      */
     @Override
     public void enviarEmail(String email) throws MessagingException {
+        ParameterExceptionUtil.validateObjectNull(email);
         String linkEmailAluno = "<a href='http://localhost:8081/sai/resposta/avaliacao/aluno/00456787323/turma/1'>Clique aqui</a>";
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
