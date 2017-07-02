@@ -171,6 +171,7 @@
 						<exclude>**/CrudServiceImpl.class</exclude>
 						<exclude>**/PageRepositoryImpl.class</exclude>
 						<exclude>**/AvaliacaoApplication.class</exclude>
+						<exclude>**/CriptografiaUtil.class</exclude>
 					</excludes>
 				</configuration>
 				<executions>
@@ -197,6 +198,7 @@
 						<param>com.infnet.avaliacao.business.service.impl.CrudServiceImpl</param>
 						<param>com.infnet.avaliacao.repository.impl.PageRepositoryImpl</param>
 						<param>com.infnet.avaliacao.AvaliacaoApplication</param>
+						<param>com.infnet.avaliacao.dto.util.CriptografiaUtil</param>
 					</excludedClasses>
 				</configuration>
 			</plugin>
