@@ -24,16 +24,16 @@ public class UsuarioServiceImplUnitTest {
 	private UsuarioRepository usuarioRepository;
 
 
-	@Test(expected = BusinessException.class)
-	public void testValidateFailedLoginExistente(){
+	@Test
+	public void testValidate(){
 		UsuarioDTO usuarioDTO = this.createUsuarioDTO(4L);
 		Usuario usuario = this.createUsuario(4L);
 		Mockito.when(usuarioRepository.findByLogin(usuarioDTO.getLogin())).thenReturn(usuario);
 		this.usuarioServiceImpl.validate(usuarioDTO);
 	}
 
-	@Test
-	public void testValidate(){
+	@Test(expected = BusinessException.class)
+	public void testValidateFailedLoginExistente(){
 		UsuarioDTO usuarioDTO = this.createUsuarioDTO(4L);
 		Usuario usuario = this.createUsuario(5L);
 		Mockito.when(usuarioRepository.findByLogin(usuarioDTO.getLogin())).thenReturn(usuario);
@@ -61,14 +61,13 @@ public class UsuarioServiceImplUnitTest {
 	 */
 
 	private UsuarioDTO createUsuarioDTO(Long id){
-		UsuarioDTO usuarioDTO = new UsuarioDTO();
-		usuarioDTO.setId(id);
-		return usuarioDTO;
+		return UsuarioDTO.toDto(this.createUsuario(id));
 	}
 
 	private Usuario createUsuario(Long id){
 		Usuario usuario = new Usuario();
 		usuario.setId(id);
+		usuario.setLogin("Login");
 		return usuario;
 	}
 
