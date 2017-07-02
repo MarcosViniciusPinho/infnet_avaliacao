@@ -1,6 +1,7 @@
 package com.infnet.avaliacao.dto.impl;
 
 import com.infnet.avaliacao.entity.Modulo;
+import com.infnet.avaliacao.exception.NullParameterException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +27,11 @@ public class ModuloDTOUnitTest {
         Assert.assertNotNull(ModuloDTO.toDto(modulo));
         Assert.assertEquals(moduloDTOEsperado, ModuloDTO.toDto(modulo));
         Assert.assertEquals(moduloDTOEsperado.getTurmaList(), ModuloDTO.toDto(modulo).getTurmaList());
+    }
+
+    @Test(expected = NullParameterException.class)
+    public void testToDtoModuloNull(){
+        ModuloDTO.toDto(null);
     }
 
     /**

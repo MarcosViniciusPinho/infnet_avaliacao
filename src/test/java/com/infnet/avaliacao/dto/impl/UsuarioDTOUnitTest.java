@@ -2,6 +2,7 @@ package com.infnet.avaliacao.dto.impl;
 
 import com.infnet.avaliacao.entity.Perfil;
 import com.infnet.avaliacao.entity.Usuario;
+import com.infnet.avaliacao.exception.NullParameterException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +27,11 @@ public class UsuarioDTOUnitTest {
         UsuarioDTO usuarioDTOEsperado = this.createUsuarioDTO(3L);
         Assert.assertNotNull(UsuarioDTO.toDto(usuario));
         Assert.assertEquals(usuarioDTOEsperado, UsuarioDTO.toDto(usuario));
+    }
+
+    @Test(expected = NullParameterException.class)
+    public void testToDtoUsuarioNull(){
+        UsuarioDTO.toDto(null);
     }
 
     /**
