@@ -25,7 +25,7 @@ public class PerfilServiceImplUnitTest {
 	private PerfilRepository perfilRepository;
 
 	@Test
-	public void test(){
+	public void testFindAll(){
 		List<Perfil> perfilList = new ArrayList<>();
 		perfilList.add(this.createPerfil(1L));
 		perfilList.add(this.createPerfil(7L));
@@ -41,6 +41,7 @@ public class PerfilServiceImplUnitTest {
 	private Perfil createPerfil(Long id){
 		Perfil perfil = new Perfil();
 		perfil.setId(4L);
+		perfil.setNome("MANTER_CADASTRO");
 		return perfil;
 	}
 

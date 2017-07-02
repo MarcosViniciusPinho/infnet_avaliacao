@@ -80,6 +80,7 @@ public class UserDetailsServiceImplUnitTest {
 
 	private Perfil createPerfil(List<Role> roleList){
 		Perfil perfil = new Perfil();
+		perfil.setNome("MANTER_CADASTRO");
 		perfil.setRoleList(roleList);
 		return perfil;
 	}

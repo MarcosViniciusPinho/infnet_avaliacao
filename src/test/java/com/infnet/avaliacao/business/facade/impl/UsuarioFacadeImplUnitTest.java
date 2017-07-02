@@ -154,6 +154,7 @@ public class UsuarioFacadeImplUnitTest {
 	private Perfil createPerfil(Long id){
 		Perfil perfil = new Perfil();
 		perfil.setId(id);
+		perfil.setNome("MANTER_CADASTRO");
 		return perfil;
 	}
 
