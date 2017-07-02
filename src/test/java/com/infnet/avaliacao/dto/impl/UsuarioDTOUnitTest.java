@@ -40,7 +40,7 @@ public class UsuarioDTOUnitTest {
     }
 
     @Test(expected = NullParameterException.class)
-    public void testToDtoUsuarioNull(){
+    public void testToDtoFailedUsuarioNull(){
         UsuarioDTO.toDto(null);
     }
 

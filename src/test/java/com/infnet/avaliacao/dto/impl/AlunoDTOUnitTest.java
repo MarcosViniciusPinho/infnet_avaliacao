@@ -29,7 +29,7 @@ public class AlunoDTOUnitTest {
     }
 
     @Test(expected = NullParameterException.class)
-    public void testToDtoAlunoNull(){
+    public void testToDtoFailedAlunoNull(){
         AlunoDTO.toDto(null);
     }
 

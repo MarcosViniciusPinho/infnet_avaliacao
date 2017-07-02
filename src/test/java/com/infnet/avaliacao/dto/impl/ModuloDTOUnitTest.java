@@ -30,7 +30,7 @@ public class ModuloDTOUnitTest {
     }
 
     @Test(expected = NullParameterException.class)
-    public void testToDtoModuloNull(){
+    public void testToDtoFailedModuloNull(){
         ModuloDTO.toDto(null);
     }
 
