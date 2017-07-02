@@ -38,7 +38,7 @@ public class UsuarioServiceImpl extends CrudServiceImpl<UsuarioDTO, Usuario> imp
     private void validarLoginUnico(UsuarioDTO usuarioDTO){
         Set<BusinessException> businessExceptionSet = new HashSet<>();
         Usuario usuario = usuarioRepository.findByLogin(usuarioDTO.getLogin());
-        if(usuario != null && usuarioDTO.toEntity().equals(usuario)){
+        if(usuario != null && usuarioDTO.getLogin().equals(usuario.getLogin())){
             businessExceptionSet.add(new UniqueException("usuario.mensagem.erro.login.unico"));
         }
         if(!businessExceptionSet.isEmpty()){
