@@ -68,8 +68,8 @@ public class UserDetailsServiceImplUnitTest {
 
 	private Usuario createUsuario(Long id){
 		List<Role> roleList = new ArrayList<>();
-		roleList.add(this.createRole("MANTER_CADASTRO"));
-		roleList.add(this.createRole("CADASTRAR_USUARIO"));
+		roleList.add(this.createRole("MANTER_CADASTRO", 1L));
+		roleList.add(this.createRole("CADASTRAR_USUARIO", 2L));
 		Usuario usuario = new Usuario();
 		usuario.setId(id);
 		usuario.setPerfil(this.createPerfil(roleList));
@@ -85,8 +85,9 @@ public class UserDetailsServiceImplUnitTest {
 		return perfil;
 	}
 
-	private Role createRole(String nome){
+	private Role createRole(String nome, Long id){
 		Role role = new Role();
+		role.setId(id);
 		role.setNome(nome);
 		return role;
 	}
