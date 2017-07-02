@@ -1,6 +1,5 @@
-package com.infnet.avaliacao.dto;
+package com.infnet.avaliacao.dto.util;
 
-import com.infnet.avaliacao.dto.util.ConversorBinarioUtil;
 import com.infnet.avaliacao.exception.NullParameterException;
 import org.junit.Assert;
 import org.junit.Test;
