@@ -5,6 +5,8 @@ import com.infnet.avaliacao.dto.DTO;
 import com.infnet.avaliacao.entity.Aluno;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 
+import java.util.Objects;
+
 public class AlunoDTO implements DTO<Aluno> {
 
     private static final long serialVersionUID = 1L;
@@ -90,7 +92,7 @@ public class AlunoDTO implements DTO<Aluno> {
             return false;
         }
         AlunoDTO other = (AlunoDTO) o;
-        return (this.id != null && other.id != null) && id.equals(other.id);
+        return Objects.equals(id, other.id);
     }
 
     @Override

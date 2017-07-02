@@ -3,6 +3,7 @@ package com.infnet.avaliacao.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Classe que representa a tabela aluno no banco de dados.
@@ -68,7 +69,7 @@ public class Aluno implements Serializable {
             return false;
         }
         Aluno other = (Aluno) o;
-        return (this.id != null && other.id != null) && id.equals(other.id);
+        return Objects.equals(id, other.id);
     }
 
     @Override
