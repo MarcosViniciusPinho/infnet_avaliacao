@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Classe que representa a tela de usuario.
@@ -156,7 +157,7 @@ public class UsuarioDTO implements DTO<Usuario> {
             return false;
         }
         UsuarioDTO other = (UsuarioDTO) o;
-        return (this.id != null && other.id != null) && id.equals(other.id);
+        return Objects.equals(id, other.id);
     }
 
     @Override

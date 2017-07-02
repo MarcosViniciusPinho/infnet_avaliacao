@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Classe que representa a tabela usuario no banco de dados.
@@ -85,12 +86,12 @@ public class Usuario implements Serializable {
         if (o == null || getClass() != o.getClass()){
             return false;
         }
-        Usuario usuario = (Usuario) o;
-        return (this.id != null && usuario.id != null) && id.equals(usuario.id);
+        Usuario other = (Usuario) o;
+        return Objects.equals(id, other.id);
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        return this.id != null ? id.hashCode() : 0;
     }
 }

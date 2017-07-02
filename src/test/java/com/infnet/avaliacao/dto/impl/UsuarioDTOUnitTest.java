@@ -9,6 +9,9 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UsuarioDTOUnitTest {
@@ -32,6 +35,28 @@ public class UsuarioDTOUnitTest {
     @Test(expected = NullParameterException.class)
     public void testToDtoUsuarioNull(){
         UsuarioDTO.toDto(null);
+    }
+
+    @Test
+    public void testConvertListEntityToListDto(){
+        List<UsuarioDTO> usuarioDTOList = new ArrayList<>();
+        usuarioDTOList.add(this.createUsuarioDTO(2L));
+        usuarioDTOList.add(this.createUsuarioDTO(6L));
+        usuarioDTOList.add(this.createUsuarioDTO(4L));
+
+        List<Usuario> usuarioList = new ArrayList<>();
+        usuarioList.add(this.createUsuario(2L));
+        usuarioList.add(this.createUsuario(6L));
+        usuarioList.add(this.createUsuario(4L));
+
+        Assert.assertNotNull(UsuarioDTO.convertListEntityToListDto(usuarioList));
+        Assert.assertEquals(usuarioDTOList, UsuarioDTO.convertListEntityToListDto(usuarioList));
+    }
+
+    @Test
+    public void testConvertListEntityToListDtoEmpty(){
+        Assert.assertNotNull(UsuarioDTO.convertListEntityToListDto(new ArrayList<>()));
+        Assert.assertEquals(new ArrayList<UsuarioDTO>(), UsuarioDTO.convertListEntityToListDto(new ArrayList<>()));
     }
 
     /**
