@@ -1,6 +1,8 @@
 package com.infnet.avaliacao.security;
 
 import com.infnet.avaliacao.dto.impl.UsuarioDTO;
+import com.infnet.avaliacao.entity.Usuario;
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import com.infnet.avaliacao.repository.UsuarioRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,10 +24,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        UsuarioDTO usuarioDTO = UsuarioDTO.toDto(this.usuarioRepository.findByLogin(login));
-        if(usuarioDTO == null){
+        ParameterExceptionUtil.validateObjectNull(login);
+        Usuario usuario = this.usuarioRepository.findByLogin(login);
+        if(usuario == null){
             throw new UsernameNotFoundException("login.erro.usuario.nao.encontrado");
         }
+        UsuarioDTO usuarioDTO = UsuarioDTO.toDto(usuario);
         return new UsuarioLogado(usuarioDTO, getPermissoes(usuarioDTO));
     }
 
