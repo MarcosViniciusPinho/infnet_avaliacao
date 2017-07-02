@@ -6,6 +6,7 @@ import com.infnet.avaliacao.entity.Turma;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ModuloDTO implements DTO<Modulo> {
 
@@ -70,12 +71,12 @@ public class ModuloDTO implements DTO<Modulo> {
         if (o == null || getClass() != o.getClass()){
             return false;
         }
-        ModuloDTO turma = (ModuloDTO) o;
-        return id != null ? id.equals(turma.id) : turma.id == null;
+        ModuloDTO other = (ModuloDTO) o;
+        return Objects.equals(id, other.id);
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        return this.id != null ? id.hashCode() : 0;
     }
 }

@@ -3,6 +3,7 @@ package com.infnet.avaliacao.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "modulo")
@@ -53,12 +54,12 @@ public class Modulo implements Serializable {
         if (o == null || getClass() != o.getClass()){
             return false;
         }
-        Modulo turma = (Modulo) o;
-        return id != null ? id.equals(turma.id) : turma.id == null;
+        Modulo other = (Modulo) o;
+        return Objects.equals(id, other.id);
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        return this.id != null ? id.hashCode() : 0;
     }
 }
