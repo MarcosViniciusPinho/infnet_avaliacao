@@ -1,5 +1,7 @@
 package com.infnet.avaliacao.dto.util;
 
+import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
+
 /**
  * Classe criada pois houve a necessidade de pegar os caracteres especiais (',' e '-') de suas formas binárias vindos da tela.
  * Portando esta classe faz a descodificação e os retorna para suas formas de origem (',' e '-').
@@ -15,6 +17,7 @@ public class ConversorBinarioUtil {//NOSONAR desnecessário implementação que 
      * @return String
      */
     public static String converterBinaryToCharacterInString(String valor){
+        ParameterExceptionUtil.validateObjectNull(valor);
        return valor.replaceAll(BINARIO_VIRGULA, ",").replaceAll(BINARIO_HIFEN, "-");
     }
 
