@@ -93,6 +93,16 @@ public class UsuarioDTO implements DTO<Usuario> {
         return new PageImpl<>(lista, pageable, entities.getTotalElements());
     }
 
+    public void limparCampoSenha(){
+        if(this.getId() == null){
+            this.setSenha(null);
+        }
+    }
+
+    public boolean isLoginExistente(Usuario usuario){
+        return !usuario.getId().equals(this.getId()) && this.getLogin().equals(usuario.getLogin());
+    }
+
     /**
      * {@inheritDoc}
      */
