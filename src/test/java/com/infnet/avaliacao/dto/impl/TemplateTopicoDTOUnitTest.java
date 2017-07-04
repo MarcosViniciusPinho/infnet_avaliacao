@@ -42,7 +42,7 @@ public class TemplateTopicoDTOUnitTest {
     }
 
     @Test(expected = NullParameterException.class)
-    public void testToDtoFailedAlunoNull(){
+    public void testToDtoFailedTemplateTopicoNull(){
         TemplateTopicoDTO.toDto(null);
     }
 

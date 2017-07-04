@@ -33,7 +33,7 @@ public class TurmaDTOUnitTest {
     }
 
     @Test(expected = NullParameterException.class)
-    public void testToDtoFailedAlunoNull(){
+    public void testToDtoFailedTurmaNull(){
         TurmaDTO.toDto(null);
     }
 

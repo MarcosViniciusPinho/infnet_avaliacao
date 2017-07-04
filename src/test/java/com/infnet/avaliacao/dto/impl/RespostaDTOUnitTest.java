@@ -34,8 +34,8 @@ public class RespostaDTOUnitTest {
     }
 
     @Test(expected = NullParameterException.class)
-    public void testToDtoFailedUsuarioNull(){
-        UsuarioDTO.toDto(null);
+    public void testToDtoFailedRespostaNull(){
+        RespostaDTO.toDto(null);
     }
 
     @Test
