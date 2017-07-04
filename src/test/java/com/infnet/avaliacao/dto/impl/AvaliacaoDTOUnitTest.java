@@ -36,6 +36,50 @@ public class AvaliacaoDTOUnitTest {
         AvaliacaoDTO.toDto(null);
     }
 
+    @Test
+    public void testConvertListDtoToListEntity(){
+        List<Avaliacao> avaliacaoList = new ArrayList<>();
+        avaliacaoList.add(this.createAvaliacao(2L));
+        avaliacaoList.add(this.createAvaliacao(6L));
+        avaliacaoList.add(this.createAvaliacao(4L));
+
+        List<AvaliacaoDTO> avaliacaoDTOList = new ArrayList<>();
+        avaliacaoDTOList.add(this.createAvaliacaoDTO(2L));
+        avaliacaoDTOList.add(this.createAvaliacaoDTO(6L));
+        avaliacaoDTOList.add(this.createAvaliacaoDTO(4L));
+
+        Assert.assertNotNull(AvaliacaoDTO.convertListDtoToListEntity(avaliacaoDTOList));
+        Assert.assertEquals(avaliacaoList, AvaliacaoDTO.convertListDtoToListEntity(avaliacaoDTOList));
+    }
+
+    @Test
+    public void testConvertListDtoToListEntityEmpty(){
+        Assert.assertNotNull(AvaliacaoDTO.convertListDtoToListEntity(new ArrayList<>()));
+        Assert.assertEquals(new ArrayList<Avaliacao>(), AvaliacaoDTO.convertListDtoToListEntity(new ArrayList<>()));
+    }
+
+    @Test
+    public void testConvertListEntityToListDto(){
+        List<AvaliacaoDTO> avaliacaoDTOList = new ArrayList<>();
+        avaliacaoDTOList.add(this.createAvaliacaoDTO(2L));
+        avaliacaoDTOList.add(this.createAvaliacaoDTO(6L));
+        avaliacaoDTOList.add(this.createAvaliacaoDTO(4L));
+
+        List<Avaliacao> avaliacaoList = new ArrayList<>();
+        avaliacaoList.add(this.createAvaliacao(2L));
+        avaliacaoList.add(this.createAvaliacao(6L));
+        avaliacaoList.add(this.createAvaliacao(4L));
+
+        Assert.assertNotNull(AvaliacaoDTO.convertListEntityToListDto(avaliacaoList));
+        Assert.assertEquals(avaliacaoDTOList, AvaliacaoDTO.convertListEntityToListDto(avaliacaoList));
+    }
+
+    @Test
+    public void testConvertListEntityToListDtoEmpty(){
+        Assert.assertNotNull(AvaliacaoDTO.convertListEntityToListDto(new ArrayList<>()));
+        Assert.assertEquals(new ArrayList<AvaliacaoDTO>(), AvaliacaoDTO.convertListEntityToListDto(new ArrayList<>()));
+    }
+
     /**
      * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
      */
