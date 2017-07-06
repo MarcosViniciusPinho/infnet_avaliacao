@@ -1,5 +1,6 @@
 package com.infnet.avaliacao.dto.impl;
 
+import com.infnet.avaliacao.controller.wrapper.PerguntaAssociadaWrapper;
 import com.infnet.avaliacao.entity.*;
 import com.infnet.avaliacao.exception.NullParameterException;
 import org.junit.Assert;
@@ -80,6 +81,51 @@ public class AvaliacaoDTOUnitTest {
         Assert.assertEquals(new ArrayList<AvaliacaoDTO>(), AvaliacaoDTO.convertListEntityToListDto(new ArrayList<>()));
     }
 
+    @Test
+    public void testIsExisteTemplateAvaliacaoAndTemplateTopico(){
+        AvaliacaoDTO avaliacaoDTO = this.createAvaliacaoDTO(3L);
+        Assert.assertNotNull(avaliacaoDTO.isExisteTemplateAvaliacaoAndTemplateTopico());
+        Assert.assertEquals(Boolean.TRUE, avaliacaoDTO.isExisteTemplateAvaliacaoAndTemplateTopico());
+    }
+
+    @Test
+    public void testIsExisteTemplateAvaliacaoAndTemplateTopicoTemplateAvaliacaoDTONull(){
+        AvaliacaoDTO avaliacaoDTO = this.createAvaliacaoDTO(3L);
+        avaliacaoDTO.setTemplateAvaliacaoDTO(null);
+        Assert.assertNotNull(avaliacaoDTO.isExisteTemplateAvaliacaoAndTemplateTopico());
+        Assert.assertEquals(Boolean.FALSE, avaliacaoDTO.isExisteTemplateAvaliacaoAndTemplateTopico());
+    }
+
+    @Test
+    public void testShowNextTopicoComPergunta(){
+        AvaliacaoDTO avaliacaoDTO = this.createAvaliacaoDTO(3L);
+        List<PerguntaAssociadaWrapper> perguntaAssociadaWrapperList = new ArrayList<>();
+        avaliacaoDTO.showNextTopicoComPergunta(perguntaAssociadaWrapperList, 1);
+    }
+
+    @Test
+    public void testIsExisteProximoTopico(){
+        AvaliacaoDTO avaliacaoDTO = this.createAvaliacaoDTO(3L);
+        Assert.assertNotNull(avaliacaoDTO.isExisteProximoTopico());
+        Assert.assertEquals(Boolean.TRUE, avaliacaoDTO.isExisteProximoTopico());
+    }
+
+    @Test
+    public void testIsExisteProximoTopicoIndiceTopicoIgual(){
+        AvaliacaoDTO avaliacaoDTO = this.createAvaliacaoDTO(3L);
+        avaliacaoDTO.setIndiceTopico(3);
+        Assert.assertNotNull(avaliacaoDTO.isExisteProximoTopico());
+        Assert.assertEquals(Boolean.FALSE, avaliacaoDTO.isExisteProximoTopico());
+    }
+
+    @Test
+    public void testIsExisteProximoTopicoIndiceTopicoMaior(){
+        AvaliacaoDTO avaliacaoDTO = this.createAvaliacaoDTO(3L);
+        avaliacaoDTO.setIndiceTopico(4);
+        Assert.assertNotNull(avaliacaoDTO.isExisteProximoTopico());
+        Assert.assertEquals(Boolean.FALSE, avaliacaoDTO.isExisteProximoTopico());
+    }
+
     /**
      * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
      */
@@ -111,6 +157,7 @@ public class AvaliacaoDTOUnitTest {
         avaliacaoDTO.setRespostaDTOList(respostaDTOList);
         avaliacaoDTO.setTurmaDTO(this.createTurmaDTO(4L));
         avaliacaoDTO.setAlunoDTO(this.createAlunoDTO(5L));
+        avaliacaoDTO.setIndiceTopico(2);
         return avaliacaoDTO;
     }
 
@@ -137,9 +184,21 @@ public class AvaliacaoDTOUnitTest {
     }
 
     private TemplateAvaliacao createTemplateAvaliacao(Long id){
+        List<TemplateTopico> templateTopicoList = new ArrayList<>();
+        templateTopicoList.add(this.createTemplateTopico(4L));
+        templateTopicoList.add(this.createTemplateTopico(1L));
+        templateTopicoList.add(this.createTemplateTopico(8L));
+
         TemplateAvaliacao templateAvaliacao = new TemplateAvaliacao();
         templateAvaliacao.setId(id);
+        templateAvaliacao.setTemplateTopicoList(templateTopicoList);
         return templateAvaliacao;
+    }
+
+    private TemplateTopico createTemplateTopico(Long id){
+        TemplateTopico templateTopico = new TemplateTopico();
+        templateTopico.setId(id);
+        return templateTopico;
     }
 
     private TurmaDTO createTurmaDTO(Long id){
