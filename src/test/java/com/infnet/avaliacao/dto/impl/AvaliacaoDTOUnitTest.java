@@ -126,6 +126,26 @@ public class AvaliacaoDTOUnitTest {
         Assert.assertEquals(Boolean.FALSE, avaliacaoDTO.isExisteProximoTopico());
     }
 
+    @Test
+    public void testGetValorResposta(){
+        AvaliacaoDTO avaliacaoDTO = this.createAvaliacaoDTO(3L);
+        String valorEsperado = "fhsdjfhsdjf,fhsdjfhsdjh";
+        String valorEnviado = "fhsdjfhsdjf00101100fhsdjfhsdjh";
+
+        Assert.assertNotNull(avaliacaoDTO.getValorResposta(valorEnviado));
+        Assert.assertEquals(valorEsperado, avaliacaoDTO.getValorResposta(valorEnviado));
+    }
+
+    @Test
+    public void testGetIdTemplatePergunta(){
+        AvaliacaoDTO avaliacaoDTO = this.createAvaliacaoDTO(3L);
+        Long valorEsperado = 4L;
+        String valorEnviado = "fhsdjfhsdjf00101100fhsdjfhsdjh-4";
+
+        Assert.assertNotNull(avaliacaoDTO.getIdTemplatePergunta(valorEnviado));
+        Assert.assertEquals(valorEsperado, avaliacaoDTO.getIdTemplatePergunta(valorEnviado));
+    }
+
     /**
      * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
      */
