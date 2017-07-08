@@ -6,7 +6,11 @@ import com.infnet.avaliacao.exception.NullParameterException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -15,6 +19,9 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TemplateAvaliacaoDTOUnitTest {
+
+    @Mock
+    private Pageable pageable;
 
     @Test
     public void testToEntity(){
@@ -43,6 +50,56 @@ public class TemplateAvaliacaoDTOUnitTest {
     @Test(expected = NullParameterException.class)
     public void testToDtoFailedTemplateAvaliacaoNull(){
         TemplateAvaliacaoDTO.toDto(null);
+    }
+
+    @Test
+    public void testConvertListEntityToListDto(){
+        List<TemplateAvaliacaoDTO> templateAvaliacaoDTOList = new ArrayList<>();
+        templateAvaliacaoDTOList.add(this.createTemplateAvaliacaoDTO(2L));
+        templateAvaliacaoDTOList.add(this.createTemplateAvaliacaoDTO(6L));
+        templateAvaliacaoDTOList.add(this.createTemplateAvaliacaoDTO(4L));
+
+        List<TemplateAvaliacao> templateAvaliacaoList = new ArrayList<>();
+        templateAvaliacaoList.add(this.createTemplateAvaliacao(2L));
+        templateAvaliacaoList.add(this.createTemplateAvaliacao(6L));
+        templateAvaliacaoList.add(this.createTemplateAvaliacao(4L));
+
+        Assert.assertNotNull(TemplateAvaliacaoDTO.convertListEntityToListDto(templateAvaliacaoList));
+        Assert.assertEquals(templateAvaliacaoDTOList, TemplateAvaliacaoDTO.convertListEntityToListDto(templateAvaliacaoList));
+    }
+
+    @Test
+    public void testConvertListEntityToListDtoEmpty(){
+        Assert.assertNotNull(TemplateAvaliacaoDTO.convertListEntityToListDto(new ArrayList<>()));
+        Assert.assertEquals(new ArrayList<TemplateAvaliacaoDTO>(), TemplateAvaliacaoDTO.convertListEntityToListDto(new ArrayList<>()));
+    }
+
+    @Test
+    public void testConvertPageEntityToPageDto(){
+        List<TemplateAvaliacaoDTO> templateAvaliacaoDTOList = new ArrayList<>();
+        templateAvaliacaoDTOList.add(this.createTemplateAvaliacaoDTO(7L));
+        templateAvaliacaoDTOList.add(this.createTemplateAvaliacaoDTO(2L));
+        templateAvaliacaoDTOList.add(this.createTemplateAvaliacaoDTO(5L));
+
+        Page<TemplateAvaliacaoDTO> pageDtoList = new PageImpl<>(templateAvaliacaoDTOList, pageable, templateAvaliacaoDTOList.size());
+
+        List<TemplateAvaliacao> templateAvaliacaoList = new ArrayList<>();
+        templateAvaliacaoList.add(this.createTemplateAvaliacao(7L));
+        templateAvaliacaoList.add(this.createTemplateAvaliacao(2L));
+        templateAvaliacaoList.add(this.createTemplateAvaliacao(5L));
+
+        Page<TemplateAvaliacao> pageList = new PageImpl<>(templateAvaliacaoList, pageable, templateAvaliacaoList.size());
+
+        Assert.assertNotNull(TemplateAvaliacaoDTO.convertPageEntityToPageDto(pageList, this.pageable));
+        Assert.assertEquals(pageDtoList, TemplateAvaliacaoDTO.convertPageEntityToPageDto(pageList, this.pageable));
+    }
+
+    @Test
+    public void testConvertPageEntityToPageDtoEmpty(){
+        Page<TemplateAvaliacaoDTO> pageDtoList = new PageImpl<>(new ArrayList<>(), pageable, 0);
+        Page<TemplateAvaliacao> pageList = new PageImpl<>(new ArrayList<>(), pageable, 0);
+        Assert.assertNotNull(TemplateAvaliacaoDTO.convertPageEntityToPageDto(pageList, this.pageable));
+        Assert.assertEquals(pageDtoList, TemplateAvaliacaoDTO.convertPageEntityToPageDto(pageList, this.pageable));
     }
 
     /**

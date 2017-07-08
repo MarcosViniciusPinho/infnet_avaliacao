@@ -67,7 +67,6 @@ public class TemplateAvaliacaoDTO implements DTO<TemplateAvaliacao> {
         return lista;
     }
 
-
     /**
      * Método que converte uma lista de entidade para uma lista de dto.
      * @param entities entities
