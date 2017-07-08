@@ -102,9 +102,34 @@ public class TemplateAvaliacaoDTOUnitTest {
         Assert.assertEquals(pageDtoList, TemplateAvaliacaoDTO.convertPageEntityToPageDto(pageList, this.pageable));
     }
 
+    @Test
+    public void testCarregarTopicosCadastradosParaFicarSelecionados(){
+        TemplateAvaliacaoDTO templateAvaliacaoDTO = this.createTemplateAvaliacaoDTO(3L);
+        templateAvaliacaoDTO.setTemplateTopicoDTOList(this.getTemplateTopicoDTOList());
+
+        Assert.assertNotNull(templateAvaliacaoDTO.carregarTopicosCadastradosParaFicarSelecionados().getIdsTemplateTopicoSelecionados());
+        Assert.assertEquals(this.getIdsTemplateTopicoSelecionados(), templateAvaliacaoDTO.carregarTopicosCadastradosParaFicarSelecionados().getIdsTemplateTopicoSelecionados());
+    }
+
+    @Test
+    public void testCarregarTopicosCadastradosParaFicarSelecionadosEmpty(){
+        TemplateAvaliacaoDTO templateAvaliacaoDTO = this.createTemplateAvaliacaoDTO(3L);
+
+        Assert.assertNotNull(templateAvaliacaoDTO.carregarTopicosCadastradosParaFicarSelecionados().getIdsTemplateTopicoSelecionados());
+        Assert.assertEquals(new ArrayList<>(), templateAvaliacaoDTO.carregarTopicosCadastradosParaFicarSelecionados().getIdsTemplateTopicoSelecionados());
+    }
+
     /**
      * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
      */
+
+    private List<Long> getIdsTemplateTopicoSelecionados(){
+        List<Long> ids = new ArrayList<>();
+        ids.add(2L);
+        ids.add(1L);
+        ids.add(3L);
+        return ids;
+    }
 
     private List<TemplateTopicoDTO> getTemplateTopicoDTOList(){
         List<TemplateTopicoDTO> templateTopicoDTOList = new ArrayList<>();
