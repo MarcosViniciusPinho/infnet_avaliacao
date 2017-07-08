@@ -1,6 +1,7 @@
 package com.infnet.avaliacao.dto.impl;
 
 import com.infnet.avaliacao.entity.TemplateAvaliacao;
+import com.infnet.avaliacao.entity.TemplatePergunta;
 import com.infnet.avaliacao.entity.TemplateTopico;
 import com.infnet.avaliacao.exception.NullParameterException;
 import org.junit.Assert;
@@ -119,6 +120,26 @@ public class TemplateAvaliacaoDTOUnitTest {
         Assert.assertEquals(new ArrayList<>(), templateAvaliacaoDTO.carregarTopicosCadastradosParaFicarSelecionados().getIdsTemplateTopicoSelecionados());
     }
 
+    @Test
+    public void testIsVerificaTopicoAndAvaliacaoAndAtivo(){
+        TemplateAvaliacaoDTO templateAvaliacaoDTO = this.createTemplateAvaliacaoDTO(3L);
+        TemplateTopicoDTO templateTopicoDTO = this.createTemplateTopicoDTO(8L);
+        TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO = this.createTemplateAvaliacaoTopicoPerguntaDTO(1L, Boolean.TRUE);
+
+        Assert.assertNotNull(templateAvaliacaoDTO.isVerificaTopicoAndAvaliacaoAndAtivo(templateTopicoDTO, templateAvaliacaoTopicoPerguntaDTO));
+        Assert.assertEquals(Boolean.TRUE, templateAvaliacaoDTO.isVerificaTopicoAndAvaliacaoAndAtivo(templateTopicoDTO, templateAvaliacaoTopicoPerguntaDTO));
+    }
+
+    @Test
+    public void testIsVerificaTopicoAndAvaliacaoAndAtivoFalse(){
+        TemplateAvaliacaoDTO templateAvaliacaoDTO = this.createTemplateAvaliacaoDTO(3L);
+        TemplateTopicoDTO templateTopicoDTO = this.createTemplateTopicoDTO(8L);
+        TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO = this.createTemplateAvaliacaoTopicoPerguntaDTO(1L, Boolean.FALSE);
+
+        Assert.assertNotNull(templateAvaliacaoDTO.isVerificaTopicoAndAvaliacaoAndAtivo(templateTopicoDTO, templateAvaliacaoTopicoPerguntaDTO));
+        Assert.assertEquals(Boolean.FALSE, templateAvaliacaoDTO.isVerificaTopicoAndAvaliacaoAndAtivo(templateTopicoDTO, templateAvaliacaoTopicoPerguntaDTO));
+    }
+
     /**
      * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
      */
@@ -147,6 +168,16 @@ public class TemplateAvaliacaoDTOUnitTest {
         return templateTopicoList;
     }
 
+    private TemplateAvaliacaoTopicoPerguntaDTO createTemplateAvaliacaoTopicoPerguntaDTO(Long id, boolean ativo){
+        TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO = new TemplateAvaliacaoTopicoPerguntaDTO();
+        templateAvaliacaoTopicoPerguntaDTO.setId(id);
+        templateAvaliacaoTopicoPerguntaDTO.setTemplateAvaliacao(this.createTemplateAvaliacao(3L));
+        templateAvaliacaoTopicoPerguntaDTO.setTemplateTopico(this.createTemplateTopico(8L));
+        templateAvaliacaoTopicoPerguntaDTO.setTemplatePergunta(this.createTemplatePergunta(1L));
+        templateAvaliacaoTopicoPerguntaDTO.setAtivo(ativo);
+        return templateAvaliacaoTopicoPerguntaDTO;
+    }
+
     private TemplateAvaliacaoDTO createTemplateAvaliacaoDTO(Long id){
         TemplateAvaliacaoDTO templateAvaliacaoDTO = new TemplateAvaliacaoDTO();
         templateAvaliacaoDTO.setId(id);
@@ -165,6 +196,12 @@ public class TemplateAvaliacaoDTOUnitTest {
         TemplateTopico templateTopico = new TemplateTopico();
         templateTopico.setId(id);
         return templateTopico;
+    }
+
+    private TemplatePergunta createTemplatePergunta(Long id){
+        TemplatePergunta templatePergunta = new TemplatePergunta();
+        templatePergunta.setId(id);
+        return templatePergunta;
     }
 
     private TemplateTopicoDTO createTemplateTopicoDTO(Long id){

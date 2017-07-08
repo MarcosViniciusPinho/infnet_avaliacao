@@ -104,7 +104,7 @@ public class TemplateAvaliacaoDTO implements DTO<TemplateAvaliacao> {
      * @param templateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO
      * @return boolean
      */
-    private boolean isVerificaTopicoAndAvaliacaoAndAtivo(TemplateTopicoDTO templateTopicoDTO,
+    protected boolean isVerificaTopicoAndAvaliacaoAndAtivo(TemplateTopicoDTO templateTopicoDTO,
                                                          TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO){
         return templateAvaliacaoTopicoPerguntaDTO.isAtivo()
                 && templateTopicoDTO.getId().equals(templateAvaliacaoTopicoPerguntaDTO.getTemplateTopico().getId())
