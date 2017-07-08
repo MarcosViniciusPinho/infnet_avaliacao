@@ -120,7 +120,7 @@ public class TemplateAvaliacaoDTO implements DTO<TemplateAvaliacao> {
         }
     }
 
-    private void percorrerPerguntasAssociadas(TemplateTopicoDTO templateTopicoDTO, List<TemplatePerguntaDTO> templatePerguntaDTOList){
+    protected void percorrerPerguntasAssociadas(TemplateTopicoDTO templateTopicoDTO, List<TemplatePerguntaDTO> templatePerguntaDTOList){
         for(TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO : templateTopicoDTO.getTemplateAvaliacaoTopicoPerguntaDTOList()){
             this.addPerguntasAssociadas(templateAvaliacaoTopicoPerguntaDTO, templatePerguntaDTOList, templateTopicoDTO);
         }

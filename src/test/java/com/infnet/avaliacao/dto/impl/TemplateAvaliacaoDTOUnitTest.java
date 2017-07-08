@@ -124,7 +124,7 @@ public class TemplateAvaliacaoDTOUnitTest {
     public void testIsVerificaTopicoAndAvaliacaoAndAtivo(){
         TemplateAvaliacaoDTO templateAvaliacaoDTO = this.createTemplateAvaliacaoDTO(3L);
         TemplateTopicoDTO templateTopicoDTO = this.createTemplateTopicoDTO(8L);
-        TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO = this.createTemplateAvaliacaoTopicoPerguntaDTO(1L, Boolean.TRUE);
+        TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO = this.createTemplateAvaliacaoTopicoPerguntaDTO(1L, Boolean.TRUE, 1L);
 
         Assert.assertNotNull(templateAvaliacaoDTO.isVerificaTopicoAndAvaliacaoAndAtivo(templateTopicoDTO, templateAvaliacaoTopicoPerguntaDTO));
         Assert.assertEquals(Boolean.TRUE, templateAvaliacaoDTO.isVerificaTopicoAndAvaliacaoAndAtivo(templateTopicoDTO, templateAvaliacaoTopicoPerguntaDTO));
@@ -134,7 +134,7 @@ public class TemplateAvaliacaoDTOUnitTest {
     public void testIsVerificaTopicoAndAvaliacaoAndAtivoFalse(){
         TemplateAvaliacaoDTO templateAvaliacaoDTO = this.createTemplateAvaliacaoDTO(3L);
         TemplateTopicoDTO templateTopicoDTO = this.createTemplateTopicoDTO(8L);
-        TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO = this.createTemplateAvaliacaoTopicoPerguntaDTO(1L, Boolean.FALSE);
+        TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO = this.createTemplateAvaliacaoTopicoPerguntaDTO(1L, Boolean.FALSE, 1L);
 
         Assert.assertNotNull(templateAvaliacaoDTO.isVerificaTopicoAndAvaliacaoAndAtivo(templateTopicoDTO, templateAvaliacaoTopicoPerguntaDTO));
         Assert.assertEquals(Boolean.FALSE, templateAvaliacaoDTO.isVerificaTopicoAndAvaliacaoAndAtivo(templateTopicoDTO, templateAvaliacaoTopicoPerguntaDTO));
@@ -144,7 +144,7 @@ public class TemplateAvaliacaoDTOUnitTest {
     public void testAddPerguntasAssociadas(){
         TemplateAvaliacaoDTO templateAvaliacaoDTO = this.createTemplateAvaliacaoDTO(3L);
 
-        TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO = this.createTemplateAvaliacaoTopicoPerguntaDTO(1L, Boolean.TRUE);
+        TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO = this.createTemplateAvaliacaoTopicoPerguntaDTO(1L, Boolean.TRUE, 1L);
 
         List<TemplatePerguntaDTO> templatePerguntaDTOListEsperado = new ArrayList<>();
         templatePerguntaDTOListEsperado.add(this.createTemplatePerguntaDTO(1L));
@@ -163,7 +163,7 @@ public class TemplateAvaliacaoDTOUnitTest {
     public void testAddPerguntasAssociadasEmpty(){
         TemplateAvaliacaoDTO templateAvaliacaoDTO = this.createTemplateAvaliacaoDTO(3L);
 
-        TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO = this.createTemplateAvaliacaoTopicoPerguntaDTO(1L, Boolean.FALSE);
+        TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO = this.createTemplateAvaliacaoTopicoPerguntaDTO(1L, Boolean.FALSE, 1L);
 
         List<TemplatePerguntaDTO> templatePerguntaDTOListEsperado = new ArrayList<>();
 
@@ -172,6 +172,47 @@ public class TemplateAvaliacaoDTOUnitTest {
         TemplateTopicoDTO templateTopicoDTO = this.createTemplateTopicoDTO(8L);
 
         templateAvaliacaoDTO.addPerguntasAssociadas(templateAvaliacaoTopicoPerguntaDTO, templatePerguntaDTOList, templateTopicoDTO);
+
+        Assert.assertNotNull(templatePerguntaDTOList);
+        Assert.assertEquals(templatePerguntaDTOListEsperado, templatePerguntaDTOList);
+    }
+
+    @Test
+    public void testPercorrerPerguntasAssociadas(){
+        TemplateAvaliacaoDTO templateAvaliacaoDTO = this.createTemplateAvaliacaoDTO(3L);
+
+        List<TemplatePerguntaDTO> templatePerguntaDTOListEsperado = new ArrayList<>();
+        templatePerguntaDTOListEsperado.add(this.createTemplatePerguntaDTO(3L));
+        templatePerguntaDTOListEsperado.add(this.createTemplatePerguntaDTO(5L));
+        templatePerguntaDTOListEsperado.add(this.createTemplatePerguntaDTO(1L));
+
+        List<TemplatePerguntaDTO> templatePerguntaDTOList = new ArrayList<>();
+
+        List<TemplateAvaliacaoTopicoPerguntaDTO> templateAvaliacaoTopicoPerguntaDTOList = new ArrayList<>();
+        templateAvaliacaoTopicoPerguntaDTOList.add(this.createTemplateAvaliacaoTopicoPerguntaDTO(3L, Boolean.TRUE, 3L));
+        templateAvaliacaoTopicoPerguntaDTOList.add(this.createTemplateAvaliacaoTopicoPerguntaDTO(5L, Boolean.TRUE, 5L));
+        templateAvaliacaoTopicoPerguntaDTOList.add(this.createTemplateAvaliacaoTopicoPerguntaDTO(1L, Boolean.TRUE, 1L));
+
+        TemplateTopicoDTO templateTopicoDTO = this.createTemplateTopicoDTO(8L);
+        templateTopicoDTO.setTemplateAvaliacaoTopicoPerguntaDTOList(templateAvaliacaoTopicoPerguntaDTOList);
+
+        templateAvaliacaoDTO.percorrerPerguntasAssociadas(templateTopicoDTO, templatePerguntaDTOList);
+
+        Assert.assertNotNull(templatePerguntaDTOList);
+        Assert.assertEquals(templatePerguntaDTOListEsperado, templatePerguntaDTOList);
+    }
+
+    @Test
+    public void testPercorrerPerguntasAssociadasEmpty(){
+        TemplateAvaliacaoDTO templateAvaliacaoDTO = this.createTemplateAvaliacaoDTO(3L);
+
+        List<TemplatePerguntaDTO> templatePerguntaDTOListEsperado = new ArrayList<>();
+
+        List<TemplatePerguntaDTO> templatePerguntaDTOList = new ArrayList<>();
+
+        TemplateTopicoDTO templateTopicoDTO = this.createTemplateTopicoDTO(8L);
+
+        templateAvaliacaoDTO.percorrerPerguntasAssociadas(templateTopicoDTO, templatePerguntaDTOList);
 
         Assert.assertNotNull(templatePerguntaDTOList);
         Assert.assertEquals(templatePerguntaDTOListEsperado, templatePerguntaDTOList);
@@ -205,12 +246,12 @@ public class TemplateAvaliacaoDTOUnitTest {
         return templateTopicoList;
     }
 
-    private TemplateAvaliacaoTopicoPerguntaDTO createTemplateAvaliacaoTopicoPerguntaDTO(Long id, boolean ativo){
+    private TemplateAvaliacaoTopicoPerguntaDTO createTemplateAvaliacaoTopicoPerguntaDTO(Long id, boolean ativo, Long idPergunta){
         TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO = new TemplateAvaliacaoTopicoPerguntaDTO();
         templateAvaliacaoTopicoPerguntaDTO.setId(id);
         templateAvaliacaoTopicoPerguntaDTO.setTemplateAvaliacao(this.createTemplateAvaliacao(3L));
         templateAvaliacaoTopicoPerguntaDTO.setTemplateTopico(this.createTemplateTopico(8L));
-        templateAvaliacaoTopicoPerguntaDTO.setTemplatePergunta(this.createTemplatePergunta(1L));
+        templateAvaliacaoTopicoPerguntaDTO.setTemplatePergunta(this.createTemplatePergunta(idPergunta));
         templateAvaliacaoTopicoPerguntaDTO.setAtivo(ativo);
         return templateAvaliacaoTopicoPerguntaDTO;
     }
