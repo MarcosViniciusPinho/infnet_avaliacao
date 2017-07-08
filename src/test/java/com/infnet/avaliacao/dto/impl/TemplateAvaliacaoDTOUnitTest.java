@@ -251,6 +251,42 @@ public class TemplateAvaliacaoDTOUnitTest {
         Assert.assertEquals(perguntaAssociadaWrapperListEsperado, perguntaAssociadaWrapperList);
     }
 
+    @Test
+    public void testDetail(){
+        PerguntaAssociadaWrapper perguntaAssociadaWrapper = this.createPerguntaAssociadaWrapper();
+
+        List<TemplateAvaliacaoTopicoPerguntaDTO> templateAvaliacaoTopicoPerguntaDTOList = new ArrayList<>();
+        templateAvaliacaoTopicoPerguntaDTOList.add(this.createTemplateAvaliacaoTopicoPerguntaDTO(3L, Boolean.TRUE, 3L));
+        templateAvaliacaoTopicoPerguntaDTOList.add(this.createTemplateAvaliacaoTopicoPerguntaDTO(5L, Boolean.TRUE, 5L));
+        templateAvaliacaoTopicoPerguntaDTOList.add(this.createTemplateAvaliacaoTopicoPerguntaDTO(1L, Boolean.TRUE, 1L));
+
+        TemplateTopicoDTO templateTopicoDTO = this.createTemplateTopicoDTO(8L);
+        templateTopicoDTO.setTemplateAvaliacaoTopicoPerguntaDTOList(templateAvaliacaoTopicoPerguntaDTOList);
+
+        List<TemplateTopicoDTO> templateTopicoDTOList = new ArrayList<>();
+        templateTopicoDTOList.add(templateTopicoDTO);
+
+        TemplateAvaliacaoDTO templateAvaliacaoDTO = this.createTemplateAvaliacaoDTO(3L);
+        templateAvaliacaoDTO.setTemplateTopicoDTOList(templateTopicoDTOList);
+
+        List<TemplatePerguntaDTO> templatePerguntaDTOList = new ArrayList<>();
+        templatePerguntaDTOList.add(this.createTemplatePerguntaDTO(3L));
+        templatePerguntaDTOList.add(this.createTemplatePerguntaDTO(5L));
+        templatePerguntaDTOList.add(this.createTemplatePerguntaDTO(1L));
+
+        perguntaAssociadaWrapper.setTemplatePerguntaDTOList(templatePerguntaDTOList);
+
+        List<PerguntaAssociadaWrapper> perguntaAssociadaWrapperList = new ArrayList<>();
+
+        List<PerguntaAssociadaWrapper> perguntaAssociadaWrapperListEsperado = new ArrayList<>();
+        perguntaAssociadaWrapperListEsperado.add(perguntaAssociadaWrapper);
+
+        templateAvaliacaoDTO.detail(perguntaAssociadaWrapperList);
+
+        Assert.assertNotNull(perguntaAssociadaWrapperList);
+        Assert.assertEquals(perguntaAssociadaWrapperListEsperado, perguntaAssociadaWrapperList);
+    }
+
     /**
      * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
      */
