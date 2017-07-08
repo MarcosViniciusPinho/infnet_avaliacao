@@ -111,7 +111,7 @@ public class TemplateAvaliacaoDTO implements DTO<TemplateAvaliacao> {
                 && this.getId().equals(templateAvaliacaoTopicoPerguntaDTO.getTemplateAvaliacao().getId());
     }
 
-    private void addPerguntasAssociadas(TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO,
+    protected void addPerguntasAssociadas(TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO,
                                         List<TemplatePerguntaDTO> templatePerguntaDTOList, TemplateTopicoDTO templateTopicoDTO){
         if(this.isVerificaTopicoAndAvaliacaoAndAtivo(templateTopicoDTO, templateAvaliacaoTopicoPerguntaDTO)){
             templatePerguntaDTOList.add(

@@ -140,6 +140,43 @@ public class TemplateAvaliacaoDTOUnitTest {
         Assert.assertEquals(Boolean.FALSE, templateAvaliacaoDTO.isVerificaTopicoAndAvaliacaoAndAtivo(templateTopicoDTO, templateAvaliacaoTopicoPerguntaDTO));
     }
 
+    @Test
+    public void testAddPerguntasAssociadas(){
+        TemplateAvaliacaoDTO templateAvaliacaoDTO = this.createTemplateAvaliacaoDTO(3L);
+
+        TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO = this.createTemplateAvaliacaoTopicoPerguntaDTO(1L, Boolean.TRUE);
+
+        List<TemplatePerguntaDTO> templatePerguntaDTOListEsperado = new ArrayList<>();
+        templatePerguntaDTOListEsperado.add(this.createTemplatePerguntaDTO(1L));
+
+        List<TemplatePerguntaDTO> templatePerguntaDTOList = new ArrayList<>();
+
+        TemplateTopicoDTO templateTopicoDTO = this.createTemplateTopicoDTO(8L);
+
+        templateAvaliacaoDTO.addPerguntasAssociadas(templateAvaliacaoTopicoPerguntaDTO, templatePerguntaDTOList, templateTopicoDTO);
+
+        Assert.assertNotNull(templatePerguntaDTOList);
+        Assert.assertEquals(templatePerguntaDTOListEsperado, templatePerguntaDTOList);
+    }
+
+    @Test
+    public void testAddPerguntasAssociadasEmpty(){
+        TemplateAvaliacaoDTO templateAvaliacaoDTO = this.createTemplateAvaliacaoDTO(3L);
+
+        TemplateAvaliacaoTopicoPerguntaDTO templateAvaliacaoTopicoPerguntaDTO = this.createTemplateAvaliacaoTopicoPerguntaDTO(1L, Boolean.FALSE);
+
+        List<TemplatePerguntaDTO> templatePerguntaDTOListEsperado = new ArrayList<>();
+
+        List<TemplatePerguntaDTO> templatePerguntaDTOList = new ArrayList<>();
+
+        TemplateTopicoDTO templateTopicoDTO = this.createTemplateTopicoDTO(8L);
+
+        templateAvaliacaoDTO.addPerguntasAssociadas(templateAvaliacaoTopicoPerguntaDTO, templatePerguntaDTOList, templateTopicoDTO);
+
+        Assert.assertNotNull(templatePerguntaDTOList);
+        Assert.assertEquals(templatePerguntaDTOListEsperado, templatePerguntaDTOList);
+    }
+
     /**
      * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
      */
@@ -202,6 +239,12 @@ public class TemplateAvaliacaoDTOUnitTest {
         TemplatePergunta templatePergunta = new TemplatePergunta();
         templatePergunta.setId(id);
         return templatePergunta;
+    }
+
+    private TemplatePerguntaDTO createTemplatePerguntaDTO(Long id){
+        TemplatePerguntaDTO templatePerguntaDTO = new TemplatePerguntaDTO();
+        templatePerguntaDTO.setId(id);
+        return templatePerguntaDTO;
     }
 
     private TemplateTopicoDTO createTemplateTopicoDTO(Long id){
