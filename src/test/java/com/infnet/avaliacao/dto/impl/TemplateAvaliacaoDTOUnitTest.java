@@ -1,5 +1,6 @@
 package com.infnet.avaliacao.dto.impl;
 
+import com.infnet.avaliacao.controller.wrapper.PerguntaAssociadaWrapper;
 import com.infnet.avaliacao.entity.TemplateAvaliacao;
 import com.infnet.avaliacao.entity.TemplatePergunta;
 import com.infnet.avaliacao.entity.TemplateTopico;
@@ -218,9 +219,47 @@ public class TemplateAvaliacaoDTOUnitTest {
         Assert.assertEquals(templatePerguntaDTOListEsperado, templatePerguntaDTOList);
     }
 
+    @Test
+    public void testInit(){
+        PerguntaAssociadaWrapper perguntaAssociadaWrapper = this.createPerguntaAssociadaWrapper();
+
+        TemplateAvaliacaoDTO templateAvaliacaoDTO = this.createTemplateAvaliacaoDTO(3L);
+
+        List<TemplatePerguntaDTO> templatePerguntaDTOList = new ArrayList<>();
+        templatePerguntaDTOList.add(this.createTemplatePerguntaDTO(3L));
+        templatePerguntaDTOList.add(this.createTemplatePerguntaDTO(5L));
+        templatePerguntaDTOList.add(this.createTemplatePerguntaDTO(1L));
+
+        List<TemplateAvaliacaoTopicoPerguntaDTO> templateAvaliacaoTopicoPerguntaDTOList = new ArrayList<>();
+        templateAvaliacaoTopicoPerguntaDTOList.add(this.createTemplateAvaliacaoTopicoPerguntaDTO(3L, Boolean.TRUE, 3L));
+        templateAvaliacaoTopicoPerguntaDTOList.add(this.createTemplateAvaliacaoTopicoPerguntaDTO(5L, Boolean.TRUE, 5L));
+        templateAvaliacaoTopicoPerguntaDTOList.add(this.createTemplateAvaliacaoTopicoPerguntaDTO(1L, Boolean.TRUE, 1L));
+
+        TemplateTopicoDTO templateTopicoDTO = this.createTemplateTopicoDTO(8L);
+        templateTopicoDTO.setTemplateAvaliacaoTopicoPerguntaDTOList(templateAvaliacaoTopicoPerguntaDTOList);
+
+        perguntaAssociadaWrapper.setTemplatePerguntaDTOList(templatePerguntaDTOList);
+
+        List<PerguntaAssociadaWrapper> perguntaAssociadaWrapperList = new ArrayList<>();
+
+        List<PerguntaAssociadaWrapper> perguntaAssociadaWrapperListEsperado = new ArrayList<>();
+        perguntaAssociadaWrapperListEsperado.add(perguntaAssociadaWrapper);
+
+        templateAvaliacaoDTO.init(perguntaAssociadaWrapperList, templateTopicoDTO);
+
+        Assert.assertNotNull(perguntaAssociadaWrapperList);
+        Assert.assertEquals(perguntaAssociadaWrapperListEsperado, perguntaAssociadaWrapperList);
+    }
+
     /**
      * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
      */
+
+    private PerguntaAssociadaWrapper createPerguntaAssociadaWrapper(){
+        PerguntaAssociadaWrapper perguntaAssociadaWrapper = new PerguntaAssociadaWrapper();
+        perguntaAssociadaWrapper.setTemplateTopicoDTO(this.createTemplateTopicoDTO(2L));
+        return perguntaAssociadaWrapper;
+    }
 
     private List<Long> getIdsTemplateTopicoSelecionados(){
         List<Long> ids = new ArrayList<>();
