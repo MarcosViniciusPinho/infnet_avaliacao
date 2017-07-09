@@ -45,10 +45,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/template/avaliacao/list").hasRole("LISTAR_TEMPLATE_AVALIACAO")
                 .antMatchers("/template/avaliacao/detail/{id}").hasRole("DETALHAR_TEMPLATE_AVALIACAO")
                 .antMatchers("/template/avaliacao/edit/{id}").hasRole("ASSOCIAR_TEMPLATE_TOPICO")
+                .antMatchers("/template/avaliacao/error/{id}").hasRole("ASSOCIAR_TEMPLATE_TOPICO")
                 .antMatchers("/template/avaliacao/save").hasRole("SALVAR_TEMPLATE_TOPICO")
                 .antMatchers("/template/avaliacao/topico/edit/{id}/avaliacao/{idAvaliacao}").hasRole("ASSOCIAR_TEMPLATE_PERGUNTA")
+                .antMatchers("/template/avaliacao/topico/error/{id}/avaliacao/{idAvaliacao}").hasRole("ASSOCIAR_TEMPLATE_PERGUNTA")
                 .antMatchers("/template/avaliacao/topico/save").hasRole("SALVAR_TEMPLATE_PERGUNTA")
                 .antMatchers(ApplicationConstant.ACTION_LOGIN).permitAll()
+                .antMatchers("/enviarEmail").permitAll()
+                .antMatchers("/resposta/avaliacao/aluno/{idAluno}/turma/{idTurma}").permitAll()
+                .antMatchers("/resposta/avaliacao/save").permitAll()
                 .antMatchers("/").permitAll()
                 .anyRequest().denyAll().and();
     }
