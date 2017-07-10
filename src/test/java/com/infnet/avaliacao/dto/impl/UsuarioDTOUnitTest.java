@@ -122,6 +122,24 @@ public class UsuarioDTOUnitTest {
         Assert.assertFalse(usuarioDTO.isLoginExistente(usuario));
     }
 
+    @Test
+    public void testResetarSenhaFailed(){
+        UsuarioDTO usuarioDTO = this.createUsuarioDTO(null);
+        usuarioDTO.resetarSenha();
+
+        Assert.assertNotNull(usuarioDTO.getSenha());
+        Assert.assertEquals("Senha", usuarioDTO.getSenha());
+    }
+
+    @Test
+    public void testResetarSenha(){
+        UsuarioDTO usuarioDTO = this.createUsuarioDTO(4L);
+        usuarioDTO.resetarSenha();
+
+        Assert.assertNotNull(usuarioDTO.getSenha());
+        Assert.assertEquals("infnet123", usuarioDTO.getSenha());
+    }
+
     /**
      * Métodos foram criados para auxiliar nos testes; ou seja; diminuir a codificação dos mesmos.
      */
