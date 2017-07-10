@@ -49,6 +49,7 @@
                             <div class="form-group">
                                 <h3 th:text="#{usuario.informacoes.basicas}"></h3>
                                 <input type="hidden" th:field="*{id}" id="id"/>
+                                <input type="hidden" th:field="*{senha}" id="senha"/>
                                 <div class="well col-xs-12">
                                     <div class="col-xs-5" th:classappend="*{nome eq ''} ? has-error">
                                         <label for="nome">

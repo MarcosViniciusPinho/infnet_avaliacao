@@ -2,7 +2,6 @@ package com.infnet.avaliacao.dto.impl;
 
 
 import com.infnet.avaliacao.dto.DTO;
-import com.infnet.avaliacao.dto.util.CriptografiaUtil;
 import com.infnet.avaliacao.entity.Perfil;
 import com.infnet.avaliacao.entity.Usuario;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
@@ -104,6 +103,10 @@ public class UsuarioDTO implements DTO<Usuario> {
         return !usuario.getId().equals(this.getId()) && this.getLogin().equals(usuario.getLogin());
     }
 
+    public void resetarSenha(){
+        this.setSenha(this.getId() != null ? "infnet123" : this.getSenha());
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -137,7 +140,7 @@ public class UsuarioDTO implements DTO<Usuario> {
     }
 
     public void setSenha(String senha) {
-        this.senha = CriptografiaUtil.getSenhaCriptografada(senha, this.getId());
+        this.senha = senha;
     }
 
     public Perfil getPerfil() {

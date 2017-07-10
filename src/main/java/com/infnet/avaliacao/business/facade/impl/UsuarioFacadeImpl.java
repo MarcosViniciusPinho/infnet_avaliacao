@@ -4,6 +4,7 @@ import com.infnet.avaliacao.business.facade.UsuarioFacade;
 import com.infnet.avaliacao.business.service.PerfilService;
 import com.infnet.avaliacao.business.service.UsuarioService;
 import com.infnet.avaliacao.dto.impl.UsuarioDTO;
+import com.infnet.avaliacao.dto.util.CriptografiaUtil;
 import com.infnet.avaliacao.entity.Perfil;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.springframework.data.domain.Page;
@@ -31,6 +32,8 @@ public class UsuarioFacadeImpl implements UsuarioFacade {
     @Override
     public void save(UsuarioDTO usuarioDTO) {
         ParameterExceptionUtil.validateObjectNull(usuarioDTO);
+        String senhaCriptografada = CriptografiaUtil.getSenhaCriptografada(usuarioDTO.getSenha());
+        usuarioDTO.setSenha(senhaCriptografada);
         this.usuarioService.save(usuarioDTO);
     }
 
@@ -40,7 +43,9 @@ public class UsuarioFacadeImpl implements UsuarioFacade {
     @Override
     public UsuarioDTO findById(Long id) {
         ParameterExceptionUtil.validateObjectNull(id);
-        return UsuarioDTO.toDto(this.usuarioService.findById(id));
+        UsuarioDTO usuarioDTO = UsuarioDTO.toDto(this.usuarioService.findById(id));
+        usuarioDTO.resetarSenha();
+        return usuarioDTO;
     }
 
     /**
