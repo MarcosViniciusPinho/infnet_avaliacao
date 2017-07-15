@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8081/" />
+<title>Teste validando campos obrigatórios em usuario(Alterar)</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Teste validando campos obrigatórios em usuario(Alterar)</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/sai/login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=username</td>
+	<td>joao</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>joao</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=salvar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=a.js-sidebar-toggle</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Cadastro</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Usuário</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='page-content-wrapper']/div/div/div[2]/table/tbody/tr[4]/td[4]/a[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=nome</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=salvar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-danger</td>
+	<td>O campo Nome é obrigatório</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='page-content-wrapper']/div/div/div[2]/div[2]/div</td>
+	<td>O campo Login é obrigatório</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=li.active.alterar</td>
+	<td>Alterar Usuário</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h2.alterar</td>
+	<td>Alterar Usuário</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=nome</td>
+	<td>çklçklçklçkl</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=salvar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-danger &gt; span</td>
+	<td>O campo Login é obrigatório</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login</td>
+	<td>667876fhfghfghgf</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=salvar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a[title=&quot;Sair&quot;]</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

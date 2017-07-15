@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8081/" />
+<title>Teste Usuário com Perfil Administrador</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Teste Usuário com Perfil Administrador</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/sai/login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=username</td>
+	<td>joao</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>joao</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=salvar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=a.js-sidebar-toggle</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=a &gt; span</td>
+	<td>Cadastro</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//li[2]/a/span</td>
+	<td>Avaliação</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//li[2]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Montar</td>
+	<td>Montar</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=a &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Usuário</td>
+	<td>Usuário</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//nav[@id='main-navbar']/div/ul/li[2]/a/em</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
