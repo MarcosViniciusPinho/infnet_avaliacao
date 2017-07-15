@@ -8,7 +8,7 @@ public class CriptografiaUtil {//NOSONAR desnecessário implementação que acus
     public static String getSenhaCriptografada(String senha){
         if(StringUtils.isNotEmpty(senha)){
             BCryptPasswordEncoder criptografar = new BCryptPasswordEncoder();
-            return criptografar.encode(senha.replace(",", ""));
+            return criptografar.encode(senha);
         }
         return senha;
     }

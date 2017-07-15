@@ -7,6 +7,7 @@ import com.infnet.avaliacao.dto.impl.UsuarioDTO;
 import com.infnet.avaliacao.dto.util.CriptografiaUtil;
 import com.infnet.avaliacao.entity.Perfil;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,11 @@ public class UsuarioFacadeImpl implements UsuarioFacade {
     public void save(UsuarioDTO usuarioDTO) {
         ParameterExceptionUtil.validateObjectNull(usuarioDTO);
         String senhaCriptografada = CriptografiaUtil.getSenhaCriptografada(usuarioDTO.getSenha());
-        usuarioDTO.setSenha(senhaCriptografada);
+        if(StringUtils.isEmpty(senhaCriptografada) && usuarioDTO.getId() != null){
+            usuarioDTO.setSenha("infnet123");
+        } else{
+            usuarioDTO.setSenha(senhaCriptografada);
+        }
         this.usuarioService.save(usuarioDTO);
     }
 
