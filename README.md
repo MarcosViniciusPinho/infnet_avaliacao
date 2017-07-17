@@ -17,4 +17,4 @@ Exemplo: /mnt/dados/Desenvolvimento/Instituicao_INFNET/infnet_avaliacao/.sonarli
 Logo em seguida descompactar e configurar a variavel de ambiente com este zip** <br />
 
 Todos estes passos podem ser executados via terminal(cmd) desde que você tenha configurado o maven em sua máquina.
-Para poder fazer a chamada da aplicação na url basta digitar: _http://localhost:8081/sai/_
+Para poder fazer a chamada da aplicação na url basta digitar: _http://localhost:8081/sai/login_
