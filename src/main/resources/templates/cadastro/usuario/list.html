@@ -44,10 +44,10 @@
                         </thead>
                         <tbody>
                         <tr th:each="usuario : ${listarUsuarios}">
-                            <td th:text="${usuario.nome}"></td>
-                            <td th:text="${usuario.login}"></td>
-                            <td th:text="${usuario.perfil.nome}"></td>
-                            <td>
+                            <td th:text="${usuario.nome}" th:if="${#authentication.principal.usuarioDTO.id ne usuario.id}"></td>
+                            <td th:text="${usuario.login}" th:if="${#authentication.principal.usuarioDTO.id ne usuario.id}"></td>
+                            <td th:text="${usuario.perfil.nome}" th:if="${#authentication.principal.usuarioDTO.id ne usuario.id}"></td>
+                            <td th:if="${#authentication.principal.usuarioDTO.id ne usuario.id}">
                                 <a th:title="#{hint.detalhar}" class="btn btn-link btn-xs" th:href="@{/cadastro/usuario/detail/{id}(id=${usuario.id})}"
                                    sec:authorize="hasRole('DETALHAR_USUARIO')">
                                     <span class="glyphicon glyphicon-th-list"></span>
