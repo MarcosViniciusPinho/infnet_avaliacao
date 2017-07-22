@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+       xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="#{usuario.logado.title}"></title>
+</head>
+
+<body>
+    <section layout:fragment="conteudo">
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12"> &nbsp; </div>
+                    <div class="col-lg-12">
+                        <ol class="breadcrumb">
+                            <li><a th:href="@{/}" th:text="#{home}"></a></li>
+                            <li class="active" th:text="#{usuario.logado.bread.crumb.alterar}"></li>
+                        </ol>
+
+                        <div th:if="${!#lists.isEmpty(setExceptionBusiness)}" th:each="error : ${setExceptionBusiness}">
+                            <div class="alert alert-danger" role="alert">
+                                <span th:text="#{${error.mensagem}}"></span>
+                            </div>
+                        </div>
+
+                        <div th:if="${!#lists.isEmpty(setExceptionRequired)}" th:each="error : ${setExceptionRequired}">
+                            <div class="alert alert-danger" role="alert">
+                                <span th:text="#{${error.messageTemplate}}"></span>
+                            </div>
+                        </div>
+
+                        <h2 class="alterar" th:text="#{usuario.logado.h2.alterar}"></h2>
+                        <hr />
+
+                        <div class="textoCamposObrigatorios">
+                            <small class="col-xs-offset-10">(<span class="corVermelho">*</span>)
+                                <span th:text="#{campo.obrigatorio}"></span> </small>
+                        </div>
+
+                        <form method="POST" th:action="@{/usuario/save}" th:object="${usuarioDTO}" id="form">
+                            <div class="form-group">
+                                <input type="hidden" th:field="*{id}" id="id"/>
+                                <input type="hidden" th:field="*{perfil.id}" name="perfil" id="perfil"/>
+                                <div class="well col-xs-12">
+                                    <div class="col-xs-5" th:classappend="*{nome eq ''} ? has-error">
+                                        <label for="nome">
+                                            <span class="corVermelho">*</span> <span th:text="#{usuario.nome}"></span>:</label>
+                                        <input type="text" class="form-control" id="nome" th:field="*{nome}" name="nome" maxlength="120"
+                                               th:placeholder="#{usuario.nome.placeholder}"/>
+                                    </div>
+
+                                    <div class="col-xs-4" th:classappend="*{login eq ''} ? has-error">
+                                        <label for="login">
+                                            <span class="corVermelho">*</span> <span th:text="#{usuario.login}"></span>:</label>
+                                        <input type="text" class="form-control" id="login" th:field="*{login}" name="login" maxlength="50"
+                                               th:placeholder="#{usuario.login.placeholder}"/>
+                                    </div>
+
+                                    <div class="col-xs-3" th:classappend="*{senha eq ''} ? has-error">
+                                        <label for="senha">
+                                            <span class="corVermelho">*</span> <span th:text="#{usuario.senha}"></span>:</label>
+                                        <input type="password" class="form-control" id="senha" th:field="*{senha}" th:placeholder="#{usuario.senha.placeholder}"
+                                            maxlength="10"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <input id="salvar" type="submit" class="btn btn-primary" th:value="#{btn.salvar}"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

@@ -54,7 +54,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/enviarEmail").permitAll()
                 .antMatchers("/resposta/avaliacao/aluno/{idAluno}/turma/{idTurma}").permitAll()
                 .antMatchers("/resposta/avaliacao/save").permitAll()
+                .antMatchers("/usuario/save").permitAll()
                 .antMatchers("/resposta/avaliacao/agradecimento").permitAll()
+                .antMatchers("/usuario/edit/{id}").permitAll()
                 .antMatchers("/").permitAll()
                 .anyRequest().denyAll().and();
     }

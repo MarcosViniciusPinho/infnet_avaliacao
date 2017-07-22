@@ -61,7 +61,9 @@
                             <li role="separator" class="divider"></li>
                             <li><a href="#" th:text="#{dropdown.versao}"></a></li>
                             <li><a href="#" th:text="${#authentication.principal.usuarioDTO.perfil.nome}"></a></li>
-                            <li><a href="#" th:text="#{dropdown.alterarsenha}"></a></li>
+                            <li>
+                                <a th:href="@{/usuario/edit/{id}(id=${#authentication.principal.usuarioDTO.id})}" th:text="#{dropdown.alterar.informacoes}"></a>
+                            </li>
                         </ul>
                     </li>
 
