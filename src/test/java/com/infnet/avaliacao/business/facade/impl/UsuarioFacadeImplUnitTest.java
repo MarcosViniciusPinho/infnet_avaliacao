@@ -48,6 +48,16 @@ public class UsuarioFacadeImplUnitTest {
 	}
 
 	@Test
+	public void testUpdateUsuarioLogado(){
+		this.usuarioFacadeImpl.updateUsuarioLogado(new UsuarioDTO());
+	}
+
+	@Test(expected = NullParameterException.class)
+	public void testUpdateUsuarioLogadoUsuarioNull(){
+		this.usuarioFacadeImpl.updateUsuarioLogado(null);
+	}
+
+	@Test
 	public void testFindById(){
 		UsuarioDTO usuarioDTO = new UsuarioDTO();
 		usuarioDTO.setId(1L);
