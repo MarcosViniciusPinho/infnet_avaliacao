@@ -4,7 +4,6 @@ import com.infnet.avaliacao.business.facade.UsuarioFacade;
 import com.infnet.avaliacao.business.service.PerfilService;
 import com.infnet.avaliacao.business.service.UsuarioService;
 import com.infnet.avaliacao.dto.impl.UsuarioDTO;
-import com.infnet.avaliacao.dto.util.CriptografiaUtil;
 import com.infnet.avaliacao.entity.Perfil;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
 import org.apache.commons.lang.StringUtils;
@@ -33,12 +32,22 @@ public class UsuarioFacadeImpl implements UsuarioFacade {
     @Override
     public void save(UsuarioDTO usuarioDTO) {
         ParameterExceptionUtil.validateObjectNull(usuarioDTO);
-        String senhaCriptografada = CriptografiaUtil.getSenhaCriptografada(usuarioDTO.getSenha());
+        String senhaCriptografada = usuarioDTO.getSenhaCriptografada();
         if(StringUtils.isEmpty(senhaCriptografada) && usuarioDTO.getId() != null){
             usuarioDTO.setSenha("infnet123");
         } else{
             usuarioDTO.setSenha(senhaCriptografada);
         }
+        this.usuarioService.save(usuarioDTO);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateUsuarioLogado(UsuarioDTO usuarioDTO) {
+        ParameterExceptionUtil.validateObjectNull(usuarioDTO);
+        usuarioDTO.setSenha(usuarioDTO.getSenhaCriptografada());
         this.usuarioService.save(usuarioDTO);
     }
 

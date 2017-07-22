@@ -29,7 +29,7 @@ public class UsuarioLogadoController{
     private UsuarioFacade usuarioFacade;
 
     /**
-     * Método que salva/altera uma entidade.
+     * Método que altera as informações do usuário logado
      * @param usuarioDTO usuarioDTO
      * @param redirectAttributes redirectAttributes
      * @return String
@@ -37,7 +37,7 @@ public class UsuarioLogadoController{
     @RequestMapping(value = ActionConstant.ACTION_SAVE, method = RequestMethod.POST)
     public String save(UsuarioDTO usuarioDTO, RedirectAttributes redirectAttributes, Model model){
         try{
-            this.getFacade().save(usuarioDTO);
+            this.getFacade().updateUsuarioLogado(usuarioDTO);
             redirectAttributes.addFlashAttribute(MessageConstant.SUCESS, MessageConstant.MENSAGEM_SUCESSO_USUARIO_LOGADO);
             return ActionConstant.REDIRECT + ActionConstant.ACTION_HOME;
         } catch (ConstraintViolationException ex) {//NOSONAR a exceção é direcionada para a camada de visão da aplicação, portanto o uso do 'throw' neste ponto não é utilizado. - Validação de campos obrigatórios
@@ -49,7 +49,7 @@ public class UsuarioLogadoController{
     }
 
     /**
-     * Método que redireciona o usuário para a tela de alterar.
+     * Método que redireciona o usuário que está logado na aplicação para a tela onde tem suas informações.
      * @param id id
      * @param model model
      * @return String
@@ -77,7 +77,7 @@ public class UsuarioLogadoController{
     }
 
     /**
-     * Método que redireciona para a tela de cadastrar/alterar.
+     * Método que redireciona para a tela de alterar
      * @return String
      */
     public String getViewForm(){

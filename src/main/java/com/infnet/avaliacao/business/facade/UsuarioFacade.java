@@ -18,4 +18,10 @@ public interface UsuarioFacade extends CrudFacade<UsuarioDTO> {
 
     List<Perfil> findAllPerfil();
 
+    /**
+     * Método que altera as informações do usuário que está logado na aplicação
+     * @param usuarioDTO usuarioDTO
+     */
+    void updateUsuarioLogado(UsuarioDTO usuarioDTO);
+
 }
