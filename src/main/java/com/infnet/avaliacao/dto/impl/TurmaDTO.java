@@ -3,7 +3,10 @@ package com.infnet.avaliacao.dto.impl;
 import com.infnet.avaliacao.dto.DTO;
 import com.infnet.avaliacao.entity.Turma;
 import com.infnet.avaliacao.exception.util.ParameterExceptionUtil;
+import org.apache.commons.collections.CollectionUtils;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,6 +22,8 @@ public class TurmaDTO implements DTO<Turma> {
 
     private ModuloDTO moduloDTO;
 
+    private Date dataTermino;
+
     /**
      * {@inheritDoc}
      */
@@ -31,6 +36,7 @@ public class TurmaDTO implements DTO<Turma> {
                 AvaliacaoDTO.convertListDtoToListEntity(
                         this.getAvaliacaoDTOList()));
         turma.setModulo(this.getModuloDTO().toEntity());
+        turma.setDataTermino(this.getDataTermino());
         return turma;
     }
 
@@ -46,7 +52,23 @@ public class TurmaDTO implements DTO<Turma> {
         turmaDTO.setNumero(turma.getNumero());
         turmaDTO.setModuloDTO(
                 ModuloDTO.toDto(turma.getModulo()));
+        turmaDTO.setDataTermino(turma.getDataTermino());
         return turmaDTO;
+    }
+
+    /**
+     * Método que converte uma lista de entidade para uma lista de dto.
+     * @param entities entities
+     * @return List<TemplateAvaliacaoDTO>
+     */
+    public static List<TurmaDTO> convertListEntityToListDto(List<Turma> entities){
+        List<TurmaDTO> lista = new ArrayList<>();
+        if(CollectionUtils.isNotEmpty(entities)){
+            for(Turma turma : entities){
+                lista.add(toDto(turma));
+            }
+        }
+        return lista;
     }
 
     /**
@@ -83,6 +105,14 @@ public class TurmaDTO implements DTO<Turma> {
 
     public void setModuloDTO(ModuloDTO moduloDTO) {
         this.moduloDTO = moduloDTO;
+    }
+
+    public Date getDataTermino() {
+        return dataTermino;
+    }
+
+    public void setDataTermino(Date dataTermino) {
+        this.dataTermino = dataTermino;
     }
 
     @Override

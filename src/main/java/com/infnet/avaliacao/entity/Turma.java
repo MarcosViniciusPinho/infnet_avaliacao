@@ -2,6 +2,7 @@ package com.infnet.avaliacao.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,6 +26,9 @@ public class Turma implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_modulo", nullable = false)
     private Modulo modulo;
+
+    @Column(name = "data_termino", nullable = false)
+    private Date dataTermino;
 
     public Long getId() {
         return id;
@@ -56,6 +60,14 @@ public class Turma implements Serializable {
 
     public void setModulo(Modulo modulo) {
         this.modulo = modulo;
+    }
+
+    public Date getDataTermino() {
+        return dataTermino;
+    }
+
+    public void setDataTermino(Date dataTermino) {
+        this.dataTermino = dataTermino;
     }
 
     @Override
