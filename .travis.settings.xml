@@ -2,8 +2,8 @@
     <servers>
         <server>
             <id>ossrh</id>
-            <username>${env.USER_NAME}</username>
-            <password>${env.USER_PASSWORD}</password>
+            <username>marcos</username>
+            <password>557b9f65e299ebd89119367f3e08410e52a2cb4d</password>
         </server>
     </servers>
 </settings>

@@ -5,7 +5,7 @@ addons:
   sonarcloud:
     organization: "Infnet"
     token:
-      secure: "Infnet123"
+      secure: "557b9f65e299ebd89119367f3e08410e52a2cb4d"
 jdk:
  - oraclejdk8
 script:
