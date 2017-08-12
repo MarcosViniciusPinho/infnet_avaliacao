@@ -3,7 +3,7 @@ sudo: false
 install: true
 addons:
   sonarcloud:
-    organization: "Infnet"
+    organization: "MarcosViniciusPinho"
     token:
       secure: "557b9f65e299ebd89119367f3e08410e52a2cb4d"
 jdk:
