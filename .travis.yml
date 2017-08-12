@@ -1,6 +1,14 @@
 language: java
+sudo: false
+install: true
+addons:
+  sonarcloud:
+    organization: "Infnet"
+    token:
+      secure: "Infnet123"
 script:
- - mvn clean install test jacoco:report coveralls:report
+# - mvn clean install test jacoco:report coveralls:report
+ - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
 jdk:
  - oraclejdk8
 notifications:
