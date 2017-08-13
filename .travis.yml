@@ -9,7 +9,6 @@ addons:
 jdk:
  - oraclejdk8
 script:
-# - mvn clean install test jacoco:report coveralls:report
  - mvn clean test org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
 cache:
   directories:
