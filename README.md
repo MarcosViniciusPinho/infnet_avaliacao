@@ -11,7 +11,6 @@ O projeto ainda não tem sua versão em produção, portando para poder executar
     &nbsp;&nbsp;&nbsp;&nbsp;- clean spring-boot:run(Executa de fato a aplicação)<br />
     
 **3º passo)** Analisar métricas da qualidade do código produzido acessar: <br />
-    - Codacy: https://www.codacy.com/app/MarcosViniciusPinho/infnet_avaliacao/dashboard?bid=5100299<br />
     - SonarQube: https://sonarcloud.io/dashboard?id=com.infnet%3Asai
 
 Todos estes passos podem ser executados via terminal(cmd) desde que você tenha configurado o maven em sua máquina.
