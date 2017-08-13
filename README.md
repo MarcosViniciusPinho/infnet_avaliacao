@@ -1,6 +1,7 @@
 # infnet_avaliacao
 [![Build Status](https://travis-ci.org/MarcosViniciusPinho/infnet_avaliacao.svg?branch=master)](https://travis-ci.org/MarcosViniciusPinho/infnet_avaliacao)
 [![Coverage Status](https://coveralls.io/repos/github/MarcosViniciusPinho/infnet_avaliacao/badge.svg)](https://coveralls.io/github/MarcosViniciusPinho/infnet_avaliacao)<br />
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b18981c1dd854c0cb1f7be6edbf9d35f)](https://www.codacy.com/app/MarcosViniciusPinho/infnet_avaliacao?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MarcosViniciusPinho/infnet_avaliacao&amp;utm_campaign=Badge_Grade)
 Projeto de TCC que representa o sistema de avaliação da infnet
 O projeto ainda não tem sua versão em produção, portando para poder executar e utilizar o sistema deverá ser feita localmente no pc e seguindo os seguintes passos:<br />
 **1º passo)** Fazer o checkout do projeto: `https://github.com/MarcosViniciusPinho/infnet_avaliacao.git`<br />
