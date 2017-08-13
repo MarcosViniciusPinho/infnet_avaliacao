@@ -3,9 +3,9 @@ sudo: false
 install: true
 addons:
   sonarcloud:
-    organization: "infnet_avaliacao"
+    organization: ${env.organizacao}
     token:
-      secure: "557b9f65e299ebd89119367f3e08410e52a2cb4d"
+      secure: ${env.senha}
 jdk:
  - oraclejdk8
 script:
